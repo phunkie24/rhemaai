@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build output
+client/dist/
+client/build/
+
+# Environment files
+server/.env
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Docker volumes
+mongo_data/
+
+# Test artifacts
+e2e-report/
+test-results/
+server/coverage/
+client/coverage/
+playwright-report/
+blob-report/
+
+# Playwright cache
+.playwright/

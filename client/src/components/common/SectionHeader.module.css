@@ -1,0 +1,51 @@
+.header {
+  margin-bottom: 56px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.centered .subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.light .label {
+  color: var(--brand-300);
+}
+
+.title {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.light .title {
+  color: white;
+}
+
+.subtitle {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 560px;
+}
+
+.light .subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}

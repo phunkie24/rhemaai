@@ -1,0 +1,130 @@
+export const SERVICES = [
+  {
+    id: 'agentic-ai',
+    icon: '🤖',
+    title: 'Agentic AI Engineering',
+    description:
+      'Design and deploy multi-agent systems, LLM orchestration pipelines, RAG architectures, AI copilots, and fully autonomous enterprise automation powered by 21 proven agentic patterns.',
+    tags: ['ADAS', 'LangGraph', 'MCP', 'RAG', 'LLM', 'AutoGen'],
+    color: '#6B46FF',
+    highlight: true,
+    capabilities: [
+      'Multi-agent orchestration (ADAS)',
+      'RAG + vector database pipelines',
+      'LLM fine-tuning & prompt engineering',
+      'Enterprise AI copilots',
+      'MCP server integration',
+      'Agentic workflow automation',
+    ],
+  },
+  {
+    id: 'data-engineering',
+    icon: '🏗️',
+    title: 'Data Engineering & Platforms',
+    description:
+      'Medallion lakehouse architectures, high-throughput ETL/ELT pipelines, real-time Spark/Kafka processing, Azure Synapse, Databricks, and full enterprise EDW solutions.',
+    tags: ['Databricks', 'Synapse', 'Delta Lake', 'Kafka', 'Airflow'],
+    color: '#7C3AED',
+    highlight: false,
+    capabilities: [
+      'Bronze-Silver-Gold medallion architecture',
+      'Azure Synapse + Databricks pipelines',
+      'SAP ECC / Datasphere integrations',
+      'Real-time streaming with Kafka',
+      'Apache Airflow orchestration',
+      'Data quality & observability',
+    ],
+  },
+  {
+    id: 'data-science',
+    icon: '📊',
+    title: 'Data Science & Advanced Analytics',
+    description:
+      'Predictive modelling, statistical analysis, demand forecasting, customer intelligence, prescriptive optimisation, and AI-powered BI — transforming raw data into strategic decisions.',
+    tags: ['Predictive', 'Forecasting', 'Statistical ML', 'Power BI', 'Python'],
+    color: '#8B5CF6',
+    highlight: true,
+    capabilities: [
+      'Predictive & prescriptive modelling',
+      'Time-series forecasting',
+      'Customer segmentation & CLV',
+      'Statistical hypothesis testing',
+      'Advanced Power BI / Tableau dashboards',
+      'Applied mathematics — MSc level',
+    ],
+  },
+  {
+    id: 'cloud-architecture',
+    icon: '☁️',
+    title: 'Cloud Architecture',
+    description:
+      'Multi-cloud solution design across Azure, AWS and GCP. Infrastructure-as-Code, Kubernetes orchestration, DevOps/GitOps pipelines, and cost-optimised cloud governance.',
+    tags: ['Azure', 'AWS', 'GCP', 'Kubernetes', 'Terraform'],
+    color: '#6D28D9',
+    highlight: false,
+    capabilities: [
+      '19+ Microsoft Azure certifications',
+      'AWS & GCP certified architecture',
+      'Kubernetes & container orchestration',
+      'Terraform / Bicep IaC',
+      'DevOps + GitOps pipelines',
+      'FinOps & cloud cost optimisation',
+    ],
+  },
+  {
+    id: 'mlops',
+    icon: '⚙️',
+    title: 'MLOps & DataOps',
+    description:
+      'End-to-end ML lifecycle management: experiment tracking, model registry, CI/CD for ML, drift monitoring, feature stores, and full DataOps governance frameworks.',
+    tags: ['MLflow', 'AzureML', 'SageMaker', 'CI/CD', 'Feature Store'],
+    color: '#7C3AED',
+    highlight: false,
+    capabilities: [
+      'ML pipeline automation',
+      'Model monitoring & drift detection',
+      'Feature store design',
+      'A/B testing infrastructure',
+      'DataOps governance frameworks',
+      'Automated retraining pipelines',
+    ],
+  },
+  {
+    id: 'software-engineering',
+    icon: '💻',
+    title: 'Enterprise Software Engineering',
+    description:
+      'Production-grade backend systems, RESTful & GraphQL APIs, microservices, and SaaS platforms in C# .NET Core, Python FastAPI, and Node.js — built for enterprise scale.',
+    tags: ['C# .NET', 'FastAPI', 'MERN', 'Microservices', 'GraphQL'],
+    color: '#5B21B6',
+    highlight: false,
+    capabilities: [
+      'C# ASP.NET Core 10 systems',
+      'Python FastAPI services',
+      'MERN stack SaaS platforms',
+      'Microservices architecture',
+      'RESTful & GraphQL APIs',
+      'Event-driven systems (Azure Service Bus)',
+    ],
+  },
+  {
+    id: 'fintech-blockchain',
+    icon: '🔗',
+    title: 'FinTech & Blockchain',
+    description:
+      'Ethereum smart contracts, DeFi platform development, digital finance systems, automated payment integrations, Web3 APIs, and regulatory-compliant financial technology solutions.',
+    tags: ['Solidity', 'Ethereum', 'Web3', 'DeFi', 'Payments'],
+    color: '#6B46FF',
+    highlight: false,
+    capabilities: [
+      'Ethereum smart contract development',
+      'DeFi protocol integrations',
+      'Digital payment gateway systems',
+      'Web3.js / Ethers.js APIs',
+      'Regulatory compliance (NUPRC/DPR)',
+      'Financial data analytics',
+    ],
+  },
+]
+
+export default SERVICES

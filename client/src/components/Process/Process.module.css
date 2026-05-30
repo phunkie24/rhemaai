@@ -1,0 +1,105 @@
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--dark-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(107,70,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107,70,255,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(107, 70, 255, 0.2);
+  position: relative;
+  z-index: var(--z-above);
+}
+
+.step {
+  padding: 36px 28px;
+  background: rgba(10, 4, 20, 0.7);
+  border-right: 1px solid rgba(107, 70, 255, 0.12);
+  position: relative;
+  transition: var(--transition-base);
+  cursor: default;
+}
+
+.step:last-child {
+  border-right: none;
+}
+
+.stepNum {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 800;
+  color: rgba(107, 70, 255, 0.18);
+  line-height: 1;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+
+.step:hover .stepNum {
+  color: rgba(107, 70, 255, 0.4);
+}
+
+.stepContent {}
+
+.stepTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.stepDesc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.stepDetail {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.detailCheck {
+  color: var(--brand-400);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .step { border-right: 1px solid rgba(107, 70, 255, 0.12); border-bottom: 1px solid rgba(107, 70, 255, 0.12); }
+  .step:nth-child(even) { border-right: none; }
+}
+
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .step { border-right: none; }
+}

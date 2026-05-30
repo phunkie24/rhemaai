@@ -1,0 +1,124 @@
+/* =====================================================
+   RhemaAI Technologies — Design System Variables
+   ===================================================== */
+
+:root {
+  /* Brand Palette */
+  --brand-50:  #EDE8FF;
+  --brand-100: #D4C8FF;
+  --brand-200: #B9A5FF;
+  --brand-300: #9B6DFF;
+  --brand-400: #7C50F5;
+  --brand-500: #6B46FF;
+  --brand-600: #5535EE;
+  --brand-700: #3E26CC;
+  --brand-800: #2A18A0;
+  --brand-900: #180E70;
+
+  /* Semantic Colors */
+  --primary:        var(--brand-500);
+  --primary-hover:  var(--brand-600);
+  --primary-light:  var(--brand-50);
+  --primary-mid:    var(--brand-300);
+
+  /* Neutrals */
+  --white:      #FFFFFF;
+  --off-white:  #F8F7FF;
+  --gray-50:    #F4F3FA;
+  --gray-100:   #E8E6F5;
+  --gray-200:   #CBC8DE;
+  --gray-400:   #9896AB;
+  --gray-600:   #6B6080;
+  --gray-800:   #2D2840;
+  --dark:       #0A0414;
+  --dark-mid:   #12082A;
+  --dark-card:  #1A0D38;
+
+  /* Text */
+  --text-primary:   #0F0A1E;
+  --text-secondary: #5A5370;
+  --text-muted:     #9896AB;
+  --text-white:     rgba(255, 255, 255, 0.92);
+  --text-white-muted: rgba(255, 255, 255, 0.52);
+
+  /* Borders */
+  --border-light:   rgba(107, 70, 255, 0.12);
+  --border-mid:     rgba(107, 70, 255, 0.22);
+  --border-strong:  rgba(107, 70, 255, 0.40);
+  --border-dark:    rgba(107, 70, 255, 0.15);
+
+  /* Glows / Shadows */
+  --glow-sm:   0 4px 20px rgba(107, 70, 255, 0.18);
+  --glow-md:   0 8px 40px rgba(107, 70, 255, 0.25);
+  --glow-lg:   0 16px 60px rgba(107, 70, 255, 0.35);
+  --shadow-sm: 0 2px 8px rgba(10, 4, 20, 0.08);
+  --shadow-md: 0 8px 32px rgba(10, 4, 20, 0.12);
+  --shadow-lg: 0 20px 60px rgba(10, 4, 20, 0.16);
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Type Scale */
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-md:   17px;
+  --text-lg:   20px;
+  --text-xl:   24px;
+  --text-2xl:  32px;
+  --text-3xl:  44px;
+  --text-4xl:  56px;
+  --text-5xl:  72px;
+
+  /* Spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Radius */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast:   all 0.15s ease;
+  --transition-base:   all 0.25s ease;
+  --transition-slow:   all 0.40s ease;
+  --transition-spring: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --container-max: 1200px;
+  --section-pad-x: clamp(20px, 5%, 80px);
+  --section-pad-y: clamp(60px, 8vw, 110px);
+
+  /* Z-Index */
+  --z-base:    1;
+  --z-above:   10;
+  --z-modal:   100;
+  --z-nav:     200;
+  --z-toast:   300;
+}
+
+/* Dark mode override */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white:      #0A0414;
+    --off-white:  #12082A;
+    --text-primary:   rgba(255, 255, 255, 0.92);
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-muted:     rgba(255, 255, 255, 0.35);
+    --border-light:   rgba(155, 109, 255, 0.15);
+  }
+}

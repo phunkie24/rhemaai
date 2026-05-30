@@ -1,0 +1,145 @@
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: linear-gradient(135deg, var(--brand-600) 0%, #3D1FAB 45%, var(--dark-mid) 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.bgOrb1 {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bgOrb2 {
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(107,70,255,0.3), transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-above);
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.desc {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 500px;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btnWhite {
+  background: white;
+  color: var(--primary);
+  padding: 15px 32px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition-spring);
+}
+
+.btnWhite:hover {
+  color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.btnGhost {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 15px 28px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: var(--transition-base);
+}
+
+.btnGhost:hover {
+  border-color: white;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.trustRow {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.trustCheck {
+  color: var(--brand-300);
+  font-size: 14px;
+}
+
+@media (max-width: 560px) {
+  .actions { flex-direction: column; align-items: center; }
+  .btnWhite, .btnGhost { width: 100%; max-width: 320px; text-align: center; }
+  .trustRow { gap: 14px; }
+}

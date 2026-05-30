@@ -1,0 +1,113 @@
+@import './variables.css';
+@import './animations.css';
+
+/* =====================================================
+   Reset & Base
+   ===================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--text-primary);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+h1 { font-size: clamp(38px, 5.5vw, var(--text-5xl)); font-weight: 800; }
+h2 { font-size: clamp(28px, 3.5vw, var(--text-3xl)); }
+h3 { font-size: clamp(18px, 2vw, var(--text-xl)); }
+h4 { font-size: var(--text-lg); }
+
+p { line-height: 1.75; color: var(--text-secondary); }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover { color: var(--primary-hover); }
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  border: none;
+  background: none;
+  transition: var(--transition-base);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul { list-style: none; }
+
+/* Layout Utilities */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--section-pad-x);
+}
+
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.section--dark {
+  background: var(--dark);
+}
+
+.section--off {
+  background: var(--off-white);
+}
+
+/* Text Utilities */
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand-500), var(--brand-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-muted { color: var(--text-muted); }
+.text-white { color: var(--text-white); }
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--radius-full);
+}

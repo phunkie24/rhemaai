@@ -1,0 +1,188 @@
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(107,70,255,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(155,109,255,0.10) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 72px;
+  align-items: start;
+  position: relative;
+  z-index: var(--z-above);
+}
+
+/* Left */
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-300);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.title {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.accent {
+  background: linear-gradient(135deg, var(--brand-300), #C084FC);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* Tech Stack */
+.techStack {}
+
+.techTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.techPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.techPill {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand-200);
+  background: rgba(107, 70, 255, 0.18);
+  border: 1px solid rgba(107, 70, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.2px;
+}
+
+/* Math Badge */
+.mathBadge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(107, 70, 255, 0.12);
+  border: 1px solid rgba(107, 70, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+}
+
+.mathIcon {
+  font-size: 36px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--brand-300);
+  line-height: 1;
+  width: 48px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.mathTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 3px;
+}
+
+.mathSub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Right — Capability Grid */
+.capGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.capCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(107, 70, 255, 0.18);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  cursor: default;
+  transition: var(--transition-base);
+}
+
+.capCard:hover {
+  background: rgba(107, 70, 255, 0.12);
+  border-color: rgba(107, 70, 255, 0.35);
+}
+
+.capIcon {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.capTitle {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 7px;
+}
+
+.capDesc {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.65;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .inner { grid-template-columns: 1fr; gap: 48px; }
+}
+
+@media (max-width: 540px) {
+  .capGrid { grid-template-columns: 1fr; }
+}
