@@ -1,41 +1,63 @@
 #!/usr/bin/env bash
 # =============================================================================
-# RhemaAI VPS Setup — Ubuntu 24.04 (Hostinger)
-# Run once as root: bash setup.sh
+# RhemaAI — One-time VPS setup for Ubuntu 24.04 (Hostinger)
+# Run as root: bash setup.sh
 # =============================================================================
 set -euo pipefail
 
 DOMAIN="rhemaai.tech"
-REPO="https://github.com/YOUR_GITHUB_USERNAME/rhemaai.git"   # <-- update this
-APP_DIR="/opt/rhemaai"
+REPO="https://github.com/phunkie24/rhemaai.git"
+APP_DIR="/var/www/rhemaai"
 
 echo "======================================================"
 echo "  RhemaAI VPS Setup — $(date)"
 echo "======================================================"
 
 # ── 1. System update ──────────────────────────────────────
-echo "[1/7] Updating system packages..."
+echo ""
+echo "[1/8] Updating system..."
 apt-get update -y && apt-get upgrade -y
-apt-get install -y git curl ufw nginx certbot python3-certbot-nginx
+apt-get install -y git curl gnupg ufw nginx certbot python3-certbot-nginx
 
-# ── 2. Install Docker ─────────────────────────────────────
-echo "[2/7] Installing Docker..."
-if ! command -v docker &>/dev/null; then
-  curl -fsSL https://get.docker.com | bash
-  systemctl enable docker
-  systemctl start docker
-else
-  echo "  Docker already installed: $(docker --version)"
-fi
+# ── 2. Node.js 22 via nvm ─────────────────────────────────
+echo ""
+echo "[2/8] Installing Node.js 22..."
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1091
+\. "$NVM_DIR/nvm.sh"
+nvm install 22
+nvm use 22
+nvm alias default 22
+echo "  Node: $(node -v)  npm: $(npm -v)"
 
-# ── 3. Firewall ───────────────────────────────────────────
-echo "[3/7] Configuring firewall..."
-ufw allow OpenSSH
-ufw allow 'Nginx Full'
-ufw --force enable
+# ── 3. PM2 ────────────────────────────────────────────────
+echo ""
+echo "[3/8] Installing PM2..."
+npm install -g pm2
 
-# ── 4. Clone repo ─────────────────────────────────────────
-echo "[4/7] Cloning repository..."
+# ── 4. MongoDB 8.0 ────────────────────────────────────────
+echo ""
+echo "[4/8] Installing MongoDB 8.0..."
+curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+  gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] \
+https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" \
+  | tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+
+apt-get update -y
+apt-get install -y mongodb-org
+
+systemctl daemon-reload
+systemctl start mongod
+systemctl enable mongod
+echo "  MongoDB status: $(systemctl is-active mongod)"
+
+# ── 5. Clone repo ─────────────────────────────────────────
+echo ""
+echo "[5/8] Cloning repository..."
+mkdir -p /var/www
 if [ -d "$APP_DIR/.git" ]; then
   echo "  Repo exists — pulling latest..."
   git -C "$APP_DIR" pull
@@ -43,22 +65,46 @@ else
   git clone "$REPO" "$APP_DIR"
 fi
 
-# ── 5. Create .env ────────────────────────────────────────
-echo "[5/7] Setting up environment..."
-if [ ! -f "$APP_DIR/.env" ]; then
-  cat > "$APP_DIR/.env" <<EOF
+# ── 6. Backend setup ──────────────────────────────────────
+echo ""
+echo "[6/8] Setting up backend..."
+cd "$APP_DIR/server"
+npm install --omit=dev
+
+if [ ! -f "$APP_DIR/server/.env" ]; then
+  cat > "$APP_DIR/server/.env" <<EOF
+NODE_ENV=production
+PORT=5000
+MONGODB_URI=mongodb://127.0.0.1:27017/rhemaai
 EMAIL_USER=info@rhemaai.tech
-EMAIL_PASS=REPLACE_WITH_YOUR_APP_PASSWORD
+EMAIL_PASS=REPLACE_WITH_APP_PASSWORD
 FRONTEND_URL=https://${DOMAIN}
-CONTACT_ADMIN_KEY=REPLACE_WITH_STRONG_SECRET
 EOF
-  echo "  !! .env created — edit $APP_DIR/.env with real values before continuing !!"
-  echo "  Press ENTER when ready..."
+  echo ""
+  echo "  !! .env created at $APP_DIR/server/.env"
+  echo "  !! Edit it now with your real EMAIL_PASS, then press ENTER..."
   read -r
 fi
 
-# ── 6. Configure Nginx ────────────────────────────────────
-echo "[6/7] Configuring Nginx..."
+# Start backend with PM2
+pm2 start "$APP_DIR/server/index.js" --name rhemaai-server
+pm2 startup
+pm2 save
+echo "  Backend running on port 5000"
+
+# ── 7. Frontend build ─────────────────────────────────────
+echo ""
+echo "[7/8] Building React frontend..."
+cd "$APP_DIR/client"
+npm install
+VITE_API_URL=/api npm run build
+echo "  Build output: $APP_DIR/client/dist"
+
+# ── 8. Nginx + SSL ────────────────────────────────────────
+echo ""
+echo "[8/8] Configuring Nginx..."
+
+# Write Nginx site config
 sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/nginx.conf" \
   > /etc/nginx/sites-available/rhemaai
 
@@ -67,10 +113,15 @@ rm -f /etc/nginx/sites-enabled/default
 
 nginx -t && systemctl reload nginx
 
-# ── 7. SSL with Let's Encrypt ─────────────────────────────
-echo "[7/7] Obtaining SSL certificate..."
-echo "  Make sure DNS A records for ${DOMAIN} and www.${DOMAIN} point to this server's IP."
-echo "  Press ENTER to continue..."
+# Firewall
+ufw allow OpenSSH
+ufw allow 'Nginx Full'
+ufw --force enable
+
+# SSL
+echo ""
+echo "  DNS: make sure A records for ${DOMAIN} and www.${DOMAIN} point to this IP."
+echo "  Press ENTER to request the SSL certificate..."
 read -r
 
 certbot --nginx \
@@ -81,20 +132,13 @@ certbot --nginx \
   --email "info@${DOMAIN}" \
   --redirect
 
-# Enable auto-renewal
 systemctl enable certbot.timer
 systemctl start certbot.timer
-
-# ── Build and start containers ────────────────────────────
-echo ""
-echo "Starting Docker containers..."
-cd "$APP_DIR"
-docker compose -f docker-compose.prod.yml up -d --build
 
 echo ""
 echo "======================================================"
 echo "  Setup complete!"
-echo "  Site:   https://${DOMAIN}"
-echo "  Logs:   docker compose -f $APP_DIR/docker-compose.prod.yml logs -f"
-echo "  Update: bash $APP_DIR/deploy/deploy.sh"
+echo "  Site:    https://${DOMAIN}"
+echo "  Logs:    pm2 logs rhemaai-server"
+echo "  Update:  bash ${APP_DIR}/deploy/deploy.sh"
 echo "======================================================"
