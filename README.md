@@ -31,7 +31,7 @@ Create `.env` on the VPS from `.env.example`:
 ```env
 FRONTEND_URL=https://rhemaai.tech
 CONTACT_ADMIN_KEY=replace_with_a_long_random_secret
-EMAIL_USER=hello@rhemaai.tech
+EMAIL_USER=info@rhemaai.tech
 EMAIL_PASS=your_gmail_app_password
 ```
 

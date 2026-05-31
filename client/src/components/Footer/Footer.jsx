@@ -25,7 +25,7 @@ const COMPANY_LINKS = [
 ]
 
 const CONTACT_LINKS = [
-  { label: 'hello@rhemaai.tech',   path: 'mailto:hello@rhemaai.tech', external: true },
+  { label: 'info@rhemaai.tech',    path: 'mailto:info@rhemaai.tech', external: true },
   { label: '+234 904 313 8981',    path: 'tel:+2349043138981', external: true },
   { label: 'LinkedIn',             path: 'https://linkedin.com/company/rhemaai-tech', external: true },
   { label: 'GitHub',               path: 'https://github.com/phunkie24', external: true },
@@ -95,7 +95,7 @@ export default function Footer() {
           <div className={styles.colTitle}>Services</div>
           <ul>
             {SERVICES_LINKS.map((l) => (
-              <li key={l.path}>
+              <li key={`${l.label}-${l.path}`}>
                 <Link to={l.path} className={styles.footerLink}>{l.label}</Link>
               </li>
             ))}
@@ -107,7 +107,7 @@ export default function Footer() {
           <div className={styles.colTitle}>Company</div>
           <ul>
             {COMPANY_LINKS.map((l) => (
-              <li key={l.path}>
+              <li key={`${l.label}-${l.path}`}>
                 {l.external
                   ? <a href={l.path} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>{l.label}</a>
                   : <Link to={l.path} className={styles.footerLink}>{l.label}</Link>
@@ -122,7 +122,7 @@ export default function Footer() {
           <div className={styles.colTitle}>Connect</div>
           <ul>
             {CONTACT_LINKS.map((l) => (
-              <li key={l.path}>
+              <li key={`${l.label}-${l.path}`}>
                 {l.external
                   ? <a href={l.path} target="_blank" rel="noopener noreferrer" className={styles.footerLink}>{l.label}</a>
                   : <Link to={l.path} className={styles.footerLink}>{l.label}</Link>
