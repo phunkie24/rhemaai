@@ -20,11 +20,17 @@ const contactSchema = Joi.object({
   message: Joi.string().trim().min(10).max(2000).required(),
 })
 
+// Hostinger email uses SMTP directly (not the gmail service shorthand)
 const emailEnabled = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS)
 const transporter = emailEnabled
   ? nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+      host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
+      port: parseInt(process.env.EMAIL_PORT || '465', 10),
+      secure: true,          // SSL on port 465
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
     })
   : null
 
@@ -110,7 +116,7 @@ export async function submitContact(req, res, next) {
             </div>
             <hr style="border: none; border-top: 1px solid #e8e6f5; margin: 24px 0;">
             <p style="font-size: 12px; color: #9896AB; text-align: center; margin: 0;">
-              RhemaAI Solutions Ltd | hello@rhemaai.tech | rhemaai.tech
+              RhemaAI Solutions Ltd | info@rhemaai.tech | rhemaai.tech
             </p>
           </div>
         </div>

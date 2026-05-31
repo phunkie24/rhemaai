@@ -76,8 +76,10 @@ if [ ! -f "$APP_DIR/server/.env" ]; then
 NODE_ENV=production
 PORT=5000
 MONGODB_URI=mongodb://127.0.0.1:27017/rhemaai
+EMAIL_HOST=smtp.hostinger.com
+EMAIL_PORT=465
 EMAIL_USER=info@rhemaai.tech
-EMAIL_PASS=REPLACE_WITH_APP_PASSWORD
+EMAIL_PASS=REPLACE_WITH_HOSTINGER_EMAIL_PASSWORD
 FRONTEND_URL=https://${DOMAIN}
 EOF
   echo ""
