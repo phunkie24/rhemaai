@@ -32,7 +32,7 @@ function ServiceCard({ service, index }) {
       )}
 
       <div className={`${styles.icon} ${hovered ? styles.iconActive : ''}`}>
-        <span role="img" aria-label={service.title}>{service.icon}</span>
+        <span aria-hidden="true">{service.icon}</span>
       </div>
 
       <h3 className={styles.cardTitle}>{service.title}</h3>
@@ -54,7 +54,7 @@ function ServiceCard({ service, index }) {
       </div>
 
       <Link to={`/services#${service.id}`} className={styles.cardLink}>
-        Learn more <span className={styles.linkArrow}>→</span>
+        Learn more
       </Link>
     </motion.div>
   )
@@ -68,7 +68,7 @@ export default function Services() {
       <SectionHeader
         label="What We Build"
         title="End-to-End Enterprise AI & Cloud Services"
-        subtitle="From strategy to production deployment — we deliver across the full intelligence stack, combining mathematics, multi-cloud expertise, and proven agentic AI patterns."
+        subtitle="From strategy to production deployment, we deliver across the full intelligence stack, combining Applied Mathematics, multi-cloud expertise, and proven agentic AI patterns."
         centered
       />
 
@@ -90,7 +90,7 @@ export default function Services() {
         transition={{ delay: 0.6, duration: 0.5 }}
       >
         <Link to="/services" className={styles.allServicesBtn}>
-          View All Services & Capabilities →
+          View All Services & Capabilities
         </Link>
       </motion.div>
     </section>

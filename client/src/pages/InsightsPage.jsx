@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { insightsAPI } from '@utils/api'
 import styles from './InsightsPage.module.css'
 
-const CATEGORIES = [
+export const CATEGORIES = [
   { value: 'all',              label: 'All Topics' },
   { value: 'agentic-ai',       label: 'Agentic AI' },
   { value: 'data-engineering', label: 'Data Engineering' },
@@ -17,13 +17,13 @@ const CATEGORIES = [
 ]
 
 // Static seed articles (shown while API loads or if no data yet)
-const SEED_ARTICLES = [
-  { _id: '1', title: 'Building 21-Pattern Agentic AI Systems for Enterprise', category: 'agentic-ai', excerpt: 'A deep dive into the 21 agentic design patterns that form the foundation of production-grade multi-agent systems — from orchestration to observability.', readTime: 12, publishedAt: '2026-04-10', tags: ['ADAS', 'Multi-Agent', 'LLM'] },
-  { _id: '2', title: 'Azure vs AWS for Enterprise Data Engineering in 2026', category: 'cloud-architecture', excerpt: 'A practical comparison of Microsoft Azure Synapse Analytics, Azure Databricks, and Amazon EMR for building enterprise-scale data lakehouses.', readTime: 10, publishedAt: '2026-03-28', tags: ['Azure', 'AWS', 'Data Lakehouse'] },
-  { _id: '3', title: 'RAG vs Fine-Tuning: When to Use Each in Enterprise AI', category: 'agentic-ai', excerpt: 'The decision between retrieval-augmented generation and fine-tuned models is nuanced. Here\'s how we approach it for enterprise deployments.', readTime: 8, publishedAt: '2026-03-15', tags: ['RAG', 'Fine-Tuning', 'LLM'] },
-  { _id: '4', title: 'Predictive Analytics in Oil & Gas: A Practical Framework', category: 'data-science', excerpt: 'How we applied predictive maintenance models, demand forecasting, and anomaly detection to a major West African energy company\'s operations.', readTime: 11, publishedAt: '2026-02-20', tags: ['Predictive', 'Oil & Gas', 'Machine Learning'] },
-  { _id: '5', title: 'Medallion Architecture: Bronze-Silver-Gold with Databricks', category: 'data-engineering', excerpt: 'A complete walkthrough of designing and implementing a production Medallion lakehouse on Azure Databricks — including CDC patterns and data quality layers.', readTime: 14, publishedAt: '2026-02-05', tags: ['Databricks', 'Delta Lake', 'Medallion'] },
-  { _id: '6', title: 'MLOps at Scale: Lessons from 10 Enterprise Deployments', category: 'mlops', excerpt: 'What we\'ve learned building MLOps pipelines for enterprise clients — from experiment tracking and model registry to drift detection and automated retraining.', readTime: 9, publishedAt: '2026-01-18', tags: ['MLflow', 'AzureML', 'Model Monitoring'] },
+export const SEED_ARTICLES = [
+  { _id: '1', slug: 'building-21-pattern-agentic-ai-systems', title: 'Building 21-Pattern Agentic AI Systems for Enterprise', category: 'agentic-ai', excerpt: 'A deep dive into the 21 agentic design patterns that form the foundation of production-grade multi-agent systems - from orchestration to observability.', readTime: 12, publishedAt: '2026-04-10', tags: ['ADAS', 'Multi-Agent', 'LLM'] },
+  { _id: '2', slug: 'azure-vs-aws-enterprise-data-engineering-2026', title: 'Azure vs AWS for Enterprise Data Engineering in 2026', category: 'cloud-architecture', excerpt: 'A practical comparison of Microsoft Azure Synapse Analytics, Azure Databricks, and Amazon EMR for building enterprise-scale data lakehouses.', readTime: 10, publishedAt: '2026-03-28', tags: ['Azure', 'AWS', 'Data Lakehouse'] },
+  { _id: '3', slug: 'rag-vs-fine-tuning-enterprise-ai', title: 'RAG vs Fine-Tuning: When to Use Each in Enterprise AI', category: 'agentic-ai', excerpt: 'The decision between retrieval-augmented generation and fine-tuned models is nuanced. Here\'s how we approach it for enterprise deployments.', readTime: 8, publishedAt: '2026-03-15', tags: ['RAG', 'Fine-Tuning', 'LLM'] },
+  { _id: '4', slug: 'predictive-analytics-oil-gas-framework', title: 'Predictive Analytics in Oil & Gas: A Practical Framework', category: 'data-science', excerpt: 'How we applied predictive maintenance models, demand forecasting, and anomaly detection to a major West African energy company\'s operations.', readTime: 11, publishedAt: '2026-02-20', tags: ['Predictive', 'Oil & Gas', 'Machine Learning'] },
+  { _id: '5', slug: 'medallion-architecture-bronze-silver-gold-databricks', title: 'Medallion Architecture: Bronze-Silver-Gold with Databricks', category: 'data-engineering', excerpt: 'A complete walkthrough of designing and implementing a production Medallion lakehouse on Azure Databricks - including CDC patterns and data quality layers.', readTime: 14, publishedAt: '2026-02-05', tags: ['Databricks', 'Delta Lake', 'Medallion'] },
+  { _id: '6', slug: 'mlops-at-scale-enterprise-deployments', title: 'MLOps at Scale: Lessons from 10 Enterprise Deployments', category: 'mlops', excerpt: 'What we\'ve learned building MLOps pipelines for enterprise clients - from experiment tracking and model registry to drift detection and automated retraining.', readTime: 9, publishedAt: '2026-01-18', tags: ['MLflow', 'AzureML', 'Model Monitoring'] },
 ]
 
 function ArticleCard({ article, index }) {
@@ -52,7 +52,7 @@ function ArticleCard({ article, index }) {
       <div className={styles.cardFooter}>
         <span className={styles.cardDate}>{date}</span>
         <Link to={`/insights/${article.slug || article._id}`} className={styles.cardLink}>
-          Read Article →
+          Read Article
         </Link>
       </div>
     </motion.article>
@@ -81,8 +81,8 @@ export default function InsightsPage() {
   return (
     <>
       <Helmet>
-        <title>Insights — RhemaAI Technologies | AI, Cloud & Data Engineering</title>
-        <meta name="description" content="Expert insights on agentic AI, data engineering, cloud architecture, MLOps, data science, and enterprise AI transformation from RhemaAI Technologies." />
+        <title>Insights | RhemaAI Solutions Ltd | AI, Cloud & Data Engineering</title>
+        <meta name="description" content="Expert insights on agentic AI, data engineering, cloud architecture, MLOps, data science, and enterprise AI transformation from RhemaAI Solutions Ltd." />
       </Helmet>
 
       {/* Hero */}
@@ -94,7 +94,7 @@ export default function InsightsPage() {
         >
           <span className={styles.heroLabel}>Intelligence Insights</span>
           <h1 className={styles.heroTitle}>AI, Cloud & Data<br /><span className={styles.heroAccent}>Engineering Insights</span></h1>
-          <p className={styles.heroDesc}>Deep technical articles, architectural guides, and strategic thinking from the RhemaAI team — written for enterprise practitioners, not beginners.</p>
+          <p className={styles.heroDesc}>Deep technical articles, architectural guides, and strategic thinking from the RhemaAI Solutions Ltd team, written for enterprise practitioners.</p>
         </motion.div>
       </div>
 
@@ -128,8 +128,8 @@ export default function InsightsPage() {
       {/* Newsletter signup */}
       <div className={styles.newsletterBanner}>
         <h2>Get Insights in Your Inbox</h2>
-        <p>New articles on agentic AI, cloud architecture, data science, and enterprise engineering — delivered when they're published.</p>
-        <Link to="/#newsletter" className={styles.nlBtn}>Subscribe to Intelligence Insights →</Link>
+        <p>New articles on agentic AI, cloud architecture, data science, and enterprise engineering, delivered when they are published.</p>
+        <Link to="/#newsletter" className={styles.nlBtn}>Subscribe to Intelligence Insights</Link>
       </div>
     </>
   )

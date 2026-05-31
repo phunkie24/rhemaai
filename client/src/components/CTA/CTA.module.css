@@ -1,6 +1,6 @@
 .section {
   padding: var(--section-pad-y) var(--section-pad-x);
-  background: linear-gradient(135deg, var(--brand-600) 0%, #3D1FAB 45%, var(--dark-mid) 100%);
+  background: linear-gradient(135deg, var(--brand-800) 0%, var(--dark-mid) 52%, #063C43 100%);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -13,29 +13,6 @@
     linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
   background-size: 48px 48px;
-  pointer-events: none;
-}
-
-.bgOrb1 {
-  position: absolute;
-  top: -150px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.bgOrb2 {
-  position: absolute;
-  bottom: -100px;
-  right: -100px;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(107,70,255,0.3), transparent 60%);
-  border-radius: 50%;
   pointer-events: none;
 }
 
@@ -59,11 +36,11 @@
 }
 
 .title {
-  font-size: clamp(28px, 4vw, 48px);
+  font-size: var(--text-3xl);
   font-weight: 800;
   color: white;
   line-height: 1.1;
-  letter-spacing: -1.5px;
+  letter-spacing: 0;
 }
 
 .desc {
@@ -134,11 +111,12 @@
 }
 
 .trustCheck {
-  color: var(--brand-300);
+  color: var(--accent-teal);
   font-size: 14px;
 }
 
 @media (max-width: 560px) {
+  .title { font-size: var(--text-2xl); }
   .actions { flex-direction: column; align-items: center; }
   .btnWhite, .btnGhost { width: 100%; max-width: 320px; text-align: center; }
   .trustRow { gap: 14px; }

@@ -5,40 +5,40 @@ import styles from './WhyUs.module.css'
 
 const POINTS = [
   {
-    icon: '🧮',
-    title: 'Mathematics-Driven Thinking',
-    desc: 'Our MSc Mathematics foundation means we solve problems from first principles — not copy-paste templates. Better architectures, better AI systems, better analytical models.',
+    icon: 'MA',
+    title: 'Applied Mathematics Thinking',
+    desc: 'Our Applied Mathematics foundation keeps models, data products, and cloud architectures grounded in first principles. Better assumptions, better systems, better decisions.',
   },
   {
-    icon: '🌍',
+    icon: 'MC',
     title: 'Genuine Multi-Cloud Mastery',
-    desc: 'Azure, AWS, and GCP in real production — 19+ Azure certifications plus AWS and GCP. We architect across the full cloud landscape without vendor lock-in bias.',
+    desc: 'Azure, AWS and GCP Certified expertise applied in real production environments. We architect across the full cloud landscape without vendor lock-in bias.',
   },
   {
-    icon: '⚡',
+    icon: 'AI',
     title: 'Production-Grade AI Systems',
-    desc: '21-pattern agentic AI architectures, enterprise EDW pipelines, multi-agent procurement systems — all battle-tested in live enterprise environments.',
+    desc: 'Agentic AI architectures, enterprise data pipelines, and multi-agent workflows designed for live operational environments.',
   },
   {
-    icon: '📊',
+    icon: 'DA',
     title: 'End-to-End Data & Analytics',
-    desc: 'From raw SAP ECC ingestion through Bronze-Silver-Gold Databricks layers to predictive ML models and Power BI dashboards — we own the full data value chain.',
+    desc: 'From raw SAP ECC ingestion through Bronze-Silver-Gold Databricks layers to predictive ML models and Power BI dashboards, we own the full data value chain.',
   },
   {
-    icon: '🎯',
-    title: 'Thin-Team, High-Output Model',
-    desc: 'We operate lean and deliver elite — no bloated consulting overhead. Senior-level expertise on every engagement, every time.',
+    icon: 'SM',
+    title: 'Senior-Led Delivery Model',
+    desc: 'Lean delivery with senior-level expertise on architecture, implementation, governance, and production readiness.',
   },
   {
-    icon: '🔗',
+    icon: 'DK',
     title: 'Deep Enterprise Domain Knowledge',
-    desc: 'Oil & gas, finance, procurement — we\'ve built ProcureIQ, APAIE, and EDW pipelines for major Nigerian energy companies. Domain context built in, not bolted on.',
+    desc: 'Oil and gas, finance, and procurement experience across ProcureIQ, APAIE, and EDW pipelines for major Nigerian energy companies.',
   },
 ]
 
 const CERTS = [
-  { label: 'MSc Mathematics', color: '#6B46FF' },
-  { label: '19× Azure Certified', color: '#0078D4' },
+  { label: 'Applied Mathematics', color: '#6B46FF' },
+  { label: 'Azure Certified', color: '#0078D4' },
   { label: 'AWS Certified', color: '#FF9900' },
   { label: 'GCP Certified', color: '#4285F4' },
   { label: 'AI/ML Specialist', color: '#8B5CF6' },
@@ -53,13 +53,13 @@ export default function WhyUs() {
   return (
     <section className={styles.section}>
       <SectionHeader
-        label="Why RhemaAI"
+        label="Why RhemaAI Solutions Ltd"
         title="The Rare Combination That Changes Outcomes"
-        subtitle="Very few professionals combine MSc-level mathematics, multi-cloud certification, agentic AI engineering, and enterprise domain knowledge. That combination is our moat."
+        subtitle="Very few teams combine Applied Mathematics, Azure, AWS and GCP certified cloud delivery, agentic AI engineering, and enterprise domain knowledge. That combination is our advantage."
+        light
       />
 
       <div className={styles.inner} ref={ref}>
-        {/* Left: credentials visual */}
         <motion.div
           className={styles.visual}
           initial={{ opacity: 0, x: -32 }}
@@ -67,8 +67,8 @@ export default function WhyUs() {
           transition={{ duration: 0.65 }}
         >
           <div className={styles.visualTop}>
-            <div className={styles.mathSymbol}>∑ ∫ ∂</div>
-            <div className={styles.mscLabel}>MSc Applied Mathematics</div>
+            <div className={styles.mathSymbol}>MATH / AI / CLOUD</div>
+            <div className={styles.mscLabel}>Applied Mathematics</div>
             <div className={styles.mscSub}>First-principles problem solving</div>
           </div>
 
@@ -88,7 +88,7 @@ export default function WhyUs() {
             </div>
             <div className={styles.statDiv} />
             <div className={styles.stat}>
-              <div className={styles.statNum}>21</div>
+              <div className={styles.statNum}>10,000+</div>
               <div className={styles.statLabel}>Agentic Patterns</div>
             </div>
             <div className={styles.statDiv} />
@@ -99,7 +99,6 @@ export default function WhyUs() {
           </div>
         </motion.div>
 
-        {/* Right: points */}
         <motion.div
           className={styles.points}
           initial="hidden"

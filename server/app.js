@@ -10,9 +10,22 @@ import insightsRoutes from './routes/insights.js'
 
 const app = express()
 
-app.use(helmet())
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
+app.disable('x-powered-by')
+app.set('trust proxy', 1)
+
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+}))
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true)
+    return callback(new Error('Not allowed by CORS'))
+  },
   credentials: true,
 }))
 
@@ -23,20 +36,20 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(express.json({ limit: '10kb' }))
 app.use(express.urlencoded({ extended: true, limit: '10kb' }))
 
-app.use('/api/', rateLimiter)
-
-app.use('/api/contact',    contactRoutes)
-app.use('/api/newsletter', newsletterRoutes)
-app.use('/api/insights',   insightsRoutes)
-
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'RhemaAI Technologies API',
+    service: 'RhemaAI Solutions Ltd API',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
   })
 })
+
+app.use('/api/', rateLimiter)
+
+app.use('/api/contact', contactRoutes)
+app.use('/api/newsletter', newsletterRoutes)
+app.use('/api/insights', insightsRoutes)
 
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' })

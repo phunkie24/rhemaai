@@ -13,6 +13,25 @@ beforeAll(() => {
   process.env.EMAIL_PASS = 'test'
 })
 
+async function withProductionAdminEnv(testFn) {
+  const previousEnv = process.env.NODE_ENV
+  const previousKey = process.env.CONTACT_ADMIN_KEY
+
+  process.env.NODE_ENV = 'production'
+  process.env.CONTACT_ADMIN_KEY = 'contact-admin-secret-for-tests'
+
+  try {
+    await testFn()
+  } finally {
+    process.env.NODE_ENV = previousEnv
+    if (previousKey === undefined) {
+      delete process.env.CONTACT_ADMIN_KEY
+    } else {
+      process.env.CONTACT_ADMIN_KEY = previousKey
+    }
+  }
+}
+
 describe('POST /api/contact', () => {
   it('creates a contact and returns 201', async () => {
     const res = await request(app)
@@ -117,5 +136,30 @@ describe('GET /api/contact', () => {
     expect(res.status).toBe(200)
     expect(res.body.contacts).toHaveLength(2)
     expect(res.body.pages).toBe(3)
+  })
+
+  it('rejects invalid status filters', async () => {
+    const res = await request(app).get('/api/contact?status=archived')
+    expect(res.status).toBe(400)
+    expect(res.body.message).toMatch(/invalid status/i)
+  })
+
+  it('requires an admin API key in production', async () => {
+    await withProductionAdminEnv(async () => {
+      const res = await request(app).get('/api/contact')
+      expect(res.status).toBe(401)
+    })
+  })
+
+  it('allows the production contact list with the admin API key', async () => {
+    await Contact.create(validContact)
+
+    await withProductionAdminEnv(async () => {
+      const res = await request(app)
+        .get('/api/contact')
+        .set('x-admin-api-key', 'contact-admin-secret-for-tests')
+      expect(res.status).toBe(200)
+      expect(res.body.total).toBe(1)
+    })
   })
 })

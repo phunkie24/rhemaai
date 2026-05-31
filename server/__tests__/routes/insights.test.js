@@ -62,6 +62,12 @@ describe('GET /api/insights', () => {
     expect(res.body.total).toBe(2)
   })
 
+  it('rejects invalid category filters', async () => {
+    const res = await request(app).get('/api/insights?category=bad-category')
+    expect(res.status).toBe(400)
+    expect(res.body.message).toMatch(/invalid insight category/i)
+  })
+
   it('paginates results correctly', async () => {
     for (let i = 0; i < 5; i++) {
       await Insight.create({
@@ -75,6 +81,14 @@ describe('GET /api/insights', () => {
     expect(res.body.insights).toHaveLength(2)
     expect(res.body.pages).toBe(3)
     expect(res.body.page).toBe(1)
+  })
+
+  it('normalizes invalid pagination values', async () => {
+    await Insight.create(validInsight)
+    const res = await request(app).get('/api/insights?page=-1&limit=not-a-number')
+    expect(res.status).toBe(200)
+    expect(res.body.page).toBe(1)
+    expect(res.body.insights).toHaveLength(1)
   })
 
   it('returns insights sorted by publishedAt descending', async () => {

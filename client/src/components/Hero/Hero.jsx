@@ -1,123 +1,121 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import useCountUp from '@hooks/useCountUp'
+import heroMedia from '../../assets/enterprise-ai-operations.png'
 import styles from './Hero.module.css'
 
 const STATS = [
-  { value: 19, suffix: '+', label: 'Azure Certifications' },
-  { value: 3,  suffix: '',  label: 'Cloud Platforms' },
-  { value: 50, suffix: '+', label: 'Enterprise Projects' },
-  { value: 21, suffix: '',  label: 'Agentic AI Patterns' },
+  { text: 'Azure, AWS and GCP', label: 'Certified' },
+  { value: 50, suffix: '+', label: 'Enterprise projects' },
+  { value: 10000, suffix: '+', label: 'Agentic AI patterns' },
+]
+
+const CAPABILITIES = [
+  'AI strategy',
+  'Cloud architecture',
+  'Lakehouse engineering',
+  'MLOps governance',
+]
+
+const SIGNALS = [
+  { label: 'Model risk', value: 'Monitored' },
+  { label: 'Data quality', value: '97.8%' },
+  { label: 'Cloud posture', value: 'Compliant' },
 ]
 
 function StatItem({ stat, delay }) {
-  const count = useCountUp(stat.value, 2200, true)
+  const count = useCountUp(stat.value ?? 0, 1800, true)
+
   return (
     <motion.div
-      className={styles.stat}
-      initial={{ opacity: 0, y: 20 }}
+      className={`${styles.stat} ${stat.text ? styles.textStat : ''}`}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.8 + delay, duration: 0.5 }}
+      transition={{ delay, duration: 0.45 }}
     >
-      <div className={styles.statNum}>
-        {count}{stat.suffix}
-      </div>
-      <div className={styles.statLabel}>{stat.label}</div>
+      <strong>{stat.text ?? `${count.toLocaleString()}${stat.suffix}`}</strong>
+      <span>{stat.label}</span>
     </motion.div>
   )
 }
 
 export default function Hero() {
-  const heroRef = useRef(null)
-
-  const containerVariants = {
-    hidden:  {},
-    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-  }
-
-  const itemVariants = {
-    hidden:  { opacity: 0, y: 28 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-  }
-
   return (
-    <section className={styles.hero} ref={heroRef}>
-      {/* Background layers */}
-      <div className={styles.heroBg}>
-        <div className={styles.heroGrid} />
-        <div className={`${styles.orb} ${styles.orb1}`} />
-        <div className={`${styles.orb} ${styles.orb2}`} />
-        <div className={`${styles.orb} ${styles.orb3}`} />
-        <div className={styles.gradientBase} />
+    <section className={styles.hero}>
+      <div className={styles.backdrop} aria-hidden="true" />
+
+      <div className={styles.heroShell}>
+        <motion.div
+          className={styles.copy}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowMark} />
+            Enterprise AI, cloud and data engineering
+          </div>
+
+          <h1 className={styles.headline}>
+            Enterprise AI Systems for Production
+          </h1>
+
+          <p className={styles.subtext}>
+            RhemaAI Solutions Ltd designs, builds and operates governed AI, data and cloud
+            platforms for enterprise teams that need measurable outcomes, resilient
+            architecture and reliable production operations.
+          </p>
+
+          <div className={styles.actions}>
+            <Link to="/contact" className={styles.btnPrimary}>
+              Start a transformation
+            </Link>
+            <Link to="/case-studies" className={styles.btnSecondary}>
+              View client outcomes
+            </Link>
+          </div>
+
+          <div className={styles.statsRow} aria-label="RhemaAI Solutions Ltd delivery proof points">
+            {STATS.map((stat, index) => (
+              <StatItem key={stat.label} stat={stat} delay={0.35 + index * 0.08} />
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className={styles.media}
+          initial={{ opacity: 0, x: 28 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.18, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img
+            src={heroMedia}
+            alt="Enterprise AI operations dashboard with cloud architecture, model performance and workflow monitoring panels"
+            className={styles.mediaImage}
+          />
+          <div className={styles.mediaShade} />
+
+          <div className={styles.statusPanel}>
+            <span className={styles.statusDot} />
+            Production readiness review
+          </div>
+
+          <div className={styles.signalPanel}>
+            {SIGNALS.map((signal) => (
+              <div key={signal.label} className={styles.signal}>
+                <span>{signal.label}</span>
+                <strong>{signal.value}</strong>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
-      {/* SEO keyword bar */}
-      <motion.div
-        className={styles.seoBar}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.1, duration: 0.6 }}
-      >
-        {['Enterprise AI Consulting', 'Agentic AI Systems', 'Azure · AWS · GCP',
-          'Data Engineering', 'Advanced Analytics', 'MLOps · DataOps'].map((kw) => (
-          <span key={kw} className={styles.seoKw}>
-            <span className={styles.seoDot} />
-            {kw}
-          </span>
+      <div className={styles.capabilityStrip} aria-label="Core capabilities">
+        {CAPABILITIES.map((item) => (
+          <span key={item}>{item}</span>
         ))}
-      </motion.div>
-
-      {/* Hero content */}
-      <motion.div
-        className={styles.heroContent}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div variants={itemVariants} className={styles.badge}>
-          <span className={styles.badgeDot} />
-          Enterprise AI &amp; Cloud Transformation
-        </motion.div>
-
-        <motion.h1 variants={itemVariants} className={styles.headline}>
-          Intelligent Systems<br />
-          for <span className={styles.gradientText}>Global Enterprise</span>
-        </motion.h1>
-
-        <motion.p variants={itemVariants} className={styles.subtext}>
-          We architect and deploy AI transformation, cloud-native data platforms,
-          agentic systems, advanced analytics, and enterprise intelligence infrastructure — at scale.
-        </motion.p>
-
-        <motion.div variants={itemVariants} className={styles.actions}>
-          <Link to="/contact" className={styles.btnPrimary}>
-            Start Transformation
-            <span className={styles.btnArrow}>→</span>
-          </Link>
-          <Link to="/services" className={styles.btnOutline}>
-            Explore Services
-          </Link>
-        </motion.div>
-
-        {/* Stats */}
-        <div className={styles.statsRow}>
-          {STATS.map((stat, i) => (
-            <StatItem key={stat.label} stat={stat} delay={i * 0.08} />
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className={styles.scrollIndicator}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4 }}
-      >
-        <div className={styles.scrollLine} />
-        <span>Scroll to explore</span>
-      </motion.div>
+      </div>
     </section>
   )
 }

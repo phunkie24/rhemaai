@@ -1,7 +1,7 @@
 {
-  "name": "rhemaai-technologies",
+  "name": "rhemaai-solutions-ltd",
   "version": "1.0.0",
-  "description": "RhemaAI Technologies — Full MERN Stack Website",
+  "description": "RhemaAI Solutions Ltd - Full MERN Stack Website",
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "cd server && npm run dev",
@@ -14,13 +14,17 @@
     "test:client": "cd client && npm test",
     "test:e2e": "playwright test",
     "test:all": "npm run test && npm run test:e2e",
-    "seed": "cd server && npm run seed"
+    "seed": "cd server && npm run seed",
+    "docker:prod:build": "docker compose -f docker-compose.prod.yml build",
+    "docker:prod:up": "docker compose -f docker-compose.prod.yml up -d",
+    "docker:prod:logs": "docker compose -f docker-compose.prod.yml logs -f --tail=100",
+    "docker:prod:ps": "docker compose -f docker-compose.prod.yml ps"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.0",
     "concurrently": "^8.2.2"
   },
   "keywords": ["rhemaai", "enterprise-ai", "cloud-consulting", "mern", "agentic-ai"],
-  "author": "RhemaAI Technologies",
+  "author": "RhemaAI Solutions Ltd",
   "license": "UNLICENSED"
 }

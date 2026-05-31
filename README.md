@@ -1,125 +1,92 @@
-# RhemaAI Technologies — Full MERN Stack Website
+# RhemaAI Solutions Ltd
 
-## Architecture Overview
+Enterprise AI, cloud, data engineering and analytics website built with React, Vite, Express, MongoDB and Docker.
 
-```
-rhemaai/
-├── client/                    # React 18 + Vite frontend
-│   ├── src/
-│   │   ├── components/        # All UI sections
-│   │   │   ├── Navbar/
-│   │   │   ├── Hero/
-│   │   │   ├── Marquee/
-│   │   │   ├── Services/
-│   │   │   ├── DataScience/   # Data Science & Advanced Analytics
-│   │   │   ├── WhyUs/
-│   │   │   ├── Process/
-│   │   │   ├── Industries/
-│   │   │   ├── CTA/
-│   │   │   ├── Footer/
-│   │   │   └── common/        # Button, Badge, SectionHeader, AnimatedCard
-│   │   ├── pages/             # HomePage, ServicesPage, AboutPage, ContactPage
-│   │   ├── hooks/             # useScrollAnimation, useInView, useForm
-│   │   ├── context/           # ThemeContext, ToastContext
-│   │   ├── utils/             # api.js, seo.js, animations.js
-│   │   └── styles/            # globals.css, variables.css, animations.css
-│   ├── index.html             # SEO-optimised HTML shell
-│   ├── vite.config.js
-│   └── package.json
-│
-├── server/                    # Node.js + Express backend
-│   ├── routes/
-│   │   ├── contact.js         # POST /api/contact
-│   │   ├── newsletter.js      # POST /api/newsletter
-│   │   └── insights.js        # GET  /api/insights
-│   ├── controllers/
-│   │   ├── contactController.js
-│   │   ├── newsletterController.js
-│   │   └── insightsController.js
-│   ├── models/
-│   │   ├── Contact.js         # Mongoose schema
-│   │   ├── Subscriber.js
-│   │   └── Insight.js
-│   ├── middleware/
-│   │   ├── validateRequest.js # Joi validation
-│   │   ├── rateLimiter.js     # express-rate-limit
-│   │   └── errorHandler.js
-│   ├── config/
-│   │   └── db.js              # MongoDB connection
-│   └── index.js               # Express entry point
-│
-└── docker-compose.yml         # Dev environment
-```
+## Stack
 
-## Tech Stack
+- Frontend: React 18, Vite, React Router, Framer Motion, React Helmet Async
+- Backend: Node.js, Express, MongoDB, Mongoose, Joi, Nodemailer
+- Runtime: Docker Compose with nginx serving the SPA and proxying `/api`
+- Production entrypoint: `docker-compose.prod.yml`
 
-### Frontend
-- **React 18** — UI library with concurrent features
-- **Vite** — build tool (HMR, tree-shaking)
-- **React Router v6** — client-side routing
-- **Framer Motion** — production animations
-- **React Hook Form** — performant forms
-- **Axios** — HTTP client
-- **React Helmet Async** — SEO meta management
-- **CSS Custom Properties** — theming system
-
-### Backend
-- **Node.js + Express** — REST API server
-- **MongoDB + Mongoose** — document database
-- **Nodemailer** — email delivery (consultation requests)
-- **Joi** — input validation
-- **express-rate-limit** — API protection
-- **cors** — cross-origin configuration
-- **dotenv** — environment management
-
-### DevOps / Deployment
-- **Docker + docker-compose** — containerised dev
-- **Vercel** — frontend hosting (recommended)
-- **Railway / Render** — backend hosting
-- **MongoDB Atlas** — managed database
-
-## Getting Started
+## Local Development
 
 ```bash
-# Clone and install
-git clone https://github.com/rhemaai/website.git
-cd rhemaai
-
-# Install all dependencies
-cd client && npm install
-cd ../server && npm install
-
-# Environment setup
+npm run install:all
+cp .env.example .env
 cp server/.env.example server/.env
-# Fill in MONGODB_URI, EMAIL_USER, EMAIL_PASS, PORT
-
-# Development
-# Terminal 1 — backend
-cd server && npm run dev
-
-# Terminal 2 — frontend
-cd client && npm run dev
-
-# Production build
-cd client && npm run build
+npm run dev
 ```
 
-## Environment Variables
+Local URLs:
+
+- Frontend: `http://localhost:5173`
+- API: `http://localhost:5000/api`
+- Health check: `http://localhost:5000/api/health`
+
+## Required Production Environment
+
+Create `.env` on the VPS from `.env.example`:
 
 ```env
-# server/.env
-PORT=5000
-MONGODB_URI=mongodb+srv://...
+FRONTEND_URL=https://rhemaai.tech
+CONTACT_ADMIN_KEY=replace_with_a_long_random_secret
 EMAIL_USER=hello@rhemaai.tech
-EMAIL_PASS=your_app_password
-FRONTEND_URL=http://localhost:5173
-NODE_ENV=development
+EMAIL_PASS=your_gmail_app_password
 ```
 
-## SEO Strategy
-- React Helmet Async on every page (title, description, OG tags)
-- Semantic HTML5 structure (nav, main, section, article, footer)
-- Structured data (JSON-LD: Organization, Service)
-- Sitemap.xml generation
-- robots.txt
-- Core Web Vitals optimised (lazy loading, code splitting)
+Generate a strong admin key on the VPS with:
+
+```bash
+openssl rand -hex 32
+```
+
+Production Compose will fail fast if `FRONTEND_URL` or `CONTACT_ADMIN_KEY` is missing.
+
+`CONTACT_ADMIN_KEY` protects `GET /api/contact` in production. Use it as:
+
+```bash
+curl -H "x-admin-api-key: YOUR_SECRET" https://rhemaai.tech/api/contact
+```
+
+## Hostinger VPS Deployment
+
+1. Point DNS `A` records for `rhemaai.tech` and `www.rhemaai.tech` to the VPS IP.
+2. SSH into the VPS and install Docker plus the Docker Compose plugin.
+3. Clone or upload this repository to the VPS.
+4. Create `.env` in the project root using the production values above.
+5. Build and start:
+
+```bash
+npm run docker:prod:build
+npm run docker:prod:up
+npm run docker:prod:ps
+```
+
+6. Check health:
+
+```bash
+curl http://127.0.0.1:8080/health
+curl http://127.0.0.1:8080/api/health
+```
+
+7. Add TLS with a host-level reverse proxy or Certbot/nginx on the VPS. The Docker client is bound to `127.0.0.1:8080`, so proxy public `80/443` traffic to that local port.
+
+## Production Notes
+
+- MongoDB is internal to Docker and is not exposed publicly.
+- nginx serves the built React app and proxies `/api` to the Express container.
+- Static assets are cached for one year; HTML is not cached.
+- API requests are rate limited.
+- Contact submissions are stored in MongoDB even if email credentials are not configured.
+- `server/.env` is for non-Docker local server development. Docker production reads root `.env`.
+
+## Useful Commands
+
+```bash
+npm run build
+npm run test
+npm run test:e2e
+npm run docker:prod:logs
+npm run docker:prod:ps
+```

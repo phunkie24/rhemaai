@@ -30,20 +30,20 @@
 }
 
 .logoMark {
-  width: 34px;
-  height: 34px;
-  background: linear-gradient(135deg, var(--brand-500), var(--brand-300));
-  border-radius: var(--radius-md);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: var(--glow-sm);
+  box-shadow: 0 10px 24px rgba(76, 24, 145, 0.18);
 }
 
-.logoMark svg {
-  width: 18px;
-  height: 18px;
+.logoSvg {
+  width: 40px;
+  height: 40px;
+  display: block;
 }
 
 .brandName {
@@ -51,11 +51,19 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.3px;
+  letter-spacing: 0;
 }
 
 .brandAccent {
-  color: var(--primary);
+  color: #5B1AA2;
+}
+
+.onDark .brandName {
+  color: #fff;
+}
+
+.onDark .brandAccent {
+  color: #d8c3ff;
 }
 
 /* Nav Links */
@@ -87,6 +95,24 @@
   background: var(--brand-50);
 }
 
+.onDark .navLink {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.onDark .navLink:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.onDark .navLink.active {
+  color: var(--primary);
+  background: #fff;
+}
+
+.onDark .hamburger span {
+  background: #fff;
+}
+
 /* CTA */
 .navRight {
   display: flex;
@@ -115,14 +141,6 @@
   color: white;
   transform: translateY(-1px);
   box-shadow: var(--glow-sm);
-}
-
-.ctaArrow {
-  transition: transform 0.2s ease;
-}
-
-.ctaBtn:hover .ctaArrow {
-  transform: translateX(3px);
 }
 
 /* Hamburger */
@@ -197,7 +215,57 @@
 
 /* Responsive */
 @media (max-width: 860px) {
-  .navLinks { display: none; }
-  .ctaBtn   { display: none; }
+  .nav {
+    height: 64px;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom-color: var(--border-light);
+  }
+
+  .brandName { display: none; }
+
+  .navLinks {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding: 8px var(--section-pad-x);
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--border-light);
+    scrollbar-width: none;
+  }
+
+  .navLinks::-webkit-scrollbar { display: none; }
+
+  .navLink {
+    padding: 6px 8px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .onDark .navLink {
+    color: var(--text-secondary);
+  }
+
+  .onDark .navLink:hover {
+    color: var(--primary);
+    background: var(--brand-50);
+  }
+
+  .onDark .navLink.active {
+    color: var(--primary);
+    background: var(--brand-50);
+  }
+
+  .ctaBtn {
+    display: flex;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
   .hamburger { display: flex; }
+  .onDark .hamburger span { background: var(--text-primary); }
+  .mobileMenu { top: 108px; }
 }

@@ -1,12 +1,12 @@
 export const SERVICES = [
   {
     id: 'agentic-ai',
-    icon: '🤖',
+    icon: 'AI',
     title: 'Agentic AI Engineering',
     description:
-      'Design and deploy multi-agent systems, LLM orchestration pipelines, RAG architectures, AI copilots, and fully autonomous enterprise automation powered by 21 proven agentic patterns.',
+      'Design and deploy governed multi-agent systems, LLM orchestration pipelines, RAG architectures, AI copilots, and enterprise automation workflows.',
     tags: ['ADAS', 'LangGraph', 'MCP', 'RAG', 'LLM', 'AutoGen'],
-    color: '#6B46FF',
+    color: '#3157D5',
     highlight: true,
     capabilities: [
       'Multi-agent orchestration (ADAS)',
@@ -18,13 +18,31 @@ export const SERVICES = [
     ],
   },
   {
+    id: 'generative-ai',
+    icon: 'GL',
+    title: 'Generative AI & LLM Systems Design',
+    description:
+      'Production LLM architecture covering foundation model selection, prompt engineering, domain fine-tuning, evaluation frameworks, GenAI safety guardrails, and deployment observability.',
+    tags: ['GPT-4o', 'Claude', 'Gemini', 'Llama', 'LangChain', 'RAGAS'],
+    color: '#7C3AED',
+    highlight: true,
+    capabilities: [
+      'Foundation model selection & benchmarking',
+      'Prompt architecture & few-shot design',
+      'Domain fine-tuning on enterprise data',
+      'LLM evaluation (RAGAS, LLM-as-judge)',
+      'GenAI guardrails & output validation',
+      'LLM observability & token optimisation',
+    ],
+  },
+  {
     id: 'data-engineering',
-    icon: '🏗️',
+    icon: 'DE',
     title: 'Data Engineering & Platforms',
     description:
-      'Medallion lakehouse architectures, high-throughput ETL/ELT pipelines, real-time Spark/Kafka processing, Azure Synapse, Databricks, and full enterprise EDW solutions.',
+      'Medallion lakehouse architectures, high-throughput ETL/ELT pipelines, real-time Spark/Kafka processing, Databricks, Synapse, and enterprise warehouse modernisation.',
     tags: ['Databricks', 'Synapse', 'Delta Lake', 'Kafka', 'Airflow'],
-    color: '#7C3AED',
+    color: '#0E9488',
     highlight: false,
     capabilities: [
       'Bronze-Silver-Gold medallion architecture',
@@ -37,12 +55,12 @@ export const SERVICES = [
   },
   {
     id: 'data-science',
-    icon: '📊',
+    icon: 'DS',
     title: 'Data Science & Advanced Analytics',
     description:
-      'Predictive modelling, statistical analysis, demand forecasting, customer intelligence, prescriptive optimisation, and AI-powered BI — transforming raw data into strategic decisions.',
+      'Predictive modelling, statistical analysis, demand forecasting, customer intelligence, prescriptive optimisation, and executive-grade decision intelligence.',
     tags: ['Predictive', 'Forecasting', 'Statistical ML', 'Power BI', 'Python'],
-    color: '#8B5CF6',
+    color: '#B7791F',
     highlight: true,
     capabilities: [
       'Predictive & prescriptive modelling',
@@ -50,21 +68,21 @@ export const SERVICES = [
       'Customer segmentation & CLV',
       'Statistical hypothesis testing',
       'Advanced Power BI / Tableau dashboards',
-      'Applied mathematics — MSc level',
+      'Applied Mathematics for decision intelligence',
     ],
   },
   {
     id: 'cloud-architecture',
-    icon: '☁️',
+    icon: 'CL',
     title: 'Cloud Architecture',
     description:
-      'Multi-cloud solution design across Azure, AWS and GCP. Infrastructure-as-Code, Kubernetes orchestration, DevOps/GitOps pipelines, and cost-optimised cloud governance.',
+      'Multi-cloud architecture across Azure, AWS and GCP with Infrastructure-as-Code, Kubernetes orchestration, DevOps/GitOps pipelines, security controls, and cost governance.',
     tags: ['Azure', 'AWS', 'GCP', 'Kubernetes', 'Terraform'],
-    color: '#6D28D9',
+    color: '#2447B8',
     highlight: false,
     capabilities: [
-      '19+ Microsoft Azure certifications',
-      'AWS & GCP certified architecture',
+      'Azure, AWS and GCP certified architecture',
+      'Enterprise landing zones and governance',
       'Kubernetes & container orchestration',
       'Terraform / Bicep IaC',
       'DevOps + GitOps pipelines',
@@ -73,12 +91,12 @@ export const SERVICES = [
   },
   {
     id: 'mlops',
-    icon: '⚙️',
+    icon: 'MO',
     title: 'MLOps & DataOps',
     description:
-      'End-to-end ML lifecycle management: experiment tracking, model registry, CI/CD for ML, drift monitoring, feature stores, and full DataOps governance frameworks.',
+      'End-to-end ML lifecycle management with experiment tracking, model registry, CI/CD for ML, drift monitoring, feature stores, and DataOps governance frameworks.',
     tags: ['MLflow', 'AzureML', 'SageMaker', 'CI/CD', 'Feature Store'],
-    color: '#7C3AED',
+    color: '#C2415D',
     highlight: false,
     capabilities: [
       'ML pipeline automation',
@@ -90,13 +108,31 @@ export const SERVICES = [
     ],
   },
   {
+    id: 'ai-advisory',
+    icon: 'AV',
+    title: 'AI Advisory & Governance',
+    description:
+      'AI readiness assessment, transformation roadmaps, responsible AI policy, model risk management, regulatory compliance, and board-level AI governance for enterprise programmes.',
+    tags: ['AI Strategy', 'Responsible AI', 'EU AI Act', 'NIST RMF', 'Model Risk', 'Governance'],
+    color: '#047857',
+    highlight: false,
+    capabilities: [
+      'AI readiness & opportunity mapping',
+      'Enterprise AI strategy & roadmap',
+      'Responsible AI frameworks & ethics policy',
+      'Model risk management & audit-readiness',
+      'EU AI Act & NIST RMF compliance',
+      'Executive AI & board-level governance',
+    ],
+  },
+  {
     id: 'software-engineering',
-    icon: '💻',
+    icon: 'SE',
     title: 'Enterprise Software Engineering',
     description:
-      'Production-grade backend systems, RESTful & GraphQL APIs, microservices, and SaaS platforms in C# .NET Core, Python FastAPI, and Node.js — built for enterprise scale.',
+      'Production-grade backend systems, REST and GraphQL APIs, microservices, and SaaS platforms in C# .NET, Python FastAPI, and Node.js, built for enterprise scale.',
     tags: ['C# .NET', 'FastAPI', 'MERN', 'Microservices', 'GraphQL'],
-    color: '#5B21B6',
+    color: '#10275F',
     highlight: false,
     capabilities: [
       'C# ASP.NET Core 10 systems',
@@ -109,12 +145,12 @@ export const SERVICES = [
   },
   {
     id: 'fintech-blockchain',
-    icon: '🔗',
+    icon: 'FX',
     title: 'FinTech & Blockchain',
     description:
-      'Ethereum smart contracts, DeFi platform development, digital finance systems, automated payment integrations, Web3 APIs, and regulatory-compliant financial technology solutions.',
+      'Digital finance platforms, payment integrations, blockchain services, Web3 APIs, and regulatory-aware financial technology solutions for secure transaction flows.',
     tags: ['Solidity', 'Ethereum', 'Web3', 'DeFi', 'Payments'],
-    color: '#6B46FF',
+    color: '#6F5B22',
     highlight: false,
     capabilities: [
       'Ethereum smart contract development',

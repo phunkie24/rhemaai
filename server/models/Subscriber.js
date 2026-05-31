@@ -1,4 +1,3 @@
-// models/Subscriber.js (inline for brevity — can be split)
 import mongoose from 'mongoose'
 
 const subscriberSchema = new mongoose.Schema(

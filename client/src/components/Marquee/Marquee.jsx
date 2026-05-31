@@ -9,11 +9,15 @@ const ITEMS = [
 ]
 
 export default function Marquee() {
-  const doubled = [...ITEMS, ...ITEMS]
   return (
-    <div className={styles.marqueeSection}>
+    <div className={styles.wrapper} aria-hidden="true">
+      <div className={styles.grid} />
+      <div className={styles.streamLine} />
+      <div className={styles.fadeLeft} />
+      <div className={styles.fadeRight} />
       <div className={styles.track}>
-        {doubled.map((item, i) => (
+        {/* Tripled so the loop is truly seamless at any viewport width */}
+        {[...ITEMS, ...ITEMS, ...ITEMS].map((item, i) => (
           <span key={i} className={styles.item}>
             <span className={styles.dot} />
             {item}

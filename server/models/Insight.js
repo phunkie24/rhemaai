@@ -43,7 +43,7 @@ const insightSchema = new mongoose.Schema(
     published: { type: Boolean, default: false },
     publishedAt: Date,
     author: {
-      name:   { type: String, default: 'RhemaAI Team' },
+      name:   { type: String, default: 'RhemaAI Solutions Ltd Team' },
       avatar: String,
     },
     seo: {

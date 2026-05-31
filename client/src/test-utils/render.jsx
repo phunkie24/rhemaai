@@ -6,7 +6,10 @@ export function renderWithProviders(ui, { route = '/', ...options } = {}) {
   function Wrapper({ children }) {
     return (
       <HelmetProvider>
-        <MemoryRouter initialEntries={[route]}>
+        <MemoryRouter
+          initialEntries={[route]}
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
           {children}
         </MemoryRouter>
       </HelmetProvider>

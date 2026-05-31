@@ -24,6 +24,8 @@ const contactSchema = new mongoose.Schema(
       type: String,
       enum: [
         'agentic-ai',
+        'generative-ai',
+        'ai-advisory',
         'data-engineering',
         'data-science',
         'cloud-architecture',

@@ -9,8 +9,6 @@ export default function CTA() {
   return (
     <section className={styles.section} ref={ref}>
       <div className={styles.bg} />
-      <div className={styles.bgOrb1} />
-      <div className={styles.bgOrb2} />
 
       <motion.div
         className={styles.content}
@@ -18,27 +16,27 @@ export default function CTA() {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
-        <span className={styles.label}>Ready to Transform?</span>
+        <span className={styles.label}>Ready for Production AI?</span>
         <h2 className={styles.title}>
-          Start Your AI &amp;<br />Data Transformation Today
+          Build the Next Layer of<br />Enterprise Intelligence
         </h2>
         <p className={styles.desc}>
-          Let's architect the intelligent infrastructure that will define your enterprise's
-          next decade — from agentic AI to cloud-native analytics.
+          Let's define the roadmap, architecture and delivery model for intelligent
+          systems that can operate securely at enterprise scale.
         </p>
         <div className={styles.actions}>
           <Link to="/contact" className={styles.btnWhite}>
             Book a Free Consultation
           </Link>
-          <Link to="/services" className={styles.btnGhost}>
-            Explore Services →
+          <Link to="/services#capabilities" className={styles.btnGhost}>
+            Explore Services
           </Link>
         </div>
 
         <div className={styles.trustRow}>
-          {['Multi-cloud certified', 'MSc Mathematics', 'Enterprise-proven', 'Production-grade AI'].map((t) => (
+          {['Azure, AWS and GCP Certified', 'Applied Mathematics', 'Enterprise-proven', 'Production-grade AI'].map((t) => (
             <div key={t} className={styles.trustItem}>
-              <span className={styles.trustCheck}>✓</span>
+              <span className={styles.trustCheck}>+</span>
               {t}
             </div>
           ))}

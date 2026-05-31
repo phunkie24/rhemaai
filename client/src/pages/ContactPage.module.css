@@ -5,24 +5,11 @@
   padding-top: 68px;
 }
 
-/* Left dark panel */
 .left {
   background: var(--dark);
   padding: 72px var(--section-pad-x);
   position: relative;
   overflow: hidden;
-}
-
-.left::before {
-  content: '';
-  position: absolute;
-  top: -150px;
-  left: -100px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(107,70,255,0.18) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
 }
 
 .leftInner {
@@ -42,19 +29,16 @@
 }
 
 .title {
-  font-size: clamp(32px, 3.5vw, 48px);
+  font-size: var(--text-3xl);
   font-weight: 800;
   color: white;
   line-height: 1.1;
-  letter-spacing: -1.5px;
+  letter-spacing: 0;
   margin-bottom: 20px;
 }
 
 .accent {
-  background: linear-gradient(135deg, var(--brand-300), #C084FC);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #9BD8D2;
 }
 
 .desc {
@@ -62,7 +46,59 @@
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.75;
   font-weight: 300;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+}
+
+.phoneLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 34px;
+  padding: 13px 16px;
+  border: 1px solid rgba(155, 216, 210, 0.28);
+  border-radius: var(--radius-lg);
+  background: rgba(155, 216, 210, 0.08);
+  color: #fff;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.phoneLink:hover {
+  border-color: rgba(155, 216, 210, 0.5);
+  background: rgba(155, 216, 210, 0.12);
+  transform: translateY(-1px);
+}
+
+.phoneIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background: rgba(155, 216, 210, 0.16);
+  color: #9BD8D2;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.phoneLink strong,
+.phoneLink em {
+  display: block;
+  font-style: normal;
+}
+
+.phoneLink strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.phoneLink em {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
 }
 
 .infoCards {
@@ -82,7 +118,10 @@
 }
 
 .infoIcon {
-  font-size: 20px;
+  color: var(--brand-300);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 900;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -100,7 +139,6 @@
   line-height: 1.5;
 }
 
-/* Right form panel */
 .right {
   background: var(--off-white);
   padding: 72px var(--section-pad-x);
@@ -124,10 +162,9 @@
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 28px;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
 }
 
-/* Form Fields */
 .field {
   display: flex;
   flex-direction: column;
@@ -222,7 +259,6 @@
   cursor: not-allowed;
 }
 
-/* Success state */
 .success {
   text-align: center;
   padding: 32px 16px;
@@ -236,7 +272,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 900;
   color: white;
   margin: 0 auto 20px;
 }
@@ -270,8 +308,8 @@
   background: var(--brand-50);
 }
 
-/* Responsive */
 @media (max-width: 860px) {
+  .title { font-size: var(--text-2xl); }
   .page { grid-template-columns: 1fr; }
   .left { padding-bottom: 40px; }
   .leftInner { max-width: 100%; }

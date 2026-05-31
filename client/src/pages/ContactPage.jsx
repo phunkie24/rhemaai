@@ -7,6 +7,8 @@ import styles from './ContactPage.module.css'
 
 const SERVICES = [
   { value: 'agentic-ai',          label: 'Agentic AI Engineering' },
+  { value: 'generative-ai',       label: 'Generative AI & LLM Systems Design' },
+  { value: 'ai-advisory',         label: 'AI Advisory & Governance' },
   { value: 'data-engineering',    label: 'Data Engineering & Platforms' },
   { value: 'data-science',        label: 'Data Science & Advanced Analytics' },
   { value: 'cloud-architecture',  label: 'Cloud Architecture' },
@@ -18,8 +20,8 @@ const SERVICES = [
 
 const BUDGETS = [
   { value: 'under-10k',    label: 'Under $10,000' },
-  { value: '10k-50k',      label: '$10,000 – $50,000' },
-  { value: '50k-100k',     label: '$50,000 – $100,000' },
+  { value: '10k-50k',      label: '$10,000 - $50,000' },
+  { value: '50k-100k',     label: '$50,000 - $100,000' },
   { value: 'above-100k',   label: '$100,000+' },
   { value: 'not-specified',label: 'Prefer not to say' },
 ]
@@ -48,12 +50,11 @@ export default function ContactPage() {
   return (
     <>
       <Helmet>
-        <title>Book a Consultation — RhemaAI Technologies</title>
-        <meta name="description" content="Book a free consultation with RhemaAI Technologies. Discuss your enterprise AI, cloud architecture, data engineering, or advanced analytics needs." />
+        <title>Book a Consultation | RhemaAI Solutions Ltd</title>
+        <meta name="description" content="Book a free consultation with RhemaAI Solutions Ltd. Discuss your enterprise AI, cloud architecture, data engineering, or advanced analytics needs." />
       </Helmet>
 
       <div className={styles.page}>
-        {/* Left Panel */}
         <motion.div
           className={styles.left}
           initial={{ opacity: 0, x: -32 }}
@@ -71,12 +72,20 @@ export default function ContactPage() {
               solution architecture, and show you exactly how we can deliver measurable impact.
             </p>
 
+            <a href="tel:+2349043138981" className={styles.phoneLink}>
+              <span className={styles.phoneIcon}>PH</span>
+              <span>
+                <strong>Call RhemaAI Solutions Ltd</strong>
+                <em>+234 904 313 8981</em>
+              </span>
+            </a>
+
             <div className={styles.infoCards}>
               {[
-                { icon: '⚡', title: '24-Hour Response', desc: 'We respond to every enquiry within one business day.' },
-                { icon: '🎯', title: 'Free Discovery Call', desc: 'No-commitment strategy session to map your AI roadmap.' },
-                { icon: '🌍', title: 'Global Clients', desc: 'We serve enterprises across Africa, Europe, and North America.' },
-                { icon: '🔐', title: 'NDA Available', desc: 'We sign NDAs before discussing sensitive project details.' },
+                { icon: '24', title: '24-Hour Response', desc: 'We respond to every enquiry within one business day.' },
+                { icon: 'DC', title: 'Free Discovery Call', desc: 'No-commitment strategy session to map your AI roadmap.' },
+                { icon: 'GL', title: 'Global Clients', desc: 'We serve enterprises across Africa, Europe, and North America.' },
+                { icon: 'ND', title: 'NDA Available', desc: 'We sign NDAs before discussing sensitive project details.' },
               ].map((card) => (
                 <div key={card.title} className={styles.infoCard}>
                   <span className={styles.infoIcon}>{card.icon}</span>
@@ -90,7 +99,6 @@ export default function ContactPage() {
           </div>
         </motion.div>
 
-        {/* Form */}
         <motion.div
           className={styles.right}
           initial={{ opacity: 0, x: 32 }}
@@ -100,7 +108,7 @@ export default function ContactPage() {
           <div className={styles.formCard}>
             {submitStatus === 'success' ? (
               <div className={styles.success}>
-                <div className={styles.successIcon}>✓</div>
+                <div className={styles.successIcon}>OK</div>
                 <h2>Request Received!</h2>
                 <p>Thank you for reaching out. Our team will be in touch within 24 hours.</p>
                 <button onClick={() => setSubmitStatus('idle')} className={styles.resetBtn}>
@@ -187,7 +195,7 @@ export default function ContactPage() {
                 >
                   {isSubmitting || submitStatus === 'loading'
                     ? 'Sending...'
-                    : 'Send Consultation Request →'}
+                    : 'Send Consultation Request'}
                 </button>
               </form>
             )}

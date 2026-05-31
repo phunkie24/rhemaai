@@ -1,17 +1,34 @@
 import Insight from '../models/Insight.js'
+import { parsePagination } from '../utils/pagination.js'
 
-// GET /api/insights
+const INSIGHT_CATEGORIES = new Set([
+  'agentic-ai',
+  'data-engineering',
+  'data-science',
+  'cloud-architecture',
+  'mlops',
+  'fintech',
+  'enterprise-ai',
+  'all',
+])
+
 export async function getInsights(req, res, next) {
   try {
-    const { category, page = 1, limit = 9 } = req.query
+    const { category } = req.query
+    const { page, limit, skip } = parsePagination(req.query, { defaultLimit: 9, maxLimit: 24 })
+
+    if (category && !INSIGHT_CATEGORIES.has(category)) {
+      return res.status(400).json({ message: 'Invalid insight category.' })
+    }
+
     const filter = { published: true }
     if (category && category !== 'all') filter.category = category
 
     const [insights, total] = await Promise.all([
       Insight.find(filter)
         .sort({ publishedAt: -1 })
-        .skip((page - 1) * limit)
-        .limit(Number(limit))
+        .skip(skip)
+        .limit(limit)
         .select('-content'),
       Insight.countDocuments(filter),
     ])
@@ -19,15 +36,14 @@ export async function getInsights(req, res, next) {
     return res.json({
       insights,
       total,
-      page: Number(page),
-      pages: Math.ceil(total / Number(limit)),
+      page,
+      pages: Math.ceil(total / limit),
     })
   } catch (err) {
     next(err)
   }
 }
 
-// GET /api/insights/:slug
 export async function getInsightBySlug(req, res, next) {
   try {
     const insight = await Insight.findOne({ slug: req.params.slug, published: true })

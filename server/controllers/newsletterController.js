@@ -2,10 +2,9 @@ import Joi from 'joi'
 import { Subscriber } from '../models/Subscriber.js'
 
 const emailSchema = Joi.object({
-  email: Joi.string().email().required(),
+  email: Joi.string().trim().lowercase().email().required(),
 })
 
-// POST /api/newsletter
 export async function subscribe(req, res, next) {
   try {
     const { error, value } = emailSchema.validate(req.body)

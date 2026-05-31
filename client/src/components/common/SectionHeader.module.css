@@ -26,10 +26,10 @@
 }
 
 .title {
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: var(--text-3xl);
   font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -1.2px;
+  letter-spacing: 0;
   line-height: 1.1;
   margin-bottom: 14px;
 }
@@ -48,4 +48,10 @@
 
 .light .subtitle {
   color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 700px) {
+  .title {
+    font-size: var(--text-2xl);
+  }
 }

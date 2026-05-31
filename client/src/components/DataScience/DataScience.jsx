@@ -4,34 +4,34 @@ import styles from './DataScience.module.css'
 
 const ANALYTICS_CAPABILITIES = [
   {
-    icon: '📈',
+    icon: 'PM',
     title: 'Predictive Modelling',
-    desc: 'Machine learning models that forecast business outcomes — churn, demand, revenue, risk.',
+    desc: 'Machine learning models that forecast business outcomes across churn, demand, revenue, and risk.',
   },
   {
-    icon: '📉',
+    icon: 'TS',
     title: 'Time-Series Forecasting',
-    desc: 'ARIMA, Prophet, LSTM-based forecasts for operational and financial planning.',
+    desc: 'ARIMA, Prophet, and LSTM-based forecasts for operational and financial planning.',
   },
   {
-    icon: '🧠',
+    icon: 'SA',
     title: 'Statistical Analysis',
-    desc: 'Hypothesis testing, A/B experimentation, regression analysis — MSc mathematics foundation.',
+    desc: 'Hypothesis testing, A/B experimentation, and regression analysis grounded in Applied Mathematics.',
   },
   {
-    icon: '🗂️',
+    icon: 'CI',
     title: 'Customer Intelligence',
-    desc: 'Segmentation, lifetime value modelling, propensity scoring and behavioural analytics.',
+    desc: 'Segmentation, lifetime value modelling, propensity scoring, and behavioural analytics.',
   },
   {
-    icon: '🎯',
+    icon: 'PA',
     title: 'Prescriptive Analytics',
     desc: 'Optimisation algorithms and simulation models that recommend the best course of action.',
   },
   {
-    icon: '📊',
+    icon: 'BI',
     title: 'Enterprise BI & Dashboards',
-    desc: 'Power BI, Tableau and custom analytics dashboards wired to your live data platform.',
+    desc: 'Power BI, Tableau, and custom analytics dashboards wired to your live data platform.',
   },
 ]
 
@@ -52,7 +52,6 @@ export default function DataScience() {
   return (
     <section className={styles.section} id="data-science" ref={ref}>
       <div className={styles.inner}>
-        {/* Left: intro */}
         <motion.div
           className={styles.left}
           initial={{ opacity: 0, x: -30 }}
@@ -65,9 +64,9 @@ export default function DataScience() {
             <span className={styles.accent}>Strategic Advantage</span>
           </h2>
           <p className={styles.desc}>
-            Built on an MSc Mathematics foundation, our data science practice goes
-            beyond dashboards — we build predictive engines, optimisation systems,
-            and intelligence layers that drive measurable business outcomes.
+            Built on Applied Mathematics, our data science practice goes beyond
+            dashboards. We build predictive engines, optimisation systems, and
+            intelligence layers that drive measurable business outcomes.
           </p>
 
           <div className={styles.techStack}>
@@ -80,15 +79,14 @@ export default function DataScience() {
           </div>
 
           <div className={styles.mathBadge}>
-            <div className={styles.mathIcon}>∑</div>
+            <div className={styles.mathIcon}>S</div>
             <div>
-              <div className={styles.mathTitle}>MSc Applied Mathematics</div>
+              <div className={styles.mathTitle}>Applied Mathematics</div>
               <div className={styles.mathSub}>First-principles statistical thinking</div>
             </div>
           </div>
         </motion.div>
 
-        {/* Right: capability grid */}
         <motion.div
           className={styles.right}
           initial={{ opacity: 0, x: 30 }}

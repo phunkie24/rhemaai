@@ -27,6 +27,12 @@ describe('POST /api/newsletter', () => {
     expect(sub.active).toBe(true)
   })
 
+  it('normalizes email casing and whitespace', async () => {
+    await request(app).post('/api/newsletter').send({ email: '  MixedCase@Example.COM  ' })
+    const sub = await Subscriber.findOne({ email: 'mixedcase@example.com' })
+    expect(sub).not.toBeNull()
+  })
+
   it('returns 200 when already subscribed (active)', async () => {
     await Subscriber.create({ email: 'already@example.com' })
     const res = await request(app)

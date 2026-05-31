@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { SERVICES } from '../../utils/servicesData'
 
 describe('SERVICES data', () => {
-  it('exports an array of 7 services', () => {
+  it('exports the enterprise service catalog', () => {
     expect(Array.isArray(SERVICES)).toBe(true)
-    expect(SERVICES).toHaveLength(7)
+    expect(SERVICES).toHaveLength(9)
   })
 
   it('each service has required shape', () => {
@@ -25,9 +25,13 @@ describe('SERVICES data', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('exactly 2 services are highlighted', () => {
+  it('highlights the priority enterprise service tracks', () => {
     const highlighted = SERVICES.filter((s) => s.highlight)
-    expect(highlighted).toHaveLength(2)
+    expect(highlighted.map((s) => s.id)).toEqual([
+      'agentic-ai',
+      'generative-ai',
+      'data-science',
+    ])
   })
 
   it('contains agentic-ai as first service', () => {

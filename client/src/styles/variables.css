@@ -1,21 +1,27 @@
 /* =====================================================
-   RhemaAI Technologies — Design System Variables
+   RhemaAI Solutions Ltd - Design System Variables
    ===================================================== */
 
 :root {
-  /* Brand Palette */
-  --brand-50:  #EDE8FF;
-  --brand-100: #D4C8FF;
-  --brand-200: #B9A5FF;
-  --brand-300: #9B6DFF;
-  --brand-400: #7C50F5;
-  --brand-500: #6B46FF;
-  --brand-600: #5535EE;
-  --brand-700: #3E26CC;
-  --brand-800: #2A18A0;
-  --brand-900: #180E70;
+  color-scheme: light;
 
-  /* Semantic Colors */
+  /* Brand palette */
+  --brand-50:  #F4ECFF;
+  --brand-100: #E5D3FF;
+  --brand-200: #C8A6FF;
+  --brand-300: #9B6DFF;
+  --brand-400: #7B3FE8;
+  --brand-500: #5B1AA2;
+  --brand-600: #4B148C;
+  --brand-700: #3E1076;
+  --brand-800: #2F0B5C;
+  --brand-900: #1B0738;
+
+  --accent-teal:  #0E9488;
+  --accent-amber: #B7791F;
+  --accent-rose:  #C2415D;
+
+  /* Semantic colors */
   --primary:        var(--brand-500);
   --primary-hover:  var(--brand-600);
   --primary-light:  var(--brand-50);
@@ -23,43 +29,43 @@
 
   /* Neutrals */
   --white:      #FFFFFF;
-  --off-white:  #F8F7FF;
-  --gray-50:    #F4F3FA;
-  --gray-100:   #E8E6F5;
-  --gray-200:   #CBC8DE;
-  --gray-400:   #9896AB;
-  --gray-600:   #6B6080;
-  --gray-800:   #2D2840;
-  --dark:       #0A0414;
-  --dark-mid:   #12082A;
-  --dark-card:  #1A0D38;
+  --off-white:  #F7F9FC;
+  --gray-50:    #F2F5F9;
+  --gray-100:   #E4E9F2;
+  --gray-200:   #C9D2E1;
+  --gray-400:   #8A96AA;
+  --gray-600:   #586276;
+  --gray-800:   #202B3D;
+  --dark:       #07111F;
+  --dark-mid:   #0B172A;
+  --dark-card:  #111D32;
 
   /* Text */
-  --text-primary:   #0F0A1E;
-  --text-secondary: #5A5370;
-  --text-muted:     #9896AB;
+  --text-primary:   #101827;
+  --text-secondary: #526071;
+  --text-muted:     #7A8699;
   --text-white:     rgba(255, 255, 255, 0.92);
   --text-white-muted: rgba(255, 255, 255, 0.52);
 
   /* Borders */
-  --border-light:   rgba(107, 70, 255, 0.12);
-  --border-mid:     rgba(107, 70, 255, 0.22);
-  --border-strong:  rgba(107, 70, 255, 0.40);
-  --border-dark:    rgba(107, 70, 255, 0.15);
+  --border-light:   rgba(49, 87, 213, 0.12);
+  --border-mid:     rgba(49, 87, 213, 0.24);
+  --border-strong:  rgba(49, 87, 213, 0.42);
+  --border-dark:    rgba(49, 87, 213, 0.18);
 
-  /* Glows / Shadows */
-  --glow-sm:   0 4px 20px rgba(107, 70, 255, 0.18);
-  --glow-md:   0 8px 40px rgba(107, 70, 255, 0.25);
-  --glow-lg:   0 16px 60px rgba(107, 70, 255, 0.35);
-  --shadow-sm: 0 2px 8px rgba(10, 4, 20, 0.08);
-  --shadow-md: 0 8px 32px rgba(10, 4, 20, 0.12);
-  --shadow-lg: 0 20px 60px rgba(10, 4, 20, 0.16);
+  /* Shadows */
+  --glow-sm:   0 4px 20px rgba(49, 87, 213, 0.16);
+  --glow-md:   0 8px 38px rgba(49, 87, 213, 0.22);
+  --glow-lg:   0 16px 56px rgba(49, 87, 213, 0.30);
+  --shadow-sm: 0 2px 8px rgba(7, 17, 31, 0.08);
+  --shadow-md: 0 8px 30px rgba(7, 17, 31, 0.12);
+  --shadow-lg: 0 20px 56px rgba(7, 17, 31, 0.16);
 
   /* Typography */
   --font-display: 'Syne', sans-serif;
   --font-body:    'DM Sans', sans-serif;
 
-  /* Type Scale */
+  /* Type scale */
   --text-xs:   11px;
   --text-sm:   13px;
   --text-base: 15px;
@@ -86,10 +92,10 @@
   --space-24: 96px;
 
   /* Radius */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   16px;
-  --radius-xl:   24px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   8px;
+  --radius-xl:   8px;
   --radius-full: 9999px;
 
   /* Transitions */
@@ -101,24 +107,12 @@
   /* Layout */
   --container-max: 1200px;
   --section-pad-x: clamp(20px, 5%, 80px);
-  --section-pad-y: clamp(60px, 8vw, 110px);
+  --section-pad-y: 88px;
 
-  /* Z-Index */
+  /* Z-index */
   --z-base:    1;
   --z-above:   10;
   --z-modal:   100;
   --z-nav:     200;
   --z-toast:   300;
-}
-
-/* Dark mode override */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --white:      #0A0414;
-    --off-white:  #12082A;
-    --text-primary:   rgba(255, 255, 255, 0.92);
-    --text-secondary: rgba(255, 255, 255, 0.6);
-    --text-muted:     rgba(255, 255, 255, 0.35);
-    --border-light:   rgba(155, 109, 255, 0.15);
-  }
 }
