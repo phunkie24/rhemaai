@@ -18,7 +18,7 @@ const COMPANY_LINKS = [
   { label: 'About Us',          path: '/about' },
   { label: 'Case Studies',      path: '/case-studies' },
   { label: 'Blog & Insights',   path: '/insights' },
-  { label: 'RhemaAI Academy',      path: 'https://rhemaai.academy', external: true },
+  //{ label: 'RhemaAI Academy',      path: 'https://rhemaai.academy', external: true },
   { label: 'RhemaAI Platform',     path: '/services' },
   { label: 'RhemaAI Press',        path: '/insights' },
   { label: 'RhemaAI Labs',         path: '/labs' },
