@@ -9,6 +9,7 @@ import InsightsPage from '@pages/InsightsPage'
 import InsightDetailPage from '@pages/InsightDetailPage'
 import CaseStudiesPage from '@pages/CaseStudiesPage'
 import CareersPage from '@pages/CareersPage'
+import LabsPage from '@pages/LabsPage'
 import LegalPage from '@pages/LegalPage'
 import NotFoundPage from '@pages/NotFoundPage'
 import ScrollToTop from '@components/common/ScrollToTop'
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/insights/:slug" element={<InsightDetailPage />} />
           <Route path="/contact"      element={<ContactPage />} />
           <Route path="/careers"      element={<CareersPage />} />
+          <Route path="/labs"         element={<LabsPage />} />
           <Route path="/privacy"      element={<LegalPage type="privacy" />} />
           <Route path="/terms"        element={<LegalPage type="terms" />} />
           <Route path="/cookies"      element={<LegalPage type="cookies" />} />
