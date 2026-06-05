@@ -55,5 +55,6 @@ const insightSchema = new mongoose.Schema(
 )
 
 insightSchema.index({ category: 1, published: 1, publishedAt: -1 })
+insightSchema.index({ published: 1, publishedAt: -1 })
 
 export default mongoose.model('Insight', insightSchema)

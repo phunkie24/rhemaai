@@ -19,10 +19,10 @@ echo "[1/4] Pulling latest code..."
 git -C "$APP_DIR" pull
 
 echo "[2/4] Installing backend dependencies..."
-npm --prefix "$APP_DIR/server" install --omit=dev
+npm --prefix "$APP_DIR/server" ci --omit=dev
 
 echo "[3/4] Rebuilding React frontend..."
-npm --prefix "$APP_DIR/client" install
+npm --prefix "$APP_DIR/client" ci
 VITE_API_URL=/api npm --prefix "$APP_DIR/client" run build
 
 echo "[4/4] Restarting backend..."

@@ -88,8 +88,10 @@ EOF
   read -r
 fi
 
-# Start backend with PM2
-pm2 start "$APP_DIR/server/index.js" --name rhemaai-server
+# Start backend with PM2 (NODE_ENV set explicitly for process manager)
+NODE_ENV=production pm2 start "$APP_DIR/server/index.js" \
+  --name rhemaai-server \
+  --node-args="--enable-source-maps"
 pm2 startup
 pm2 save
 echo "  Backend running on port 5000"
@@ -98,7 +100,7 @@ echo "  Backend running on port 5000"
 echo ""
 echo "[7/8] Building React frontend..."
 cd "$APP_DIR/client"
-npm install
+npm ci
 VITE_API_URL=/api npm run build
 echo "  Build output: $APP_DIR/client/dist"
 

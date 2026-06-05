@@ -19,3 +19,12 @@ export const contactLimiter = rateLimit({
     message: 'Too many contact form submissions. Please try again in an hour.',
   },
 })
+
+export const newsletterLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 10,
+  skip: () => process.env.NODE_ENV === 'test',
+  message: {
+    message: 'Too many subscription attempts. Please try again in an hour.',
+  },
+})
