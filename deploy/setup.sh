@@ -76,16 +76,22 @@ if [ ! -f "$APP_DIR/server/.env" ]; then
 NODE_ENV=production
 PORT=5000
 MONGODB_URI=mongodb://127.0.0.1:27017/rhemaai
+
+# Hostinger email — use your webmail password
 EMAIL_HOST=smtp.hostinger.com
 EMAIL_PORT=465
 EMAIL_USER=info@rhemaai.tech
 EMAIL_PASS=REPLACE_WITH_HOSTINGER_EMAIL_PASSWORD
+
+# Admin panel key — paste this into /admin password field
+CONTACT_ADMIN_KEY=63e6666a1b5f574d828e4d87c3949ff10ee47affe6eb7b76
+
 FRONTEND_URL=https://${DOMAIN}
 EOF
   echo ""
   echo "  !! .env created at $APP_DIR/server/.env"
-  echo "  !! Edit it now with your real EMAIL_PASS, then press ENTER..."
-  read -r
+  echo "  !! Edit EMAIL_PASS with your real Hostinger password, then press ENTER..."
+  nano "$APP_DIR/server/.env"
 fi
 
 # Start backend with PM2 (NODE_ENV set explicitly for process manager)
