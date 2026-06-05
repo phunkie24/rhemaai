@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
@@ -7,6 +8,10 @@ import { rateLimiter } from './middleware/rateLimiter.js'
 import contactRoutes from './routes/contact.js'
 import newsletterRoutes from './routes/newsletter.js'
 import insightsRoutes from './routes/insights.js'
+import publicationsRoutes from './routes/publications.js'
+import productsRoutes from './routes/products.js'
+import caseStudiesRoutes from './routes/caseStudies.js'
+import adminRoutes from './routes/admin.js'
 
 const app = express()
 
@@ -33,8 +38,11 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('combined'))
 }
 
-app.use(express.json({ limit: '10kb' }))
-app.use(express.urlencoded({ extended: true, limit: '10kb' }))
+app.use(express.json({ limit: '1mb' }))
+app.use(express.urlencoded({ extended: true, limit: '1mb' }))
+app.use('/api/uploads', express.static(path.join(process.cwd(), 'uploads'), {
+  maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
+}))
 
 app.get('/api/health', (req, res) => {
   res.json({
@@ -50,6 +58,10 @@ app.use('/api/', rateLimiter)
 app.use('/api/contact', contactRoutes)
 app.use('/api/newsletter', newsletterRoutes)
 app.use('/api/insights', insightsRoutes)
+app.use('/api/publications', publicationsRoutes)
+app.use('/api/products', productsRoutes)
+app.use('/api/case-studies', caseStudiesRoutes)
+app.use('/api/admin', adminRoutes)
 
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' })

@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { caseStudiesAPI } from '@utils/api'
 import styles from './CaseStudiesPage.module.css'
 
 const CASES = [
@@ -67,8 +68,6 @@ const CASES = [
   },
 ]
 
-const FILTERS = ['All', 'FinTech', 'Energy', 'Enterprise', 'Retail', 'Healthcare', 'Manufacturing']
-
 const cardAnim = {
   hidden: { opacity: 0, y: 20 },
   show: (i) => ({
@@ -80,7 +79,20 @@ const cardAnim = {
 
 export default function CaseStudiesPage() {
   const [active, setActive] = useState('All')
-  const filtered = active === 'All' ? CASES : CASES.filter((c) => c.industry === active)
+  const [cases, setCases] = useState(CASES)
+  const filters = useMemo(() => {
+    const industries = Array.from(new Set(cases.map((item) => item.industry))).filter(Boolean)
+    return ['All', ...industries]
+  }, [cases])
+  const filtered = active === 'All' ? cases : cases.filter((c) => c.industry === active)
+
+  useEffect(() => {
+    caseStudiesAPI.getAll({ limit: 48 })
+      .then((data) => {
+        if (data.caseStudies?.length) setCases(data.caseStudies)
+      })
+      .catch(() => { /* static case studies stay visible */ })
+  }, [])
 
   return (
     <>
@@ -127,7 +139,7 @@ export default function CaseStudiesPage() {
           <div className="container">
 
             <div className={styles.filters}>
-              {FILTERS.map((f) => (
+              {filters.map((f) => (
                 <button
                   key={f}
                   className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
@@ -149,7 +161,7 @@ export default function CaseStudiesPage() {
               >
                 {filtered.map((cs, i) => (
                   <motion.article
-                    key={cs.id}
+                    key={cs._id || cs.id || cs.slug}
                     className={styles.card}
                     custom={i}
                     variants={cardAnim}

@@ -5,10 +5,13 @@ import BrandMark from '@components/common/BrandMark'
 import styles from './Navbar.module.css'
 
 const NAV_LINKS = [
+  { label: 'Products',     path: '/products' },
   { label: 'Services',     path: '/services' },
   { label: 'Case Studies', path: '/case-studies' },
+  { label: 'Research',     path: '/insights' },
   { label: 'About',        path: '/about' },
-  { label: 'Insights',     path: '/insights' },
+  { label: 'Publications', path: '/publications' },
+  { label: 'Admin',        path: '/admin' },
   { label: 'Contact',      path: '/contact' },
 ]
 
@@ -17,7 +20,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`)
-  const usesDarkHero = ['/services', '/about', '/case-studies', '/careers'].some((path) => isActivePath(path))
+  const usesDarkHero = ['/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/admin'].some((path) => isActivePath(path))
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -58,9 +61,6 @@ export default function Navbar() {
         </ul>
 
         <div className={styles.navRight}>
-          <Link to="/contact" className={styles.ctaBtn}>
-            Book Consultation
-          </Link>
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -95,9 +95,6 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
-            <Link to="/contact" className={styles.mobileCta}>
-              Book a Consultation
-            </Link>
           </motion.div>
         )}
       </AnimatePresence>

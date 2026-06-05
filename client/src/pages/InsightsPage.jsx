@@ -81,8 +81,9 @@ export default function InsightsPage() {
   return (
     <>
       <Helmet>
-        <title>Insights | RhemaAI Solutions Ltd | AI, Cloud & Data Engineering</title>
-        <meta name="description" content="Expert insights on agentic AI, data engineering, cloud architecture, MLOps, data science, and enterprise AI transformation from RhemaAI Solutions Ltd." />
+        <title>Research | RhemaAI Labs | RhemaAI Solutions Ltd</title>
+        <meta name="description" content="Enterprise AI research, technical insights, architecture guides, MLOps notes, and data engineering analysis from RhemaAI Labs." />
+        <meta name="keywords" content="RhemaAI Labs, enterprise AI research, agentic AI insights, data engineering research, cloud architecture, MLOps" />
       </Helmet>
 
       {/* Hero */}
@@ -92,9 +93,9 @@ export default function InsightsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65 }}
         >
-          <span className={styles.heroLabel}>Intelligence Insights</span>
-          <h1 className={styles.heroTitle}>AI, Cloud & Data<br /><span className={styles.heroAccent}>Engineering Insights</span></h1>
-          <p className={styles.heroDesc}>Deep technical articles, architectural guides, and strategic thinking from the RhemaAI Solutions Ltd team, written for enterprise practitioners.</p>
+          <span className={styles.heroLabel}>RhemaAI Labs</span>
+          <h1 className={styles.heroTitle}>Research for<br /><span className={styles.heroAccent}>Enterprise Intelligence</span></h1>
+          <p className={styles.heroDesc}>Technical research, architectural guides, and strategic thinking from the RhemaAI Solutions Ltd team, written for enterprise practitioners.</p>
         </motion.div>
       </div>
 
@@ -114,22 +115,22 @@ export default function InsightsPage() {
       {/* Articles */}
       <div className={styles.articlesSection}>
         {loading ? (
-          <div className={styles.loading}>Loading insights...</div>
+          <div className={styles.loading}>Loading research...</div>
         ) : (
           <div className={styles.grid}>
             {filtered.map((a, i) => <ArticleCard key={a._id} article={a} index={i} />)}
           </div>
         )}
         {!loading && filtered.length === 0 && (
-          <div className={styles.empty}>No articles in this category yet. Check back soon.</div>
+          <div className={styles.empty}>No research notes in this category yet. Check back soon.</div>
         )}
       </div>
 
       {/* Newsletter signup */}
       <div className={styles.newsletterBanner}>
-        <h2>Get Insights in Your Inbox</h2>
+        <h2>Get Research in Your Inbox</h2>
         <p>New articles on agentic AI, cloud architecture, data science, and enterprise engineering, delivered when they are published.</p>
-        <Link to="/#newsletter" className={styles.nlBtn}>Subscribe to Intelligence Insights</Link>
+        <Link to="/#newsletter" className={styles.nlBtn}>Subscribe to Research</Link>
       </div>
     </>
   )

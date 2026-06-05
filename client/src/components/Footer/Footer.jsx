@@ -17,10 +17,10 @@ const SERVICES_LINKS = [
 const COMPANY_LINKS = [
   { label: 'About Us',          path: '/about' },
   { label: 'Case Studies',      path: '/case-studies' },
-  { label: 'Blog & Insights',   path: '/insights' },
+  { label: 'Research', path: '/insights' },
   //{ label: 'RhemaAI Academy',      path: 'https://rhemaai.academy', external: true },
-  { label: 'RhemaAI Platform',     path: '/services' },
-  { label: 'RhemaAI Press',        path: '/insights' },
+  { label: 'RhemaAI Platform',     path: '/products' },
+  { label: 'RhemaAI Press',        path: '/publications' },
   { label: 'RhemaAI Labs',         path: '/labs' },
   { label: 'RhemaAI Careers',      path: '/careers' },
 ]
@@ -30,7 +30,7 @@ const CONTACT_LINKS = [
   { label: '+234 904 313 8981',    path: 'tel:+2349043138981', external: true },
   { label: 'LinkedIn',             path: 'https://linkedin.com/company/rhemaai-tech', external: true },
   { label: 'GitHub',               path: 'https://github.com/phunkie24', external: true },
-  { label: 'YouTube',              path: 'https://www.youtube.com/@Funtech-ai-x4t', external: true },
+  { label: 'YouTube',              path: 'https://www.youtube.com/@rhemaai_tech', external: true },
   { label: 'Book a Discovery Call',path: '/contact' },
 ]
 
@@ -71,7 +71,7 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div className={styles.newsletter} id="newsletter">
-            <div className={styles.newsletterTitle}>Intelligence Insights</div>
+            <div className={styles.newsletterTitle}>Research</div>
             <div className={styles.newsletterSub}>AI, cloud & data engineering updates. No spam.</div>
             <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
               <input
