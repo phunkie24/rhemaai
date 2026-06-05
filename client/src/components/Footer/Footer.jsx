@@ -21,6 +21,7 @@ const COMPANY_LINKS = [
   //{ label: 'RhemaAI Academy',      path: 'https://rhemaai.academy', external: true },
   { label: 'RhemaAI Platform',     path: '/products' },
   { label: 'RhemaAI Press',        path: '/publications' },
+  { label: 'RhemaAI Academy',      path: '/courses' },
   { label: 'RhemaAI Labs',         path: '/labs' },
   { label: 'RhemaAI Careers',      path: '/careers' },
 ]

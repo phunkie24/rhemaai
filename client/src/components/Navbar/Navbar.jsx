@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { label: 'Services',     path: '/services' },
   { label: 'Case Studies', path: '/case-studies' },
   { label: 'Research',     path: '/insights' },
+  { label: 'Courses',      path: '/courses' },
   { label: 'Publications', path: '/publications' },
   { label: 'Admin',        path: '/admin' },
   { label: 'About',        path: '/about' },
@@ -20,7 +21,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`)
-  const usesDarkHero = ['/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers'].some((path) => isActivePath(path))
+  const usesDarkHero = ['/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses'].some((path) => isActivePath(path))
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)

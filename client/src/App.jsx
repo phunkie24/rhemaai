@@ -11,6 +11,7 @@ import InsightDetailPage from '@pages/InsightDetailPage'
 import PublicationsPage from '@pages/PublicationsPage'
 import CaseStudiesPage from '@pages/CaseStudiesPage'
 import CareersPage from '@pages/CareersPage'
+import CoursesPage from '@pages/CoursesPage'
 import AdminOperationsPage from '@pages/AdminOperationsPage'
 import LegalPage from '@pages/LegalPage'
 import NotFoundPage from '@pages/NotFoundPage'
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/contact"      element={<ContactPage />} />
           <Route path="/careers"      element={<CareersPage />} />
+          <Route path="/courses"      element={<CoursesPage />} />
           <Route path="/labs"         element={<InsightsPage />} />
           <Route path="/admin"        element={<AdminOperationsPage />} />
           <Route path="/admin/operations" element={<AdminOperationsPage />} />

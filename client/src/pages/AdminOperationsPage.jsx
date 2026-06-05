@@ -8,6 +8,7 @@ const AREAS = [
   { key: 'caseStudies', label: 'Case Studies', eyebrow: 'Client Results', title: 'Create, edit and delete case studies.' },
   { key: 'research', label: 'Research', eyebrow: 'RhemaAI Labs', title: 'Upload and edit research articles.' },
   { key: 'publications', label: 'Publications', eyebrow: 'RhemaAI Press', title: 'Upload and edit books and white papers.' },
+  { key: 'courses', label: 'Courses', eyebrow: 'RhemaAI Academy', title: 'Add YouTube courses with pricing and category tags.' },
 ]
 
 const PRODUCT_CATEGORIES = [
@@ -123,11 +124,34 @@ const emptyPublicationForm = {
   keywordsText: '',
 }
 
+const emptyCourseForm = {
+  _id: '',
+  title: '',
+  slug: '',
+  description: '',
+  category: 'data-engineering',
+  youtubeUrl: '',
+  instructor: 'RhemaAI Technologies',
+  duration: '',
+  level: 'intermediate',
+  tagsText: '',
+  isFree: true,
+  priceAmount: '0',
+  priceCurrency: 'USD',
+  priceLabel: 'Free',
+  paymentUrl: '',
+  featured: false,
+  published: false,
+  seoMetaTitle: '',
+  seoMetaDescription: '',
+}
+
 const emptyForms = {
   products: emptyProductForm,
   caseStudies: emptyCaseStudyForm,
   research: emptyResearchForm,
   publications: emptyPublicationForm,
+  courses: emptyCourseForm,
 }
 
 const apiConfig = {
@@ -158,6 +182,13 @@ const apiConfig = {
     delete: adminAPI.deletePublication,
     responseKey: 'publications',
     savedKey: 'publication',
+  },
+  courses: {
+    list: adminAPI.listCourses,
+    save: adminAPI.saveCourse,
+    delete: adminAPI.deleteCourse,
+    responseKey: 'courses',
+    savedKey: 'course',
   },
 }
 
@@ -421,11 +452,62 @@ function formToPublication(form) {
   }
 }
 
+function courseToForm(course) {
+  return {
+    _id: course._id || '',
+    title: course.title || '',
+    slug: course.slug || '',
+    description: course.description || '',
+    category: course.category || 'data-engineering',
+    youtubeUrl: course.youtubeUrl || '',
+    instructor: course.instructor || 'RhemaAI Technologies',
+    duration: course.duration || '',
+    level: course.level || 'intermediate',
+    tagsText: (course.tags || []).join(', '),
+    isFree: course.pricing?.isFree !== false,
+    priceAmount: String(course.pricing?.amount ?? 0),
+    priceCurrency: course.pricing?.currency || 'USD',
+    priceLabel: course.pricing?.label || 'Free',
+    paymentUrl: course.pricing?.paymentUrl || '',
+    featured: !!course.featured,
+    published: !!course.published,
+    seoMetaTitle: course.seo?.metaTitle || '',
+    seoMetaDescription: course.seo?.metaDescription || '',
+  }
+}
+
+function formToCourse(form) {
+  const payload = {
+    title: form.title,
+    slug: form.slug || form.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+    description: form.description,
+    category: form.category,
+    youtubeUrl: form.youtubeUrl,
+    instructor: form.instructor,
+    duration: form.duration,
+    level: form.level,
+    tags: splitList(form.tagsText),
+    pricing: {
+      isFree: form.isFree,
+      amount: Number(form.priceAmount) || 0,
+      currency: form.priceCurrency || 'USD',
+      label: form.priceLabel || (form.isFree ? 'Free' : 'Paid'),
+      paymentUrl: form.paymentUrl || '',
+    },
+    featured: form.featured,
+    published: form.published,
+    seo: { metaTitle: form.seoMetaTitle, metaDescription: form.seoMetaDescription },
+  }
+  if (form._id) payload._id = form._id
+  return payload
+}
+
 const formMappers = {
   products: { toForm: productToForm, toPayload: formToProduct, empty: emptyProductForm },
   caseStudies: { toForm: caseStudyToForm, toPayload: formToCaseStudy, empty: emptyCaseStudyForm },
   research: { toForm: researchToForm, toPayload: formToResearch, empty: emptyResearchForm },
   publications: { toForm: publicationToForm, toPayload: formToPublication, empty: emptyPublicationForm },
+  courses: { toForm: courseToForm, toPayload: formToCourse, empty: emptyCourseForm },
 }
 
 function recordTitle(area, record) {
@@ -451,7 +533,7 @@ function statusLine(area, record) {
 export default function AdminOperationsPage() {
   const [activeArea, setActiveArea] = useState('products')
   const [adminKey, setAdminKey] = useState('')
-  const [records, setRecords] = useState({ products: [], caseStudies: [], research: [], publications: [] })
+  const [records, setRecords] = useState({ products: [], caseStudies: [], research: [], publications: [], courses: [] })
   const [forms, setForms] = useState(emptyForms)
   const [status, setStatus] = useState('idle')
   const [message, setMessage] = useState('')
@@ -879,6 +961,96 @@ export default function AdminOperationsPage() {
                 Tags
                 <input value={form.tagsText} onChange={(event) => updateForm('tagsText', event.target.value)} placeholder="Research, AI, Cloud" />
               </label>
+            </>
+          )}
+
+          {activeArea === 'courses' && (
+            <>
+              <div className={styles.twoCol}>
+                <label>
+                  Course Title *
+                  <input value={form.title} onChange={(event) => updateForm('title', event.target.value)} required placeholder="e.g. Building Agentic AI Systems" />
+                </label>
+                <label>
+                  Slug
+                  <input value={form.slug} onChange={(event) => updateForm('slug', event.target.value)} placeholder="auto-generated if empty" />
+                </label>
+              </div>
+              <label>
+                YouTube URL *
+                <input
+                  value={form.youtubeUrl}
+                  onChange={(event) => updateForm('youtubeUrl', event.target.value)}
+                  placeholder="https://www.youtube.com/watch?v=..."
+                  required
+                />
+              </label>
+              <label>
+                Description
+                <textarea rows="3" value={form.description} onChange={(event) => updateForm('description', event.target.value)} placeholder="What will students learn in this course?" />
+              </label>
+              <div className={styles.twoCol}>
+                <label>
+                  Category *
+                  <select value={form.category} onChange={(event) => updateForm('category', event.target.value)}>
+                    <option value="data-engineering">Data Engineering</option>
+                    <option value="machine-learning">Machine Learning</option>
+                    <option value="generative-ai">Generative AI</option>
+                    <option value="agentic-ai">Agentic AI</option>
+                    <option value="software-engineering">Software Engineering</option>
+                    <option value="cloud-architecture">Cloud & Architecture</option>
+                    <option value="advanced-analytics">Advanced Analytics</option>
+                  </select>
+                </label>
+                <label>
+                  Level
+                  <select value={form.level} onChange={(event) => updateForm('level', event.target.value)}>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                  </select>
+                </label>
+              </div>
+              <div className={styles.twoCol}>
+                <label>
+                  Instructor
+                  <input value={form.instructor} onChange={(event) => updateForm('instructor', event.target.value)} />
+                </label>
+                <label>
+                  Duration
+                  <input value={form.duration} onChange={(event) => updateForm('duration', event.target.value)} placeholder="e.g. 2h 30m" />
+                </label>
+              </div>
+              <label>
+                Tags
+                <input value={form.tagsText} onChange={(event) => updateForm('tagsText', event.target.value)} placeholder="Python, AI, Data, LangChain" />
+              </label>
+              <div className={styles.priceGrid}>
+                <label style={{ gridColumn: '1/-1', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <input type="checkbox" checked={form.isFree} onChange={(e) => updateForm('isFree', e.target.checked)} />
+                  Free course (no payment required)
+                </label>
+                {!form.isFree && (
+                  <>
+                    <label>
+                      Price
+                      <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} />
+                    </label>
+                    <label>
+                      Currency
+                      <input value={form.priceCurrency} onChange={(event) => updateForm('priceCurrency', event.target.value.toUpperCase())} maxLength="3" />
+                    </label>
+                    <label>
+                      Price label
+                      <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="e.g. Full access" />
+                    </label>
+                    <label>
+                      Payment URL (Stripe / Paystack / Flutterwave)
+                      <input value={form.paymentUrl} onChange={(event) => updateForm('paymentUrl', event.target.value)} placeholder="https://paystack.com/pay/..." />
+                    </label>
+                  </>
+                )}
+              </div>
             </>
           )}
 

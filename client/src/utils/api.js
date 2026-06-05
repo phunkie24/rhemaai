@@ -47,6 +47,10 @@ export const caseStudiesAPI = {
   getAll: (params) => api.get('/case-studies', { params }),
 }
 
+export const coursesAPI = {
+  getAll: (params) => api.get('/courses', { params }),
+}
+
 function adminHeaders(adminKey) {
   return adminKey ? { 'x-admin-api-key': adminKey } : {}
 }
@@ -98,6 +102,18 @@ export const adminAPI = {
     return api.post('/admin/publications', data, { headers })
   },
   deletePublication: (adminKey, id) => api.delete(`/admin/publications/${id}`, {
+    headers: adminHeaders(adminKey),
+  }),
+  listCourses: (adminKey, params) => api.get('/admin/courses', {
+    params,
+    headers: adminHeaders(adminKey),
+  }),
+  saveCourse: (adminKey, data) => {
+    const headers = adminHeaders(adminKey)
+    if (data._id) return api.put(`/admin/courses/${data._id}`, data, { headers })
+    return api.post('/admin/courses', data, { headers })
+  },
+  deleteCourse: (adminKey, id) => api.delete(`/admin/courses/${id}`, {
     headers: adminHeaders(adminKey),
   }),
   uploadAsset: async (adminKey, file) => {

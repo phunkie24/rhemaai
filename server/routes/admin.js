@@ -26,6 +26,12 @@ import {
   listAdminInsights,
   updateAdminInsight,
 } from '../controllers/adminInsightsController.js'
+import {
+  createAdminCourse,
+  deleteAdminCourse,
+  listAdminCourses,
+  updateAdminCourse,
+} from '../controllers/coursesController.js'
 
 const router = Router()
 
@@ -141,6 +147,11 @@ router.get('/insights', listAdminInsights)
 router.post('/insights', createAdminInsight)
 router.put('/insights/:id', updateAdminInsight)
 router.delete('/insights/:id', deleteAdminInsight)
+
+router.get('/courses', listAdminCourses)
+router.post('/courses', createAdminCourse)
+router.put('/courses/:id', updateAdminCourse)
+router.delete('/courses/:id', deleteAdminCourse)
 
 router.post(
   '/uploads',

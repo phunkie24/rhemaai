@@ -11,6 +11,7 @@ import insightsRoutes from './routes/insights.js'
 import publicationsRoutes from './routes/publications.js'
 import productsRoutes from './routes/products.js'
 import caseStudiesRoutes from './routes/caseStudies.js'
+import coursesRoutes from './routes/courses.js'
 import adminRoutes from './routes/admin.js'
 
 const app = express()
@@ -61,6 +62,7 @@ app.use('/api/insights', insightsRoutes)
 app.use('/api/publications', publicationsRoutes)
 app.use('/api/products', productsRoutes)
 app.use('/api/case-studies', caseStudiesRoutes)
+app.use('/api/courses', coursesRoutes)
 app.use('/api/admin', adminRoutes)
 
 app.use('*', (req, res) => {
