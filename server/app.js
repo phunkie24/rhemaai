@@ -3,10 +3,8 @@ import path from 'path'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import swaggerUi from 'swagger-ui-express'
 import { errorHandler } from './middleware/errorHandler.js'
 import { rateLimiter } from './middleware/rateLimiter.js'
-import { swaggerSpec } from './config/swagger.js'
 import contactRoutes from './routes/contact.js'
 import newsletterRoutes from './routes/newsletter.js'
 import insightsRoutes from './routes/insights.js'
@@ -45,13 +43,6 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }))
 app.use('/api/uploads', express.static(path.join(process.cwd(), 'uploads'), {
   maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
 }))
-
-// Swagger API docs — available in all environments
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  customSiteTitle: 'RhemaAI API Docs',
-  customCss: '.swagger-ui .topbar { background: #12082A; } .swagger-ui .topbar-wrapper img { content: none; }',
-}))
-app.get('/api/docs.json', (req, res) => res.json(swaggerSpec))
 
 app.get('/api/health', (req, res) => {
   res.json({

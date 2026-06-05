@@ -8,6 +8,7 @@ export function setupTestDB() {
   beforeAll(async () => {
     mongod = await MongoMemoryServer.create()
     await mongoose.connect(mongod.getUri())
+    await mongoose.syncIndexes()   // ensure unique indexes are built before tests run
   })
 
   afterEach(async () => {
