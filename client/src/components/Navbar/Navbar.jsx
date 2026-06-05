@@ -9,9 +9,9 @@ const NAV_LINKS = [
   { label: 'Services',     path: '/services' },
   { label: 'Case Studies', path: '/case-studies' },
   { label: 'Research',     path: '/insights' },
-  { label: 'About',        path: '/about' },
   { label: 'Publications', path: '/publications' },
   { label: 'Admin',        path: '/admin' },
+  { label: 'About',        path: '/about' },
   { label: 'Contact',      path: '/contact' },
 ]
 
