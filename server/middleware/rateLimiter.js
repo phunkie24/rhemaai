@@ -5,7 +5,7 @@ export const rateLimiter = rateLimit({
   max: 60,
   standardHeaders: true,
   legacyHeaders: false,
-  skip: () => process.env.NODE_ENV === 'test',
+  skip: () => process.env.NODE_ENV !== 'production',
   message: {
     message: 'Too many requests from this IP. Please try again in 15 minutes.',
   },
@@ -14,7 +14,7 @@ export const rateLimiter = rateLimit({
 export const contactLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   max: 5,
-  skip: () => process.env.NODE_ENV === 'test',
+  skip: () => process.env.NODE_ENV !== 'production',
   message: {
     message: 'Too many contact form submissions. Please try again in an hour.',
   },
@@ -23,7 +23,7 @@ export const contactLimiter = rateLimit({
 export const newsletterLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   max: 10,
-  skip: () => process.env.NODE_ENV === 'test',
+  skip: () => process.env.NODE_ENV !== 'production',
   message: {
     message: 'Too many subscription attempts. Please try again in an hour.',
   },
