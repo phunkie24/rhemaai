@@ -65,6 +65,17 @@ app.use('/api/case-studies', caseStudiesRoutes)
 app.use('/api/courses', coursesRoutes)
 app.use('/api/admin', adminRoutes)
 
+// Swagger UI — dynamic import keeps swagger-jsdoc out of Jest's module graph
+if (process.env.NODE_ENV !== 'test') {
+  const { default: swaggerUi } = await import('swagger-ui-express')
+  const { swaggerSpec }        = await import('./config/swagger.js')
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+    customSiteTitle: 'RhemaAI API Docs',
+    customCss: '.swagger-ui .topbar { background: #12082A; }',
+  }))
+  app.get('/api/docs.json', (req, res) => res.json(swaggerSpec))
+}
+
 app.use('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' })
 })
