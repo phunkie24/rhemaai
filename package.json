@@ -15,6 +15,7 @@
     "test:e2e": "playwright test",
     "test:all": "npm run test && npm run test:e2e",
     "seed": "cd server && npm run seed",
+    "seed:publications": "cd server && npm run seed:publications",
     "docker:prod:build": "docker compose -f docker-compose.prod.yml build",
     "docker:prod:up": "docker compose -f docker-compose.prod.yml up -d",
     "docker:prod:logs": "docker compose -f docker-compose.prod.yml logs -f --tail=100",

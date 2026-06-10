@@ -5,30 +5,44 @@ import { coursesAPI } from '@utils/api'
 import styles from './CoursesPage.module.css'
 
 const CATEGORIES = [
-  { key: 'all',                 label: 'All Courses',         color: '#9B6DFF' },
-  { key: 'data-engineering',   label: 'Data Engineering',    color: '#0E9488' },
-  { key: 'machine-learning',   label: 'Machine Learning',    color: '#B7791F' },
-  { key: 'generative-ai',      label: 'Generative AI',       color: '#7C3AED' },
-  { key: 'agentic-ai',         label: 'Agentic AI',          color: '#3157D5' },
-  { key: 'software-engineering', label: 'Software Engineering', color: '#C2415D' },
-  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#2447B8' },
-  { key: 'advanced-analytics', label: 'Advanced Analytics',  color: '#047857' },
+  { key: 'all', label: 'All Courses', color: '#2563EB' },
+  { key: 'data-engineering', label: 'Data Engineering', color: '#0F766E' },
+  { key: 'machine-learning', label: 'Machine Learning', color: '#D97706' },
+  { key: 'generative-ai', label: 'Generative AI', color: '#7C3AED' },
+  { key: 'agentic-ai', label: 'Agentic AI', color: '#3157D5' },
+  { key: 'software-engineering', label: 'Software Engineering', color: '#E11D48' },
+  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#0284C7' },
+  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#047857' },
 ]
 
 const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
-const LEVEL_COLOR = { beginner: '#047857', intermediate: '#B7791F', advanced: '#C2415D' }
+const LEVEL_COLOR = { beginner: '#10B981', intermediate: '#F59E0B', advanced: '#F43F5E' }
+
+const HERO_TRACKS = [
+  { label: 'Agentic AI labs', value: 'Architecture patterns', color: '#67E8F9' },
+  { label: 'Cloud delivery', value: 'Azure, AWS and GCP', color: '#FBBF24' },
+  { label: 'Data engineering', value: 'Lakehouse to analytics', color: '#34D399' },
+]
 
 function getCategoryMeta(key) {
-  return CATEGORIES.find((c) => c.key === key) || CATEGORIES[0]
+  return CATEGORIES.find((category) => category.key === key) || CATEGORIES[0]
+}
+
+function formatPaidPrice(pricing = {}) {
+  return `${pricing.currency || 'USD'} ${pricing.amount ?? 0}`
 }
 
 function YoutubeModal({ course, onClose }) {
   const embedUrl = `https://www.youtube-nocookie.com/embed/${course.youtubeId}?autoplay=1&rel=0`
 
   useEffect(() => {
-    const handleKey = (e) => { if (e.key === 'Escape') onClose() }
+    const handleKey = (event) => {
+      if (event.key === 'Escape') onClose()
+    }
+
     document.addEventListener('keydown', handleKey)
     document.body.style.overflow = 'hidden'
+
     return () => {
       document.removeEventListener('keydown', handleKey)
       document.body.style.overflow = ''
@@ -45,13 +59,15 @@ function YoutubeModal({ course, onClose }) {
     >
       <motion.div
         className={styles.modal}
-        initial={{ scale: 0.92, opacity: 0 }}
+        initial={{ scale: 0.94, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.92, opacity: 0 }}
-        transition={{ duration: 0.25 }}
-        onClick={(e) => e.stopPropagation()}
+        exit={{ scale: 0.94, opacity: 0 }}
+        transition={{ duration: 0.22 }}
+        onClick={(event) => event.stopPropagation()}
       >
-        <button className={styles.modalClose} onClick={onClose} aria-label="Close">✕</button>
+        <button className={styles.modalClose} type="button" onClick={onClose} aria-label="Close video">
+          x
+        </button>
         <div className={styles.playerWrap}>
           <iframe
             src={embedUrl}
@@ -68,9 +84,9 @@ function YoutubeModal({ course, onClose }) {
           <h3 className={styles.modalTitle}>{course.title}</h3>
           {course.description && <p className={styles.modalDesc}>{course.description}</p>}
           <div className={styles.modalTags}>
-            {course.instructor && <span className={styles.modalTag}>👤 {course.instructor}</span>}
-            {course.duration   && <span className={styles.modalTag}>⏱ {course.duration}</span>}
-            {course.level      && (
+            {course.instructor && <span className={styles.modalTag}>Instructor: {course.instructor}</span>}
+            {course.duration && <span className={styles.modalTag}>Duration: {course.duration}</span>}
+            {course.level && (
               <span className={styles.modalTag} style={{ color: LEVEL_COLOR[course.level] }}>
                 {LEVEL_LABEL[course.level]}
               </span>
@@ -79,8 +95,8 @@ function YoutubeModal({ course, onClose }) {
           <div className={styles.modalActions}>
             <span className={`${styles.modalPrice} ${course.pricing?.isFree !== false ? styles.priceFree : styles.pricePaid}`}>
               {course.pricing?.isFree !== false
-                ? '🎓 Free Course'
-                : `${course.pricing?.currency || 'USD'} ${course.pricing?.amount ?? 0} — ${course.pricing?.label || 'Paid'}`}
+                ? 'Free Course'
+                : `${formatPaidPrice(course.pricing)} - ${course.pricing?.label || 'Paid'}`}
             </span>
             {course.pricing?.isFree === false && course.pricing?.paymentUrl && (
               <a
@@ -88,9 +104,9 @@ function YoutubeModal({ course, onClose }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.enrollBtn}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(event) => event.stopPropagation()}
               >
-                Enrol Now →
+                Enrol Now
               </a>
             )}
           </div>
@@ -101,53 +117,54 @@ function YoutubeModal({ course, onClose }) {
 }
 
 function CourseCard({ course, onClick }) {
-  const cat = getCategoryMeta(course.category)
+  const category = getCategoryMeta(course.category)
   const thumb = course.thumbnail || `https://img.youtube.com/vi/${course.youtubeId}/maxresdefault.jpg`
 
   return (
     <motion.article
       className={styles.card}
-      style={{ '--cat-color': cat.color }}
-      whileHover={{ y: -6, transition: { duration: 0.22 } }}
+      style={{ '--cat-color': category.color }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
       onClick={onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      onKeyDown={(event) => event.key === 'Enter' && onClick()}
     >
       <div className={styles.thumb}>
         <img src={thumb} alt={course.title} loading="lazy" />
         <div className={styles.thumbOverlay} />
-        <div className={styles.playBtn}>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <div className={styles.playBtn} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
         </div>
         {course.featured && <span className={styles.featuredBadge}>Featured</span>}
-        <span className={styles.catBadge} style={{ background: cat.color + '22', color: cat.color, borderColor: cat.color + '44' }}>
-          {cat.label}
+        <span className={styles.catBadge}>
+          {category.label}
         </span>
       </div>
 
       <div className={styles.cardBody}>
         <h3 className={styles.cardTitle}>{course.title}</h3>
         {course.description && (
-          <p className={styles.cardDesc}>{course.description.slice(0, 110)}{course.description.length > 110 ? '…' : ''}</p>
+          <p className={styles.cardDesc}>
+            {course.description.slice(0, 112)}
+            {course.description.length > 112 ? '...' : ''}
+          </p>
         )}
         <div className={styles.cardMeta}>
           {course.instructor && <span>{course.instructor}</span>}
-          {course.duration   && <span>⏱ {course.duration}</span>}
+          {course.duration && <span>{course.duration}</span>}
           {course.level && (
-            <span className={styles.levelPill} style={{ color: LEVEL_COLOR[course.level], borderColor: LEVEL_COLOR[course.level] + '44' }}>
+            <span className={styles.levelPill} style={{ color: LEVEL_COLOR[course.level], borderColor: LEVEL_COLOR[course.level] + '55' }}>
               {LEVEL_LABEL[course.level]}
             </span>
           )}
         </div>
         <div className={styles.cardFooter}>
           <span className={`${styles.priceBadge} ${course.pricing?.isFree !== false ? styles.priceFree : styles.pricePaid}`}>
-            {course.pricing?.isFree !== false
-              ? 'Free'
-              : `${course.pricing?.currency || 'USD'} ${course.pricing?.amount ?? 0}`}
+            {course.pricing?.isFree !== false ? 'Free' : formatPaidPrice(course.pricing)}
           </span>
-          <span className={styles.watchBtn} style={{ color: cat.color }}>
-            {course.pricing?.isFree !== false ? 'Watch now →' : 'Enrol →'}
+          <span className={styles.watchBtn}>
+            {course.pricing?.isFree !== false ? 'Watch now' : 'Enrol'}
           </span>
         </div>
       </div>
@@ -157,18 +174,18 @@ function CourseCard({ course, onClick }) {
 
 export default function CoursesPage() {
   const [activeCategory, setActiveCategory] = useState('all')
-  const [courses, setCourses]   = useState([])
-  const [total, setTotal]       = useState(0)
-  const [page, setPage]         = useState(1)
-  const [pages, setPages]       = useState(1)
-  const [loading, setLoading]   = useState(true)
+  const [courses, setCourses] = useState([])
+  const [total, setTotal] = useState(0)
+  const [page, setPage] = useState(1)
+  const [pages, setPages] = useState(1)
+  const [loading, setLoading] = useState(true)
   const [selected, setSelected] = useState(null)
 
-  const fetchCourses = useCallback(async (cat, pg) => {
+  const fetchCourses = useCallback(async (category, nextPage) => {
     setLoading(true)
     try {
-      const params = { page: pg, limit: 12 }
-      if (cat !== 'all') params.category = cat
+      const params = { page: nextPage, limit: 12 }
+      if (category !== 'all') params.category = category
       const data = await coursesAPI.getAll(params)
       setCourses(data.courses || [])
       setTotal(data.total || 0)
@@ -181,7 +198,9 @@ export default function CoursesPage() {
     }
   }, [])
 
-  useEffect(() => { fetchCourses(activeCategory, 1) }, [activeCategory, fetchCourses])
+  useEffect(() => {
+    fetchCourses(activeCategory, 1)
+  }, [activeCategory, fetchCourses])
 
   const handleCategory = (key) => {
     setActiveCategory(key)
@@ -192,69 +211,98 @@ export default function CoursesPage() {
   return (
     <>
       <Helmet>
-        <title>Courses | RhemaAI Technologies</title>
-        <meta name="description" content="Free enterprise AI and data engineering courses — Generative AI, Agentic AI, Machine Learning, Data Engineering, Cloud Architecture, and Advanced Analytics." />
+        <title>Enterprise AI Courses | RhemaAI Academy</title>
+        <meta
+          name="description"
+          content="Free and premium RhemaAI Academy courses in agentic AI, generative AI, data engineering, cloud architecture, machine learning, software engineering, and analytics."
+        />
+        <meta
+          name="keywords"
+          content="enterprise AI courses, agentic AI training, generative AI course, data engineering courses, cloud architecture training, machine learning"
+        />
       </Helmet>
 
-      {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.heroOrb1} />
-        <div className={styles.heroOrb2} />
         <div className={styles.heroGrid} />
         <div className={styles.heroInner}>
           <motion.div
+            className={styles.heroCopy}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className={styles.eyebrow}>RhemaAI Academy</span>
-            <h1 className={styles.heroTitle}>
-              Expert-Led Courses in<br />
-              <span className={styles.heroGradient}>AI, Data & Cloud</span>
+            <h1>
+              Enterprise AI, Data and Cloud Courses
             </h1>
-            <p className={styles.heroSub}>
-              Free video courses taught by RhemaAI practitioners — covering Agentic AI,
-              Generative AI, Data Engineering, Machine Learning, Cloud Architecture, and Advanced Analytics.
+            <p>
+              Practitioner-led courses for teams building agentic AI systems,
+              generative AI products, data platforms, machine learning workflows
+              and cloud architecture with production discipline.
             </p>
             <div className={styles.heroStats}>
               <div className={styles.heroStat}><strong>{total}</strong><span>Courses</span></div>
               <div className={styles.heroStatDiv} />
               <div className={styles.heroStat}><strong>7</strong><span>Topics</span></div>
               <div className={styles.heroStatDiv} />
-              <div className={styles.heroStat}><strong>Free</strong><span>Always</span></div>
+              <div className={styles.heroStat}><strong>Free</strong><span>Starter lessons</span></div>
             </div>
           </motion.div>
+
+          <motion.aside
+            className={styles.heroPanel}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.14, duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+            aria-label="RhemaAI Academy curriculum highlights"
+          >
+            <span className={styles.panelLabel}>Curriculum map</span>
+            <div className={styles.trackList}>
+              {HERO_TRACKS.map((track) => (
+                <div className={styles.trackItem} key={track.label} style={{ '--track-color': track.color }}>
+                  <span />
+                  <div>
+                    <strong>{track.label}</strong>
+                    <p>{track.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className={styles.panelMetric}>
+              <strong>Production focused</strong>
+              <span>Courses designed for real enterprise delivery.</span>
+            </div>
+          </motion.aside>
         </div>
       </section>
 
-      {/* Filter tabs */}
       <div className={styles.filterBar}>
         <div className={styles.filterInner}>
-          {CATEGORIES.map((cat) => (
+          {CATEGORIES.map((category) => (
             <button
-              key={cat.key}
-              className={`${styles.filterBtn} ${activeCategory === cat.key ? styles.filterActive : ''}`}
-              style={activeCategory === cat.key ? { borderColor: cat.color, color: cat.color, background: cat.color + '18' } : {}}
-              onClick={() => handleCategory(cat.key)}
+              key={category.key}
+              type="button"
+              className={`${styles.filterBtn} ${activeCategory === category.key ? styles.filterActive : ''}`}
+              style={activeCategory === category.key ? { '--active-color': category.color } : {}}
+              onClick={() => handleCategory(category.key)}
             >
-              {cat.label}
+              {category.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Grid */}
       <section className={styles.gridSection}>
         <div className={styles.gridInner}>
           {loading ? (
             <div className={styles.loadingGrid}>
-              {[...Array(6)].map((_, i) => <div key={i} className={styles.skeleton} />)}
+              {[...Array(6)].map((_, index) => <div key={index} className={styles.skeleton} />)}
             </div>
           ) : courses.length === 0 ? (
             <div className={styles.empty}>
-              <div className={styles.emptyIcon}>🎓</div>
+              <div className={styles.emptyIcon}>Academy</div>
               <h3>No courses yet in this category</h3>
-              <p>Check back soon — more content is being added regularly.</p>
+              <p>Check back soon. More enterprise AI lessons are being added regularly.</p>
             </div>
           ) : (
             <AnimatePresence mode="wait">
@@ -273,16 +321,16 @@ export default function CoursesPage() {
             </AnimatePresence>
           )}
 
-          {/* Pagination */}
           {pages > 1 && (
             <div className={styles.pagination}>
-              {[...Array(pages)].map((_, i) => (
+              {[...Array(pages)].map((_, index) => (
                 <button
-                  key={i}
-                  className={`${styles.pageBtn} ${page === i + 1 ? styles.pageActive : ''}`}
-                  onClick={() => fetchCourses(activeCategory, i + 1)}
+                  key={index}
+                  type="button"
+                  className={`${styles.pageBtn} ${page === index + 1 ? styles.pageActive : ''}`}
+                  onClick={() => fetchCourses(activeCategory, index + 1)}
                 >
-                  {i + 1}
+                  {index + 1}
                 </button>
               ))}
             </div>
@@ -290,7 +338,6 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      {/* YouTube modal */}
       <AnimatePresence>
         {selected && (
           <YoutubeModal course={selected} onClose={() => setSelected(null)} />

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { publicationsAPI } from '@utils/api'
+import multiAgentBookCover from '../assets/multi-agent-book-cover.jpg'
 import styles from './PlatformPages.module.css'
 
 const TYPES = [
@@ -12,6 +13,19 @@ const TYPES = [
 ]
 
 const SEED_PUBLICATIONS = [
+  {
+    _id: 'seed-book-multi-agent-orchestration-patterns',
+    title: 'Multi-Agent Orchestration Patterns for Enterprise Scale Systems',
+    slug: 'multi-agent-orchestration-patterns-enterprise-scale-systems',
+    type: 'book',
+    summary: 'Architectures, patterns and operational practices for reliable, governed and scalable multi-agent AI systems in enterprise environments.',
+    coverImage: multiAgentBookCover,
+    tags: ['Multi-Agent Systems', 'Agentic AI', 'Enterprise Architecture', 'Governance'],
+    price: { amount: 0, currency: 'USD', label: 'New release' },
+    publishedAt: '2026-06-10',
+    featured: true,
+    author: { name: 'Funke R. Yusuf' },
+  },
   {
     _id: 'seed-book-1',
     title: 'Enterprise Agentic AI Playbook',
@@ -65,6 +79,14 @@ function PublicationCard({ publication, index }) {
         <span>{typeLabel(publication.type)}</span>
         {publication.featured && <strong>Featured</strong>}
       </div>
+      {publication.coverImage && (
+        <img
+          className={styles.publicationCover}
+          src={publication.coverImage}
+          alt={`${publication.title} cover`}
+          loading="lazy"
+        />
+      )}
       <h2>{publication.title}</h2>
       <p>{publication.summary}</p>
       <div className={styles.tagRow}>
@@ -98,7 +120,7 @@ export default function PublicationsPage() {
     setLoading(true)
     publicationsAPI.getAll({ type: activeType, limit: 24 })
       .then((data) => {
-        if (data.publications?.length) setPublications(data.publications)
+        if (Array.isArray(data.publications)) setPublications(data.publications)
       })
       .catch(() => { /* seed publications stay visible */ })
       .finally(() => setLoading(false))

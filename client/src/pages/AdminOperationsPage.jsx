@@ -4,11 +4,11 @@ import { adminAPI } from '@utils/api'
 import styles from './AdminOperationsPage.module.css'
 
 const AREAS = [
-  { key: 'products', label: 'Products', eyebrow: 'RhemaAI Platform', title: 'Upload and manage SaaS software products.' },
+  { key: 'products', label: 'Products', eyebrow: 'RhemaAI Platform', title: 'Create, edit and delete SaaS software products.' },
   { key: 'caseStudies', label: 'Case Studies', eyebrow: 'Client Results', title: 'Create, edit and delete case studies.' },
-  { key: 'research', label: 'Research', eyebrow: 'RhemaAI Labs', title: 'Upload and edit research articles.' },
-  { key: 'publications', label: 'Publications', eyebrow: 'RhemaAI Press', title: 'Upload and edit books and white papers.' },
-  { key: 'courses', label: 'Courses', eyebrow: 'RhemaAI Academy', title: 'Add YouTube courses with pricing and category tags.' },
+  { key: 'research', label: 'Research', eyebrow: 'RhemaAI Labs', title: 'Create, edit and delete research articles.' },
+  { key: 'publications', label: 'Publications', eyebrow: 'RhemaAI Press', title: 'Create, edit and delete books and white papers.' },
+  { key: 'courses', label: 'Courses', eyebrow: 'RhemaAI Academy', title: 'Create, edit and delete courses with pricing and category tags.' },
 ]
 
 const PRODUCT_CATEGORIES = [
@@ -34,6 +34,12 @@ const PUBLICATION_TYPES = [
   { value: 'book', label: 'Book' },
   { value: 'whitepaper', label: 'White paper' },
 ]
+
+const COURSE_LEVEL_LABEL = {
+  beginner: 'Beginner',
+  intermediate: 'Intermediate',
+  advanced: 'Advanced',
+}
 
 const emptyProductForm = {
   _id: '',
@@ -144,6 +150,8 @@ const emptyCourseForm = {
   published: false,
   seoMetaTitle: '',
   seoMetaDescription: '',
+  canonicalUrl: '',
+  keywordsText: '',
 }
 
 const emptyForms = {
@@ -473,6 +481,8 @@ function courseToForm(course) {
     published: !!course.published,
     seoMetaTitle: course.seo?.metaTitle || '',
     seoMetaDescription: course.seo?.metaDescription || '',
+    canonicalUrl: course.seo?.canonicalUrl || '',
+    keywordsText: (course.seo?.keywords || []).join(', '),
   }
 }
 
@@ -496,7 +506,12 @@ function formToCourse(form) {
     },
     featured: form.featured,
     published: form.published,
-    seo: { metaTitle: form.seoMetaTitle, metaDescription: form.seoMetaDescription },
+    seo: {
+      metaTitle: form.seoMetaTitle,
+      metaDescription: form.seoMetaDescription,
+      canonicalUrl: form.canonicalUrl,
+      keywords: splitList(form.keywordsText),
+    },
   }
   if (form._id) payload._id = form._id
   return payload
@@ -511,14 +526,15 @@ const formMappers = {
 }
 
 function recordTitle(area, record) {
-  if (area === 'products') return record.name
-  return record.title
+  if (area === 'products') return record.name || 'Untitled product'
+  return record.title || 'Untitled record'
 }
 
 function recordType(area, record) {
   if (area === 'products') return record.category
   if (area === 'caseStudies') return record.industry
   if (area === 'research') return record.category
+  if (area === 'courses') return getCourseCategoryLabel(record.category)
   return record.type
 }
 
@@ -527,7 +543,22 @@ function statusLine(area, record) {
   if (area === 'products') return `${status} - ${record.pricing?.label || 'Contact sales'}`
   if (area === 'caseStudies') return `${status} - ${record.client || 'No client'}`
   if (area === 'publications') return `${status} - ${record.price?.label || 'Free'}`
+  if (area === 'courses') return `${status} - ${COURSE_LEVEL_LABEL[record.level] || 'Course'} - ${record.pricing?.label || 'Free'}`
   return `${status} - ${record.readTime || 5} min read`
+}
+
+function getCourseCategoryLabel(category) {
+  const labels = {
+    'data-engineering': 'Data Engineering',
+    'machine-learning': 'Machine Learning',
+    'generative-ai': 'Generative AI',
+    'agentic-ai': 'Agentic AI',
+    'software-engineering': 'Software Engineering',
+    'cloud-architecture': 'Cloud & Architecture',
+    'advanced-analytics': 'Advanced Analytics',
+  }
+
+  return labels[category] || 'Course'
 }
 
 export default function AdminOperationsPage() {
@@ -622,6 +653,10 @@ export default function AdminOperationsPage() {
   }
 
   const handleDelete = async (id) => {
+    const target = records[activeArea].find((item) => item._id === id)
+    const title = target ? recordTitle(activeArea, target) : 'this record'
+    if (!window.confirm(`Delete "${title}"? This cannot be undone.`)) return
+
     setStatus('saving')
     setMessage('')
     try {
@@ -1206,8 +1241,21 @@ export default function AdminOperationsPage() {
                   <p>{statusLine(activeArea, item)}</p>
                 </div>
                 <div className={styles.itemActions}>
-                  <button type="button" onClick={() => editRecord(item)}>Edit</button>
-                  <button type="button" onClick={() => handleDelete(item._id)}>Delete</button>
+                  <button
+                    type="button"
+                    onClick={() => editRecord(item)}
+                    aria-label={`Edit ${recordTitle(activeArea, item)}`}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.deleteButton}
+                    onClick={() => handleDelete(item._id)}
+                    aria-label={`Delete ${recordTitle(activeArea, item)}`}
+                  >
+                    Delete
+                  </button>
                 </div>
               </article>
             ))}

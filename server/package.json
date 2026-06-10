@@ -9,7 +9,8 @@
     "dev": "nodemon index.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "seed:publications": "node scripts/seedPublications.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
