@@ -1,0 +1,202 @@
+.streamSection {
+  position: relative;
+  overflow: hidden;
+  padding: 28px var(--section-pad-x);
+  background:
+    linear-gradient(90deg, rgba(7, 17, 31, 0.98) 0%, rgba(18, 23, 58, 0.96) 48%, rgba(6, 78, 59, 0.95) 100%);
+}
+
+.streamSection::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: min(1240px, 100%);
+  min-width: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  align-items: center;
+  gap: 28px;
+}
+
+.copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: #67e8f9;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.copy h2 {
+  max-width: 620px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(26px, 3.6vw, 42px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.copy p {
+  max-width: 660px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.topicRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.topicRow span {
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  color: #dbeafe;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.primaryAction {
+  color: #06101d;
+  background: linear-gradient(135deg, #67e8f9, #bef264);
+}
+
+.primaryAction:hover {
+  color: #06101d;
+  transform: translateY(-1px);
+}
+
+.secondaryAction {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.secondaryAction:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.36);
+  transform: translateY(-1px);
+}
+
+.stream {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: calc(100vw - (var(--section-pad-x) * 2));
+  min-width: 0;
+  min-height: 238px;
+  padding: 10px 0;
+  mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.streamTrack {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  animation: bookStream 24s linear infinite;
+}
+
+.bookCard {
+  flex: 0 0 clamp(176px, 18vw, 240px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
+}
+
+.bookCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes bookStream {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 7px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streamTrack {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+
+  .stream {
+    min-height: 210px;
+  }
+}
+
+@media (max-width: 560px) {
+  .streamSection {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
+  .bookCard {
+    flex-basis: 168px;
+  }
+}
