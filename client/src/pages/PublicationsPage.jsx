@@ -176,7 +176,7 @@ export default function PublicationsPage() {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <span className={styles.eyebrow}>Publication Library</span>
-          <h2>Books and white papers with pricing, access links and SEO-ready metadata.</h2>
+          <h2>Books &amp; White Papers</h2>
         </div>
 
         {loading ? (

@@ -102,6 +102,33 @@
   animation: dotPulse 2.4s ease-in-out infinite;
 }
 
+.logoPlate {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  overflow: visible;
+  opacity: 1;
+}
+
+.item:hover .logoPlate {
+  transform: scale(1.15);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
+
 @keyframes stream {
   0% { transform: translateX(0); }
   100% { transform: translateX(-33.333%); }
