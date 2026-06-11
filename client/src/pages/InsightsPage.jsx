@@ -81,9 +81,9 @@ export default function InsightsPage() {
   return (
     <>
       <Helmet>
-        <title>Research | RhemaAI Labs | RhemaAI Solutions Ltd</title>
-        <meta name="description" content="Enterprise AI research, technical insights, architecture guides, MLOps notes, and data engineering analysis from RhemaAI Labs." />
-        <meta name="keywords" content="RhemaAI Labs, enterprise AI research, agentic AI insights, data engineering research, cloud architecture, MLOps" />
+        <title>Research | RhemaAI Labs</title>
+        <meta name="description" content="Enterprise AI research, architecture guides, MLOps notes, and data engineering analysis from RhemaAI Labs — written for enterprise practitioners." />
+        <meta name="keywords" content="RhemaAI Labs, enterprise AI research, agentic AI, data engineering, cloud architecture, MLOps" />
       </Helmet>
 
       {/* Hero */}

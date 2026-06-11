@@ -149,7 +149,114 @@
   background: rgba(49, 87, 213, 0.1);
   color: var(--primary);
   font-size: 0.92em;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
   font-weight: 700;
+}
+
+/* ── Article headings (used by MD_COMPONENTS) ── */
+.articleH2 {
+  margin: 34px 0 14px;
+  color: var(--text-primary);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.articleH3 {
+  margin: 28px 0 12px;
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.articleH4 {
+  margin: 24px 0 10px;
+  color: var(--text-primary);
+  font-size: var(--text-md);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* ── Images / diagrams ── */
+.figure {
+  margin: 32px 0;
+  text-align: center;
+}
+
+.articleImage {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
+}
+
+.figcaption {
+  margin-top: 10px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── Tables ── */
+.tableWrap {
+  margin: 28px 0;
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.th {
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border-mid);
+  background: var(--off-white);
+  color: var(--text-primary);
+  font-weight: 800;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.table tr:last-child .td {
+  border-bottom: 0;
+}
+
+.table tr:nth-child(even) {
+  background: rgba(49, 87, 213, 0.025);
+}
+
+/* ── Horizontal rule ── */
+.hr {
+  margin: 36px 0;
+  border: 0;
+  border-top: 2px solid var(--border-light);
+}
+
+/* ── Blockquote (also used by react-markdown) ── */
+.blockquote {
+  margin: 28px 0;
+  padding: 18px 20px;
+  border-left: 4px solid var(--accent-teal);
+  border-radius: var(--radius-md);
+  background: var(--off-white);
+  color: var(--text-secondary);
+  line-height: 1.75;
 }
 
 .grid {
