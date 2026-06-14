@@ -15,13 +15,13 @@ echo "======================================================"
 
 # ── 1. System update ──────────────────────────────────────
 echo ""
-echo "[1/8] Updating system..."
+echo "[1/11] Updating system..."
 apt-get update -y && apt-get upgrade -y
 apt-get install -y git curl gnupg ufw nginx certbot python3-certbot-nginx
 
 # ── 2. Node.js 22 via nvm ─────────────────────────────────
 echo ""
-echo "[2/8] Installing Node.js 22..."
+echo "[2/11] Installing Node.js 22..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 # shellcheck disable=SC1091
@@ -33,12 +33,12 @@ echo "  Node: $(node -v)  npm: $(npm -v)"
 
 # ── 3. PM2 ────────────────────────────────────────────────
 echo ""
-echo "[3/8] Installing PM2..."
+echo "[3/11] Installing PM2..."
 npm install -g pm2
 
 # ── 4. MongoDB 8.0 ────────────────────────────────────────
 echo ""
-echo "[4/8] Installing MongoDB 8.0..."
+echo "[4/11] Installing MongoDB 8.0..."
 curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
   gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
 
@@ -56,7 +56,7 @@ echo "  MongoDB status: $(systemctl is-active mongod)"
 
 # ── 5. Clone repo ─────────────────────────────────────────
 echo ""
-echo "[5/8] Cloning repository..."
+echo "[5/11] Cloning repository..."
 mkdir -p /var/www
 if [ -d "$APP_DIR/.git" ]; then
   echo "  Repo exists — pulling latest..."
@@ -67,7 +67,7 @@ fi
 
 # ── 6. Backend setup ──────────────────────────────────────
 echo ""
-echo "[6/8] Setting up backend..."
+echo "[6/11] Setting up backend..."
 cd "$APP_DIR/server"
 npm install --omit=dev
 
@@ -104,7 +104,7 @@ echo "  Backend running on port 5000"
 
 # ── 7. Frontend build ─────────────────────────────────────
 echo ""
-echo "[7/8] Building React frontend..."
+echo "[7/11] Building React frontend..."
 cd "$APP_DIR/client"
 npm ci
 VITE_API_URL=/api npm run build
@@ -112,7 +112,7 @@ echo "  Build output: $APP_DIR/client/dist"
 
 # ── 8. Nginx + SSL ────────────────────────────────────────
 echo ""
-echo "[8/8] Configuring Nginx..."
+echo "[8/11] Configuring Nginx..."
 
 # Write Nginx site config
 sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/nginx.conf" \
@@ -145,10 +145,77 @@ certbot --nginx \
 systemctl enable certbot.timer
 systemctl start certbot.timer
 
+# ── 9. PM2 log rotation ───────────────────────────────────
+echo ""
+echo "[9/11] Configuring PM2 log rotation..."
+pm2 install pm2-logrotate
+pm2 set pm2-logrotate:max_size 50M
+pm2 set pm2-logrotate:retain 14
+pm2 set pm2-logrotate:compress true
+pm2 set pm2-logrotate:rotateInterval "0 0 * * *"
+echo "  Log rotation: 50MB max, 14 days retained, compressed, rotates daily"
+
+# ── 10. MongoDB daily backup cron ─────────────────────────
+echo ""
+echo "[10/11] Setting up MongoDB daily backup..."
+mkdir -p /var/backups/rhemaai
+
+cat > /etc/cron.d/rhemaai-backup <<'CRON'
+# RhemaAI — MongoDB nightly backup at 02:00
+0 2 * * * root mongodump --uri="mongodb://127.0.0.1:27017/rhemaai" --archive | gzip > /var/backups/rhemaai/rhemaai-$(date +\%F).gz
+
+# Delete backups older than 30 days
+0 3 * * * root find /var/backups/rhemaai -name "rhemaai-*.gz" -mtime +30 -delete
+CRON
+
+chmod 644 /etc/cron.d/rhemaai-backup
+echo "  MongoDB backup: daily at 02:00 → /var/backups/rhemaai/, 30-day retention"
+
+# ── 11. Netdata monitoring ────────────────────────────────
+echo ""
+echo "[11/11] Installing Netdata (server observability)..."
+curl https://get.netdata.cloud/kickstart.sh | sudo bash /dev/stdin --non-interactive --stable-channel
+
+# Lock Netdata to localhost only (do not expose port 19999 publicly)
+sed -i 's/# bind to = \*/bind to = 127.0.0.1/' /etc/netdata/netdata.conf 2>/dev/null || true
+systemctl restart netdata
+systemctl enable netdata
+
+# Add Nginx reverse proxy for Netdata at /netdata/ (admin access only)
+cat >> /etc/nginx/sites-available/rhemaai <<'NETDATA'
+
+  # Netdata dashboard — protect with basic auth
+  location /netdata/ {
+    proxy_pass http://127.0.0.1:19999/;
+    proxy_set_header Host $host;
+    auth_basic "RhemaAI Monitoring";
+    auth_basic_user_file /etc/nginx/.htpasswd_netdata;
+  }
+NETDATA
+
+# Create basic auth password for Netdata dashboard
+apt-get install -y apache2-utils -qq
+htpasswd -cb /etc/nginx/.htpasswd_netdata admin "$(openssl rand -base64 16)"
+NETDATA_PASS=$(grep admin /etc/nginx/.htpasswd_netdata | cut -d: -f1)
+
+nginx -t && systemctl reload nginx
+echo "  Netdata: https://${DOMAIN}/netdata/ (user: admin)"
+
 echo ""
 echo "======================================================"
 echo "  Setup complete!"
-echo "  Site:    https://${DOMAIN}"
-echo "  Logs:    pm2 logs rhemaai-server"
-echo "  Update:  bash ${APP_DIR}/deploy/deploy.sh"
+echo ""
+echo "  Site:      https://${DOMAIN}"
+echo "  API docs:  https://${DOMAIN}/api/docs"
+echo "  Netdata:   https://${DOMAIN}/netdata/ (user: admin)"
+echo ""
+echo "  Logs:      pm2 logs rhemaai-server"
+echo "  Monitor:   pm2 monit"
+echo "  Backup:    /var/backups/rhemaai/"
+echo "  Update:    bash ${APP_DIR}/deploy/deploy.sh"
+echo ""
+echo "  Next steps:"
+echo "  1. Add UptimeRobot free monitor → https://uptimerobot.com"
+echo "     Ping: https://${DOMAIN}/api/health every 5 min"
+echo "  2. Save Netdata password from /etc/nginx/.htpasswd_netdata"
 echo "======================================================"
