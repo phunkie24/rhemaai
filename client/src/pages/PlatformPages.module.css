@@ -36,6 +36,22 @@
   align-items: center;
 }
 
+.heroCentered {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.heroCentered .heroCopy h1,
+.heroCentered .heroCopy p {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroSingle {
+  grid-template-columns: minmax(0, 680px);
+}
+
 .heroCopy h1 {
   max-width: 850px;
   margin: 0;
@@ -43,6 +59,7 @@
   font-size: clamp(42px, 6vw, 76px);
   line-height: 0.98;
   letter-spacing: 0;
+  text-align: left;
 }
 
 .heroCopy p {
@@ -51,6 +68,26 @@
   color: rgba(255,255,255,0.72);
   font-size: 18px;
   line-height: 1.75;
+  text-align: left;
+}
+
+.heroBgPortrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+}
+
+.heroBgOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to right, rgba(7,17,31,0.88) 0%, rgba(7,17,31,0.72) 55%, rgba(7,17,31,0.28) 100%),
+    linear-gradient(to bottom, rgba(7,17,31,0.18) 0%, rgba(7,17,31,0.52) 100%);
 }
 
 .eyebrow {
@@ -376,21 +413,72 @@
   font-size: 11px;
 }
 
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 0;
+  flex-wrap: wrap;
+}
+
+.priceNGN {
+  color: #0f172a;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.priceUSD {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.priceFree {
+  color: #0f766e;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .publicationBottom {
-  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid #e2e8f0;
 }
 
-.publicationBottom span {
-  color: #0f172a;
-  font-size: 14px;
-  font-weight: 900;
+.btnPaystack {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: #0ba4db;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.18s;
+}
+
+.btnPaystack:hover {
+  background: #0891c2;
+  color: #fff;
 }
 
 .textAction {
   min-height: 34px;
   color: #0f766e;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .stateText {

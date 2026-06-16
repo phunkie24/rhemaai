@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { publicationsAPI } from '@utils/api'
 import multiAgentBookCover from '../assets/multi-agent-book-cover.jpg'
+import authorPortrait from '../assets/author_portrait.jpg.png'
 import styles from './PlatformPages.module.css'
 
 const TYPES = [
@@ -59,14 +60,9 @@ function formatPrice(price = {}) {
 }
 
 function PublicationCard({ publication, index }) {
-  const kindleUrl = publication.price?.kindleUrl || publication.price?.paymentUrl
-  const actionUrl = kindleUrl || publication.documentUrl
-  const isExternal = /^https?:\/\//.test(actionUrl || '')
-  const actionLabel = kindleUrl
-    ? 'Buy on Amazon Kindle'
-    : publication.documentUrl
-      ? 'Open document'
-      : 'Request access'
+  const paystackUrl = publication.price?.paystackUrl
+  const kindleUrl   = publication.price?.kindleUrl
+  const price       = publication.price
 
   return (
     <motion.article
@@ -92,18 +88,46 @@ function PublicationCard({ publication, index }) {
       <div className={styles.tagRow}>
         {(publication.tags || []).slice(0, 4).map((tag) => <em key={tag}>{tag}</em>)}
       </div>
+
+      <div className={styles.priceRow}>
+        {price?.amountNGN > 0 && (
+          <span className={styles.priceNGN}>₦{Number(price.amountNGN).toLocaleString()}</span>
+        )}
+        {price?.amount > 0 && (
+          <span className={styles.priceUSD}>${Number(price.amount).toFixed(2)}</span>
+        )}
+        {(!price?.amount && !price?.amountNGN) && (
+          <span className={styles.priceFree}>Free</span>
+        )}
+      </div>
+
       <div className={styles.publicationBottom}>
-        <span>{formatPrice(publication.price)}</span>
-        {actionUrl ? (
+        {paystackUrl && (
           <a
-            href={actionUrl}
-            className={styles.textAction}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
+            href={paystackUrl}
+            className={styles.btnPaystack}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {actionLabel}
+            Buy Now — Paystack
           </a>
-        ) : (
+        )}
+        {kindleUrl && (
+          <a
+            href={kindleUrl}
+            className={styles.textAction}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Buy on Amazon
+          </a>
+        )}
+        {!paystackUrl && !kindleUrl && publication.documentUrl && (
+          <a href={publication.documentUrl} className={styles.textAction} target="_blank" rel="noopener noreferrer">
+            Open document
+          </a>
+        )}
+        {!paystackUrl && !kindleUrl && !publication.documentUrl && (
           <Link to="/contact" className={styles.textAction}>Request access</Link>
         )}
       </div>
@@ -142,8 +166,9 @@ export default function PublicationsPage() {
       </Helmet>
 
       <section className={styles.hero}>
-        <div className={styles.radiance} />
-        <div className={styles.heroInner}>
+        <img src={authorPortrait} alt="" aria-hidden="true" className={styles.heroBgPortrait} />
+        <div className={styles.heroBgOverlay} />
+        <div className={`${styles.heroInner} ${styles.heroSingle}`}>
           <motion.div
             className={styles.heroCopy}
             initial={{ opacity: 0, y: 24 }}
@@ -151,10 +176,10 @@ export default function PublicationsPage() {
             transition={{ duration: 0.65 }}
           >
             <span className={styles.eyebrow}>RhemaAI Press</span>
-            <h1>Enterprise AI books and white papers.</h1>
+            <h1>Enterprise Data &amp; AI books and white papers.</h1>
             <p>
-              A curated publication desk for practical AI engineering books,
-              cloud architecture white papers, and executive technology decision-making.
+              A curated publication desk for practical books and white papers on data engineering,
+              cloud architecture, machine learning, and enterprise AI — written for practitioners and decision-makers.
             </p>
           </motion.div>
         </div>
@@ -174,11 +199,6 @@ export default function PublicationsPage() {
       </section>
 
       <section className={styles.section}>
-        <div className={styles.sectionHeader}>
-          <span className={styles.eyebrow}>Publication Library</span>
-          <h2>Books &amp; White Papers</h2>
-        </div>
-
         {loading ? (
           <div className={styles.stateText}>Loading publications...</div>
         ) : (

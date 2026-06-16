@@ -118,8 +118,10 @@ const emptyPublicationForm = {
   documentLabel: '',
   tagsText: '',
   priceAmount: '0',
+  priceNGN: '0',
   priceCurrency: 'USD',
   priceLabel: 'Free',
+  paystackUrl: '',
   kindleUrl: '',
   featured: false,
   published: false,
@@ -414,8 +416,10 @@ function publicationToForm(publication) {
     documentLabel: publication.documentLabel || '',
     tagsText: (publication.tags || []).join(', '),
     priceAmount: String(publication.price?.amount ?? 0),
+    priceNGN: String(publication.price?.amountNGN ?? 0),
     priceCurrency: publication.price?.currency || 'USD',
     priceLabel: publication.price?.label || 'Free',
+    paystackUrl: publication.price?.paystackUrl || '',
     kindleUrl: publication.price?.kindleUrl || publication.price?.paymentUrl || '',
     featured: !!publication.featured,
     published: !!publication.published,
@@ -440,11 +444,13 @@ function formToPublication(form) {
     documentLabel: form.documentLabel,
     tags: splitList(form.tagsText),
     price: {
-      amount: Number(form.priceAmount || 0),
-      currency: form.priceCurrency,
-      label: form.priceLabel,
-      kindleUrl: form.kindleUrl,
-      paymentUrl: form.kindleUrl,
+      amount:     Number(form.priceAmount || 0),
+      amountNGN:  Number(form.priceNGN || 0),
+      currency:   form.priceCurrency,
+      label:      form.priceLabel,
+      paystackUrl: form.paystackUrl,
+      kindleUrl:  form.kindleUrl,
+      paymentUrl: form.paystackUrl || form.kindleUrl,
     },
     featured: form.featured,
     published: form.published,
@@ -1080,7 +1086,7 @@ export default function AdminOperationsPage() {
                       <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="e.g. Full access" />
                     </label>
                     <label>
-                      Payment URL (Stripe / Paystack / Flutterwave)
+                      Paystack payment link
                       <input value={form.paymentUrl} onChange={(event) => updateForm('paymentUrl', event.target.value)} placeholder="https://paystack.com/pay/..." />
                     </label>
                   </>
@@ -1153,22 +1159,26 @@ export default function AdminOperationsPage() {
               </div>
               <div className={styles.priceGrid}>
                 <label>
-                  Price
-                  <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} />
+                  Sale price (NGN) ₦
+                  <input type="number" min="0" step="1" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                 </label>
                 <label>
-                  Currency
-                  <input value={form.priceCurrency} onChange={(event) => updateForm('priceCurrency', event.target.value.toUpperCase())} maxLength="3" />
+                  Sale price (USD) $
+                  <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} placeholder="0" />
                 </label>
                 <label>
                   Price label
-                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} />
+                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="Free / ₦5,000 / $9.99" />
                 </label>
                 <label>
                   Amazon Kindle URL
                   <input value={form.kindleUrl} onChange={(event) => updateForm('kindleUrl', event.target.value)} placeholder="https://www.amazon.com/dp/..." />
                 </label>
               </div>
+              <label>
+                Paystack payment link
+                <input value={form.paystackUrl} onChange={(event) => updateForm('paystackUrl', event.target.value)} placeholder="https://paystack.com/pay/..." />
+              </label>
             </>
           )}
 
