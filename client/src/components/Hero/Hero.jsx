@@ -42,7 +42,8 @@ function StatItem({ stat, delay }) {
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.backdrop} aria-hidden="true" />
+      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} />
+      <div className={styles.heroBgOverlay} aria-hidden="true" />
 
       <div className={styles.heroShell}>
         <motion.div
@@ -53,7 +54,7 @@ export default function Hero() {
         >
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowMark} />
-            Enterprise AI, cloud and data engineering
+            Enterprise AI, Cloud, Data Engineering, Data Science &amp; MLOps
           </div>
 
           <h1 className={styles.headline}>
@@ -82,24 +83,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <motion.div
-          className={styles.media}
-          initial={{ opacity: 0, x: 28 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.18, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <img
-            src={heroMedia}
-            alt="Enterprise AI operations dashboard with cloud architecture, model performance and workflow monitoring panels"
-            className={styles.mediaImage}
-          />
-          <div className={styles.mediaShade} />
-
-          <div className={styles.statusPanel}>
-            <span className={styles.statusDot} />
-            Production readiness review
-          </div>
-
+        <div className={styles.signalsCol}>
           <div className={styles.signalPanel}>
             {SIGNALS.map((signal) => (
               <div key={signal.label} className={styles.signal}>
@@ -108,7 +92,7 @@ export default function Hero() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <div className={styles.capabilityStrip} aria-label="Core capabilities">

@@ -17,7 +17,6 @@ const SERVICES_LINKS = [
 const COMPANY_LINKS = [
   { label: 'About Us',          path: '/about' },
   { label: 'Case Studies',      path: '/case-studies' },
-  { label: 'Research', path: '/insights' },
   //{ label: 'RhemaAI Academy',      path: 'https://rhemaai.academy', external: true },
   { label: 'RhemaAI Platform',     path: '/products' },
   { label: 'RhemaAI Press',        path: '/publications' },
@@ -27,7 +26,7 @@ const COMPANY_LINKS = [
 ]
 
 const CONTACT_LINKS = [
-  { label: 'info@rhemaai.tech',    path: 'mailto:info@rhemaai.tech', external: true },
+  { label: 'info@rhemaaisolutions.tech',    path: 'mailto:info@rhemaaisolutions.tech', external: true },
   { label: '+234 904 313 8981',    path: 'tel:+2349043138981', external: true },
   { label: 'LinkedIn',             path: 'https://linkedin.com/company/rhemaai-tech', external: true },
   { label: 'GitHub',               path: 'https://github.com/phunkie24', external: true },

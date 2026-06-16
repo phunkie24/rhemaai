@@ -184,7 +184,7 @@ export default function ContactPage() {
 
                 {submitStatus === 'error' && (
                   <div className={styles.formError}>
-                    Something went wrong. Please try again or email us directly at info@rhemaai.tech
+                    Something went wrong. Please try again or email us directly at info@rhemaaisolutions.tech
                   </div>
                 )}
 

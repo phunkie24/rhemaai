@@ -106,17 +106,17 @@ export async function submitContact(req, res, next) {
               We look forward to discussing how we can help transform your enterprise with AI and cloud technology.
             </p>
             <p style="font-size: 15px; color: #5A5370; line-height: 1.75; margin-bottom: 28px;">
-              In the meantime, you can explore our <a href="https://rhemaai.tech/insights" style="color: #6B46FF;">latest insights</a>
+              In the meantime, you can explore our <a href="https://rhemaaisolutions.tech/insights" style="color: #6B46FF;">latest insights</a>
               or check out <a href="https://eliteaiacademy.com" style="color: #6B46FF;">EliteAI Academy</a> for enterprise AI learning resources.
             </p>
             <div style="text-align: center; margin: 28px 0;">
-              <a href="https://rhemaai.tech/services" style="background: #6B46FF; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
+              <a href="https://rhemaaisolutions.tech/services" style="background: #6B46FF; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px;">
                 Explore Our Services
               </a>
             </div>
             <hr style="border: none; border-top: 1px solid #e8e6f5; margin: 24px 0;">
             <p style="font-size: 12px; color: #9896AB; text-align: center; margin: 0;">
-              RhemaAI Solutions Ltd | info@rhemaai.tech | rhemaai.tech
+              RhemaAI Solutions Ltd | info@rhemaaisolutions.tech | rhemaaisolutions.tech
             </p>
           </div>
         </div>

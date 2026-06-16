@@ -10,13 +10,13 @@ const options = {
         'REST API for RhemaAI Technologies — insights, publications, products, case studies, contact, and newsletter endpoints.',
       contact: {
         name: 'RhemaAI Technologies',
-        email: 'info@rhemaai.tech',
-        url: 'https://rhemaai.tech',
+        email: 'info@rhemaaisolutions.tech',
+        url: 'https://rhemaaisolutions.tech',
       },
     },
     servers: [
       { url: 'http://localhost:5000/api', description: 'Local development' },
-      { url: 'https://rhemaai.tech/api',  description: 'Production' },
+      { url: 'https://rhemaaisolutions.tech/api',  description: 'Production' },
     ],
     components: {
       securitySchemes: {

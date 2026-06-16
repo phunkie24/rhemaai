@@ -94,20 +94,17 @@ function YoutubeModal({ course, onClose }) {
           </div>
           <div className={styles.modalActions}>
             <div className={styles.modalPriceRow}>
-              {course.pricing?.isFree !== false ? (
+              {course.pricing?.amountNGN > 0 && (
+                <span className={styles.pricePaid}>₦{Number(course.pricing.amountNGN).toLocaleString()}</span>
+              )}
+              {course.pricing?.amount > 0 && (
+                <span className={styles.priceUSD}>${Number(course.pricing.amount).toFixed(2)}</span>
+              )}
+              {!course.pricing?.amountNGN && !course.pricing?.amount && (
                 <span className={styles.priceFree}>Free Course</span>
-              ) : (
-                <>
-                  {course.pricing?.amountNGN > 0 && (
-                    <span className={styles.pricePaid}>₦{Number(course.pricing.amountNGN).toLocaleString()}</span>
-                  )}
-                  {course.pricing?.amount > 0 && (
-                    <span className={styles.priceUSD}>${Number(course.pricing.amount).toFixed(2)}</span>
-                  )}
-                </>
               )}
             </div>
-            {course.pricing?.isFree === false && course.pricing?.paymentUrl && (
+            {course.pricing?.paymentUrl && (
               <a
                 href={course.pricing.paymentUrl}
                 target="_blank"
@@ -169,11 +166,15 @@ function CourseCard({ course, onClick }) {
           )}
         </div>
         <div className={styles.cardFooter}>
-          <span className={`${styles.priceBadge} ${course.pricing?.isFree !== false ? styles.priceFree : styles.pricePaid}`}>
-            {course.pricing?.isFree !== false ? 'Free' : formatPaidPrice(course.pricing)}
+          <span className={`${styles.priceBadge} ${(course.pricing?.amountNGN > 0 || course.pricing?.amount > 0) ? styles.pricePaid : styles.priceFree}`}>
+            {course.pricing?.amountNGN > 0
+              ? `₦${Number(course.pricing.amountNGN).toLocaleString()}`
+              : course.pricing?.amount > 0
+                ? `$${Number(course.pricing.amount).toFixed(2)}`
+                : 'Free'}
           </span>
           <span className={styles.watchBtn}>
-            {course.pricing?.isFree !== false ? 'Watch now' : 'Enrol'}
+            {course.pricing?.paymentUrl ? 'Enrol' : 'Watch now'}
           </span>
         </div>
       </div>

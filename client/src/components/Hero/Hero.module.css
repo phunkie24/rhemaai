@@ -3,30 +3,36 @@
   min-height: 92vh;
   padding: 124px var(--section-pad-x) 40px;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(248, 250, 252, 0.96) 0%, rgba(255, 255, 255, 1) 64%),
-    var(--white);
+  background: #07111f;
 }
 
-.backdrop {
+.heroBg {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(49, 87, 213, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(49, 87, 213, 0.07) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, black 0%, transparent 72%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+}
+
+.heroBgOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to right, rgba(7,17,31,0.82) 0%, rgba(7,17,31,0.60) 55%, rgba(7,17,31,0.35) 100%),
+    linear-gradient(to bottom, rgba(7,17,31,0.12) 0%, rgba(7,17,31,0.68) 100%);
 }
 
 .heroShell {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1240px;
   min-width: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
   align-items: center;
   gap: 56px;
 }
@@ -41,10 +47,10 @@
   gap: 10px;
   margin-bottom: 24px;
   padding: 7px 14px;
-  border: 1px solid rgba(49, 87, 213, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--primary);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.88);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -61,7 +67,7 @@
 
 .headline {
   margin: 0 0 24px;
-  color: var(--text-primary);
+  color: #fff;
   font-size: var(--text-4xl);
   font-weight: 800;
   line-height: 1.04;
@@ -72,7 +78,7 @@
 .subtext {
   max-width: 610px;
   margin: 0 0 34px;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 18px;
   line-height: 1.72;
 }
@@ -111,15 +117,24 @@
 }
 
 .btnSecondary {
-  color: var(--text-primary);
-  background: #fff;
-  border: 1px solid var(--border-mid);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .btnSecondary:hover {
-  color: var(--primary);
-  border-color: var(--primary);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-1px);
+}
+
+.signalsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-self: center;
+  justify-self: end;
 }
 
 .statsRow {
@@ -128,8 +143,8 @@
   max-width: 620px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: var(--shadow-sm);
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 
 .stat {
@@ -262,7 +277,7 @@
 
 .capabilityStrip {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 1240px;
   margin: 34px auto 0;
   display: grid;
@@ -270,7 +285,7 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   background: #fff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 
 .capabilityStrip span {

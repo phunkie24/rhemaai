@@ -13,6 +13,7 @@ import productsRoutes from './routes/products.js'
 import caseStudiesRoutes from './routes/caseStudies.js'
 import coursesRoutes from './routes/courses.js'
 import adminRoutes from './routes/admin.js'
+import webhookRoutes from './routes/webhooks.js'
 
 const app = express()
 
@@ -38,6 +39,10 @@ app.use(cors({
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('combined'))
 }
+
+// Webhook route must be registered BEFORE express.json() so the raw body
+// buffer is preserved for Paystack HMAC signature verification.
+app.use('/api/webhooks', webhookRoutes)
 
 app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ extended: true, limit: '1mb' }))

@@ -97,7 +97,7 @@ jobs:
         run: |
           echo "Waiting 15s for server to stabilise..."
           sleep 15
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://rhemaai.tech/api/health)
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://rhemaaisolutions.tech/api/health)
           echo "Health check status: $STATUS"
           if [ "$STATUS" != "200" ]; then
             echo "Health check FAILED (HTTP $STATUS) — triggering rollback"

@@ -5,7 +5,7 @@
 # =============================================================================
 set -euo pipefail
 
-DOMAIN="rhemaai.tech"
+DOMAIN="rhemaaisolutions.tech"
 REPO="https://github.com/phunkie24/rhemaai.git"
 APP_DIR="/var/www/rhemaai"
 
@@ -80,8 +80,11 @@ MONGODB_URI=mongodb://127.0.0.1:27017/rhemaai
 # Hostinger email — use your webmail password
 EMAIL_HOST=smtp.hostinger.com
 EMAIL_PORT=465
-EMAIL_USER=info@rhemaai.tech
+EMAIL_USER=info@rhemaaisolutions.tech
 EMAIL_PASS=REPLACE_WITH_HOSTINGER_EMAIL_PASSWORD
+
+# Paystack — Settings > API Keys > Secret Key (sk_live_...)
+PAYSTACK_SECRET_KEY=REPLACE_WITH_PAYSTACK_SECRET_KEY
 
 # Admin panel key — paste this into /admin password field
 CONTACT_ADMIN_KEY=63e6666a1b5f574d828e4d87c3949ff10ee47affe6eb7b76

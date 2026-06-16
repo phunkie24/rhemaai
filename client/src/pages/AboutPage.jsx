@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import styles from './AboutPage.module.css'
+import founderPhoto from '../assets/funke-yusuf.jpg.png'
 
 const PILLARS = [
   {
@@ -138,6 +139,42 @@ export default function AboutPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className={styles.founderSection}>
+        <div className="container">
+          <motion.div
+            className={styles.founderInner}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className={styles.founderPhotoWrap}>
+              <img src={founderPhoto} alt="Funke Yusuf" className={styles.founderPhoto} />
+              <div className={styles.founderPhotoBorder} />
+            </div>
+            <div className={styles.founderCopy}>
+              <span className={styles.sectionLabel}>Leadership</span>
+              <h2 className={styles.founderName}>Funke Yusuf</h2>
+              <p className={styles.founderRole}>Data &amp; AI Architect &nbsp;·&nbsp; Enterprise AI Consultant &nbsp;·&nbsp; Founder, RhemaAI</p>
+              <div className={styles.founderDivider} />
+              <p className={styles.founderBio}>
+                Funke founded RhemaAI Solutions Ltd to bring rigorous, mathematics-backed AI and data engineering
+                to enterprise organisations across Africa, Europe, and beyond. With certifications across Azure,
+                AWS, and GCP, and hands-on delivery of 10,000+ agentic AI patterns, she leads every engagement
+                from architecture through to production.
+              </p>
+              <div className={styles.founderTags}>
+                <span>Applied Mathematics</span>
+                <span>Agentic AI</span>
+                <span>Data Lakehouse</span>
+                <span>Cloud Architecture</span>
+                <span>MLOps</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

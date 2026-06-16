@@ -29,9 +29,9 @@ Local URLs:
 Create `.env` on the VPS from `.env.example`:
 
 ```env
-FRONTEND_URL=https://rhemaai.tech
+FRONTEND_URL=https://rhemaaisolutions.tech
 CONTACT_ADMIN_KEY=replace_with_a_long_random_secret
-EMAIL_USER=info@rhemaai.tech
+EMAIL_USER=info@rhemaaisolutions.tech
 EMAIL_PASS=your_gmail_app_password
 ```
 
@@ -46,12 +46,12 @@ Production Compose will fail fast if `FRONTEND_URL` or `CONTACT_ADMIN_KEY` is mi
 `CONTACT_ADMIN_KEY` protects `GET /api/contact` in production. Use it as:
 
 ```bash
-curl -H "x-admin-api-key: YOUR_SECRET" https://rhemaai.tech/api/contact
+curl -H "x-admin-api-key: YOUR_SECRET" https://rhemaaisolutions.tech/api/contact
 ```
 
 ## Hostinger VPS Deployment
 
-1. Point DNS `A` records for `rhemaai.tech` and `www.rhemaai.tech` to the VPS IP.
+1. Point DNS `A` records for `rhemaaisolutions.tech` and `www.rhemaaisolutions.tech` to the VPS IP.
 2. SSH into the VPS and install Docker plus the Docker Compose plugin.
 3. Clone or upload this repository to the VPS.
 4. Create `.env` in the project root using the production values above.

@@ -70,7 +70,7 @@
                                         │ HTTPS
                         ┌───────────────▼───────────────┐
                         │         Nginx (reverse proxy)  │
-                        │         rhemaai.tech           │
+                        │         rhemaaisolutions.tech           │
                         └──────────┬────────────────────┘
                                    │
               ┌────────────────────┴────────────────────┐
@@ -90,7 +90,7 @@
 ### 2.2 Application Modules
 
 ```
-rhemaai.tech
+rhemaaisolutions.tech
 │
 ├── / ──────────────────── Homepage (Hero, Services, WhyUs, Industries)
 ├── /about ─────────────── About page (Founder, Pillars, Values)
@@ -272,7 +272,7 @@ SQL Server                      Azure Blob / S3
 │  ┌──────────────────────────────────────────────────────────┐   │
 │  │                    Nginx (Port 80/443)                    │   │
 │  │                    SSL: Let's Encrypt                     │   │
-│  │                    Domain: rhemaai.tech                  │   │
+│  │                    Domain: rhemaaisolutions.tech                  │   │
 │  └──────────────┬───────────────────────────────────────────┘   │
 │                 │                                                 │
 │     ┌───────────┴──────────────┐                                 │
@@ -305,7 +305,7 @@ server { listen 80; return 301 https://$host$request_uri; }
 # HTTPS — serve React SPA + proxy API
 server {
   listen 443 ssl;
-  server_name rhemaai.tech www.rhemaai.tech;
+  server_name rhemaaisolutions.tech www.rhemaaisolutions.tech;
 
   # React build (static)
   root /var/www/rhemaai/client/dist;
@@ -338,10 +338,10 @@ pm2 save
 | `MONGODB_URI` | Server | `mongodb://127.0.0.1:27017/rhemaai` |
 | `EMAIL_HOST` | Server | `smtp.hostinger.com` |
 | `EMAIL_PORT` | Server | `465` |
-| `EMAIL_USER` | Server | `info@rhemaai.tech` |
+| `EMAIL_USER` | Server | `info@rhemaaisolutions.tech` |
 | `EMAIL_PASS` | Server | Hostinger webmail password |
 | `CONTACT_ADMIN_KEY` | Server | Admin panel API key |
-| `FRONTEND_URL` | Server | `https://rhemaai.tech` |
+| `FRONTEND_URL` | Server | `https://rhemaaisolutions.tech` |
 | `VITE_API_URL` | Client build | `/api` |
 
 ---
@@ -512,5 +512,5 @@ MongoDB (localhost only, no external port)
 | **Infrastructure** | Hostinger KVM 1 VPS, Ubuntu 24.04 LTS |
 | **CI/CD** | GitHub Actions |
 | **Version Control** | Git / GitHub (`phunkie24/rhemaai`) |
-| **Domain** | rhemaai.tech |
+| **Domain** | rhemaaisolutions.tech |
 | **Future Analytics** | Python, Apache Airflow, SQL Server, Azure Synapse, Power BI |

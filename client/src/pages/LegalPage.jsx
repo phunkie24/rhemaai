@@ -10,7 +10,7 @@ const LEGAL_COPY = {
       ['Information we collect', 'We collect contact details, project context and website analytics needed to respond to enquiries, operate our services and improve the website experience.'],
       ['How we use information', 'We use information to communicate with you, evaluate project fit, deliver contracted work, protect our systems and meet legal or compliance obligations.'],
       ['Data protection', 'Client materials are handled with restricted access, reasonable technical safeguards and confidentiality practices appropriate for enterprise consulting engagements.'],
-      ['Your choices', 'You can request access, correction or deletion of personal information by contacting info@rhemaai.tech.'],
+      ['Your choices', 'You can request access, correction or deletion of personal information by contacting info@rhemaaisolutions.tech.'],
     ],
   },
   terms: {
@@ -63,7 +63,7 @@ export default function LegalPage({ type = 'privacy' }) {
           </section>
         ))}
         <p>
-          For questions about this page, contact <a href="mailto:info@rhemaai.tech">info@rhemaai.tech</a>.
+          For questions about this page, contact <a href="mailto:info@rhemaaisolutions.tech">info@rhemaaisolutions.tech</a>.
         </p>
       </section>
     </div>
