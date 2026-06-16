@@ -86,8 +86,9 @@ EMAIL_PASS=REPLACE_WITH_HOSTINGER_EMAIL_PASSWORD
 # Paystack — Settings > API Keys > Secret Key (sk_live_...)
 PAYSTACK_SECRET_KEY=REPLACE_WITH_PAYSTACK_SECRET_KEY
 
-# Admin panel key — paste this into /admin password field
+# Admin panel — username is always "admin", set your password here
 CONTACT_ADMIN_KEY=63e6666a1b5f574d828e4d87c3949ff10ee47affe6eb7b76
+ADMIN_PANEL_PASSWORD=REPLACE_WITH_ADMIN_PANEL_PASSWORD
 
 FRONTEND_URL=https://${DOMAIN}
 EOF
@@ -117,9 +118,34 @@ echo "  Build output: $APP_DIR/client/dist"
 echo ""
 echo "[8/11] Configuring Nginx..."
 
-# Write Nginx site config
-sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/nginx.conf" \
-  > /etc/nginx/sites-available/rhemaai
+# Write HTTP-only config first — certbot needs nginx running to do the ACME challenge,
+# but the full SSL config references letsencrypt files that don't exist until after certbot runs.
+cat > /etc/nginx/sites-available/rhemaai <<NGINX_HTTP
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ${DOMAIN} www.${DOMAIN};
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+
+    location / {
+        root ${APP_DIR}/client/dist;
+        index index.html;
+        try_files \$uri \$uri/ /index.html;
+    }
+}
+NGINX_HTTP
 
 ln -sf /etc/nginx/sites-available/rhemaai /etc/nginx/sites-enabled/rhemaai
 rm -f /etc/nginx/sites-enabled/default
@@ -131,7 +157,7 @@ ufw allow OpenSSH
 ufw allow 'Nginx Full'
 ufw --force enable
 
-# SSL
+# SSL — certbot issues the cert AND creates /etc/letsencrypt/options-ssl-nginx.conf
 echo ""
 echo "  DNS: make sure A records for ${DOMAIN} and www.${DOMAIN} point to this IP."
 echo "  Press ENTER to request the SSL certificate..."
@@ -144,6 +170,12 @@ certbot --nginx \
   --agree-tos \
   --email "info@${DOMAIN}" \
   --redirect
+
+# Now letsencrypt files exist — deploy the full config with security headers
+sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/nginx.conf" \
+  > /etc/nginx/sites-available/rhemaai
+
+nginx -t && systemctl reload nginx
 
 systemctl enable certbot.timer
 systemctl start certbot.timer
@@ -196,8 +228,14 @@ cat >> /etc/nginx/sites-available/rhemaai <<'NETDATA'
   }
 NETDATA
 
-# Create basic auth password for Netdata dashboard
+# Create basic auth files
 apt-get install -y apache2-utils -qq
+
+# Admin panel — password from .env
+ADMIN_PASS=$(grep '^ADMIN_PANEL_PASSWORD=' "$APP_DIR/server/.env" | cut -d= -f2-)
+htpasswd -cb /etc/nginx/.htpasswd_admin admin "${ADMIN_PASS}"
+
+# Netdata dashboard — random password (saved in htpasswd file)
 htpasswd -cb /etc/nginx/.htpasswd_netdata admin "$(openssl rand -base64 16)"
 NETDATA_PASS=$(grep admin /etc/nginx/.htpasswd_netdata | cut -d: -f1)
 
