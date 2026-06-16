@@ -56,8 +56,10 @@ const emptyProductForm = {
   productUrl: '',
   version: '1.0.0',
   priceAmount: '0',
+  priceNGN: '0',
   priceCurrency: 'USD',
   priceLabel: 'Contact sales',
+  paystackUrl: '',
   featured: false,
   published: false,
   seoMetaTitle: '',
@@ -145,6 +147,7 @@ const emptyCourseForm = {
   tagsText: '',
   isFree: true,
   priceAmount: '0',
+  priceNGN: '0',
   priceCurrency: 'USD',
   priceLabel: 'Free',
   paymentUrl: '',
@@ -263,8 +266,10 @@ function productToForm(product) {
     productUrl: product.productUrl || '',
     version: product.version || '1.0.0',
     priceAmount: String(product.pricing?.amount ?? 0),
+    priceNGN: String(product.pricing?.amountNGN ?? 0),
     priceCurrency: product.pricing?.currency || 'USD',
     priceLabel: product.pricing?.label || 'Contact sales',
+    paystackUrl: product.pricing?.paystackUrl || '',
     featured: !!product.featured,
     published: !!product.published,
     seoMetaTitle: product.seo?.metaTitle || '',
@@ -290,9 +295,11 @@ function formToProduct(form) {
     productUrl: form.productUrl,
     version: form.version,
     pricing: {
-      amount: Number(form.priceAmount || 0),
-      currency: form.priceCurrency,
-      label: form.priceLabel,
+      amount:      Number(form.priceAmount || 0),
+      amountNGN:   Number(form.priceNGN || 0),
+      currency:    form.priceCurrency,
+      label:       form.priceLabel,
+      paystackUrl: form.paystackUrl,
     },
     featured: form.featured,
     published: form.published,
@@ -480,6 +487,7 @@ function courseToForm(course) {
     tagsText: (course.tags || []).join(', '),
     isFree: course.pricing?.isFree !== false,
     priceAmount: String(course.pricing?.amount ?? 0),
+    priceNGN: String(course.pricing?.amountNGN ?? 0),
     priceCurrency: course.pricing?.currency || 'USD',
     priceLabel: course.pricing?.label || 'Free',
     paymentUrl: course.pricing?.paymentUrl || '',
@@ -504,10 +512,11 @@ function formToCourse(form) {
     level: form.level,
     tags: splitList(form.tagsText),
     pricing: {
-      isFree: form.isFree,
-      amount: Number(form.priceAmount) || 0,
-      currency: form.priceCurrency || 'USD',
-      label: form.priceLabel || (form.isFree ? 'Free' : 'Paid'),
+      isFree:     form.isFree,
+      amount:     Number(form.priceAmount) || 0,
+      amountNGN:  Number(form.priceNGN) || 0,
+      currency:   form.priceCurrency || 'USD',
+      label:      form.priceLabel || (form.isFree ? 'Free' : 'Paid'),
       paymentUrl: form.paymentUrl || '',
     },
     featured: form.featured,
@@ -846,18 +855,22 @@ export default function AdminOperationsPage() {
                   <input value={form.version} onChange={(event) => updateForm('version', event.target.value)} />
                 </label>
                 <label>
-                  Price
-                  <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} />
+                  Sale price (NGN) ₦
+                  <input type="number" min="0" step="1" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                 </label>
                 <label>
-                  Currency
-                  <input value={form.priceCurrency} onChange={(event) => updateForm('priceCurrency', event.target.value.toUpperCase())} maxLength="3" />
+                  Sale price (USD) $
+                  <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} placeholder="0" />
                 </label>
                 <label>
                   Price label
-                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} />
+                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="Contact sales / ₦5,000" />
                 </label>
               </div>
+              <label>
+                Paystack payment link
+                <input value={form.paystackUrl} onChange={(event) => updateForm('paystackUrl', event.target.value)} placeholder="https://paystack.com/pay/..." />
+              </label>
               <label>
                 Tags
                 <input value={form.tagsText} onChange={(event) => updateForm('tagsText', event.target.value)} placeholder="SaaS, AI, Workflow" />
@@ -1074,12 +1087,12 @@ export default function AdminOperationsPage() {
                 {!form.isFree && (
                   <>
                     <label>
-                      Price
-                      <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} />
+                      Sale price (NGN) ₦
+                      <input type="number" min="0" step="1" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                     </label>
                     <label>
-                      Currency
-                      <input value={form.priceCurrency} onChange={(event) => updateForm('priceCurrency', event.target.value.toUpperCase())} maxLength="3" />
+                      Sale price (USD) $
+                      <input type="number" min="0" step="0.01" value={form.priceAmount} onChange={(event) => updateForm('priceAmount', event.target.value)} placeholder="0" />
                     </label>
                     <label>
                       Price label

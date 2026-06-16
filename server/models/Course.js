@@ -32,9 +32,10 @@ const courseSchema = new mongoose.Schema(
     pricing: {
       isFree:      { type: Boolean, default: true },
       amount:      { type: Number, min: 0, default: 0 },
+      amountNGN:   { type: Number, min: 0, default: 0 },
       currency:    { type: String, uppercase: true, default: 'USD' },
       label:       { type: String, default: 'Free' },
-      paymentUrl:  String,   // Stripe / Paystack / Flutterwave checkout link
+      paymentUrl:  String,
     },
     featured:  { type: Boolean, default: false },
     published: { type: Boolean, default: false },

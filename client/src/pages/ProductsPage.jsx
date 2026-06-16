@@ -152,13 +152,25 @@ export default function ProductsPage() {
               <div className={styles.tagRow}>
                 {(product.tags || []).map((tag) => <em key={tag}>{tag}</em>)}
               </div>
-              {(product.demoUrl || product.productUrl || product.assetUrl) && (
-                <div className={styles.cardActions}>
-                  {product.demoUrl && <a href={product.demoUrl} className={styles.textAction}>Open demo</a>}
-                  {product.productUrl && <a href={product.productUrl} className={styles.textAction}>View product</a>}
-                  {product.assetUrl && <a href={product.assetUrl} className={styles.textAction}>Download package</a>}
-                </div>
-              )}
+              <div className={styles.priceRow}>
+                {product.pricing?.amountNGN > 0 && (
+                  <span className={styles.priceNGN}>₦{Number(product.pricing.amountNGN).toLocaleString()}</span>
+                )}
+                {product.pricing?.amount > 0 && (
+                  <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
+                )}
+                {(!product.pricing?.amount && !product.pricing?.amountNGN) && (
+                  <span className={styles.priceLabel}>{product.pricing?.label || 'Contact sales'}</span>
+                )}
+              </div>
+              <div className={styles.cardActions}>
+                {product.pricing?.paystackUrl && (
+                  <a href={product.pricing.paystackUrl} className={styles.btnPaystack} target="_blank" rel="noopener noreferrer">Buy Now — Paystack</a>
+                )}
+                {product.demoUrl && <a href={product.demoUrl} className={styles.textAction}>Open demo</a>}
+                {product.productUrl && <a href={product.productUrl} className={styles.textAction}>View product</a>}
+                {product.assetUrl && <a href={product.assetUrl} className={styles.textAction}>Download package</a>}
+              </div>
             </motion.article>
           ))}
         </div>

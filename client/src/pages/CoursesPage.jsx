@@ -93,20 +93,29 @@ function YoutubeModal({ course, onClose }) {
             )}
           </div>
           <div className={styles.modalActions}>
-            <span className={`${styles.modalPrice} ${course.pricing?.isFree !== false ? styles.priceFree : styles.pricePaid}`}>
-              {course.pricing?.isFree !== false
-                ? 'Free Course'
-                : `${formatPaidPrice(course.pricing)} - ${course.pricing?.label || 'Paid'}`}
-            </span>
+            <div className={styles.modalPriceRow}>
+              {course.pricing?.isFree !== false ? (
+                <span className={styles.priceFree}>Free Course</span>
+              ) : (
+                <>
+                  {course.pricing?.amountNGN > 0 && (
+                    <span className={styles.pricePaid}>₦{Number(course.pricing.amountNGN).toLocaleString()}</span>
+                  )}
+                  {course.pricing?.amount > 0 && (
+                    <span className={styles.priceUSD}>${Number(course.pricing.amount).toFixed(2)}</span>
+                  )}
+                </>
+              )}
+            </div>
             {course.pricing?.isFree === false && course.pricing?.paymentUrl && (
               <a
                 href={course.pricing.paymentUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.enrollBtn}
+                className={styles.btnPaystack}
                 onClick={(event) => event.stopPropagation()}
               >
-                Enrol Now
+                Pay with Paystack
               </a>
             )}
           </div>
