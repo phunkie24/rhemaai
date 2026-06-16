@@ -34,6 +34,8 @@ app.use(cors({
     return callback(new Error('Not allowed by CORS'))
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-admin-api-key', 'x-file-name', 'x-paystack-signature'],
 }))
 
 if (process.env.NODE_ENV !== 'test') {

@@ -613,9 +613,9 @@ export default function AdminOperationsPage() {
   }
 
   useEffect(() => {
-    loadItems(activeArea)
+    if (adminKey.length >= 24) loadItems(activeArea)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeArea])
+  }, [activeArea, adminKey])
 
   const updateForm = (field, value) => {
     setForms((current) => ({
