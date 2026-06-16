@@ -117,7 +117,8 @@ export const adminAPI = {
     headers: adminHeaders(adminKey),
   }),
   uploadAsset: async (adminKey, file) => {
-    const response = await api.post('/admin/uploads', file, {
+    const buffer = await file.arrayBuffer()
+    const response = await api.post('/admin/uploads', buffer, {
       headers: {
         ...adminHeaders(adminKey),
         'Content-Type': file.type || 'application/octet-stream',
