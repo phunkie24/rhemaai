@@ -11,7 +11,6 @@ const NAV_LINKS = [
   { label: 'Research',     path: '/insights' },
   { label: 'Courses',      path: '/courses' },
   { label: 'Publications', path: '/publications' },
-  { label: 'Admin',        path: '/admin' },
   { label: 'About',        path: '/about' },
   { label: 'Contact',      path: '/contact' },
 ]

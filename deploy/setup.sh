@@ -216,18 +216,6 @@ sed -i 's/# bind to = \*/bind to = 127.0.0.1/' /etc/netdata/netdata.conf 2>/dev/
 systemctl restart netdata
 systemctl enable netdata
 
-# Add Nginx reverse proxy for Netdata at /netdata/ (admin access only)
-cat >> /etc/nginx/sites-available/rhemaai <<'NETDATA'
-
-  # Netdata dashboard — protect with basic auth
-  location /netdata/ {
-    proxy_pass http://127.0.0.1:19999/;
-    proxy_set_header Host $host;
-    auth_basic "RhemaAI Monitoring";
-    auth_basic_user_file /etc/nginx/.htpasswd_netdata;
-  }
-NETDATA
-
 # Create basic auth files
 apt-get install -y apache2-utils -qq
 

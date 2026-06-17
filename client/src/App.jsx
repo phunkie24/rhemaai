@@ -36,8 +36,7 @@ export default function App() {
           <Route path="/careers"      element={<CareersPage />} />
           <Route path="/courses"      element={<CoursesPage />} />
           <Route path="/labs"         element={<InsightsPage />} />
-          <Route path="/admin"        element={<AdminOperationsPage />} />
-          <Route path="/admin/operations" element={<AdminOperationsPage />} />
+          <Route path="/rh-ops-9m2k"  element={<AdminOperationsPage />} />
           <Route path="/privacy"      element={<LegalPage type="privacy" />} />
           <Route path="/terms"        element={<LegalPage type="terms" />} />
           <Route path="/cookies"      element={<LegalPage type="cookies" />} />
