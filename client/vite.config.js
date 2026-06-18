@@ -30,10 +30,13 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           motion: ['framer-motion'],
+          helmet: ['react-helmet-async'],
         },
       },
     },
     chunkSizeWarningLimit: 600,
+    cssCodeSplit: true,
+    reportCompressedSize: false,
   },
   test: {
     globals: true,

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { MotionConfig } from 'framer-motion'
 import Navbar from '@components/Navbar/Navbar'
 import Footer from '@components/Footer/Footer'
 import ScrollToTop from '@components/common/ScrollToTop'
@@ -30,7 +31,7 @@ function PageLoader() {
 
 export default function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <ScrollToTop />
       <Navbar />
       <main>
@@ -57,6 +58,6 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   )
 }
