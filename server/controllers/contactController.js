@@ -20,8 +20,8 @@ const contactSchema = Joi.object({
   message: Joi.string().trim().min(10).max(2000).required(),
 })
 
-// Hostinger email uses SMTP directly (not the gmail service shorthand)
-const emailEnabled = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS)
+// Checked at request time — module-level constants are evaluated before dotenv loads in ESM
+const isEmailEnabled = () => !!(process.env.EMAIL_USER && process.env.EMAIL_PASS)
 
 function makeTransporter() {
   const port = parseInt(process.env.EMAIL_PORT || '465', 10)
@@ -157,7 +157,7 @@ export async function submitContact(req, res, next) {
       `,
     }
 
-    if (emailEnabled) {
+    if (isEmailEnabled()) {
       const results = await Promise.allSettled([
         sendWithFallback(notificationEmail),
         sendWithFallback(autoReply),
