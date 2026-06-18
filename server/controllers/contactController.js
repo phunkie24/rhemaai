@@ -57,9 +57,15 @@ export async function submitContact(req, res, next) {
     const firstName = escapeHtml(value.name.split(' ')[0])
     const company = value.company ? escapeHtml(value.company) : 'Not provided'
 
+    // NOTIFY_EMAIL can be a different inbox (e.g. personal Gmail); falls back to EMAIL_USER
+    const notifyRecipients = [
+      process.env.EMAIL_USER,
+      process.env.NOTIFY_EMAIL,
+    ].filter(Boolean).join(', ')
+
     const notificationEmail = {
       from: `"RhemaAI Solutions Ltd Website" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
+      to: notifyRecipients,
       subject: `New Consultation Request - ${value.name} (${value.company || 'No company'})`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
