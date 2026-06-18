@@ -27,6 +27,9 @@ npm --prefix "$APP_DIR/client" ci
 VITE_API_URL=/api npm --prefix "$APP_DIR/client" run build
 
 echo "[4/5] Applying nginx config..."
+mkdir -p /etc/nginx/snippets
+sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/security-headers.nginx" \
+  > /etc/nginx/snippets/rhemaai-security.conf
 sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/nginx.conf" \
   > /etc/nginx/sites-available/rhemaai
 nginx -t && systemctl reload nginx

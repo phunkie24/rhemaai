@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /rh-ops-9m2k
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://rhemaaisolutions.tech/sitemap.xml
