@@ -119,8 +119,8 @@
 
 /* ─── Cards section ──────────────────────────────────────── */
 .cardsSection {
-  padding: 48px 0 64px;
-  background: var(--dark);
+  padding: 40px 0 48px;
+  background: var(--off-white);
 }
 
 /* ── Filters ─────────────────────────────────────────────── */
@@ -128,33 +128,32 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .filterBtn {
   min-height: 36px;
-  padding: 7px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 7px 18px;
+  border: 1px solid var(--border-mid);
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.6);
+  background: #fff;
+  color: var(--text-secondary);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .filterBtn:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  background: rgba(255, 255, 255, 0.10);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .filterActive {
   background: var(--primary);
   border-color: var(--primary);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(49, 87, 213, 0.35);
+  box-shadow: 0 4px 14px rgba(49, 87, 213, 0.25);
 }
 
 .filterActive:hover {
@@ -165,7 +164,7 @@
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 22px;
 }
 
 /* ── Card ────────────────────────────────────────────────── */
@@ -175,17 +174,17 @@
   gap: 18px;
   min-height: 100%;
   padding: 26px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-light);
   border-top: 4px solid var(--accent, var(--primary));
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(8px);
-  transition: transform 0.2s ease, background 0.2s ease;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.07);
+  box-shadow: var(--shadow-md);
 }
 
 .cardHead {
@@ -202,7 +201,7 @@
 
 .clientName {
   margin: 0;
-  color: #fff;
+  color: var(--text-primary);
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 800;
@@ -215,8 +214,8 @@
   gap: 16px;
   align-items: center;
   padding: 16px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .kpi {
@@ -232,7 +231,7 @@
 }
 
 .kpiLabel {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -242,12 +241,12 @@
 .kpiDiv {
   width: 1px;
   height: 38px;
-  background: rgba(255, 255, 255, 0.10);
+  background: var(--border-light);
 }
 
 .summary {
   margin: 0;
-  color: rgba(255, 255, 255, 0.60);
+  color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.68;
 }
@@ -262,16 +261,16 @@
 .tag {
   padding: 5px 9px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.55);
+  background: var(--gray-50);
+  color: var(--text-secondary);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /* ─── CTA ────────────────────────────────────────────────── */
 .cta {
   position: relative;
-  padding: 78px 0;
+  padding: 56px 0;
   overflow: hidden;
   background:
     linear-gradient(135deg, rgba(49, 87, 213, 0.18), rgba(14, 148, 136, 0.12)),
