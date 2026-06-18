@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { motion } from 'framer-motion'
 import { contactAPI } from '@utils/api'
 import styles from './ContactPage.module.css'
@@ -49,10 +49,18 @@ export default function ContactPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Book a Consultation | RhemaAI Solutions Ltd</title>
-        <meta name="description" content="Book a free consultation with RhemaAI Solutions Ltd. Discuss your enterprise AI, cloud architecture, data engineering, or advanced analytics needs." />
-      </Helmet>
+      <PageSEO
+        title="Book a Consultation | RhemaAI Solutions Ltd"
+        description="Book a free consultation with RhemaAI Solutions Ltd. Discuss enterprise AI, data engineering, Azure cloud architecture, machine learning, BI analytics or agentic AI for your organisation globally."
+        keywords="hire AI consultant Nigeria, enterprise AI consultation, data engineering consultancy UK, Azure cloud architect UAE, agentic AI consulting, machine learning project South Africa, BI analytics consultant"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          name: 'Contact RhemaAI Solutions Ltd',
+          url: 'https://rhemaaisolutions.tech/contact',
+          description: 'Book a free consultation with RhemaAI Solutions Ltd for enterprise AI, data engineering and cloud architecture',
+        }}
+      />
 
       <div className={styles.page}>
         <motion.div

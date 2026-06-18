@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { insightsAPI } from '@utils/api'
@@ -80,11 +80,11 @@ export default function InsightsPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Research | RhemaAI Labs</title>
-        <meta name="description" content="Enterprise AI research, architecture guides, MLOps notes, and data engineering analysis from RhemaAI Labs — written for enterprise practitioners." />
-        <meta name="keywords" content="RhemaAI Labs, enterprise AI research, agentic AI, data engineering, cloud architecture, MLOps" />
-      </Helmet>
+      <PageSEO
+        title="AI & Data Engineering Research | RhemaAI Labs"
+        description="Enterprise AI research, data engineering guides, agentic AI architecture, machine learning patterns, Azure cloud, MLOps, and BI analytics insights from RhemaAI Labs — written for senior practitioners in Nigeria, UK, US, UAE and globally."
+        keywords="AI research blog Nigeria, data engineering articles, agentic AI guides, machine learning research, Azure cloud architecture tutorials, MLOps insights, enterprise AI blog Africa, data science research UK"
+      />
 
       {/* Hero */}
       <div className={styles.hero}>

@@ -1,14 +1,15 @@
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import styles from './ContentPage.module.css'
 
 export default function NotFoundPage() {
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>Page Not Found | RhemaAI Solutions Ltd</title>
-        <meta name="robots" content="noindex" />
-      </Helmet>
+      <PageSEO
+        title="Page Not Found | RhemaAI Solutions Ltd"
+        description="The page you're looking for doesn't exist. Explore RhemaAI Solutions Ltd for enterprise AI, data engineering, Azure cloud architecture and machine learning services."
+        noindex
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroInner}>

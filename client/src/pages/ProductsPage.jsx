@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { productsAPI } from '@utils/api'
@@ -55,14 +55,11 @@ export default function ProductsPage() {
 
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>Products | RhemaAI Platform | RhemaAI Solutions Ltd</title>
-        <meta
-          name="description"
-          content="Explore RhemaAI Platform products for enterprise AI operations, data fabric delivery, cloud landing zones and MLOps command workflows."
-        />
-        <meta name="keywords" content="RhemaAI Platform, enterprise AI products, data platform, MLOps, cloud landing zone" />
-      </Helmet>
+      <PageSEO
+        title="Enterprise AI & Data Platform Products | RhemaAI Solutions Ltd"
+        description="RhemaAI Platform SaaS products: AI Control Room for agentic operations, Data Fabric Accelerator for lakehouse delivery, Cloud Landing Zone Kit for Azure/AWS/GCP and MLOps Command Stack — built for enterprise data engineering and AI teams."
+        keywords="enterprise AI platform Nigeria, data fabric product, MLOps SaaS, cloud landing zone Azure, AI operations software, data engineering platform Africa, machine learning platform"
+      />
 
       <section className={styles.hero}>
         <div className={styles.radiance} />

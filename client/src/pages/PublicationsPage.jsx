@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { publicationsAPI } from '@utils/api'
@@ -156,14 +156,11 @@ export default function PublicationsPage() {
 
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>Publications | RhemaAI Press | RhemaAI Solutions Ltd</title>
-        <meta
-          name="description"
-          content="Books and white papers from RhemaAI Press for enterprise AI, cloud architecture and data engineering leaders."
-        />
-        <meta name="keywords" content="RhemaAI Press, AI books, enterprise AI white papers, cloud white papers, data engineering publications" />
-      </Helmet>
+      <PageSEO
+        title="AI & Data Engineering Books & Whitepapers | RhemaAI Press"
+        description="Books and white papers from RhemaAI Press for enterprise AI, agentic AI, data engineering and cloud architecture leaders. Featuring Multi-Agent Orchestration Patterns — the essential guide to scalable LLM systems."
+        keywords="AI books Nigeria, multi-agent orchestration patterns book, enterprise AI whitepaper, agentic AI book, data engineering publications, machine learning books Africa, Azure cloud whitepaper"
+      />
 
       <section className={styles.hero}>
         <img src={authorPortrait} alt="" aria-hidden="true" className={styles.heroBgPortrait} loading="lazy" decoding="async" />

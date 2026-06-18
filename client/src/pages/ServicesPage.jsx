@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { SERVICES } from '@utils/servicesData'
@@ -49,13 +49,11 @@ const fadeUp = {
 export default function ServicesPage() {
   return (
     <>
-      <Helmet>
-        <title>Services | RhemaAI Solutions Ltd</title>
-        <meta
-          name="description"
-          content="Enterprise AI, data engineering, cloud architecture, MLOps, software engineering, and real-time streaming platforms delivered as governed production systems."
-        />
-      </Helmet>
+      <PageSEO
+        title="AI, Data Engineering & Cloud Services | RhemaAI Solutions Ltd"
+        description="End-to-end enterprise services: agentic AI systems, data engineering pipelines, Azure cloud architecture, MLOps, machine learning, BI analytics and data science — delivered globally from Nigeria to UK, US, UAE, South Africa and beyond."
+        keywords="AI consulting services Nigeria, data engineering services, Azure cloud consulting UK, agentic AI engineering, MLOps DataOps, machine learning services UAE, BI analytics consulting, data science South Africa"
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroGrid} />

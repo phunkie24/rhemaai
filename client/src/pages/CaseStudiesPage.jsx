@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { caseStudiesAPI } from '@utils/api'
@@ -96,17 +96,17 @@ export default function CaseStudiesPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Case Studies | RhemaAI Solutions Ltd</title>
-        <meta
-          name="description"
-          content="Real results from real engagements: fraud detection, predictive maintenance, agentic AI, data lakehouses and more."
-        />
-      </Helmet>
+      <PageSEO
+        title="Enterprise AI & Data Engineering Case Studies | RhemaAI Solutions Ltd"
+        description="Real enterprise results: fraud detection AI (94% recall), predictive maintenance, multi-agent AI deployments, data lakehouse architecture and MLOps — across fintech, energy, healthcare and manufacturing in Nigeria, Africa and globally."
+        keywords="AI case studies Nigeria, data engineering results Africa, enterprise AI ROI, agentic AI deployment, Azure cloud case study, machine learning business outcomes, data science projects fintech energy"
+      />
 
       <div className={styles.page}>
         <section className={styles.hero}>
+          <div className={styles.heroGlow} />
           <div className={styles.grid} />
+          <div className={styles.pipeLines} />
           <div className="container">
             <motion.div
               className={styles.heroInner}
@@ -124,13 +124,18 @@ export default function CaseStudiesPage() {
                 every engagement below is a real production deployment.
               </p>
 
-              <div className={styles.heroStats}>
+              <motion.div
+                className={styles.heroStats}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.55 }}
+              >
                 <div className={styles.hStat}><strong>50+</strong><span>Engagements</span></div>
                 <div className={styles.hDiv} />
                 <div className={styles.hStat}><strong>6</strong><span>Industry Verticals</span></div>
                 <div className={styles.hDiv} />
                 <div className={styles.hStat}><strong>3</strong><span>Continents</span></div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>

@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import styles from './AboutPage.module.css'
@@ -70,13 +70,20 @@ const fadeUp = {
 export default function AboutPage() {
   return (
     <>
-      <Helmet>
-        <title>About | RhemaAI Solutions Ltd</title>
-        <meta
-          name="description"
-          content="RhemaAI Solutions Ltd combines Applied Mathematics, Azure, AWS and GCP certified cloud delivery, and agentic AI engineering for enterprise-grade systems."
-        />
-      </Helmet>
+      <PageSEO
+        title="About RhemaAI Solutions Ltd | Enterprise AI & Data Engineering Firm Nigeria"
+        description="RhemaAI Solutions Ltd is a Nigeria-based enterprise AI and data engineering consultancy led by Funke Yusuf. Azure, AWS and GCP certified. 10,000+ agentic AI implementations across fintech, energy, healthcare and manufacturing globally."
+        keywords="RhemaAI Solutions Nigeria, AI consulting firm Africa, data engineering company Nigeria, Funke Yusuf AI expert, enterprise AI consulting Lagos, agentic AI pioneer, Azure certified consultant"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Funke Yusuf',
+          jobTitle: 'Founder & Chief AI Engineer',
+          worksFor: { '@type': 'Organization', name: 'RhemaAI Solutions Ltd', url: 'https://rhemaaisolutions.tech' },
+          url: 'https://rhemaaisolutions.tech/about',
+          knowsAbout: ['Agentic AI', 'Data Engineering', 'Machine Learning', 'Azure Cloud', 'Data Science', 'Business Intelligence', 'MLOps'],
+        }}
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroGrid} />

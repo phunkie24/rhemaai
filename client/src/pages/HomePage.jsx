@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import Hero from '@components/Hero/Hero'
 import BookPromoStream from '@components/BookPromoStream/BookPromoStream'
 import Marquee from '@components/Marquee/Marquee'
@@ -10,17 +10,22 @@ import CTA from '@components/CTA/CTA'
 export default function HomePage() {
   return (
     <>
-      <Helmet>
-        <title>RhemaAI Solutions Ltd | Enterprise AI, Cloud, Data Engineering & Multi-Agent Systems</title>
-        <meta
-          name="description"
-          content="RhemaAI Solutions Ltd delivers enterprise AI transformation, agentic AI systems, cloud architecture, data engineering, analytics, and the Multi-Agent Orchestration Patterns book for scalable AI systems."
-        />
-        <meta
-          name="keywords"
-          content="enterprise AI, multi-agent orchestration patterns, agentic AI systems, cloud architecture, data engineering, AI governance"
-        />
-      </Helmet>
+      <PageSEO
+        title="RhemaAI Solutions Ltd | Enterprise AI, Data Engineering & Agentic AI"
+        description="Nigeria-based enterprise AI consultancy delivering agentic AI systems, data engineering pipelines, Azure cloud architecture, machine learning, BI analytics and data science — serving UK, US, UAE, South Africa, Kenya, Canada, Australia and global enterprises."
+        keywords="enterprise AI consulting Nigeria, data engineering Africa, agentic AI systems, machine learning consultancy, Azure cloud consulting, BI analytics, data science, AI company Nigeria UK UAE"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'RhemaAI Solutions Ltd',
+          url: 'https://rhemaaisolutions.tech',
+          potentialAction: {
+            '@type': 'SearchAction',
+            target: 'https://rhemaaisolutions.tech/insights?q={search_term_string}',
+            'query-input': 'required name=search_term_string',
+          },
+        }}
+      />
       <Hero />
       <BookPromoStream />
       <Marquee />

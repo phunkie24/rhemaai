@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { adminAPI } from '@utils/api'
 import styles from './AdminOperationsPage.module.css'
 
@@ -743,10 +743,7 @@ export default function AdminOperationsPage() {
 
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>Admin Operations | RhemaAI Solutions Ltd</title>
-        <meta name="robots" content="noindex,nofollow" />
-      </Helmet>
+      <PageSEO title="Admin Operations | RhemaAI Solutions Ltd" description="RhemaAI Solutions Ltd internal operations panel." noindex />
 
       <section className={styles.hero}>
         <div>

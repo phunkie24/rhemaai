@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import styles from './ContentPage.module.css'
 
@@ -20,13 +20,11 @@ const PRINCIPLES = [
 export default function CareersPage() {
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>Careers | RhemaAI Solutions Ltd</title>
-        <meta
-          name="description"
-          content="Careers at RhemaAI Solutions Ltd for AI, cloud, data and software engineers who build enterprise-grade systems."
-        />
-      </Helmet>
+      <PageSEO
+        title="Careers in AI & Data Engineering | RhemaAI Solutions Ltd"
+        description="Join RhemaAI Solutions Ltd. Open roles for AI engineers, data engineers, machine learning scientists, Azure cloud architects and data scientists building enterprise-grade systems — remote-first, based in Nigeria with global reach."
+        keywords="AI engineer jobs Nigeria, data engineering careers Africa, machine learning jobs remote, Azure cloud architect positions, data scientist Nigeria, agentic AI engineer careers, enterprise AI jobs UK UAE"
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroInner}>

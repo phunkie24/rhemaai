@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import styles from './ContentPage.module.css'
 
 const LEGAL_COPY = {
@@ -42,10 +42,7 @@ export default function LegalPage({ type = 'privacy' }) {
 
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>{copy.title} | RhemaAI Solutions Ltd</title>
-        <meta name="description" content={copy.description} />
-      </Helmet>
+      <PageSEO title={copy.title} description={copy.description} />
 
       <section className={styles.hero}>
         <div className={styles.heroInner}>

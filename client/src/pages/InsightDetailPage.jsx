@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -204,12 +204,12 @@ export default function InsightDetailPage() {
 
   return (
     <div className={styles.page}>
-      <Helmet>
-        <title>{article.title} | RhemaAI Research</title>
-        <meta name="description" content={article.excerpt} />
-        {article.seo?.metaTitle && <meta property="og:title" content={article.seo.metaTitle} />}
-        {article.seo?.metaDescription && <meta property="og:description" content={article.seo.metaDescription} />}
-      </Helmet>
+      <PageSEO
+        title={article.seo?.metaTitle || article.title}
+        description={article.seo?.metaDescription || article.excerpt}
+        keywords={article.tags?.join(', ')}
+        type="article"
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroInner}>

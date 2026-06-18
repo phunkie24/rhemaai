@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Helmet } from 'react-helmet-async'
+import PageSEO from '@components/common/PageSEO'
 import { coursesAPI } from '@utils/api'
 import styles from './CoursesPage.module.css'
 
@@ -220,17 +220,11 @@ export default function CoursesPage() {
 
   return (
     <>
-      <Helmet>
-        <title>Enterprise AI Courses | RhemaAI Academy</title>
-        <meta
-          name="description"
-          content="Free and premium RhemaAI Academy courses in agentic AI, generative AI, data engineering, cloud architecture, machine learning, software engineering, and analytics."
-        />
-        <meta
-          name="keywords"
-          content="enterprise AI courses, agentic AI training, generative AI course, data engineering courses, cloud architecture training, machine learning"
-        />
-      </Helmet>
+      <PageSEO
+        title="Enterprise AI & Data Engineering Courses | RhemaAI Academy"
+        description="Free and premium RhemaAI Academy courses: agentic AI, generative AI, data engineering, machine learning, Azure cloud architecture, data science and advanced analytics — taught at enterprise production level for professionals in Nigeria, UK, US, UAE and globally."
+        keywords="AI courses online Nigeria, data engineering training Africa, agentic AI course, machine learning certification, Azure cloud training, data science course, enterprise AI education, BI analytics course UK UAE"
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroGrid} />
