@@ -579,6 +579,7 @@ function getCourseCategoryLabel(category) {
 export default function AdminOperationsPage() {
   const [activeArea, setActiveArea] = useState('products')
   const [adminKey, setAdminKey] = useState('')
+  const [keyStatus, setKeyStatus] = useState('idle') // idle | verifying | ok | error
   const [records, setRecords] = useState({ products: [], caseStudies: [], research: [], publications: [], courses: [] })
   const [forms, setForms] = useState(emptyForms)
   const [status, setStatus] = useState('idle')
@@ -600,14 +601,17 @@ export default function AdminOperationsPage() {
 
   const loadItems = async (area = activeArea) => {
     setStatus('loading')
+    setKeyStatus('verifying')
     setMessage('')
     try {
       const config = apiConfig[area]
       const data = await config.list(adminKey, { limit: 100 })
       setRecords((current) => ({ ...current, [area]: data[config.responseKey] || [] }))
       setStatus('idle')
+      setKeyStatus('ok')
     } catch (err) {
       setStatus('error')
+      setKeyStatus('error')
       setMessage(err.message)
     }
   }
@@ -756,10 +760,13 @@ export default function AdminOperationsPage() {
             id="admin-key"
             type="password"
             value={adminKey}
-            onChange={(event) => setAdminKey(event.target.value)}
+            onChange={(event) => { setAdminKey(event.target.value); setKeyStatus('idle') }}
             placeholder="Production API key"
           />
           <button type="button" onClick={() => loadItems(activeArea)}>Refresh</button>
+          {keyStatus === 'verifying' && <span className={styles.keyVerifying}>Verifying...</span>}
+          {keyStatus === 'ok'        && <span className={styles.keyOk}>Key accepted — authenticated</span>}
+          {keyStatus === 'error'     && <span className={styles.keyError}>Invalid key — access denied</span>}
         </div>
       </section>
 

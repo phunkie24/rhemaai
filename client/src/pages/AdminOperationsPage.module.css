@@ -55,6 +55,29 @@
   backdrop-filter: blur(16px);
 }
 
+.keyVerifying {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+
+.keyOk {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #86efac;
+}
+
+.keyError {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fca5a5;
+}
+
 .tabs {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
