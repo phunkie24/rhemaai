@@ -296,14 +296,16 @@
 }
 
 .publicationCover {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  margin-top: 16px;
-  overflow: hidden;
-  border-radius: 8px;
+  display: block;
+  width: 100px;
+  height: 140px;
+  margin-top: 12px;
+  border-radius: 6px;
   object-fit: cover;
+  object-position: center top;
   border: 1px solid #dbe7f0;
   background: #eef4f7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }
 
 .productCard > span {
