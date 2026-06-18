@@ -22,17 +22,45 @@ const contactSchema = Joi.object({
 
 // Hostinger email uses SMTP directly (not the gmail service shorthand)
 const emailEnabled = !!(process.env.EMAIL_USER && process.env.EMAIL_PASS)
-const transporter = emailEnabled
-  ? nodemailer.createTransport({
-      host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
-      port: parseInt(process.env.EMAIL_PORT || '465', 10),
-      secure: true,          // SSL on port 465
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    })
-  : null
+
+function makeTransporter() {
+  const port = parseInt(process.env.EMAIL_PORT || '465', 10)
+  return nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
+    port,
+    secure: port === 465,   // true for 465 (SSL), false for 587 (STARTTLS)
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  })
+}
+
+async function sendWithFallback(mailOptions) {
+  // Try configured port first, then fall back to 587 STARTTLS
+  const ports = [
+    parseInt(process.env.EMAIL_PORT || '465', 10),
+    587,
+  ]
+  let lastErr
+  for (const port of ports) {
+    try {
+      const t = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
+        port,
+        secure: port === 465,
+        auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+      })
+      await t.sendMail(mailOptions)
+      console.log(`[email] sent via port ${port} to ${mailOptions.to}`)
+      return
+    } catch (err) {
+      console.error(`[email] port ${port} failed:`, err.message)
+      lastErr = err
+    }
+  }
+  throw lastErr
+}
 
 function escapeHtml(value = '') {
   return String(value)
@@ -130,12 +158,17 @@ export async function submitContact(req, res, next) {
     }
 
     if (emailEnabled) {
-      await Promise.allSettled([
-        transporter.sendMail(notificationEmail),
-        transporter.sendMail(autoReply),
+      const results = await Promise.allSettled([
+        sendWithFallback(notificationEmail),
+        sendWithFallback(autoReply),
       ])
-    } else if (process.env.NODE_ENV !== 'test') {
-      console.warn('Email not configured. Set EMAIL_USER and EMAIL_PASS in .env to enable.')
+      results.forEach((r, i) => {
+        if (r.status === 'rejected') {
+          console.error(`[email] message ${i === 0 ? 'notification' : 'autoreply'} FAILED:`, r.reason?.message)
+        }
+      })
+    } else {
+      console.warn('[email] disabled — set EMAIL_USER and EMAIL_PASS in server/.env')
     }
 
     return res.status(201).json({
