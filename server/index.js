@@ -1,5 +1,9 @@
 import dotenv from 'dotenv'
-dotenv.config()
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+dotenv.config({ path: join(__dirname, '.env') })
 
 import { connectDB } from './config/db.js'
 import { validateEnv } from './config/env.js'
