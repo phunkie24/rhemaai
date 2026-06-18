@@ -32,10 +32,12 @@ const publicationSchema = Joi.object({
   documentLabel: Joi.string().trim().max(120).allow('', null),
   tags: Joi.array().items(Joi.string().trim().max(40)).max(12).default([]),
   price: Joi.object({
-    amount: Joi.number().min(0).default(0),
-    currency: Joi.string().trim().uppercase().length(3).default('USD'),
-    label: Joi.string().trim().max(80).allow('', null).default('Free'),
-    kindleUrl: Joi.string().trim().uri({ allowRelative: false }).allow('', null),
+    amount:     Joi.number().min(0).default(0),
+    amountNGN:  Joi.number().min(0).default(0),
+    currency:   Joi.string().trim().uppercase().length(3).default('USD'),
+    label:      Joi.string().trim().max(80).allow('', null).default('Free'),
+    paystackUrl: Joi.string().trim().uri({ allowRelative: false }).allow('', null),
+    kindleUrl:  Joi.string().trim().uri({ allowRelative: false }).allow('', null),
     paymentUrl: Joi.string().trim().uri({ allowRelative: true }).allow('', null),
   }).default(),
   featured: Joi.boolean().default(false),
@@ -60,6 +62,14 @@ function slugify(value = '') {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 220)
+}
+
+function stripDocumentIfPaid(publication) {
+  const pub = publication.toObject ? publication.toObject() : { ...publication }
+  if ((pub.price?.amount > 0) || (pub.price?.amountNGN > 0)) {
+    delete pub.documentUrl
+  }
+  return pub
 }
 
 function cleanOptional(value) {
@@ -129,7 +139,7 @@ export async function getPublications(req, res, next) {
     ])
 
     return res.json({
-      publications,
+      publications: publications.map(stripDocumentIfPaid),
       total,
       page,
       pages: Math.ceil(total / limit),
@@ -147,7 +157,7 @@ export async function getPublicationBySlug(req, res, next) {
       type: { $in: ['book', 'whitepaper'] },
     })
     if (!publication) return res.status(404).json({ message: 'Publication not found' })
-    return res.json(publication)
+    return res.json(stripDocumentIfPaid(publication))
   } catch (err) {
     next(err)
   }
