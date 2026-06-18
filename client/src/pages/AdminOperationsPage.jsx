@@ -863,7 +863,7 @@ export default function AdminOperationsPage() {
                 </label>
                 <label>
                   Sale price (NGN) ₦
-                  <input type="number" min="0" step="1" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
+                  <input type="number" min="0" step="0.01" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                 </label>
                 <label>
                   Sale price (USD) $
@@ -1095,7 +1095,7 @@ export default function AdminOperationsPage() {
                   <>
                     <label>
                       Sale price (NGN) ₦
-                      <input type="number" min="0" step="1" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
+                      <input type="number" min="0" step="0.01" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                     </label>
                     <label>
                       Sale price (USD) $
@@ -1180,7 +1180,7 @@ export default function AdminOperationsPage() {
               <div className={styles.priceGrid}>
                 <label>
                   Sale price (NGN) ₦
-                  <input type="number" min="0" step="1" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
+                  <input type="number" min="0" step="0.01" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                 </label>
                 <label>
                   Sale price (USD) $
