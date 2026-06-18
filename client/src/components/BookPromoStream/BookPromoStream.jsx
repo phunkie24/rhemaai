@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import bookAuthor from '../../assets/multi-agent-book-author.jpg'
-import bookTable from '../../assets/multi-agent-book-table.jpg'
-import bookStack from '../../assets/multi-agent-book-stack.jpg'
-import bookCover from '../../assets/multi-agent-book-cover.jpg'
+import bookAuthor from '../../assets/multi-agent-book-author.webp'
+import bookTable from '../../assets/multi-agent-book-table.webp'
+import bookStack from '../../assets/multi-agent-book-stack.webp'
+import bookCover from '../../assets/multi-agent-book-cover.webp'
 import styles from './BookPromoStream.module.css'
 
 const BOOK_IMAGES = [

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import styles from './AboutPage.module.css'
-import founderPhoto from '../assets/funke-yusuf.jpg.png'
+import founderPhoto from '../assets/funke-yusuf.webp'
 
 const PILLARS = [
   {
@@ -152,7 +152,7 @@ export default function AboutPage() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className={styles.founderPhotoWrap}>
-              <img src={founderPhoto} alt="Funke Yusuf" className={styles.founderPhoto} />
+              <img src={founderPhoto} alt="Funke Yusuf" className={styles.founderPhoto} loading="lazy" decoding="async" />
               <div className={styles.founderPhotoBorder} />
             </div>
             <div className={styles.founderCopy}>

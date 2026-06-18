@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { publicationsAPI } from '@utils/api'
-import multiAgentBookCover from '../assets/multi-agent-book-cover.jpg'
-import authorPortrait from '../assets/author_portrait.jpg.png'
+import multiAgentBookCover from '../assets/multi-agent-book-cover.webp'
+import authorPortrait from '../assets/author_portrait.webp'
 import styles from './PlatformPages.module.css'
 
 const TYPES = [
@@ -166,7 +166,7 @@ export default function PublicationsPage() {
       </Helmet>
 
       <section className={styles.hero}>
-        <img src={authorPortrait} alt="" aria-hidden="true" className={styles.heroBgPortrait} />
+        <img src={authorPortrait} alt="" aria-hidden="true" className={styles.heroBgPortrait} loading="lazy" decoding="async" />
         <div className={styles.heroBgOverlay} />
         <div className={`${styles.heroInner} ${styles.heroSingle}`}>
           <motion.div

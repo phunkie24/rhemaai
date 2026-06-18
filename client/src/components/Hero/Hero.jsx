@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import useCountUp from '@hooks/useCountUp'
-import heroMedia from '../../assets/enterprise-ai-operations.png'
+import heroMedia from '../../assets/enterprise-ai-operations.webp'
 import styles from './Hero.module.css'
 
 const STATS = [
@@ -42,7 +42,7 @@ function StatItem({ stat, delay }) {
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} />
+      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} fetchpriority="high" decoding="async" />
       <div className={styles.heroBgOverlay} aria-hidden="true" />
 
       <div className={styles.heroShell}>
