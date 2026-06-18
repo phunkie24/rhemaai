@@ -17,11 +17,6 @@ import webhookRoutes from './routes/webhooks.js'
 
 const app = express()
 
-const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
-  .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean)
-
 app.disable('x-powered-by')
 app.set('trust proxy', 1)
 
@@ -30,6 +25,8 @@ app.use(helmet({
 }))
 app.use(cors({
   origin(origin, callback) {
+    const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+      .split(',').map((o) => o.trim()).filter(Boolean)
     if (!origin || allowedOrigins.includes(origin)) return callback(null, true)
     return callback(new Error('Not allowed by CORS'))
   },

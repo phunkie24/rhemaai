@@ -32,7 +32,7 @@ sed "s/DOMAIN/${DOMAIN}/g" "$APP_DIR/deploy/nginx.conf" \
 nginx -t && systemctl reload nginx
 
 echo "[5/5] Restarting backend..."
-pm2 restart rhemaai-server
+pm2 restart rhemaai-server --update-env
 
 echo ""
 echo "Deployment complete."
