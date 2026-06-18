@@ -27,6 +27,7 @@ const courseSchema = Joi.object({
   pricing: Joi.object({
     isFree:     Joi.boolean().default(true),
     amount:     Joi.number().min(0).default(0),
+    amountNGN:  Joi.number().min(0).default(0),
     currency:   Joi.string().trim().uppercase().length(3).default('USD'),
     label:      Joi.string().trim().max(80).allow('', null).default('Free'),
     paymentUrl: Joi.string().trim().uri({ allowRelative: false }).allow('', null),
@@ -54,6 +55,15 @@ function slugify(value = '') {
 
 function cleanOptional(value) {
   return value === '' || value === null ? undefined : value
+}
+
+function stripVideoIfPaid(course) {
+  const c = course.toObject ? course.toObject() : { ...course }
+  if (!c.pricing?.isFree || (c.pricing?.amount > 0) || (c.pricing?.amountNGN > 0)) {
+    delete c.youtubeUrl
+    delete c.youtubeId
+  }
+  return c
 }
 
 function extractYoutubeId(url = '') {
@@ -124,7 +134,7 @@ export async function getCourses(req, res, next) {
       Course.countDocuments(filter),
     ])
 
-    res.json({ courses, total, page, pages: Math.ceil(total / limit) })
+    res.json({ courses: courses.map(stripVideoIfPaid), total, page, pages: Math.ceil(total / limit) })
   } catch (err) {
     next(err)
   }

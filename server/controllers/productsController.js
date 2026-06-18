@@ -18,9 +18,11 @@ const productSchema = Joi.object({
   productUrl: Joi.string().trim().uri({ allowRelative: true }).allow('', null),
   version: Joi.string().trim().max(40).allow('', null).default('1.0.0'),
   pricing: Joi.object({
-    amount: Joi.number().min(0).default(0),
-    currency: Joi.string().trim().uppercase().length(3).default('USD'),
-    label: Joi.string().trim().max(80).allow('', null).default('Contact sales'),
+    amount:      Joi.number().min(0).default(0),
+    amountNGN:   Joi.number().min(0).default(0),
+    currency:    Joi.string().trim().uppercase().length(3).default('USD'),
+    label:       Joi.string().trim().max(80).allow('', null).default('Contact sales'),
+    paystackUrl: Joi.string().trim().uri({ allowRelative: false }).allow('', null),
   }).default(),
   featured: Joi.boolean().default(false),
   published: Joi.boolean().default(false),
@@ -45,6 +47,14 @@ function slugify(value = '') {
 
 function cleanOptional(value) {
   return value === '' || value === null ? undefined : value
+}
+
+function stripAssetIfPaid(product) {
+  const p = product.toObject ? product.toObject() : { ...product }
+  if ((p.pricing?.amount > 0) || (p.pricing?.amountNGN > 0)) {
+    delete p.assetUrl
+  }
+  return p
 }
 
 function normalizeProduct(value) {
@@ -108,7 +118,7 @@ export async function getProducts(req, res, next) {
       Product.countDocuments(filter),
     ])
 
-    return res.json({ products, total, page, pages: Math.ceil(total / limit) })
+    return res.json({ products: products.map(stripAssetIfPaid), total, page, pages: Math.ceil(total / limit) })
   } catch (err) {
     next(err)
   }
