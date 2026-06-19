@@ -29,6 +29,7 @@ export const SEED_ARTICLES = [
 function ArticleCard({ article, index }) {
   const catLabel = CATEGORIES.find(c => c.value === article.category)?.label || article.category
   const date = new Date(article.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  const href = `/insights/${article.slug || article._id}`
 
   return (
     <motion.article
@@ -42,7 +43,9 @@ function ArticleCard({ article, index }) {
         <span className={styles.cardCat}>{catLabel}</span>
         <span className={styles.cardRead}>{article.readTime} min read</span>
       </div>
-      <h2 className={styles.cardTitle}>{article.title}</h2>
+      <h2 className={styles.cardTitle}>
+        <Link to={href}>{article.title}</Link>
+      </h2>
       <p className={styles.cardExcerpt}>{article.excerpt}</p>
       <div className={styles.cardTags}>
         {(article.tags || []).slice(0, 3).map(t => (
@@ -51,7 +54,7 @@ function ArticleCard({ article, index }) {
       </div>
       <div className={styles.cardFooter}>
         <span className={styles.cardDate}>{date}</span>
-        <Link to={`/insights/${article.slug || article._id}`} className={styles.cardLink}>
+        <Link to={href} className={styles.cardLink}>
           Read Article
         </Link>
       </div>

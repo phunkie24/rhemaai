@@ -9,8 +9,9 @@ setupTestDB()
 
 beforeAll(() => {
   process.env.NODE_ENV = 'test'
-  process.env.EMAIL_USER = 'test@test.com'
-  process.env.EMAIL_PASS = 'test'
+  delete process.env.EMAIL_USER
+  delete process.env.EMAIL_PASS
+  delete process.env.NOTIFY_EMAIL
 })
 
 async function withProductionAdminEnv(testFn) {

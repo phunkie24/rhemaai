@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion'
-import { useInView } from '@hooks/useInView'
 import SectionHeader from '@components/common/SectionHeader'
 import styles from './Process.module.css'
 
@@ -31,8 +29,6 @@ const STEPS = [
 ]
 
 export default function Process() {
-  const { ref, inView } = useInView()
-
   return (
     <section className={styles.section}>
       <SectionHeader
@@ -42,22 +38,11 @@ export default function Process() {
         light
       />
 
-      <motion.div
-        ref={ref}
-        className={styles.grid}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
-      >
+      <div className={styles.grid}>
         {STEPS.map((step, i) => (
-          <motion.div
+          <div
             key={step.num}
             className={styles.step}
-            variants={{
-              hidden:  { opacity: 0, y: 28 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
-            }}
-            whileHover={{ backgroundColor: 'rgba(107,70,255,0.12)', transition: { duration: 0.2 } }}
           >
             <div className={styles.stepNum}>{step.num}</div>
             <div className={styles.stepContent}>
@@ -75,9 +60,9 @@ export default function Process() {
             {i < STEPS.length - 1 && (
               <div className={styles.connector} aria-hidden="true">→</div>
             )}
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   )
 }

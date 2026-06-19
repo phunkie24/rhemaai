@@ -1,8 +1,11 @@
 .header {
+  max-width: 980px;
   margin-bottom: 56px;
 }
 
 .centered {
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 
@@ -43,7 +46,7 @@
   color: var(--text-secondary);
   line-height: 1.75;
   font-weight: 300;
-  max-width: 560px;
+  max-width: 720px;
 }
 
 .light .subtitle {

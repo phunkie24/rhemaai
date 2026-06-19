@@ -37,6 +37,24 @@ describe('Product operations', () => {
     expect(res.body.products[0].slug).toBe('published-saas-product')
   })
 
+  it('returns a published product detail by slug', async () => {
+    await Product.create({
+      name: 'Published SaaS Product',
+      slug: 'published-saas-product',
+      category: 'saas',
+      summary: 'A published SaaS product available on the public product page.',
+      description: 'Full product details for the dedicated product URL.',
+      published: true,
+      publishedAt: new Date('2026-05-01'),
+    })
+
+    const res = await request(app).get('/api/products/published-saas-product')
+
+    expect(res.status).toBe(200)
+    expect(res.body.slug).toBe('published-saas-product')
+    expect(res.body.description).toBe('Full product details for the dedicated product URL.')
+  })
+
   it('creates a SaaS product with an uploaded package URL through admin operations', async () => {
     const res = await request(app)
       .post('/api/admin/products')

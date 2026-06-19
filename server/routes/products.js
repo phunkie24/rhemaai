@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getProducts } from '../controllers/productsController.js'
+import { getProductBySlug, getProducts } from '../controllers/productsController.js'
 
 const router = Router()
 
@@ -24,5 +24,6 @@ const router = Router()
  *         description: Paginated products list
  */
 router.get('/', getProducts)
+router.get('/:slug', getProductBySlug)
 
 export default router

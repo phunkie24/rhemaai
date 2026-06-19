@@ -1,28 +1,16 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { useInView } from '@hooks/useInView'
 import { SERVICES } from '@utils/servicesData'
 import SectionHeader from '@components/common/SectionHeader'
 import styles from './Services.module.css'
 
-const cardVariants = {
-  hidden:  { opacity: 0, y: 32 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  }),
-}
-
-function ServiceCard({ service, index }) {
+function ServiceCard({ service }) {
   const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
       className={`${styles.card} ${service.highlight ? styles.cardHighlight : ''}`}
-      variants={cardVariants}
-      custom={index}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
@@ -61,8 +49,6 @@ function ServiceCard({ service, index }) {
 }
 
 export default function Services() {
-  const { ref, inView } = useInView()
-
   return (
     <section className={styles.section} id="services">
       <SectionHeader
@@ -72,27 +58,17 @@ export default function Services() {
         centered
       />
 
-      <motion.div
-        ref={ref}
-        className={styles.grid}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-      >
-        {SERVICES.map((service, i) => (
-          <ServiceCard key={service.id} service={service} index={i} />
+      <div className={styles.grid}>
+        {SERVICES.map((service) => (
+          <ServiceCard key={service.id} service={service} />
         ))}
-      </motion.div>
+      </div>
 
-      <motion.div
-        className={styles.cta}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.6, duration: 0.5 }}
-      >
+      <div className={styles.cta}>
         <Link to="/services" className={styles.allServicesBtn}>
           View All Services & Capabilities
         </Link>
-      </motion.div>
+      </div>
     </section>
   )
 }

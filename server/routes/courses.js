@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getCourses } from '../controllers/coursesController.js'
+import { getCourseBySlug, getCourses } from '../controllers/coursesController.js'
 
 const router = Router()
 
@@ -26,5 +26,6 @@ const router = Router()
  *         description: Paginated courses list
  */
 router.get('/', getCourses)
+router.get('/:slug', getCourseBySlug)
 
 export default router

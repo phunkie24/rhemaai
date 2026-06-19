@@ -37,15 +37,6 @@ const FLOW_STAGES = [
   },
 ]
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] },
-  }),
-}
-
 export default function ServicesPage() {
   return (
     <>
@@ -141,18 +132,14 @@ export default function ServicesPage() {
           <div className={styles.flowTrack} aria-label="Service delivery flow">
             <div className={styles.flowLine} />
             {FLOW_STAGES.map((stage, index) => (
-              <motion.div
+              <div
                 key={stage.title}
                 className={styles.flowStage}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.35 }}
-                transition={{ delay: index * 0.08, duration: 0.45 }}
               >
                 <span className={styles.stageNum}>0{index + 1}</span>
                 <h3>{stage.title}</h3>
                 <p>{stage.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -170,16 +157,11 @@ export default function ServicesPage() {
           </div>
 
           <div className={styles.grid}>
-            {SERVICES.map((service, i) => (
-              <motion.div
+            {SERVICES.map((service) => (
+              <div
                 key={service.id}
                 id={service.id}
                 className={`${styles.card} ${service.highlight ? styles.cardFeatured : ''}`}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.1 }}
               >
                 {service.highlight && (
                   <span className={styles.featuredBadge}>Featured</span>
@@ -220,7 +202,7 @@ export default function ServicesPage() {
                 >
                   Start a conversation
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

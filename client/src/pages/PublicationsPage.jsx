@@ -13,13 +13,14 @@ const TYPES = [
   { value: 'whitepaper', label: 'White Papers' },
 ]
 
-const SEED_PUBLICATIONS = [
+export const SEED_PUBLICATIONS = [
   {
     _id: 'seed-book-multi-agent-orchestration-patterns',
     title: 'Multi-Agent Orchestration Patterns for Enterprise Scale Systems',
     slug: 'multi-agent-orchestration-patterns-enterprise-scale-systems',
     type: 'book',
     summary: 'Architectures, patterns and operational practices for reliable, governed and scalable multi-agent AI systems in enterprise environments.',
+    body: 'This publication gives enterprise teams a practical architecture map for multi-agent systems: orchestration patterns, governance controls, observability, data access boundaries and rollout practices for production environments.',
     coverImage: multiAgentBookCover,
     tags: ['Multi-Agent Systems', 'Agentic AI', 'Enterprise Architecture', 'Governance'],
     price: { amount: 0, currency: 'USD', label: 'New release' },
@@ -33,6 +34,7 @@ const SEED_PUBLICATIONS = [
     slug: 'enterprise-agentic-ai-playbook',
     type: 'book',
     summary: 'A practical operating guide for designing governed multi-agent systems inside regulated enterprise environments.',
+    body: 'A field guide for enterprise leaders and builders moving from agent demos to controlled AI operations. It covers governance, workflow design, measurement, deployment readiness and risk controls.',
     tags: ['Agentic AI', 'Governance', 'Architecture'],
     price: { amount: 49, currency: 'USD', label: 'Digital edition' },
     publishedAt: '2026-05-18',
@@ -44,6 +46,7 @@ const SEED_PUBLICATIONS = [
     slug: 'cloud-landing-zones-ai-workloads',
     type: 'whitepaper',
     summary: 'A concise architecture brief for secure AI workloads across Azure, AWS and GCP delivery environments.',
+    body: 'A concise cloud architecture brief covering landing-zone decisions for AI workloads: identity, network isolation, data boundaries, model hosting, telemetry and compliance-ready deployment patterns.',
     tags: ['Cloud', 'Security', 'AI Platform'],
     price: { amount: 0, currency: 'USD', label: 'Free' },
     publishedAt: '2026-03-09',
@@ -59,17 +62,14 @@ function formatPrice(price = {}) {
   return `${price.currency || 'USD'} ${Number(price.amount).toLocaleString()}`
 }
 
-function PublicationCard({ publication, index }) {
+function PublicationCard({ publication }) {
   const paystackUrl = publication.price?.paystackUrl
   const kindleUrl   = publication.price?.kindleUrl
   const price       = publication.price
 
   return (
-    <motion.article
+    <article
       className={styles.publicationCard}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06, duration: 0.45 }}
     >
       <div className={styles.publicationTop}>
         <span>{typeLabel(publication.type)}</span>
@@ -83,7 +83,9 @@ function PublicationCard({ publication, index }) {
           loading="lazy"
         />
       )}
-      <h2>{publication.title}</h2>
+      <h2>
+        <Link to={`/publications/${publication.slug || publication._id}`}>{publication.title}</Link>
+      </h2>
       <p>{publication.summary}</p>
       <div className={styles.tagRow}>
         {(publication.tags || []).slice(0, 4).map((tag) => <em key={tag}>{tag}</em>)}
@@ -102,6 +104,7 @@ function PublicationCard({ publication, index }) {
       </div>
 
       <div className={styles.publicationBottom}>
+        <Link to={`/publications/${publication.slug || publication._id}`} className={styles.textAction}>View details</Link>
         {paystackUrl && (
           <a
             href={paystackUrl}
@@ -131,7 +134,7 @@ function PublicationCard({ publication, index }) {
           <Link to="/contact" className={styles.textAction}>Request access</Link>
         )}
       </div>
-    </motion.article>
+    </article>
   )
 }
 
@@ -200,8 +203,8 @@ export default function PublicationsPage() {
           <div className={styles.stateText}>Loading publications...</div>
         ) : (
           <div className={styles.publicationGrid}>
-            {filtered.map((publication, index) => (
-              <PublicationCard key={publication._id} publication={publication} index={index} />
+            {filtered.map((publication) => (
+              <PublicationCard key={publication._id} publication={publication} />
             ))}
           </div>
         )}

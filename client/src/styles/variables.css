@@ -105,9 +105,9 @@
   --transition-spring: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Layout */
-  --container-max: 1200px;
-  --section-pad-x: clamp(20px, 5%, 80px);
-  --section-pad-y: 88px;
+  --container-max: 100%;
+  --section-pad-x: clamp(20px, 4vw, 96px);
+  --section-pad-y: clamp(64px, 6vw, 96px);
 
   /* Z-index */
   --z-base:    1;

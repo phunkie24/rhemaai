@@ -35,6 +35,14 @@ describe('api utility', () => {
     expect(typeof insightsAPI.getById).toBe('function')
   })
 
+  it('exports productsAPI and coursesAPI detail methods', async () => {
+    const { coursesAPI, productsAPI } = await import('../../utils/api')
+    expect(typeof productsAPI.getAll).toBe('function')
+    expect(typeof productsAPI.getById).toBe('function')
+    expect(typeof coursesAPI.getAll).toBe('function')
+    expect(typeof coursesAPI.getById).toBe('function')
+  })
+
   it('exports a default axios instance', async () => {
     const { default: api } = await import('../../utils/api')
     expect(api).toBeDefined()

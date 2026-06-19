@@ -57,16 +57,6 @@ const VALUES = [
   },
 ]
 
-const stagger = {
-  hidden:  {},
-  visible: { transition: { staggerChildren: 0.08 } },
-}
-
-const fadeUp = {
-  hidden:  { opacity: 0, y: 22 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
-
 export default function AboutPage() {
   return (
     <>
@@ -110,21 +100,15 @@ export default function AboutPage() {
 
       <section className={styles.pillarsSection}>
         <div className="container">
-          <motion.div
-            className={styles.pillarsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-          >
+          <div className={styles.pillarsGrid}>
             {PILLARS.map((p) => (
-              <motion.div key={p.title} className={styles.pillar} variants={fadeUp}>
+              <div key={p.title} className={styles.pillar}>
                 <div className={styles.pillarIcon}>{p.symbol}</div>
                 <h3 className={styles.pillarTitle}>{p.title}</h3>
                 <p className={styles.pillarDesc}>{p.desc}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -132,18 +116,14 @@ export default function AboutPage() {
         <div className={styles.statsInner} />
         <div className="container">
           <div className={styles.statsGrid}>
-            {STATS.map((s, i) => (
-              <motion.div
+            {STATS.map((s) => (
+              <div
                 key={s.label}
                 className={styles.stat}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
               >
                 <strong className={styles.statValue}>{s.value}</strong>
                 <span className={styles.statLabel}>{s.label}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -151,13 +131,7 @@ export default function AboutPage() {
 
       <section className={styles.founderSection}>
         <div className="container">
-          <motion.div
-            className={styles.founderInner}
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div className={styles.founderInner}>
             <div className={styles.founderPhotoWrap}>
               <img src={founderPhoto} alt="Funke Yusuf" className={styles.founderPhoto} loading="lazy" decoding="async" />
               <div className={styles.founderPhotoBorder} />
@@ -181,7 +155,7 @@ export default function AboutPage() {
                 <span>MLOps</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -191,34 +165,22 @@ export default function AboutPage() {
             <span className={styles.sectionLabel}>Our Values</span>
             <h2 className={styles.sectionTitle}>What We Stand For</h2>
           </div>
-          <motion.div
-            className={styles.valuesGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={stagger}
-          >
+          <div className={styles.valuesGrid}>
             {VALUES.map((v) => (
-              <motion.div key={v.title} className={styles.valueCard} variants={fadeUp}>
+              <div key={v.title} className={styles.valueCard}>
                 <div className={styles.valueIcon}>{v.symbol}</div>
                 <h3 className={styles.valueTitle}>{v.title}</h3>
                 <p className={styles.valueDesc}>{v.desc}</p>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       <section className={styles.ctaSection}>
         <div className={styles.ctaBg} />
         <div className="container">
-          <motion.div
-            className={styles.ctaInner}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div className={styles.ctaInner}>
             <h2 className={styles.ctaTitle}>Work With Us</h2>
             <p className={styles.ctaDesc}>
               Ready to bring this expertise to your enterprise?
@@ -227,7 +189,7 @@ export default function AboutPage() {
             <Link to="/contact" className={styles.ctaBtn}>
               Book a Consultation
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

@@ -154,6 +154,15 @@
   flex: 1;
 }
 
+.cardTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardTitle a:hover {
+  color: var(--primary);
+}
+
 .cardExcerpt {
   font-size: 13.5px;
   color: var(--text-secondary);

@@ -5,33 +5,41 @@ import { motion } from 'framer-motion'
 import { productsAPI } from '@utils/api'
 import styles from './PlatformPages.module.css'
 
-const SEED_PRODUCTS = [
+export const SEED_PRODUCTS = [
   {
     _id: 'seed-agent-control-room',
+    slug: 'enterprise-ai-control-room',
     name: 'Enterprise AI Control Room',
     kicker: 'Agent operations',
     summary: 'Plan, monitor and govern AI agents across enterprise workflows with approvals, telemetry and measurable business outcomes.',
+    description: 'A governed operating layer for enterprise AI agents, including approval queues, workflow telemetry, audit trails, escalation rules and performance reporting for production teams.',
     tags: ['AgentOps', 'Governance', 'Workflow AI'],
   },
   {
     _id: 'seed-data-fabric',
+    slug: 'data-fabric-accelerator',
     name: 'Data Fabric Accelerator',
     kicker: 'Lakehouse delivery',
     summary: 'A repeatable foundation for ingestion, quality rules, lineage, analytics products and trusted executive reporting.',
+    description: 'A delivery accelerator for lakehouse programs that need controlled ingestion, data quality rules, metadata, lineage, semantic models and executive analytics from one governed foundation.',
     tags: ['Lakehouse', 'DataOps', 'BI'],
   },
   {
     _id: 'seed-cloud-kit',
+    slug: 'cloud-landing-zone-kit',
     name: 'Cloud Landing Zone Kit',
     kicker: 'Multi-cloud platform',
     summary: 'Secure Azure, AWS and GCP architecture patterns for teams that need speed without giving up control.',
+    description: 'A reusable cloud architecture kit for enterprise AI and data workloads across Azure, AWS and GCP, with identity, network, security, observability and deployment controls built in.',
     tags: ['Azure', 'AWS', 'GCP'],
   },
   {
     _id: 'seed-mlops-stack',
+    slug: 'mlops-command-stack',
     name: 'MLOps Command Stack',
     kicker: 'Model operations',
     summary: 'Experiment tracking, model registry, deployment controls, drift monitoring and retraining workflows in one delivery pattern.',
+    description: 'A production MLOps pattern for machine learning teams that need traceable experiments, model registration, deployment gates, drift signals and automated retraining workflows.',
     tags: ['MLOps', 'MLflow', 'Monitoring'],
   },
 ]
@@ -134,17 +142,15 @@ export default function ProductsPage() {
         </div>
 
         <div className={styles.productGrid}>
-          {products.map((product, index) => (
-            <motion.article
+          {products.map((product) => (
+            <article
               key={product._id || product.slug || product.name}
               className={styles.productCard}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: index * 0.06, duration: 0.45 }}
             >
               <span>{product.kicker || product.category}</span>
-              <h3>{product.name}</h3>
+              <h3>
+                <Link to={`/products/${product.slug || product._id}`}>{product.name}</Link>
+              </h3>
               <p>{product.summary || product.description}</p>
               <div className={styles.tagRow}>
                 {(product.tags || []).map((tag) => <em key={tag}>{tag}</em>)}
@@ -161,6 +167,7 @@ export default function ProductsPage() {
                 )}
               </div>
               <div className={styles.cardActions}>
+                <Link to={`/products/${product.slug || product._id}`} className={styles.textAction}>View details</Link>
                 {product.pricing?.paystackUrl && (
                   <a href={product.pricing.paystackUrl} className={styles.btnPaystack} target="_blank" rel="noopener noreferrer">Buy Now — Paystack</a>
                 )}
@@ -168,7 +175,7 @@ export default function ProductsPage() {
                 {product.productUrl && <a href={product.productUrl} className={styles.textAction}>View product</a>}
                 {product.assetUrl && <a href={product.assetUrl} className={styles.textAction}>Download package</a>}
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>

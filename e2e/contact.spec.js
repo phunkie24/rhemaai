@@ -39,7 +39,9 @@ test.describe('Contact Page', () => {
 
   test('service dropdown contains expected options', async ({ page }) => {
     const select = page.locator('select').first()
-    const options = await select.locator('option').allTextContents()
+    const options = await select.evaluate((select) =>
+      Array.from(select.options, (option) => option.textContent?.trim() || '')
+    )
     expect(options).toContain('Agentic AI Engineering')
     expect(options).toContain('Data Engineering & Platforms')
     expect(options).toContain('General Enquiry')
@@ -48,7 +50,9 @@ test.describe('Contact Page', () => {
   test('budget dropdown contains expected options', async ({ page }) => {
     const selects = page.locator('select')
     const budgetSelect = selects.nth(1)
-    const options = await budgetSelect.locator('option').allTextContents()
+    const options = await budgetSelect.evaluate((select) =>
+      Array.from(select.options, (option) => option.textContent?.trim() || '')
+    )
     expect(options.some((o) => o.includes('$100,000'))).toBeTruthy()
     expect(options.some((o) => o.includes('Prefer not'))).toBeTruthy()
   })

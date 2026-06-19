@@ -8,14 +8,17 @@ import ScrollToTop from '@components/common/ScrollToTop'
 const HomePage           = lazy(() => import('@pages/HomePage'))
 const ServicesPage       = lazy(() => import('@pages/ServicesPage'))
 const ProductsPage       = lazy(() => import('@pages/ProductsPage'))
+const ProductDetailPage  = lazy(() => import('@pages/ProductDetailPage'))
 const AboutPage          = lazy(() => import('@pages/AboutPage'))
 const ContactPage        = lazy(() => import('@pages/ContactPage'))
 const InsightsPage       = lazy(() => import('@pages/InsightsPage'))
 const InsightDetailPage  = lazy(() => import('@pages/InsightDetailPage'))
 const PublicationsPage   = lazy(() => import('@pages/PublicationsPage'))
+const PublicationDetailPage = lazy(() => import('@pages/PublicationDetailPage'))
 const CaseStudiesPage    = lazy(() => import('@pages/CaseStudiesPage'))
 const CareersPage        = lazy(() => import('@pages/CareersPage'))
 const CoursesPage        = lazy(() => import('@pages/CoursesPage'))
+const CourseDetailPage   = lazy(() => import('@pages/CourseDetailPage'))
 const AdminOperationsPage = lazy(() => import('@pages/AdminOperationsPage'))
 const LegalPage          = lazy(() => import('@pages/LegalPage'))
 const NotFoundPage       = lazy(() => import('@pages/NotFoundPage'))
@@ -40,14 +43,17 @@ export default function App() {
             <Route path="/"               element={<HomePage />} />
             <Route path="/services"       element={<ServicesPage />} />
             <Route path="/products"       element={<ProductsPage />} />
+            <Route path="/products/:slug" element={<ProductDetailPage />} />
             <Route path="/case-studies"   element={<CaseStudiesPage />} />
             <Route path="/about"          element={<AboutPage />} />
             <Route path="/insights"       element={<InsightsPage />} />
             <Route path="/insights/:slug" element={<InsightDetailPage />} />
             <Route path="/publications"   element={<PublicationsPage />} />
+            <Route path="/publications/:slug" element={<PublicationDetailPage />} />
             <Route path="/contact"        element={<ContactPage />} />
             <Route path="/careers"        element={<CareersPage />} />
             <Route path="/courses"        element={<CoursesPage />} />
+            <Route path="/courses/:slug"  element={<CourseDetailPage />} />
             <Route path="/labs"           element={<InsightsPage />} />
             <Route path="/rh-ops-9m2k"    element={<AdminOperationsPage />} />
             <Route path="/privacy"        element={<LegalPage type="privacy" />} />

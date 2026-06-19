@@ -140,6 +140,20 @@ export async function getCourses(req, res, next) {
   }
 }
 
+export async function getCourseBySlug(req, res, next) {
+  try {
+    const course = await Course.findOne({
+      slug: req.params.slug,
+      published: true,
+    })
+
+    if (!course) return res.status(404).json({ message: 'Course not found' })
+    return res.json(stripVideoIfPaid(course))
+  } catch (err) {
+    next(err)
+  }
+}
+
 // ── Admin ────────────────────────────────────────────────────────
 export async function listAdminCourses(req, res, next) {
   try {

@@ -202,13 +202,7 @@ export default function CaseStudiesPage() {
 
         <section className={styles.cta}>
           <div className="container">
-            <motion.div
-              className={styles.ctaInner}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55 }}
-            >
+            <div className={styles.ctaInner}>
               <h2 className={styles.ctaTitle}>Ready to Be Next?</h2>
               <p className={styles.ctaSub}>
                 Tell us your problem. We'll tell you how we'd solve it.
@@ -216,7 +210,7 @@ export default function CaseStudiesPage() {
               <Link to="/contact" className={styles.ctaBtn}>
                 Book a Free Discovery Call
               </Link>
-            </motion.div>
+            </div>
           </div>
         </section>
 

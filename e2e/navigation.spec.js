@@ -25,9 +25,9 @@ test.describe('Navigation', () => {
     await expect(page).toHaveURL(/\/about/)
   })
 
-  test('navigates to Insights page', async ({ page }) => {
+  test('navigates to Research page', async ({ page }) => {
     await page.goto('/')
-    await page.getByRole('link', { name: /^Insights$/i }).first().click()
+    await page.getByRole('link', { name: /^Research$/i }).first().click()
     await expect(page).toHaveURL(/\/insights/)
   })
 
@@ -37,9 +37,9 @@ test.describe('Navigation', () => {
     await expect(page).toHaveURL(/\/contact/)
   })
 
-  test('Book Consultation CTA navigates to contact', async ({ page }) => {
+  test('home CTA navigates to contact', async ({ page }) => {
     await page.goto('/')
-    await page.getByRole('link', { name: /Book Consultation/i }).first().click()
+    await page.getByRole('link', { name: /Start a transformation/i }).first().click()
     await expect(page).toHaveURL(/\/contact/)
   })
 

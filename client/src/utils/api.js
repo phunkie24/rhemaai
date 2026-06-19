@@ -40,7 +40,8 @@ export const publicationsAPI = {
 }
 
 export const productsAPI = {
-  getAll: (params) => api.get('/products', { params }),
+  getAll:  (params) => api.get('/products', { params }),
+  getById: (id)     => api.get(`/products/${id}`),
 }
 
 export const caseStudiesAPI = {
@@ -48,7 +49,8 @@ export const caseStudiesAPI = {
 }
 
 export const coursesAPI = {
-  getAll: (params) => api.get('/courses', { params }),
+  getAll:  (params) => api.get('/courses', { params }),
+  getById: (id)     => api.get(`/courses/${id}`),
 }
 
 function adminHeaders(adminKey) {

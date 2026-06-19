@@ -7,7 +7,7 @@
 
 .left {
   background: var(--dark);
-  padding: 72px var(--section-pad-x);
+  padding: 72px clamp(24px, 5vw, 112px);
   position: relative;
   overflow: hidden;
 }
@@ -15,7 +15,7 @@
 .leftInner {
   position: relative;
   z-index: 1;
-  max-width: 460px;
+  max-width: 640px;
 }
 
 .label {
@@ -42,6 +42,7 @@
 }
 
 .desc {
+  max-width: 560px;
   font-size: 15px;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.75;
@@ -141,7 +142,7 @@
 
 .right {
   background: var(--off-white);
-  padding: 72px var(--section-pad-x);
+  padding: 72px clamp(24px, 5vw, 112px);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -153,7 +154,7 @@
   border-radius: var(--radius-xl);
   padding: 40px;
   width: 100%;
-  max-width: 520px;
+  max-width: 720px;
   box-shadow: var(--shadow-lg);
 }
 

@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { useInView } from '@hooks/useInView'
 import SectionHeader from '@components/common/SectionHeader'
 import styles from './Industries.module.css'
 
@@ -48,7 +46,6 @@ const CASE_STUDIES = [
 
 export default function Industries() {
   const [activeIndustry, setActiveIndustry] = useState(null)
-  const { ref, inView } = useInView()
 
   return (
     <section className={styles.section}>
@@ -58,42 +55,26 @@ export default function Industries() {
         subtitle="Deep domain expertise meets advanced AI and cloud engineering across the industries that matter most."
       />
 
-      <motion.div
-        ref={ref}
-        className={styles.pillGrid}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        variants={{ visible: { transition: { staggerChildren: 0.04 } } }}
-      >
+      <div className={styles.pillGrid}>
         {INDUSTRIES.map((ind) => (
-          <motion.div
+          <div
             key={ind.label}
             className={`${styles.pill} ${ind.highlight ? styles.pillHighlight : ''} ${activeIndustry === ind.label ? styles.pillActive : ''}`}
-            variants={{
-              hidden:  { opacity: 0, scale: 0.9 },
-              visible: { opacity: 1, scale: 1, transition: { duration: 0.35 } },
-            }}
             onClick={() => setActiveIndustry(activeIndustry === ind.label ? null : ind.label)}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
           >
             <span className={styles.pillIcon}>{ind.icon}</span>
             {ind.label}
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
 
       <div className={styles.caseStudiesSection}>
         <span className={styles.csLabel}>Selected Case Studies</span>
         <div className={styles.caseGrid}>
-          {CASE_STUDIES.map((cs, i) => (
-            <motion.div
+          {CASE_STUDIES.map((cs) => (
+            <div
               key={cs.title}
               className={styles.caseCard}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -4 }}
             >
               <div className={styles.caseTag}>{cs.tag}</div>
               <h3 className={styles.caseTitle}>{cs.title}</h3>
@@ -107,7 +88,7 @@ export default function Industries() {
                 <span className={styles.metricDot} />
                 {cs.metrics}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

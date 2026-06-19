@@ -21,7 +21,7 @@
 .heroInner {
   position: relative;
   z-index: 1;
-  max-width: 720px;
+  max-width: 980px;
 }
 
 .badge,
@@ -49,6 +49,7 @@
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: 0;
+  overflow-wrap: break-word;
 }
 
 .heroAccent {
@@ -56,7 +57,7 @@
 }
 
 .heroSub {
-  max-width: 620px;
+  max-width: 760px;
   color: rgba(255, 255, 255, 0.66);
   font-size: 18px;
   line-height: 1.72;
@@ -187,10 +188,10 @@
 
 .founderInner {
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
   gap: 72px;
   align-items: center;
-  max-width: 1080px;
+  max-width: 1380px;
   margin: 0 auto;
 }
 
@@ -230,7 +231,7 @@
   color: var(--text-primary);
   font-size: var(--text-3xl);
   font-weight: 900;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   line-height: 1.1;
 }
 

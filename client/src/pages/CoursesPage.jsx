@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageSEO from '@components/common/PageSEO'
+import { Link } from 'react-router-dom'
 import { coursesAPI } from '@utils/api'
+import enterpriseOpsImage from '../assets/enterprise-ai-operations.webp'
 import styles from './CoursesPage.module.css'
 
-const CATEGORIES = [
+export const CATEGORIES = [
   { key: 'all', label: 'All Courses', color: '#2563EB' },
   { key: 'data-engineering', label: 'Data Engineering', color: '#0F766E' },
   { key: 'machine-learning', label: 'Machine Learning', color: '#D97706' },
@@ -15,13 +17,56 @@ const CATEGORIES = [
   { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#047857' },
 ]
 
-const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
-const LEVEL_COLOR = { beginner: '#10B981', intermediate: '#F59E0B', advanced: '#F43F5E' }
+export const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
+export const LEVEL_COLOR = { beginner: '#10B981', intermediate: '#F59E0B', advanced: '#F43F5E' }
 
 const HERO_TRACKS = [
   { label: 'Agentic AI labs', value: 'Architecture patterns', color: '#67E8F9' },
   { label: 'Cloud delivery', value: 'Azure, AWS and GCP', color: '#FBBF24' },
   { label: 'Data engineering', value: 'Lakehouse to analytics', color: '#34D399' },
+]
+
+export const SEED_COURSES = [
+  {
+    _id: 'seed-agentic-ai-blueprint',
+    slug: 'agentic-ai-operations-blueprint',
+    title: 'Agentic AI Operations Blueprint',
+    description: 'A practical starter course on designing governed AI agent workflows, approval paths, telemetry and production rollout controls.',
+    category: 'agentic-ai',
+    thumbnail: enterpriseOpsImage,
+    instructor: 'RhemaAI Academy',
+    duration: '48m',
+    level: 'intermediate',
+    tags: ['Agentic AI', 'Governance', 'Operations'],
+    pricing: { isFree: true, amount: 0, amountNGN: 0, currency: 'USD', label: 'Free' },
+    featured: true,
+  },
+  {
+    _id: 'seed-data-engineering-lakehouse',
+    slug: 'enterprise-lakehouse-foundations',
+    title: 'Enterprise Lakehouse Foundations',
+    description: 'Learn the production decisions behind ingestion, medallion architecture, data quality, lineage and business-facing analytics products.',
+    category: 'data-engineering',
+    thumbnail: enterpriseOpsImage,
+    instructor: 'RhemaAI Academy',
+    duration: '1h 12m',
+    level: 'beginner',
+    tags: ['Lakehouse', 'Data Quality', 'Analytics'],
+    pricing: { isFree: true, amount: 0, amountNGN: 0, currency: 'USD', label: 'Free' },
+  },
+  {
+    _id: 'seed-cloud-ai-architecture',
+    slug: 'cloud-architecture-for-ai-workloads',
+    title: 'Cloud Architecture for AI Workloads',
+    description: 'A focused course on identity, networking, deployment boundaries and observability for enterprise AI systems across cloud platforms.',
+    category: 'cloud-architecture',
+    thumbnail: enterpriseOpsImage,
+    instructor: 'RhemaAI Academy',
+    duration: '55m',
+    level: 'advanced',
+    tags: ['Cloud', 'Architecture', 'AI Platform'],
+    pricing: { isFree: true, amount: 0, amountNGN: 0, currency: 'USD', label: 'Free' },
+  },
 ]
 
 function getCategoryMeta(key) {
@@ -122,20 +167,17 @@ function YoutubeModal({ course, onClose }) {
   )
 }
 
-function CourseCard({ course, onClick }) {
+function CourseCard({ course }) {
   const category = getCategoryMeta(course.category)
-  const thumb = course.thumbnail || `https://img.youtube.com/vi/${course.youtubeId}/maxresdefault.jpg`
+  const thumb = course.thumbnail || (course.youtubeId ? `https://img.youtube.com/vi/${course.youtubeId}/maxresdefault.jpg` : enterpriseOpsImage)
 
   return (
     <motion.article
       className={styles.card}
       style={{ '--cat-color': category.color }}
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(event) => event.key === 'Enter' && onClick()}
     >
+      <Link to={`/courses/${course.slug || course._id}`} className={styles.cardLink} aria-label={`Open ${course.title}`}>
       <div className={styles.thumb}>
         <img src={thumb} alt={course.title} loading="lazy" />
         <div className={styles.thumbOverlay} />
@@ -174,10 +216,11 @@ function CourseCard({ course, onClick }) {
                 : 'Free'}
           </span>
           <span className={styles.watchBtn}>
-            {course.pricing?.paymentUrl ? 'Enrol' : 'Watch now'}
+            View course
           </span>
         </div>
       </div>
+      </Link>
     </motion.article>
   )
 }
@@ -202,7 +245,13 @@ export default function CoursesPage() {
       setPage(data.page || 1)
       setPages(data.pages || 1)
     } catch {
-      setCourses([])
+      const fallback = category === 'all'
+        ? SEED_COURSES
+        : SEED_COURSES.filter((course) => course.category === category)
+      setCourses(fallback)
+      setTotal(fallback.length)
+      setPage(1)
+      setPages(1)
     } finally {
       setLoading(false)
     }
@@ -319,7 +368,7 @@ export default function CoursesPage() {
                 transition={{ duration: 0.35 }}
               >
                 {courses.map((course) => (
-                  <CourseCard key={course._id} course={course} onClick={() => setSelected(course)} />
+                  <CourseCard key={course._id || course.slug} course={course} />
                 ))}
               </motion.div>
             </AnimatePresence>

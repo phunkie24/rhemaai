@@ -46,4 +46,19 @@ test.describe('RhemaAI Solutions Ltd website', () => {
 
     expect(errors).toEqual([])
   })
+
+  test('renders shareable detail pages for content items', async ({ page }) => {
+    const detailPages = [
+      ['/products/enterprise-ai-control-room', /Enterprise AI Control Room/],
+      ['/publications/multi-agent-orchestration-patterns-enterprise-scale-systems', /Multi-Agent Orchestration Patterns/],
+      ['/courses/agentic-ai-operations-blueprint', /Agentic AI Operations Blueprint/],
+      ['/insights/building-21-pattern-agentic-ai-systems', /Building 21-Pattern Agentic AI Systems/],
+    ]
+
+    for (const [path, heading] of detailPages) {
+      await page.goto(path)
+      await expect(page).toHaveURL(new RegExp(`${path}$`))
+      await expect(page.getByRole('heading', { level: 1, name: heading })).toBeVisible({ timeout: 10000 })
+    }
+  })
 })

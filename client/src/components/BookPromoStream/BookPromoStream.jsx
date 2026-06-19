@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import bookAuthor from '../../assets/multi-agent-book-author.webp'
 import bookTable from '../../assets/multi-agent-book-table.webp'
 import bookStack from '../../assets/multi-agent-book-stack.webp'
@@ -38,13 +37,7 @@ export default function BookPromoStream() {
   return (
     <section className={styles.streamSection} aria-labelledby="book-stream-title">
       <div className={styles.inner}>
-        <motion.div
-          className={styles.copy}
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className={styles.copy}>
           <span className={styles.eyebrow}>New enterprise AI book</span>
           <h2 id="book-stream-title">
             Multi-Agent Orchestration Patterns for Enterprise Scale Systems
@@ -67,14 +60,10 @@ export default function BookPromoStream() {
               Discuss enterprise AI
             </Link>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
+        <div
           className={styles.stream}
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55 }}
           aria-label="Animated book preview stream"
         >
           <div className={styles.streamTrack}>
@@ -84,7 +73,7 @@ export default function BookPromoStream() {
               </article>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

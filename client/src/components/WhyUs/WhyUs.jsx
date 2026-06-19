@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion'
-import { useInView } from '@hooks/useInView'
 import SectionHeader from '@components/common/SectionHeader'
 import styles from './WhyUs.module.css'
 
@@ -48,8 +46,6 @@ const CERTS = [
 ]
 
 export default function WhyUs() {
-  const { ref, inView } = useInView()
-
   return (
     <section className={styles.section}>
       <SectionHeader
@@ -59,13 +55,8 @@ export default function WhyUs() {
         light
       />
 
-      <div className={styles.inner} ref={ref}>
-        <motion.div
-          className={styles.visual}
-          initial={{ opacity: 0, x: -32 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.65 }}
-        >
+      <div className={styles.inner}>
+        <div className={styles.visual}>
           <div className={styles.visualTop}>
             <div className={styles.mathSymbol}>MATH / AI / CLOUD</div>
             <div className={styles.mscLabel}>Applied Mathematics</div>
@@ -97,31 +88,22 @@ export default function WhyUs() {
               <div className={styles.statLabel}>Projects Delivered</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className={styles.points}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-        >
+        <div className={styles.points}>
           {POINTS.map((point) => (
-            <motion.div
+            <div
               key={point.title}
               className={styles.point}
-              variants={{
-                hidden:  { opacity: 0, x: 24 },
-                visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-              }}
             >
               <div className={styles.pointIcon}>{point.icon}</div>
               <div>
                 <div className={styles.pointTitle}>{point.title}</div>
                 <div className={styles.pointDesc}>{point.desc}</div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

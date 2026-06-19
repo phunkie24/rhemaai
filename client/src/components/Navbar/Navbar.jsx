@@ -20,7 +20,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`)
-  const usesDarkHero = ['/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses'].some((path) => isActivePath(path))
+  const darkHeroPaths = ['/', '/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses']
+  const usesDarkHero = darkHeroPaths.includes(pathname)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)

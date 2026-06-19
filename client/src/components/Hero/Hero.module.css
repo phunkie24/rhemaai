@@ -28,17 +28,17 @@
 .heroShell {
   position: relative;
   z-index: 2;
-  max-width: 1240px;
+  width: min(100%, var(--container-max));
   min-width: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.38fr);
   align-items: center;
   gap: 56px;
 }
 
 .copy {
-  max-width: 650px;
+  max-width: 760px;
 }
 
 .eyebrow {
@@ -72,11 +72,11 @@
   font-weight: 800;
   line-height: 1.04;
   letter-spacing: 0;
-  max-width: 620px;
+  max-width: 740px;
 }
 
 .subtext {
-  max-width: 610px;
+  max-width: 700px;
   margin: 0 0 34px;
   color: rgba(255, 255, 255, 0.72);
   font-size: 18px;
@@ -140,7 +140,7 @@
 .statsRow {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 620px;
+  max-width: 760px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   background: #fff;
@@ -278,7 +278,7 @@
 .capabilityStrip {
   position: relative;
   z-index: 2;
-  max-width: 1240px;
+  width: min(100%, var(--container-max));
   margin: 34px auto 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

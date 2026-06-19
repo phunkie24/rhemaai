@@ -26,7 +26,7 @@
 .heroInner {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+  width: min(980px, 100%);
   margin: 0 auto;
   text-align: center;
 }
@@ -52,7 +52,8 @@
   font-size: clamp(2.8rem, 5.5vw, 4.2rem);
   font-weight: 800;
   line-height: 1.04;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
 }
 
 /* Gradient on "Measurable Outcomes." */
@@ -64,7 +65,7 @@
 }
 
 .sub {
-  max-width: 580px;
+  max-width: 720px;
   margin: 0 auto 44px;
   color: rgba(255, 255, 255, 0.64);
   font-size: 17px;
@@ -163,7 +164,7 @@
 /* ── Card grid ───────────────────────────────────────────── */
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
   gap: 22px;
 }
 

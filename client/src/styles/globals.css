@@ -70,7 +70,8 @@ ul { list-style: none; }
 
 /* Layout Utilities */
 .container {
-  max-width: var(--container-max);
+  width: min(100%, var(--container-max));
+  max-width: none;
   margin: 0 auto;
   padding: 0 var(--section-pad-x);
 }

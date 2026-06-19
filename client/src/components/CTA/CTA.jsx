@@ -1,21 +1,12 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { useInView } from '@hooks/useInView'
 import styles from './CTA.module.css'
 
 export default function CTA() {
-  const { ref, inView } = useInView()
-
   return (
-    <section className={styles.section} ref={ref}>
+    <section className={styles.section}>
       <div className={styles.bg} />
 
-      <motion.div
-        className={styles.content}
-        initial={{ opacity: 0, y: 32 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-      >
+      <div className={styles.content}>
         <span className={styles.label}>Ready for Production AI?</span>
         <h2 className={styles.title}>
           Build the Next Layer of<br />Enterprise Intelligence
@@ -41,7 +32,7 @@ export default function CTA() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

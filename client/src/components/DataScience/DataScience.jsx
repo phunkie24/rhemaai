@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion'
-import { useInView } from '@hooks/useInView'
 import styles from './DataScience.module.css'
 
 const ANALYTICS_CAPABILITIES = [
@@ -47,17 +45,10 @@ const TECH = [
 ]
 
 export default function DataScience() {
-  const { ref, inView } = useInView()
-
   return (
-    <section className={styles.section} id="data-science" ref={ref}>
+    <section className={styles.section} id="data-science">
       <div className={styles.inner}>
-        <motion.div
-          className={styles.left}
-          initial={{ opacity: 0, x: -30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className={styles.left}>
           <span className={styles.label}>Data Science & Advanced Analytics</span>
           <h2 className={styles.title}>
             Turn Data Into<br />
@@ -85,31 +76,22 @@ export default function DataScience() {
               <div className={styles.mathSub}>First-principles statistical thinking</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className={styles.right}
-          initial={{ opacity: 0, x: 30 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className={styles.right}>
           <div className={styles.capGrid}>
-            {ANALYTICS_CAPABILITIES.map((cap, i) => (
-              <motion.div
+            {ANALYTICS_CAPABILITIES.map((cap) => (
+              <div
                 key={cap.title}
                 className={styles.capCard}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.07, duration: 0.45 }}
-                whileHover={{ y: -4 }}
               >
                 <div className={styles.capIcon}>{cap.icon}</div>
                 <div className={styles.capTitle}>{cap.title}</div>
                 <div className={styles.capDesc}>{cap.desc}</div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

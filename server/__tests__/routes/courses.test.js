@@ -91,6 +91,26 @@ describe('GET /api/courses', () => {
   })
 })
 
+describe('GET /api/courses/:slug', () => {
+  it('returns a published course by slug', async () => {
+    await Course.create(validCourse)
+
+    const res = await request(app).get('/api/courses/building-agentic-ai-systems')
+
+    expect(res.status).toBe(200)
+    expect(res.body.slug).toBe('building-agentic-ai-systems')
+    expect(res.body.description).toBe(validCourse.description)
+  })
+
+  it('returns 404 for draft courses', async () => {
+    await Course.create(draftCourse)
+
+    const res = await request(app).get('/api/courses/draft-data-engineering-course')
+
+    expect(res.status).toBe(404)
+  })
+})
+
 describe('Admin course operations', () => {
   it('creates a course with auto-extracted YouTube ID', async () => {
     const res = await request(app)
