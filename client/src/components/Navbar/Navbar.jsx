@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
 import BrandMark from '@components/common/BrandMark'
 import styles from './Navbar.module.css'
 
@@ -33,11 +32,8 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
+      <nav
         className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${usesDarkHero && !scrolled ? styles.onDark : ''}`}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <Link to="/" className={styles.logo}>
           <div className={styles.logoMark}>
@@ -73,32 +69,18 @@ export default function Navbar() {
             <span className={menuOpen ? styles.barBot + ' ' + styles.open : styles.barBot} />
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className={styles.mobileMenu}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-          >
-            {NAV_LINKS.map((link, i) => (
-              <motion.div
-                key={link.path}
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.06 }}
-              >
-                <Link to={link.path} className={styles.mobileLink}>
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuVisible : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        {NAV_LINKS.map((link) => (
+          <Link key={link.path} to={link.path} className={styles.mobileLink}>
+            {link.label}
+          </Link>
+        ))}
+      </div>
     </>
   )
 }

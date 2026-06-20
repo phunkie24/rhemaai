@@ -2,8 +2,32 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 
+function heroPreloadPlugin() {
+  let heroPath = ''
+  return {
+    name: 'hero-preload',
+    generateBundle(_, bundle) {
+      for (const key of Object.keys(bundle)) {
+        if (key.includes('enterprise-ai-operations')) {
+          heroPath = key
+        }
+      }
+    },
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        if (!heroPath) return html
+        return html.replace(
+          '</head>',
+          `  <link rel="preload" as="image" href="/${heroPath}" fetchpriority="high">\n  </head>`
+        )
+      },
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), heroPreloadPlugin()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
