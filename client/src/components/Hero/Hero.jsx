@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import useCountUp from '@hooks/useCountUp'
 import heroMedia from '../../assets/enterprise-ai-operations.webp'
 import styles from './Hero.module.css'
@@ -23,19 +22,17 @@ const SIGNALS = [
   { label: 'Cloud posture', value: 'Compliant' },
 ]
 
-function StatItem({ stat, delay }) {
+function StatItem({ stat, index }) {
   const count = useCountUp(stat.value ?? 0, 1800, true)
 
   return (
-    <motion.div
+    <div
       className={`${styles.stat} ${stat.text ? styles.textStat : ''}`}
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.45 }}
+      style={{ animationDelay: `${0.35 + index * 0.08}s` }}
     >
       <strong>{stat.text ?? `${count.toLocaleString()}${stat.suffix}`}</strong>
       <span>{stat.label}</span>
-    </motion.div>
+    </div>
   )
 }
 
@@ -73,7 +70,7 @@ export default function Hero() {
 
           <div className={styles.statsRow} aria-label="RhemaAI Solutions Ltd delivery proof points">
             {STATS.map((stat, index) => (
-              <StatItem key={stat.label} stat={stat} delay={0.35 + index * 0.08} />
+              <StatItem key={stat.label} stat={stat} index={index} />
             ))}
           </div>
         </div>

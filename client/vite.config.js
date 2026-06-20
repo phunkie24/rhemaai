@@ -11,9 +11,6 @@ function criticalPreloadPlugin() {
         if (key.includes('enterprise-ai-operations')) {
           preloads.push(`  <link rel="preload" as="image" href="/${key}" fetchpriority="high">`)
         }
-        if (key.includes('syne') && key.endsWith('.woff2') && key.includes('normal')) {
-          preloads.push(`  <link rel="preload" as="font" type="font/woff2" href="/${key}" crossorigin>`)
-        }
       }
     },
     transformIndexHtml: {

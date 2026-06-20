@@ -1,25 +1,16 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { SERVICES } from '@utils/servicesData'
 import SectionHeader from '@components/common/SectionHeader'
 import styles from './Services.module.css'
 
 function ServiceCard({ service }) {
-  const [hovered, setHovered] = useState(false)
-
   return (
-    <motion.div
-      className={`${styles.card} ${service.highlight ? styles.cardHighlight : ''}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -6, transition: { duration: 0.25 } }}
-    >
+    <div className={`${styles.card} ${service.highlight ? styles.cardHighlight : ''}`}>
       {service.highlight && (
         <div className={styles.popularBadge}>Featured</div>
       )}
 
-      <div className={`${styles.icon} ${hovered ? styles.iconActive : ''}`}>
+      <div className={styles.icon}>
         <span aria-hidden="true">{service.icon}</span>
       </div>
 
@@ -44,7 +35,7 @@ function ServiceCard({ service }) {
       <Link to={`/services#${service.id}`} className={styles.cardLink}>
         Learn more
       </Link>
-    </motion.div>
+    </div>
   )
 }
 

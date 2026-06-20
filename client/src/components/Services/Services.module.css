@@ -39,6 +39,14 @@
 .card:hover {
   border-color: var(--border-mid);
   box-shadow: var(--glow-sm);
+  transform: translateY(-6px);
+}
+
+.card:hover .icon {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: var(--glow-sm);
 }
 
 .card:hover::before {
