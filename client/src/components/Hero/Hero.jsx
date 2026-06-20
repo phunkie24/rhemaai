@@ -46,12 +46,7 @@ export default function Hero() {
       <div className={styles.heroBgOverlay} aria-hidden="true" />
 
       <div className={styles.heroShell}>
-        <motion.div
-          className={styles.copy}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className={styles.copy}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowMark} />
             Enterprise AI, Cloud, Data Engineering, Data Science &amp; MLOps
@@ -81,7 +76,7 @@ export default function Hero() {
               <StatItem key={stat.label} stat={stat} delay={0.35 + index * 0.08} />
             ))}
           </div>
-        </motion.div>
+        </div>
 
         <div className={styles.signalsCol}>
           <div className={styles.signalPanel}>
