@@ -2,32 +2,32 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 
-function heroPreloadPlugin() {
-  let heroPath = ''
+function criticalPreloadPlugin() {
+  const preloads = []
   return {
-    name: 'hero-preload',
+    name: 'critical-preload',
     generateBundle(_, bundle) {
       for (const key of Object.keys(bundle)) {
         if (key.includes('enterprise-ai-operations')) {
-          heroPath = key
+          preloads.push(`  <link rel="preload" as="image" href="/${key}" fetchpriority="high">`)
+        }
+        if (key.includes('syne') && key.endsWith('.woff2') && key.includes('normal')) {
+          preloads.push(`  <link rel="preload" as="font" type="font/woff2" href="/${key}" crossorigin>`)
         }
       }
     },
     transformIndexHtml: {
       order: 'post',
       handler(html) {
-        if (!heroPath) return html
-        return html.replace(
-          '</head>',
-          `  <link rel="preload" as="image" href="/${heroPath}" fetchpriority="high">\n  </head>`
-        )
+        if (!preloads.length) return html
+        return html.replace('</head>', `${preloads.join('\n')}\n  </head>`)
       },
     },
   }
 }
 
 export default defineConfig({
-  plugins: [react(), heroPreloadPlugin()],
+  plugins: [react(), criticalPreloadPlugin()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
