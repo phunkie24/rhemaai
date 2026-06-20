@@ -35,9 +35,10 @@ function PageLoader() {
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <ScrollToTop />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/"               element={<HomePage />} />

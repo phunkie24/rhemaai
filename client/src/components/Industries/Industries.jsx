@@ -57,14 +57,16 @@ export default function Industries() {
 
       <div className={styles.pillGrid}>
         {INDUSTRIES.map((ind) => (
-          <div
+          <button
             key={ind.label}
+            type="button"
             className={`${styles.pill} ${ind.highlight ? styles.pillHighlight : ''} ${activeIndustry === ind.label ? styles.pillActive : ''}`}
             onClick={() => setActiveIndustry(activeIndustry === ind.label ? null : ind.label)}
+            aria-pressed={activeIndustry === ind.label}
           >
-            <span className={styles.pillIcon}>{ind.icon}</span>
+            <span className={styles.pillIcon} aria-hidden="true">{ind.icon}</span>
             {ind.label}
-          </div>
+          </button>
         ))}
       </div>
 

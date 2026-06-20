@@ -74,7 +74,11 @@ export default function Footer() {
             <div className={styles.newsletterTitle}>Research</div>
             <div className={styles.newsletterSub}>AI, cloud & data engineering updates. No spam.</div>
             <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
+              <label htmlFor="footer-newsletter-email" className={styles.srOnly}>
+                Email address
+              </label>
               <input
+                id="footer-newsletter-email"
                 type="email"
                 placeholder="your@email.com"
                 value={email}
@@ -82,8 +86,13 @@ export default function Footer() {
                 className={styles.emailInput}
                 required
               />
-              <button type="submit" className={styles.subscribeBtn} disabled={status === 'loading'}>
-                {status === 'loading' ? '...' : '->'}
+              <button
+                type="submit"
+                className={styles.subscribeBtn}
+                disabled={status === 'loading'}
+                aria-label="Subscribe to newsletter"
+              >
+                {status === 'loading' ? '...' : '→'}
               </button>
             </form>
             {status === 'success' && <p className={styles.successMsg}>Subscribed. You are on the list.</p>}
