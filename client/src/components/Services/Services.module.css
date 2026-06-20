@@ -15,7 +15,7 @@
   background: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 32px 28px;
+  padding: 24px;
   position: relative;
   overflow: hidden;
   transition: var(--transition-base);
@@ -60,6 +60,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 2;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -83,10 +84,7 @@
   font-size: 15px;
   font-weight: 900;
   color: var(--primary);
-  margin-bottom: 20px;
   transition: var(--transition-base);
-  position: relative;
-  z-index: 1;
   flex-shrink: 0;
 }
 

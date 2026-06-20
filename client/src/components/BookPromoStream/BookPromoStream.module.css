@@ -3,7 +3,9 @@
   overflow: hidden;
   padding: 28px var(--section-pad-x);
   background:
-    linear-gradient(90deg, rgba(7, 17, 31, 0.98) 0%, rgba(18, 23, 58, 0.96) 48%, rgba(6, 78, 59, 0.95) 100%);
+    linear-gradient(90deg, rgba(7, 17, 31, 0.82) 0%, rgba(18, 23, 58, 0.8) 48%, rgba(6, 78, 59, 0.76) 100%),
+    url('../../assets/enterprise-ai-operations.webp') center / cover no-repeat,
+    #07111f;
 }
 
 .streamSection::before {

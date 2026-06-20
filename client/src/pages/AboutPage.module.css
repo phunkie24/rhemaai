@@ -3,7 +3,8 @@
   padding: 138px 0 96px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(49, 87, 213, 0.16), rgba(14, 148, 136, 0.1)),
+    linear-gradient(135deg, rgba(7, 17, 31, 0.76), rgba(8, 42, 50, 0.72)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }
 
@@ -297,13 +298,16 @@
   position: relative;
   padding: 88px 0;
   overflow: hidden;
-  background: var(--dark);
+  background:
+    linear-gradient(135deg, rgba(7, 17, 31, 0.78), rgba(8, 42, 50, 0.72)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
+    var(--dark);
 }
 
 .ctaBg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(49, 87, 213, 0.18), rgba(14, 148, 136, 0.12));
+  background: linear-gradient(135deg, rgba(49, 87, 213, 0.14), rgba(14, 148, 136, 0.1));
   pointer-events: none;
 }
 

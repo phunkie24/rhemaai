@@ -1,7 +1,8 @@
 .hero {
   padding: 140px var(--section-pad-x) 72px;
   background:
-    linear-gradient(135deg, rgba(49, 87, 213, 0.16), rgba(14, 148, 136, 0.1)),
+    linear-gradient(135deg, rgba(7, 17, 31, 0.78), rgba(8, 42, 50, 0.72)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark);
   position: relative;
   overflow: hidden;
@@ -215,12 +216,19 @@
 
 /* Newsletter Banner */
 .newsletterBanner {
+  position: relative;
+  overflow: hidden;
   padding: 80px var(--section-pad-x);
-  background: var(--dark-mid);
+  background:
+    linear-gradient(135deg, rgba(7, 17, 31, 0.84), rgba(8, 42, 50, 0.78)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
+    var(--dark-mid);
   text-align: center;
 }
 
 .newsletterBanner h2 {
+  position: relative;
+  z-index: 1;
   font-size: 32px;
   color: white;
   margin-bottom: 14px;
@@ -228,6 +236,8 @@
 }
 
 .newsletterBanner p {
+  position: relative;
+  z-index: 1;
   font-size: 15px;
   color: rgba(255,255,255,0.5);
   line-height: 1.7;
@@ -236,6 +246,8 @@
 }
 
 .nlBtn {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 6px;

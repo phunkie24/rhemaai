@@ -3,7 +3,9 @@
   overflow: hidden;
   padding: 132px var(--section-pad-x) 78px;
   background:
-    linear-gradient(135deg, #07111f 0%, #10233a 42%, #0f3d3e 72%, #1f2937 100%);
+    linear-gradient(135deg, rgba(7, 17, 31, 0.78) 0%, rgba(16, 35, 58, 0.82) 42%, rgba(15, 61, 62, 0.78) 72%, rgba(31, 41, 55, 0.74) 100%),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
+    #07111f;
 }
 
 .hero::after {
@@ -277,59 +279,15 @@
   color: inherit;
 }
 
-.thumb {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #0f172a;
-}
-
-.thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-}
-
-.card:hover .thumb img {
-  transform: scale(1.04);
-}
-
-.thumbOverlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.08) 20%, rgba(15, 23, 42, 0.72) 100%);
-}
-
-.playBtn {
-  position: absolute;
-  inset: 0;
+.cardBadges {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.22s ease;
-}
-
-.card:hover .playBtn {
-  opacity: 1;
-}
-
-.playBtn svg {
-  width: 54px;
-  height: 54px;
-  padding: 14px;
-  border-radius: 50%;
-  color: #06101d;
-  background: linear-gradient(135deg, #67e8f9, #bef264);
-  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.18);
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .featuredBadge,
 .catBadge {
-  position: absolute;
-  z-index: 1;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 900;
@@ -338,16 +296,12 @@
 }
 
 .featuredBadge {
-  top: 12px;
-  right: 12px;
   padding: 5px 10px;
   color: #06101d;
   background: linear-gradient(135deg, #fbbf24, #bef264);
 }
 
 .catBadge {
-  left: 12px;
-  bottom: 12px;
   padding: 5px 11px;
   color: #fff;
   border: 1px solid color-mix(in srgb, var(--cat-color), white 25%);

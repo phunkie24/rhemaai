@@ -8,7 +8,8 @@
   padding: 148px 0 60px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(49, 87, 213, 0.16), rgba(14, 148, 136, 0.12)),
+    linear-gradient(135deg, rgba(7, 17, 31, 0.82), rgba(8, 42, 50, 0.78)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }
 
@@ -174,7 +175,7 @@
   flex-direction: column;
   gap: 18px;
   min-height: 100%;
-  padding: 26px;
+  padding: 24px;
   border: 1px solid var(--border-light);
   border-top: 4px solid var(--accent, var(--primary));
   border-radius: var(--radius-lg);
@@ -274,7 +275,8 @@
   padding: 56px 0;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(49, 87, 213, 0.18), rgba(14, 148, 136, 0.12)),
+    linear-gradient(135deg, rgba(7, 17, 31, 0.84), rgba(8, 42, 50, 0.78)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }
 

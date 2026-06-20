@@ -1,6 +1,9 @@
 .section {
   padding: var(--section-pad-y) var(--section-pad-x);
-  background: linear-gradient(135deg, var(--brand-800) 0%, var(--dark-mid) 52%, #063C43 100%);
+  background:
+    linear-gradient(135deg, rgba(91, 26, 162, 0.76) 0%, rgba(13, 27, 56, 0.82) 52%, rgba(6, 60, 67, 0.78) 100%),
+    url('../../assets/enterprise-ai-operations.webp') center / cover no-repeat,
+    var(--dark-mid);
   text-align: center;
   position: relative;
   overflow: hidden;

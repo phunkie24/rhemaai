@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { coursesAPI } from '@utils/api'
-import enterpriseOpsImage from '../assets/enterprise-ai-operations.webp'
 import styles from './CoursesPage.module.css'
 
 export const CATEGORIES = [
@@ -33,7 +32,6 @@ export const SEED_COURSES = [
     title: 'Agentic AI Operations Blueprint',
     description: 'A practical starter course on designing governed AI agent workflows, approval paths, telemetry and production rollout controls.',
     category: 'agentic-ai',
-    thumbnail: enterpriseOpsImage,
     instructor: 'RhemaAI Academy',
     duration: '48m',
     level: 'intermediate',
@@ -47,7 +45,6 @@ export const SEED_COURSES = [
     title: 'Enterprise Lakehouse Foundations',
     description: 'Learn the production decisions behind ingestion, medallion architecture, data quality, lineage and business-facing analytics products.',
     category: 'data-engineering',
-    thumbnail: enterpriseOpsImage,
     instructor: 'RhemaAI Academy',
     duration: '1h 12m',
     level: 'beginner',
@@ -60,7 +57,6 @@ export const SEED_COURSES = [
     title: 'Cloud Architecture for AI Workloads',
     description: 'A focused course on identity, networking, deployment boundaries and observability for enterprise AI systems across cloud platforms.',
     category: 'cloud-architecture',
-    thumbnail: enterpriseOpsImage,
     instructor: 'RhemaAI Academy',
     duration: '55m',
     level: 'advanced',
@@ -169,7 +165,6 @@ function YoutubeModal({ course, onClose }) {
 
 function CourseCard({ course }) {
   const category = getCategoryMeta(course.category)
-  const thumb = course.thumbnail || (course.youtubeId ? `https://img.youtube.com/vi/${course.youtubeId}/maxresdefault.jpg` : enterpriseOpsImage)
 
   return (
     <motion.article
@@ -178,19 +173,13 @@ function CourseCard({ course }) {
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
     >
       <Link to={`/courses/${course.slug || course._id}`} className={styles.cardLink} aria-label={`Open ${course.title}`}>
-      <div className={styles.thumb}>
-        <img src={thumb} alt={course.title} loading="lazy" />
-        <div className={styles.thumbOverlay} />
-        <div className={styles.playBtn} aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
-        </div>
-        {course.featured && <span className={styles.featuredBadge}>Featured</span>}
-        <span className={styles.catBadge}>
-          {category.label}
-        </span>
-      </div>
-
       <div className={styles.cardBody}>
+        <div className={styles.cardBadges}>
+          {course.featured && <span className={styles.featuredBadge}>Featured</span>}
+          <span className={styles.catBadge}>
+            {category.label}
+          </span>
+        </div>
         <h3 className={styles.cardTitle}>{course.title}</h3>
         {course.description && (
           <p className={styles.cardDesc}>
@@ -367,7 +356,7 @@ export default function CoursesPage() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35 }}
               >
-                {courses.map((course) => (
+                {courses.map((course, index) => (
                   <CourseCard key={course._id || course.slug} course={course} />
                 ))}
               </motion.div>

@@ -142,7 +142,7 @@ export default function ProductsPage() {
         </div>
 
         <div className={styles.productGrid}>
-          {products.map((product) => (
+          {products.map((product, index) => (
             <article
               key={product._id || product.slug || product.name}
               className={styles.productCard}

@@ -1,7 +1,8 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(27, 7, 56, 0.94), rgba(12, 28, 58, 0.96)),
+    linear-gradient(135deg, rgba(27, 7, 56, 0.78), rgba(12, 28, 58, 0.84)),
+    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
   padding: 138px 0 96px;
   overflow: hidden;
@@ -411,7 +412,7 @@
   background: #fff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
-  padding: 32px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -449,6 +450,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 2;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.06em;
