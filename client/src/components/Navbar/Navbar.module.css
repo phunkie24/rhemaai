@@ -11,12 +11,6 @@
   justify-content: space-between;
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   border-bottom: 1px solid transparent;
-  animation: navIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes navIn {
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(0); }
 }
 
 .scrolled {

@@ -20,12 +20,23 @@ html {
 
 body {
   font-family: var(--font-body);
-  background:
-    linear-gradient(180deg, #ffffff 0%, #f3f7fb 42%, #ffffff 100%);
+  background: #07111f;
   color: var(--text-primary);
   font-size: var(--text-base);
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* Typography */
