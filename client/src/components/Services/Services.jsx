@@ -61,7 +61,7 @@ function ServiceCard({ service }) {
         ))}
       </div>
 
-      <Link to={`/services#${service.id}`} className={styles.cardLink}>
+      <Link to={`/services#${service.id}`} className={styles.cardLink} aria-label={`Learn more about ${service.title}`}>
         Learn more
       </Link>
     </div>

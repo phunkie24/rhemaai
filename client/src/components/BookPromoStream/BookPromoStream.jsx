@@ -69,7 +69,7 @@ export default function BookPromoStream() {
           <div className={styles.streamTrack}>
             {streamImages.map((image, index) => (
               <article className={styles.bookCard} key={`${image.alt}-${index}`}>
-                <img src={image.src} alt={image.alt} loading={index > 2 ? 'lazy' : 'eager'} />
+                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
               </article>
             ))}
           </div>

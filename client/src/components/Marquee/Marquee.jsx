@@ -115,7 +115,7 @@ function BrandIcon({ iconKey }) {
 }
 
 export default function Marquee() {
-  const stream = [...ITEMS, ...ITEMS, ...ITEMS]
+  const stream = [...ITEMS, ...ITEMS]
 
   return (
     <div className={styles.wrapper} aria-hidden="true">
