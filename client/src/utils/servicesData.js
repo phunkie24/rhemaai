@@ -43,7 +43,7 @@ export const SERVICES = [
       'Medallion lakehouse architectures, high-throughput ETL/ELT pipelines, real-time Spark/Kafka processing, Databricks, Synapse, and enterprise warehouse modernisation.',
     tags: ['Databricks', 'Synapse', 'Delta Lake', 'Kafka', 'Airflow'],
     color: '#0E9488',
-    highlight: false,
+    highlight: true,
     capabilities: [
       'Bronze-Silver-Gold medallion architecture',
       'Azure Synapse + Databricks pipelines',
