@@ -325,7 +325,24 @@
 }
 
 .signalPanel {
-  padding: 10px 14px;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0;
+}
+
+.signal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 16px 18px;
+  border-bottom: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.signal:last-child {
+  border-right: 0;
 }
 
 .metricDeck {
@@ -381,19 +398,6 @@
   height: 8px;
   border-radius: 999px;
   background: var(--accent-teal);
-}
-
-.signal {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.signal:last-child {
-  border-bottom: 0;
 }
 
 .signal span {

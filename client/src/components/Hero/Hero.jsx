@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import useCountUp from '@hooks/useCountUp'
 import heroMedia from '../../assets/enterprise-ai-operations.webp'
-import founderMedia from '../../assets/founder-no-book.webp'
 import styles from './Hero.module.css'
 
 const STATS = [
@@ -94,14 +93,6 @@ export default function Hero() {
               <div className={styles.imageCaption}>
                 <span>AI operations room</span>
                 <strong>Governed automation in view</strong>
-              </div>
-            </div>
-
-            <div className={styles.portraitCard}>
-              <img src={founderMedia} alt="Funke Yusuf" loading="lazy" decoding="async" />
-              <div>
-                <span>Founder-led architecture</span>
-                <strong>Applied mathematics, cloud and agentic AI</strong>
               </div>
             </div>
 
