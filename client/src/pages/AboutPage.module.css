@@ -3,7 +3,7 @@
   padding: 138px 0 96px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(7, 17, 31, 0.76), rgba(8, 42, 50, 0.72)),
+    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(8, 42, 50, 0.9)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }
@@ -40,7 +40,7 @@
   padding: 7px 14px;
   border: 1px solid rgba(114, 167, 248, 0.32);
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.07);
+  background: #0d1726;
 }
 
 .heroTitle {
@@ -299,7 +299,7 @@
   padding: 88px 0;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(7, 17, 31, 0.78), rgba(8, 42, 50, 0.72)),
+    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(8, 42, 50, 0.9)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark);
 }

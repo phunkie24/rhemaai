@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(27, 7, 56, 0.78), rgba(12, 28, 58, 0.84)),
+    linear-gradient(135deg, rgba(27, 7, 56, 0.94), rgba(6, 16, 29, 0.92)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
   padding: 138px 0 96px;
@@ -44,7 +44,7 @@
 
 .badge {
   color: #e9ddff;
-  background: rgba(255, 255, 255, 0.08);
+  background: #0d1726;
   border: 1px solid rgba(216, 195, 255, 0.28);
   padding: 7px 15px;
   border-radius: var(--radius-full);
@@ -93,8 +93,8 @@
 
 .proofRow span {
   color: rgba(255, 255, 255, 0.82);
-  background: rgba(255, 255, 255, 0.075);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #101c2e;
+  border: 1px solid rgba(125, 211, 252, 0.16);
   border-radius: var(--radius-full);
   padding: 8px 12px;
   font-size: 12px;
@@ -104,11 +104,9 @@
 .streamPanel {
   position: relative;
   min-height: 430px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(125, 211, 252, 0.18);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.045)),
-    rgba(8, 18, 33, 0.78);
+  background: #0d1726;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.26);
   overflow: hidden;
   padding: 24px;
@@ -196,7 +194,7 @@
 .streamRail {
   position: relative;
   height: 94px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(125, 211, 252, 0.14);
   border-radius: var(--radius-md);
   background:
     linear-gradient(90deg, rgba(14, 148, 136, 0.18), rgba(91, 26, 162, 0.16), rgba(183, 121, 31, 0.14));
@@ -259,9 +257,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(125, 211, 252, 0.14);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.065);
+  background: #142238;
   padding: 13px 14px;
 }
 
@@ -357,7 +355,7 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.08);
 }
 
 .stageNum {
@@ -410,7 +408,7 @@
 
 .card {
   background: #fff;
-  border: 1px solid var(--border-light);
+  border: 1px solid #d6e4ef;
   border-radius: var(--radius-xl);
   padding: 24px;
   display: flex;
@@ -418,6 +416,7 @@
   gap: 16px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.07);
   transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
 }
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import useCountUp from '@hooks/useCountUp'
 import heroMedia from '../../assets/enterprise-ai-operations.webp'
+import founderMedia from '../../assets/founder-no-book.webp'
 import styles from './Hero.module.css'
 
 const STATS = [
@@ -22,6 +23,12 @@ const SIGNALS = [
   { label: 'Cloud posture', value: 'Compliant' },
 ]
 
+const VISUAL_METRICS = [
+  { value: '42', label: 'Controls' },
+  { value: '3x', label: 'Clouds' },
+  { value: '24/7', label: 'Ops' },
+]
+
 function StatItem({ stat, index }) {
   const count = useCountUp(stat.value ?? 0, 1800, true)
 
@@ -39,7 +46,7 @@ function StatItem({ stat, index }) {
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} fetchpriority="high" decoding="async" />
+      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} fetchPriority="high" decoding="async" />
       <div className={styles.heroBgOverlay} aria-hidden="true" />
 
       <div className={styles.heroShell}>
@@ -76,13 +83,45 @@ export default function Hero() {
         </div>
 
         <div className={styles.signalsCol}>
-          <div className={styles.signalPanel}>
-            {SIGNALS.map((signal) => (
-              <div key={signal.label} className={styles.signal}>
-                <span>{signal.label}</span>
-                <strong>{signal.value}</strong>
+          <div className={styles.visualStack} aria-label="RhemaAI enterprise AI operating model">
+            <div className={styles.primaryImageCard}>
+              <img
+                src={heroMedia}
+                alt="Enterprise AI operations command center dashboard"
+                loading="eager"
+                decoding="async"
+              />
+              <div className={styles.imageCaption}>
+                <span>AI operations room</span>
+                <strong>Governed automation in view</strong>
               </div>
-            ))}
+            </div>
+
+            <div className={styles.portraitCard}>
+              <img src={founderMedia} alt="Funke Yusuf" loading="lazy" decoding="async" />
+              <div>
+                <span>Founder-led architecture</span>
+                <strong>Applied mathematics, cloud and agentic AI</strong>
+              </div>
+            </div>
+
+            <div className={styles.signalPanel}>
+              {SIGNALS.map((signal) => (
+                <div key={signal.label} className={styles.signal}>
+                  <span>{signal.label}</span>
+                  <strong>{signal.value}</strong>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.metricDeck}>
+              {VISUAL_METRICS.map((metric) => (
+                <div key={metric.label}>
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

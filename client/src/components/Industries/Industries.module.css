@@ -1,6 +1,7 @@
 .section {
-  padding: var(--section-pad-y) var(--section-pad-x);
-  background: var(--off-white);
+  padding: clamp(52px, 6vw, 76px) var(--section-pad-x) var(--section-pad-y);
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #eef6f6 100%);
 }
 
 /* Pill grid */
@@ -17,12 +18,12 @@
   gap: 8px;
   padding: 11px 20px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border-light);
+  border: 1px solid #d9e6ef;
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-  background: white;
+  background: #ffffff;
   cursor: pointer;
   transition: var(--transition-base);
   user-select: none;
@@ -30,16 +31,16 @@
 }
 
 .pill:hover {
-  background: var(--primary);
+  background: #0d1726;
   color: white;
-  border-color: var(--primary);
-  box-shadow: var(--glow-sm);
+  border-color: #0d1726;
+  box-shadow: 0 14px 34px rgba(13, 23, 38, 0.16);
 }
 
 .pillHighlight {
-  border-color: rgba(107, 70, 255, 0.25);
-  background: var(--brand-50);
-  color: var(--primary);
+  border-color: rgba(14, 148, 136, 0.24);
+  background: #ecfeff;
+  color: #0f766e;
 }
 
 .pillHighlight:hover {
@@ -48,10 +49,10 @@
 }
 
 .pillActive {
-  background: var(--primary);
+  background: #0d1726;
   color: white;
-  border-color: var(--primary);
-  box-shadow: var(--glow-sm);
+  border-color: #0d1726;
+  box-shadow: 0 14px 34px rgba(13, 23, 38, 0.16);
 }
 
 .pillIcon {
@@ -90,9 +91,10 @@
 
 .caseCard {
   background: white;
-  border: 1px solid var(--border-light);
+  border: 1px solid #d9e6ef;
   border-radius: var(--radius-lg);
-  padding: 28px;
+  padding: 0;
+  overflow: hidden;
   cursor: default;
   transition: var(--transition-base);
   display: flex;
@@ -102,7 +104,57 @@
 
 .caseCard:hover {
   border-color: var(--border-mid);
-  box-shadow: var(--glow-sm);
+  box-shadow: 0 22px 58px rgba(15, 23, 42, 0.12);
+}
+
+.caseMedia {
+  position: relative;
+  height: 154px;
+  overflow: hidden;
+  background: #06101d;
+}
+
+.caseMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.06);
+  transform: scale(1.02);
+  transition: transform 0.45s ease;
+}
+
+.caseMedia::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background:
+    linear-gradient(180deg, rgba(6, 16, 29, 0.06) 0%, rgba(6, 16, 29, 0.84) 100%),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.18) 0%, transparent 62%),
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-repeat: no-repeat, no-repeat, repeat, repeat;
+  background-size: auto, auto, 36px 36px, 36px 36px;
+  pointer-events: none;
+}
+
+.caseCard:hover .caseMedia img {
+  transform: scale(1.08);
+}
+
+.caseMedia span {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  z-index: 1;
+  color: #bef264;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.caseCard > :not(.caseMedia) {
+  margin-left: 24px;
+  margin-right: 24px;
 }
 
 .caseTag {
@@ -117,6 +169,7 @@
   border-radius: var(--radius-full);
   border: 1px solid rgba(107, 70, 255, 0.15);
   align-self: flex-start;
+  margin-top: 22px;
 }
 
 .caseTitle {
@@ -157,7 +210,8 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--primary);
-  padding-top: 8px;
+  margin-bottom: 24px;
+  padding-top: 12px;
   border-top: 1px solid var(--border-light);
 }
 

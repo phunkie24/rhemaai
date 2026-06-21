@@ -1,4 +1,5 @@
 import SectionHeader from '@components/common/SectionHeader'
+import founderMedia from '../../assets/founder-no-book.webp'
 import styles from './WhyUs.module.css'
 
 const POINTS = [
@@ -57,6 +58,14 @@ export default function WhyUs() {
 
       <div className={styles.inner}>
         <div className={styles.visual}>
+          <div className={styles.visualImageCard}>
+            <img src={founderMedia} alt="Funke Yusuf" loading="lazy" decoding="async" />
+            <div>
+              <span>Senior-led delivery</span>
+              <strong>Architecture grounded in mathematics and production reality</strong>
+            </div>
+          </div>
+
           <div className={styles.visualTop}>
             <div className={styles.mathSymbol}>MATH / AI / CLOUD</div>
             <div className={styles.mscLabel}>Applied Mathematics</div>

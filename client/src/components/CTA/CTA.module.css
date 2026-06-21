@@ -1,7 +1,7 @@
 .section {
   padding: var(--section-pad-y) var(--section-pad-x);
   background:
-    linear-gradient(135deg, rgba(91, 26, 162, 0.76) 0%, rgba(13, 27, 56, 0.82) 52%, rgba(6, 60, 67, 0.78) 100%),
+    linear-gradient(135deg, rgba(6, 16, 29, 0.94) 0%, rgba(19, 11, 42, 0.92) 45%, rgba(5, 56, 62, 0.9) 100%),
     url('../../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
   text-align: center;
@@ -33,7 +33,7 @@
 .label {
   font-size: 11px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
+  color: #67e8f9;
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -48,7 +48,7 @@
 
 .desc {
   font-size: 17px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.74);
   line-height: 1.75;
   font-weight: 300;
   max-width: 640px;
@@ -62,24 +62,26 @@
 }
 
 .btnWhite {
-  background: white;
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--brand-300), var(--brand-500));
+  color: #fff;
   padding: 15px 32px;
   border-radius: var(--radius-md);
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
   transition: var(--transition-spring);
+  box-shadow: 0 14px 34px rgba(91, 26, 162, 0.28);
 }
 
 .btnWhite:hover {
-  color: var(--primary-hover);
+  color: #fff;
+  background: linear-gradient(135deg, var(--brand-400), var(--brand-600));
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 16px 44px rgba(91, 26, 162, 0.36);
 }
 
 .btnGhost {
-  background: transparent;
+  background: #101c2e;
   color: rgba(255, 255, 255, 0.85);
   padding: 15px 28px;
   border-radius: var(--radius-md);
@@ -109,7 +111,7 @@
   align-items: center;
   gap: 7px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.68);
   font-weight: 500;
 }
 

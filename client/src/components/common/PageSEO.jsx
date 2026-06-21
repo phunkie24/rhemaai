@@ -23,20 +23,24 @@ export default function PageSEO({
       <title>{fullTitle}</title>
       <meta name="description"  content={description} />
       {keywords && <meta name="keywords" content={keywords} />}
+      <meta name="author"       content="RhemaAI Solutions Ltd" />
+      <meta name="application-name" content="RhemaAI Solutions Ltd" />
+      <meta name="theme-color"  content="#06101D" />
       <meta name="robots"       content={noindex ? 'noindex, nofollow' : 'index, follow'} />
       <link rel="canonical"     href={canonical} />
 
-      {/* hreflang — single English site serving multiple regions */}
-      <link rel="alternate" hreflang="en"         href={canonical} />
-      <link rel="alternate" hreflang="en-NG"      href={canonical} />
-      <link rel="alternate" hreflang="en-GB"      href={canonical} />
-      <link rel="alternate" hreflang="en-US"      href={canonical} />
-      <link rel="alternate" hreflang="en-ZA"      href={canonical} />
-      <link rel="alternate" hreflang="en-AE"      href={canonical} />
-      <link rel="alternate" hreflang="x-default"  href={canonical} />
+      {/* hreflang: single English site serving multiple regions */}
+      <link rel="alternate" hrefLang="en"         href={canonical} />
+      <link rel="alternate" hrefLang="en-NG"      href={canonical} />
+      <link rel="alternate" hrefLang="en-GB"      href={canonical} />
+      <link rel="alternate" hrefLang="en-US"      href={canonical} />
+      <link rel="alternate" hrefLang="en-ZA"      href={canonical} />
+      <link rel="alternate" hrefLang="en-AE"      href={canonical} />
+      <link rel="alternate" hrefLang="x-default"  href={canonical} />
 
       {/* Open Graph */}
       <meta property="og:type"        content={type} />
+      <meta property="og:locale"      content="en_NG" />
       <meta property="og:url"         content={canonical} />
       <meta property="og:title"       content={fullTitle} />
       <meta property="og:description" content={description} />
@@ -46,6 +50,7 @@ export default function PageSEO({
       {/* Twitter Card */}
       <meta name="twitter:card"        content="summary_large_image" />
       <meta name="twitter:site"        content="@rhemaai" />
+      <meta name="twitter:creator"     content="@rhemaai" />
       <meta name="twitter:title"       content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image"       content={ogImage} />
