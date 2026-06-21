@@ -126,6 +126,7 @@ export default function ProductsPage() {
         {METRICS.map((metric) => (
           <div key={metric.label}>
             <strong>{metric.value}</strong>
+            <span aria-hidden="true">·</span>
             <span>{metric.label}</span>
           </div>
         ))}

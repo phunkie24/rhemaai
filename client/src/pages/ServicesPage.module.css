@@ -278,7 +278,7 @@
 
 .flowSection {
   background: #fff;
-  padding: 80px 0 78px;
+  padding: 52px 0;
 }
 
 .flowHeader,
@@ -388,7 +388,7 @@
 
 .gridSection {
   background: var(--off-white);
-  padding: 76px 0 88px;
+  padding: 52px 0 60px;
 }
 
 .serviceHeader {
@@ -633,7 +633,7 @@
 
   .flowSection,
   .gridSection {
-    padding: 58px 0;
+    padding: 40px 0;
   }
 
   .eventRow {
