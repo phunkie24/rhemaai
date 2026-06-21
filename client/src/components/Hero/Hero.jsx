@@ -88,7 +88,7 @@ export default function Hero() {
               <img
                 src={heroMedia}
                 alt="Enterprise AI operations command center dashboard"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
               <div className={styles.imageCaption}>

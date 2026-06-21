@@ -457,6 +457,8 @@
   .signalsCol {
     justify-self: stretch;
     width: min(100%, 680px);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
   }
 }
 

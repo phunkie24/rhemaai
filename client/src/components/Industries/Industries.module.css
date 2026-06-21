@@ -2,6 +2,8 @@
   padding: clamp(52px, 6vw, 76px) var(--section-pad-x) var(--section-pad-y);
   background:
     linear-gradient(180deg, #f8fbff 0%, #eef6f6 100%);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 /* Pill grid */

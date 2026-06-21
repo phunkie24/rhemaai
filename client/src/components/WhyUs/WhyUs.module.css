@@ -4,6 +4,8 @@
     linear-gradient(160deg, #06101d 0%, #0a1727 52%, #130b2a 100%);
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
 }
 
 .section::before {

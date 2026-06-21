@@ -4,6 +4,8 @@
   padding: var(--section-pad-y) var(--section-pad-x) clamp(44px, 5vw, 68px);
   background:
     linear-gradient(180deg, #06101d 0%, #0a1727 52%, #101827 100%);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 .section::before {
