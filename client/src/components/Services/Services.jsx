@@ -1,27 +1,18 @@
 import { Link } from 'react-router-dom'
 import { SERVICES } from '@utils/servicesData'
+
+const HOME_SERVICE_IDS = ['agentic-ai', 'data-engineering', 'data-science']
+const HOME_SERVICES = SERVICES.filter(s => HOME_SERVICE_IDS.includes(s.id))
 import SectionHeader from '@components/common/SectionHeader'
-import advisoryMedia from '../../assets/services/ai-advisory-governance-diagram.webp'
 import agenticMedia from '../../assets/services/agentic-ai-diagram.webp'
-import cloudMedia from '../../assets/services/cloud-architecture-diagram.webp'
 import dataEngineeringMedia from '../../assets/services/data-engineering-diagram.webp'
 import dataScienceMedia from '../../assets/services/data-science-diagram.webp'
-import softwareMedia from '../../assets/services/enterprise-software-diagram.webp'
-import fintechMedia from '../../assets/services/fintech-blockchain-diagram.webp'
-import generativeMedia from '../../assets/services/generative-ai-diagram.webp'
-import mlopsMedia from '../../assets/services/mlops-dataops-diagram.webp'
 import styles from './Services.module.css'
 
 const SERVICE_VISUALS = {
   'agentic-ai': agenticMedia,
-  'generative-ai': generativeMedia,
   'data-engineering': dataEngineeringMedia,
   'data-science': dataScienceMedia,
-  'cloud-architecture': cloudMedia,
-  mlops: mlopsMedia,
-  'ai-advisory': advisoryMedia,
-  'software-engineering': softwareMedia,
-  'fintech-blockchain': fintechMedia,
 }
 
 function ServiceCard({ service }) {
@@ -80,7 +71,7 @@ export default function Services() {
       />
 
       <div className={styles.grid}>
-        {SERVICES.map((service) => (
+        {HOME_SERVICES.map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
       </div>

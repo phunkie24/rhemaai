@@ -30,6 +30,7 @@ describe('SERVICES data', () => {
     expect(highlighted.map((s) => s.id)).toEqual([
       'agentic-ai',
       'generative-ai',
+      'data-engineering',
       'data-science',
     ])
   })
