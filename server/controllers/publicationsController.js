@@ -14,6 +14,7 @@ const allowedUploadTypes = new Map([
   ['image/png', '.png'],
   ['image/jpeg', '.jpg'],
   ['image/webp', '.webp'],
+  ['image/svg+xml', '.svg'],
   ['application/zip', '.zip'],
   ['application/x-zip-compressed', '.zip'],
   ['text/markdown', ''],
@@ -248,7 +249,7 @@ export async function uploadAdminAsset(req, res, next) {
     const requestedExt = parsed.ext.toLowerCase()
     const allowedExt = allowedUploadTypes.get(mimeType)
     const extension = allowedExt || requestedExt
-    const allowedExtensions = new Set(['.pdf', '.doc', '.docx', '.png', '.jpg', '.jpeg', '.webp', '.zip', '.md', '.markdown', '.txt'])
+    const allowedExtensions = new Set(['.pdf', '.doc', '.docx', '.png', '.jpg', '.jpeg', '.webp', '.svg', '.zip', '.md', '.markdown', '.txt'])
 
     if (!allowedExtensions.has(extension)) {
       return res.status(415).json({ message: 'Unsupported file extension.' })

@@ -493,6 +493,7 @@ router.post(
       'image/png',
       'image/jpeg',
       'image/webp',
+      'image/svg+xml',
       'application/zip',
       'application/x-zip-compressed',
       'text/markdown',

@@ -18,6 +18,7 @@ const insightSchema = Joi.object({
   ).required(),
   tags: Joi.array().items(Joi.string().trim().max(40)).max(12).default([]),
   coverImage: Joi.string().trim().uri({ allowRelative: true }).allow('', null),
+  architectureImage: Joi.string().trim().uri({ allowRelative: true }).allow('', null),
   readTime: Joi.number().integer().min(1).max(120).default(5),
   published: Joi.boolean().default(false),
   publishedAt: Joi.date().allow('', null),
@@ -51,6 +52,7 @@ function normalizeInsight(value) {
     ...value,
     slug: slugify(value.slug || value.title),
     coverImage: cleanOptional(value.coverImage),
+    architectureImage: cleanOptional(value.architectureImage),
     publishedAt: value.published
       ? cleanOptional(value.publishedAt) || now
       : cleanOptional(value.publishedAt),

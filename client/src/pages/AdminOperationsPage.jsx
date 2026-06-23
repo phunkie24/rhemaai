@@ -77,6 +77,7 @@ const emptyResearchForm = {
   category: 'agentic-ai',
   tagsText: '',
   coverImage: '',
+  architectureImage: '',
   readTime: '5',
   published: false,
   authorName: 'RhemaAI Solutions Ltd Team',
@@ -378,6 +379,7 @@ function researchToForm(article) {
     category: article.category || 'agentic-ai',
     tagsText: (article.tags || []).join(', '),
     coverImage: article.coverImage || '',
+    architectureImage: article.architectureImage || '',
     readTime: String(article.readTime || 5),
     published: !!article.published,
     authorName: article.author?.name || 'RhemaAI Solutions Ltd Team',
@@ -397,6 +399,7 @@ function formToResearch(form) {
     category: form.category,
     tags: splitList(form.tagsText),
     coverImage: form.coverImage,
+    architectureImage: form.architectureImage,
     readTime: Number(form.readTime || 5),
     published: form.published,
     author: {
@@ -1004,6 +1007,24 @@ export default function AdminOperationsPage() {
                   Cover upload
                   <input type="file" accept="image/png,image/jpeg,image/webp" onChange={(event) => handleUpload(event, 'coverImage')} />
                 </label>
+              </div>
+              <div className={styles.archRow}>
+                <div className={styles.twoCol}>
+                  <label>
+                    Architecture image URL
+                    <input value={form.architectureImage} onChange={(event) => updateForm('architectureImage', event.target.value)} placeholder="https://... or upload below" />
+                  </label>
+                  <label>
+                    Architecture upload
+                    <input type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" disabled={!!uploading} onChange={(event) => handleUpload(event, 'architectureImage')} />
+                  </label>
+                </div>
+                {form.architectureImage && (
+                  <div className={styles.archPreview}>
+                    <span>Preview</span>
+                    <img src={form.architectureImage} alt="Architecture diagram preview" />
+                  </div>
+                )}
               </div>
               <div className={styles.twoCol}>
                 <label>

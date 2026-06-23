@@ -39,6 +39,7 @@ const insightSchema = new mongoose.Schema(
     },
     tags: [{ type: String, trim: true }],
     coverImage: String,
+    architectureImage: String,
     readTime: { type: Number, default: 5 }, // minutes
     published: { type: Boolean, default: false },
     publishedAt: Date,

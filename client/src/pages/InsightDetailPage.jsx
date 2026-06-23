@@ -227,27 +227,64 @@ export default function InsightDetailPage() {
         </div>
       </section>
 
-      <article className={styles.article}>
-        {content ? (
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>
-            {content}
-          </ReactMarkdown>
-        ) : (
-          <>
-            <p>
-              This field note captures how RhemaAI Solutions Ltd approaches the problem in production
-              environments, where architecture decisions have to balance speed, governance,
-              maintainability and measurable business value.
-            </p>
-            {BODY_SECTIONS.map((section) => (
-              <section key={section.title}>
-                <h2>{section.title}</h2>
-                <p>{section.body}</p>
-              </section>
-            ))}
-          </>
-        )}
-      </article>
+      {article.architectureImage ? (
+        <section className={styles.content}>
+          <div className={styles.detailLayout}>
+            <div className={styles.detailMain}>
+              {content ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>
+                  {content}
+                </ReactMarkdown>
+              ) : (
+                <>
+                  <p>
+                    This field note captures how RhemaAI Solutions Ltd approaches the problem in production
+                    environments, where architecture decisions have to balance speed, governance,
+                    maintainability and measurable business value.
+                  </p>
+                  {BODY_SECTIONS.map((section) => (
+                    <section key={section.title}>
+                      <h2>{section.title}</h2>
+                      <p>{section.body}</p>
+                    </section>
+                  ))}
+                </>
+              )}
+            </div>
+            <aside className={styles.detailAside}>
+              <h2>System Architecture</h2>
+              <img
+                src={article.architectureImage}
+                alt="System architecture diagram"
+                className={styles.mediaImage}
+                loading="lazy"
+              />
+            </aside>
+          </div>
+        </section>
+      ) : (
+        <article className={styles.article}>
+          {content ? (
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>
+              {content}
+            </ReactMarkdown>
+          ) : (
+            <>
+              <p>
+                This field note captures how RhemaAI Solutions Ltd approaches the problem in production
+                environments, where architecture decisions have to balance speed, governance,
+                maintainability and measurable business value.
+              </p>
+              {BODY_SECTIONS.map((section) => (
+                <section key={section.title}>
+                  <h2>{section.title}</h2>
+                  <p>{section.body}</p>
+                </section>
+              ))}
+            </>
+          )}
+        </article>
+      )}
 
       <section className={styles.cta}>
         <div>
