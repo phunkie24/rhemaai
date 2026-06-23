@@ -294,18 +294,22 @@
 .ctaInner {
   position: relative;
   z-index: 1;
-  max-width: 640px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
 }
 
 .ctaTitle {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   color: #fff;
   font-size: var(--text-3xl);
   letter-spacing: 0;
 }
 
 .ctaSub {
-  margin: 0 0 26px;
+  margin: 0;
   color: rgba(255, 255, 255, 0.64);
   font-size: 17px;
 }
@@ -371,6 +375,12 @@
   .title,
   .ctaTitle {
     font-size: var(--text-2xl);
+  }
+
+  .ctaInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
   }
 
   .cardGrid {

@@ -205,13 +205,11 @@ export default function CaseStudiesPage() {
         <section className={styles.cta}>
           <div className="container">
             <div className={styles.ctaInner}>
-              <h2 className={styles.ctaTitle}>Ready to Be Next?</h2>
-              <p className={styles.ctaSub}>
-                Tell us your problem. We'll tell you how we'd solve it.
-              </p>
-              <Link to="/contact" className={styles.ctaBtn}>
-                Book a Free Discovery Call
-              </Link>
+              <div>
+                <h2 className={styles.ctaTitle}>Ready to Be Next?</h2>
+                <p className={styles.ctaSub}>Tell us your problem. We'll tell you how we'd solve it.</p>
+              </div>
+              <Link to="/contact" className={styles.ctaBtn}>Book a Free Discovery Call</Link>
             </div>
           </div>
         </section>
