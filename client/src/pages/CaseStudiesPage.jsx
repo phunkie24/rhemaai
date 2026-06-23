@@ -112,15 +112,17 @@ export default function CaseStudiesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className={styles.badge}>Client Results</span>
-              <h1 className={styles.title}>
-                Real Problems.<br />
-                <span className={styles.accent}>Measurable Outcomes.</span>
-              </h1>
-              <p className={styles.sub}>
-                From fraud detection at 50ms to AI agents spanning 12 markets,
-                every engagement below is a real production deployment.
-              </p>
+              <div className={styles.heroText}>
+                <span className={styles.badge}>Client Results</span>
+                <h1 className={styles.title}>
+                  Real Problems.<br />
+                  <span className={styles.accent}>Measurable Outcomes.</span>
+                </h1>
+                <p className={styles.sub}>
+                  From fraud detection at 50ms to AI agents spanning 12 markets,
+                  every engagement below is a real production deployment.
+                </p>
+              </div>
 
               <div className={styles.heroStats}>
                 <div className={styles.hStat}><strong>50+</strong><span>Engagements</span></div>
