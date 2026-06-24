@@ -448,7 +448,7 @@ function formToPublication(form) {
     slug: form.slug,
     type: form.type,
     summary: form.summary,
-    body: form.body,
+    body: normalizeMarkdownInput(form.body),
     coverImage: form.coverImage,
     documentUrl: form.documentUrl,
     documentLabel: form.documentLabel,
@@ -715,11 +715,14 @@ export default function AdminOperationsPage() {
     }
   }
 
-  const handleMarkdownImport = async (event) => {
+  const handleMarkdownImport = async (event, targetArea = 'research') => {
     const file = event.target.files?.[0]
     if (!file) return
 
-    setUploading('content')
+    const isPublication = targetArea === 'publications'
+    const targetField = isPublication ? 'body' : 'content'
+
+    setUploading(targetField)
     setMessage('')
     try {
       const content = normalizeMarkdownInput(await file.text())
@@ -728,20 +731,52 @@ export default function AdminOperationsPage() {
 
       setForms((current) => ({
         ...current,
-        research: {
-          ...current.research,
-          title: current.research.title || importedTitle,
-          excerpt: current.research.excerpt || importedExcerpt,
-          content,
+        [targetArea]: {
+          ...current[targetArea],
+          title: current[targetArea].title || importedTitle,
+          [isPublication ? 'summary' : 'excerpt']: current[targetArea][isPublication ? 'summary' : 'excerpt'] || importedExcerpt,
+          [targetField]: content,
         },
       }))
-      setMessage('Markdown file imported into article content.')
+      setMessage(`Markdown file imported into ${isPublication ? 'publication body' : 'article content'}.`)
     } catch (err) {
       setMessage(err.message || 'Could not import Markdown file.')
     } finally {
       setUploading('')
       event.target.value = ''
     }
+  }
+
+  const handleMarkdownPaste = (event, field) => {
+    const pastedText = event.clipboardData?.getData('text/plain')
+    if (!pastedText) return
+
+    event.preventDefault()
+
+    const pastedMarkdown = normalizeMarkdownInput(pastedText)
+    const input = event.currentTarget
+    const currentValue = form[field] || ''
+    const start = input.selectionStart ?? currentValue.length
+    const end = input.selectionEnd ?? start
+    const nextValue = `${currentValue.slice(0, start)}${pastedMarkdown}${currentValue.slice(end)}`
+    const importedTitle = markdownTitle(pastedMarkdown)
+    const importedExcerpt = markdownExcerpt(pastedMarkdown)
+    const isEmptyField = currentValue.trim().length === 0
+
+    setForms((current) => ({
+      ...current,
+      [activeArea]: {
+        ...current[activeArea],
+        ...(isEmptyField && importedTitle ? { title: current[activeArea].title || importedTitle } : {}),
+        ...(isEmptyField && importedExcerpt && activeArea === 'publications'
+          ? { summary: current[activeArea].summary || importedExcerpt }
+          : {}),
+        ...(isEmptyField && importedExcerpt && activeArea === 'research'
+          ? { excerpt: current[activeArea].excerpt || importedExcerpt }
+          : {}),
+        [field]: nextValue,
+      },
+    }))
   }
 
   return (
@@ -990,6 +1025,7 @@ export default function AdminOperationsPage() {
                   rows="10"
                   value={form.content}
                   onChange={(event) => updateForm('content', event.target.value)}
+                  onPaste={(event) => handleMarkdownPaste(event, 'content')}
                   placeholder="Paste Markdown here, for example: ## Introduction"
                   required
                 />
@@ -1162,8 +1198,22 @@ export default function AdminOperationsPage() {
                 <textarea rows="3" value={form.summary} onChange={(event) => updateForm('summary', event.target.value)} required />
               </label>
               <label>
-                Body
-                <textarea rows="7" value={form.body} onChange={(event) => updateForm('body', event.target.value)} />
+                Body (Markdown)
+                <textarea
+                  rows="12"
+                  value={form.body}
+                  onChange={(event) => updateForm('body', event.target.value)}
+                  onPaste={(event) => handleMarkdownPaste(event, 'body')}
+                  placeholder="Paste Markdown here, for example: ## Table of Contents"
+                />
+              </label>
+              <label>
+                Import Markdown body
+                <input
+                  type="file"
+                  accept=".md,.markdown,text/markdown,text/plain"
+                  onChange={(event) => handleMarkdownImport(event, 'publications')}
+                />
               </label>
               <div className={styles.twoCol}>
                 <label>
