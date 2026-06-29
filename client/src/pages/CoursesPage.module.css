@@ -60,11 +60,20 @@
 .hero h1 {
   max-width: 920px;
   margin: 0;
-  color: #fff;
+  color: #f8fafc;
   font-size: clamp(38px, 5.2vw, 76px);
   line-height: 0.98;
   letter-spacing: 0;
   overflow-wrap: break-word;
+}
+
+.heroTitleAccent {
+  display: inline;
+  color: transparent;
+  background: linear-gradient(100deg, #8b5cf6 0%, #7357ff 32%, #3b82f6 66%, #06b6d4 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero p {

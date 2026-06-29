@@ -165,7 +165,7 @@ export default function PublicationsPage() {
         keywords="AI books Nigeria, multi-agent orchestration patterns book, enterprise AI whitepaper, agentic AI book, data engineering publications, machine learning books Africa, Azure cloud whitepaper"
       />
 
-      <section className={styles.hero}>
+      <section className={`${styles.hero} ${styles.colorHero}`}>
         <img src={authorPortrait} alt="" aria-hidden="true" className={styles.heroBgPortrait} loading="lazy" decoding="async" />
         <div className={styles.heroBgOverlay} />
         <div className={`${styles.heroInner} ${styles.heroSingle}`}>
@@ -176,7 +176,7 @@ export default function PublicationsPage() {
             transition={{ duration: 0.65 }}
           >
             <span className={styles.eyebrow}>RhemaAI Press</span>
-            <h1>Enterprise Data &amp; AI books and white papers.</h1>
+            <h1>Enterprise Data &amp; AI <span className={styles.heroTitleAccent}>books and white papers</span>.</h1>
             <p>
               A curated publication desk for practical books and white papers on data engineering,
               cloud architecture, machine learning, and enterprise AI — written for practitioners and decision-makers.

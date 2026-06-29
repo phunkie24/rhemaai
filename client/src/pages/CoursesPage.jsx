@@ -275,7 +275,7 @@ export default function CoursesPage() {
           >
             <span className={styles.eyebrow}>RhemaAI Academy</span>
             <h1>
-              Enterprise AI, Data and Cloud Courses
+              Enterprise <span className={styles.heroTitleAccent}>AI, Data and Cloud Courses</span>
             </h1>
             <p>
               Practitioner-led courses for teams building agentic AI systems,
