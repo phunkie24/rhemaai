@@ -5,58 +5,366 @@ import { motion } from 'framer-motion'
 import { productsAPI } from '@utils/api'
 import styles from './PlatformPages.module.css'
 
+function productDescription(summary, features) {
+  return `${summary}
+
+### Core Capabilities
+
+${features.map((feature) => `- ${feature}`).join('\n')}
+
+### Delivery Fit
+
+Use this product as a focused accelerator, or combine it with adjacent RhemaAI platform modules for a fuller AI, data, cloud, or mathematics operating model.`
+}
+
+function catalogueProduct({
+  id,
+  slug,
+  name,
+  kicker,
+  summary,
+  tags,
+  features,
+  featured = false,
+  aliases = [],
+}) {
+  return {
+    _id: `seed-${id}`,
+    slug,
+    name,
+    kicker,
+    category: 'platform',
+    summary,
+    description: productDescription(summary, features),
+    tags,
+    featured,
+    aliases,
+    pricing: { label: 'Contact sales' },
+  }
+}
+
+function productIdentity(product) {
+  return product.slug || product._id || product.name
+}
+
+function mergeProducts(apiProducts = []) {
+  const merged = [...apiProducts]
+  const seen = new Set(apiProducts.map(productIdentity).filter(Boolean))
+
+  SEED_PRODUCTS.forEach((product) => {
+    const key = productIdentity(product)
+    if (!seen.has(key)) {
+      merged.push(product)
+      seen.add(key)
+    }
+  })
+
+  return merged
+}
+
 export const SEED_PRODUCTS = [
-  {
-    _id: 'seed-agent-control-room',
-    slug: 'enterprise-ai-control-room',
-    name: 'Enterprise AI Control Room',
-    kicker: 'Agent operations',
-    summary: 'Plan, monitor and govern AI agents across enterprise workflows with approvals, telemetry and measurable business outcomes.',
-    description: 'A governed operating layer for enterprise AI agents, including approval queues, workflow telemetry, audit trails, escalation rules and performance reporting for production teams.',
-    tags: ['AgentOps', 'Governance', 'Workflow AI'],
-  },
-  {
-    _id: 'seed-data-fabric',
-    slug: 'data-fabric-accelerator',
-    name: 'Data Fabric Accelerator',
-    kicker: 'Lakehouse delivery',
-    summary: 'A repeatable foundation for ingestion, quality rules, lineage, analytics products and trusted executive reporting.',
-    description: 'A delivery accelerator for lakehouse programs that need controlled ingestion, data quality rules, metadata, lineage, semantic models and executive analytics from one governed foundation.',
-    tags: ['Lakehouse', 'DataOps', 'BI'],
-  },
-  {
-    _id: 'seed-cloud-kit',
-    slug: 'cloud-landing-zone-kit',
-    name: 'Cloud Landing Zone Kit',
-    kicker: 'Multi-cloud platform',
-    summary: 'Secure Azure, AWS and GCP architecture patterns for teams that need speed without giving up control.',
-    description: 'A reusable cloud architecture kit for enterprise AI and data workloads across Azure, AWS and GCP, with identity, network, security, observability and deployment controls built in.',
-    tags: ['Azure', 'AWS', 'GCP'],
-  },
-  {
-    _id: 'seed-mlops-stack',
-    slug: 'mlops-command-stack',
-    name: 'MLOps Command Stack',
-    kicker: 'Model operations',
-    summary: 'Experiment tracking, model registry, deployment controls, drift monitoring and retraining workflows in one delivery pattern.',
-    description: 'A production MLOps pattern for machine learning teams that need traceable experiments, model registration, deployment gates, drift signals and automated retraining workflows.',
-    tags: ['MLOps', 'MLflow', 'Monitoring'],
-  },
+  catalogueProduct({
+    id: 'nexus-aos',
+    slug: 'nexus-aos',
+    name: 'Nexus AOS',
+    kicker: 'Agentic Orchestration System',
+    summary: 'Enterprise control plane for deploying, monitoring and governing multi-agent AI systems across complex business workflows with human-in-the-loop approvals and measurable outcomes.',
+    tags: ['Flagship', 'Agentic AI', 'AgentOps', 'MCP'],
+    features: [
+      'Multi-agent graph orchestration with ADAS and LangGraph patterns',
+      'Approval gates, rollback controls and audit trails',
+      'Real-time agent telemetry and business KPI mapping',
+      'MCP server integration and governed tool registry',
+    ],
+    featured: true,
+    aliases: ['enterprise-ai-control-room'],
+  }),
+  catalogueProduct({
+    id: 'apex-rag',
+    slug: 'apex-rag',
+    name: 'Apex RAG',
+    kicker: 'Retrieval-Augmented Generation Platform',
+    summary: 'Production RAG infrastructure with vector indexing, hybrid search, re-ranking pipelines and enterprise knowledge graph connectors for grounded, hallucination-controlled AI.',
+    tags: ['Knowledge AI', 'RAG', 'Vector Search', 'Evaluation'],
+    features: [
+      'Hybrid dense and sparse vector retrieval',
+      'Re-ranking, context compression and citation workflows',
+      'Enterprise connector library for SharePoint, SAP and SQL systems',
+      'Evaluation framework with RAGAS metrics',
+    ],
+  }),
+  catalogueProduct({
+    id: 'lyra-nlp',
+    slug: 'lyra-nlp',
+    name: 'Lyra NLP',
+    kicker: 'NLP & Document Intelligence Platform',
+    summary: 'Transform unstructured enterprise text into structured intelligence for contract analysis, document classification, semantic search and multilingual NLP across African and global markets.',
+    tags: ['Language AI', 'Document AI', 'Search', 'NLP'],
+    features: [
+      'Contract intelligence and clause extraction',
+      'Multilingual NLP with African language support',
+      'Named entity recognition and knowledge graph construction',
+      'Semantic search and document Q&A workflows',
+    ],
+  }),
+  catalogueProduct({
+    id: 'aura-xai',
+    slug: 'aura-xai',
+    name: 'Aura XAI',
+    kicker: 'Explainable AI & Model Interpretability',
+    summary: 'Mathematical interpretability infrastructure for regulated AI deployments, making model predictions auditable, bias-tested and aligned with model risk standards.',
+    tags: ['Explainability', 'Model Risk', 'Fairness', 'Audit'],
+    features: [
+      'SHAP, LIME and feature attribution dashboards',
+      'Bias detection and algorithmic fairness audits',
+      'Regulatory compliance mapping for EU AI Act-style controls',
+      'Model card generation and audit trails',
+    ],
+  }),
+  catalogueProduct({
+    id: 'vega-oas',
+    slug: 'vega-oas',
+    name: 'Vega OAS',
+    kicker: 'Optimisation & Analytics System',
+    summary: 'Convex and nonlinear optimisation engine for enterprise decision problems across supply chain, resource scheduling, portfolio allocation and operations research.',
+    tags: ['Flagship', 'Optimisation', 'Analytics', 'OR'],
+    features: [
+      'Linear, nonlinear and integer programming solvers',
+      'Stochastic optimisation and simulation',
+      'Operations research workflow designer',
+      'Sensitivity analysis and scenario modelling',
+    ],
+    featured: true,
+  }),
+  catalogueProduct({
+    id: 'prism-bi',
+    slug: 'prism-bi',
+    name: 'Prism BI',
+    kicker: 'Business Intelligence & Decision Platform',
+    summary: 'AI-powered BI layer that transforms warehouse data into narrative intelligence through automated executive dashboards, natural language querying and recommendations.',
+    tags: ['Decision Intel', 'BI', 'NLQ', 'Reporting'],
+    features: [
+      'Natural language to SQL query engine',
+      'Automated narrative report generation',
+      'Executive dashboard and KPI command centre',
+      'Prescriptive action recommendations',
+    ],
+  }),
+  catalogueProduct({
+    id: 'orbit-cx',
+    slug: 'orbit-cx',
+    name: 'Orbit CX',
+    kicker: 'Customer Intelligence & Segmentation',
+    summary: '360-degree customer intelligence platform with ML-driven segmentation, CLV modelling, churn prediction and AI-powered personalisation engines.',
+    tags: ['Customer Intel', 'Segmentation', 'Churn', 'CLV'],
+    features: [
+      'Behavioural segmentation and CLV modelling',
+      'Churn prediction and retention intelligence',
+      'Real-time personalisation engine',
+      'Attribution modelling and campaign analytics',
+    ],
+  }),
+  catalogueProduct({
+    id: 'stratum-dx',
+    slug: 'stratum-dx',
+    name: 'Stratum DX',
+    kicker: 'Data Engineering & Analytics Platform',
+    summary: 'Medallion lakehouse accelerator with governed ingestion, Bronze-Silver-Gold transformation layers, lineage tracking, analytics products and trusted reporting foundations.',
+    tags: ['Flagship', 'Data Platform', 'Lakehouse', 'DataOps'],
+    features: [
+      'Bronze-Silver-Gold medallion architecture',
+      'High-throughput ETL and ELT with Spark and dbt',
+      'Data lineage, cataloguing and governance',
+      'SAP ECC, Synapse and Databricks integrations',
+    ],
+    featured: true,
+    aliases: ['data-fabric-accelerator'],
+  }),
+  catalogueProduct({
+    id: 'flux-cdc',
+    slug: 'flux-cdc',
+    name: 'Flux CDC',
+    kicker: 'Real-Time Streaming & Change Data Capture',
+    summary: 'High-throughput real-time data streaming platform with CDC pipelines, event-driven architecture, schema registry and exactly-once delivery guarantees.',
+    tags: ['Streaming', 'CDC', 'Kafka', 'Flink'],
+    features: [
+      'Kafka and Flink-based streaming pipelines',
+      'Database CDC with Debezium connectors',
+      'Schema registry and data contract enforcement',
+      'Exactly-once semantics and dead-letter queues',
+    ],
+  }),
+  catalogueProduct({
+    id: 'meridian-dq',
+    slug: 'meridian-dq',
+    name: 'Meridian DQ',
+    kicker: 'Data Quality & Observability Platform',
+    summary: 'Continuous data quality monitoring with rule engines, anomaly detection, pipeline observability and trust scores for full visibility into data asset health.',
+    tags: ['Data Quality', 'Observability', 'Lineage', 'Trust'],
+    features: [
+      'Declarative quality rule engine for high-volume checks',
+      'Statistical anomaly detection on data distributions',
+      'End-to-end pipeline lineage and impact analysis',
+      'Data trust scores and executive health reporting',
+    ],
+  }),
+  catalogueProduct({
+    id: 'corda-fs',
+    slug: 'corda-fs',
+    name: 'Corda FS',
+    kicker: 'Feature Store & ML Data Platform',
+    summary: 'Centralised feature store eliminating training-serving skew with versioned feature pipelines, point-in-time correctness and online/offline serving.',
+    tags: ['ML Data', 'Feature Store', 'Feast', 'Lineage'],
+    features: [
+      'Online low-latency and offline batch feature serving',
+      'Point-in-time correct training datasets',
+      'Feature versioning, lineage and discovery portal',
+      'Adapters for Feast, Tecton and Databricks Feature Store',
+    ],
+  }),
+  catalogueProduct({
+    id: 'helix-lz',
+    slug: 'helix-lz',
+    name: 'Helix LZ',
+    kicker: 'Cloud Landing Zone Kit',
+    summary: 'Secure, opinionated multi-cloud architecture patterns across Azure, AWS and GCP with governance rails, cost controls and GitOps pipelines from day one.',
+    tags: ['Cloud', 'Azure', 'AWS', 'GCP'],
+    features: [
+      'Enterprise landing zone IaC with Terraform and Bicep',
+      'Kubernetes orchestration and container governance',
+      'FinOps dashboards and cloud cost guardrails',
+      'GitOps CI/CD with security policy gates',
+    ],
+    aliases: ['cloud-landing-zone-kit'],
+  }),
+  catalogueProduct({
+    id: 'krato-ml',
+    slug: 'krato-ml',
+    name: 'Krato ML',
+    kicker: 'MLOps Command Stack',
+    summary: 'End-to-end ML lifecycle platform covering experiment tracking, model registry, CI/CD for ML, drift monitoring and automated retraining workflows.',
+    tags: ['MLOps', 'MLflow', 'Drift', 'ModelOps'],
+    features: [
+      'Experiment tracking and model versioning registry',
+      'Automated retraining on drift thresholds',
+      'Model deployment with canary and shadow modes',
+      'Low-latency scoring controls and service-level monitoring',
+    ],
+    aliases: ['mlops-command-stack'],
+  }),
+  catalogueProduct({
+    id: 'cipher-gx',
+    slug: 'cipher-gx',
+    name: 'Cipher GX',
+    kicker: 'Cybersecurity & Cloud Security Posture',
+    summary: 'Unified cloud security and governance platform for continuous CSPM, Zero Trust IAM, threat detection, SIEM integration and regulatory compliance.',
+    tags: ['Security', 'CSPM', 'Zero Trust', 'SIEM'],
+    features: [
+      'Cloud security posture management',
+      'Zero Trust identity and access governance',
+      'SIEM integration and automated incident response',
+      'Compliance frameworks covering ISO 27001, SOC 2 and NDPA',
+    ],
+  }),
+  catalogueProduct({
+    id: 'axiom-qr',
+    slug: 'axiom-qr',
+    name: 'Axiom QR',
+    kicker: 'Quantitative Research & Statistical Modelling',
+    summary: 'Mathematical consulting and research platform grounded in functional analysis, statistical modelling, actuarial work and bespoke quantitative research.',
+    tags: ['Quant Research', 'Statistics', 'Bayesian', 'Actuarial'],
+    features: [
+      'Functional analysis and operator-theory applications',
+      'Bayesian inference and high-dimensional modelling',
+      'Actuarial modelling and insurance mathematics',
+      'Academic-industry research partnerships',
+    ],
+  }),
+  catalogueProduct({
+    id: 'ledger-fm',
+    slug: 'ledger-fm',
+    name: 'Ledger FM',
+    kicker: 'Financial Mathematics & Risk Platform',
+    summary: 'Quantitative finance solutions bridging stochastic calculus and production financial systems for derivatives pricing, risk modelling and portfolio optimisation.',
+    tags: ['Financial Math', 'Risk', 'Quant Finance', 'Portfolio'],
+    features: [
+      'Stochastic modelling and derivatives pricing',
+      'VaR, CVaR and stress testing frameworks',
+      'Portfolio optimisation and asset allocation',
+      'Algorithmic and quantitative strategy development',
+    ],
+  }),
+  catalogueProduct({
+    id: 'sigma-im',
+    slug: 'sigma-im',
+    name: 'Sigma IM',
+    kicker: 'Industrial Mathematics & Simulation',
+    summary: 'Mathematical modelling and simulation for engineering and operational problems across energy, manufacturing, logistics and physical systems.',
+    tags: ['Industrial Math', 'Simulation', 'PDE', 'Operations'],
+    features: [
+      'ODE and PDE modelling for physical systems',
+      'Convex optimisation and operations research',
+      'Numerical methods and computational analysis',
+      'Discrete-event and Monte Carlo simulation',
+    ],
+  }),
+  catalogueProduct({
+    id: 'volta-ei',
+    slug: 'volta-ei',
+    name: 'Volta EI',
+    kicker: 'Edge AI & IoT Intelligence Platform',
+    summary: 'Deploy lightweight, compressed AI models on edge devices and IoT infrastructure for industrial monitoring, predictive maintenance and edge inference.',
+    tags: ['Edge AI', 'IoT', 'Anomaly Detection', 'Industry'],
+    features: [
+      'Model quantisation, pruning and edge compression',
+      'IoT sensor telemetry pipelines with MQTT and OPC-UA',
+      'Predictive maintenance and anomaly detection',
+      'Industrial AI for energy and manufacturing sectors',
+    ],
+  }),
+  catalogueProduct({
+    id: 'forge-se',
+    slug: 'forge-se',
+    name: 'Forge SE',
+    kicker: 'Enterprise Software Engineering Accelerator',
+    summary: 'Production-grade backend and API accelerator patterns for C# .NET, Python FastAPI and MERN systems engineered for enterprise reliability.',
+    tags: ['Software', 'APIs', '.NET', 'FastAPI'],
+    features: [
+      'C# ASP.NET Core enterprise system templates',
+      'Python FastAPI microservices accelerator',
+      'MERN stack SaaS platform scaffold',
+      'GraphQL, REST and event-driven API patterns',
+    ],
+  }),
+  catalogueProduct({
+    id: 'rhema-academy',
+    slug: 'rhema-academy',
+    name: 'Rhema Academy',
+    kicker: 'Technical Training & Certification Platform',
+    summary: 'Enterprise upskilling programmes in AI, data engineering, cloud architecture and applied mathematics delivered by production practitioners.',
+    tags: ['Academy', 'Training', 'Certification', 'Upskilling'],
+    features: [
+      'Agentic AI and LLM engineering bootcamps',
+      'Data engineering and cloud architecture programmes',
+      'Applied mathematics for AI and ML teams',
+      'Bespoke corporate training and certification tracks',
+    ],
+  }),
 ]
 
 const METRICS = [
-  { value: '04', label: 'platform product lines' },
-  { value: '24/7', label: 'observable operations' },
-  { value: '3x', label: 'cloud delivery coverage' },
+  { value: String(SEED_PRODUCTS.length).padStart(2, '0'), label: 'platform products' },
+  { value: '06', label: 'product tiers' },
+  { value: 'Many', label: 'composable paths' },
 ]
 
 export default function ProductsPage() {
   const [products, setProducts] = useState(SEED_PRODUCTS)
 
   useEffect(() => {
-    productsAPI.getAll({ limit: 24 })
+    productsAPI.getAll({ limit: 48 })
       .then((data) => {
-        if (data.products?.length) setProducts(data.products)
+        if (data.products?.length) setProducts(mergeProducts(data.products))
       })
       .catch(() => { /* seed products stay visible */ })
   }, [])
@@ -65,11 +373,11 @@ export default function ProductsPage() {
     <div className={styles.page}>
       <PageSEO
         title="Enterprise AI & Data Platform Products | RhemaAI Solutions Ltd"
-        description="RhemaAI Platform SaaS products: AI Control Room for agentic operations, Data Fabric Accelerator for lakehouse delivery, Cloud Landing Zone Kit for Azure/AWS/GCP and MLOps Command Stack — built for enterprise data engineering and AI teams."
-        keywords="enterprise AI platform Nigeria, data fabric product, MLOps SaaS, cloud landing zone Azure, AI operations software, data engineering platform Africa, machine learning platform"
+        description="RhemaAI Platform products for agentic AI, RAG, NLP, XAI, optimisation, BI, data engineering, streaming, MLOps, cloud, security, quantitative research, edge AI and technical training."
+        keywords="enterprise AI platform Nigeria, RAG platform, MLOps SaaS, cloud landing zone Azure, AI operations software, data engineering platform Africa, quantitative research platform"
       />
 
-      <section className={styles.hero}>
+      <section className={`${styles.hero} ${styles.productHero}`}>
         <div className={styles.radiance} />
         <div className={styles.heroInner}>
           <motion.div
@@ -79,11 +387,10 @@ export default function ProductsPage() {
             transition={{ duration: 0.65 }}
           >
             <span className={styles.eyebrow}>RhemaAI Platform</span>
-            <h1>Enterprise products for governed AI, data and cloud operations.</h1>
+            <h1>20 products built for <span className={styles.heroTitleAccent}>serious operating environments</span>.</h1>
             <p>
-              Productized delivery systems for teams that need reusable platforms,
-              accountable automation and production-grade intelligence without
-              starting from scratch every time.
+              Use one module as an accelerator or combine the suite into a full
+              AI, data, cloud, security and applied mathematics operating model.
             </p>
             <div className={styles.actions}>
               <Link to="/contact" className={styles.primaryAction}>Book a platform session</Link>
@@ -99,14 +406,14 @@ export default function ProductsPage() {
             aria-label="RhemaAI Platform operating signals"
           >
             <div className={styles.panelHeader}>
-              <span>Platform telemetry</span>
+              <span>Platform catalogue</span>
               <strong>Enterprise ready</strong>
             </div>
             <div className={styles.signalGrid}>
               <span>Agents</span>
               <span>Data</span>
               <span>Cloud</span>
-              <span>MLOps</span>
+              <span>Math</span>
             </div>
             <div className={styles.pulseTrack}>
               <i />
@@ -114,9 +421,9 @@ export default function ProductsPage() {
               <i />
             </div>
             <div className={styles.panelRows}>
-              <div><span>Governance checks</span><strong>Active</strong></div>
-              <div><span>Release readiness</span><strong>92%</strong></div>
-              <div><span>Pipeline health</span><strong>Stable</strong></div>
+              <div><span>Product tiers</span><strong>6</strong></div>
+              <div><span>Catalogue depth</span><strong>20</strong></div>
+              <div><span>Delivery model</span><strong>Composable</strong></div>
             </div>
           </motion.div>
         </div>
@@ -126,7 +433,7 @@ export default function ProductsPage() {
         {METRICS.map((metric) => (
           <div key={metric.label}>
             <strong>{metric.value}</strong>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true">|</span>
             <span>{metric.label}</span>
           </div>
         ))}
@@ -135,15 +442,16 @@ export default function ProductsPage() {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <span className={styles.eyebrow}>Product Suite</span>
-          <h2>Platform modules built for serious operating environments.</h2>
+          <h2>Composable modules across six product tiers.</h2>
           <p>
-            Use one module as an accelerator or combine the suite into a full
-            AI and data operating model.
+            The catalogue spans agentic AI, optimisation, analytics, data
+            platforms, cloud operations, security, applied mathematics and
+            enablement.
           </p>
         </div>
 
         <div className={styles.productGrid}>
-          {products.map((product, index) => (
+          {products.map((product) => (
             <article
               key={product._id || product.slug || product.name}
               className={styles.productCard}
@@ -158,7 +466,7 @@ export default function ProductsPage() {
               </div>
               <div className={styles.priceRow}>
                 {product.pricing?.amountNGN > 0 && (
-                  <span className={styles.priceNGN}>₦{Number(product.pricing.amountNGN).toLocaleString()}</span>
+                  <span className={styles.priceNGN}>NGN {Number(product.pricing.amountNGN).toLocaleString()}</span>
                 )}
                 {product.pricing?.amount > 0 && (
                   <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
@@ -170,7 +478,7 @@ export default function ProductsPage() {
               <div className={styles.cardActions}>
                 <Link to={`/products/${product.slug || product._id}`} className={styles.textAction}>View details</Link>
                 {product.pricing?.paystackUrl && (
-                  <a href={product.pricing.paystackUrl} className={styles.btnPaystack} target="_blank" rel="noopener noreferrer">Buy Now — Paystack</a>
+                  <a href={product.pricing.paystackUrl} className={styles.btnPaystack} target="_blank" rel="noopener noreferrer">Buy Now - Paystack</a>
                 )}
                 {product.demoUrl && <a href={product.demoUrl} className={styles.textAction}>Open demo</a>}
                 {product.productUrl && <a href={product.productUrl} className={styles.textAction}>View product</a>}

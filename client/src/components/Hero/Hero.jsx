@@ -45,7 +45,7 @@ function StatItem({ stat, index }) {
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} fetchPriority="high" decoding="async" />
+      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} fetchpriority="high" decoding="async" />
       <div className={styles.heroBgOverlay} aria-hidden="true" />
 
       <div className={styles.heroShell}>

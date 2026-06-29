@@ -49,7 +49,7 @@ test.describe('RhemaAI Solutions Ltd website', () => {
 
   test('renders shareable detail pages for content items', async ({ page }) => {
     const detailPages = [
-      ['/products/enterprise-ai-control-room', /Enterprise AI Control Room/],
+      ['/products/nexus-aos', /Nexus AOS/],
       ['/publications/multi-agent-orchestration-patterns-enterprise-scale-systems', /Multi-Agent Orchestration Patterns/],
       ['/courses/agentic-ai-operations-blueprint', /Agentic AI Operations Blueprint/],
       ['/insights/building-21-pattern-agentic-ai-systems', /Building 21-Pattern Agentic AI Systems/],

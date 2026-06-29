@@ -17,10 +17,14 @@ function productCategory(product) {
   return product.kicker || product.category || 'Platform product'
 }
 
+function productMatchesRoute(product, slug) {
+  return product.slug === slug || product._id === slug || product.aliases?.includes(slug)
+}
+
 export default function ProductDetailPage() {
   const { slug } = useParams()
   const fallback = useMemo(
-    () => SEED_PRODUCTS.find((product) => product.slug === slug || product._id === slug),
+    () => SEED_PRODUCTS.find((product) => productMatchesRoute(product, slug)),
     [slug]
   )
   const [product, setProduct] = useState(fallback)
