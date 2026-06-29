@@ -27,6 +27,7 @@ function catalogueProduct({
   features,
   featured = false,
   aliases = [],
+  productUrl,
 }) {
   return {
     _id: `seed-${id}`,
@@ -39,6 +40,7 @@ function catalogueProduct({
     tags,
     featured,
     aliases,
+    productUrl,
     pricing: { label: 'Contact sales' },
   }
 }
@@ -350,6 +352,22 @@ export const SEED_PRODUCTS = [
       'Bespoke corporate training and certification tracks',
     ],
   }),
+  catalogueProduct({
+    id: 'rhema-press',
+    slug: 'rhema-press',
+    name: 'Rhema Press',
+    kicker: 'Publication & Knowledge Product',
+    summary: 'Publication product for enterprise AI, data engineering, cloud architecture and applied mathematics books, white papers and practitioner playbooks.',
+    tags: ['Publications', 'Books', 'White Papers', 'Knowledge'],
+    features: [
+      'Enterprise AI, data and cloud publication catalogue',
+      'Books, white papers and practitioner playbooks',
+      'Research-backed implementation guidance for leaders and builders',
+      'Publication workflows connected to RhemaAI advisory and training',
+    ],
+    aliases: ['rhemaai-press', 'publications'],
+    productUrl: '/publications',
+  }),
 ]
 
 const METRICS = [
@@ -373,8 +391,8 @@ export default function ProductsPage() {
     <div className={styles.page}>
       <PageSEO
         title="Enterprise AI & Data Platform Products | RhemaAI Solutions Ltd"
-        description="RhemaAI Platform products for agentic AI, RAG, NLP, XAI, optimisation, BI, data engineering, streaming, MLOps, cloud, security, quantitative research, edge AI and technical training."
-        keywords="enterprise AI platform Nigeria, RAG platform, MLOps SaaS, cloud landing zone Azure, AI operations software, data engineering platform Africa, quantitative research platform"
+        description="RhemaAI Platform products for agentic AI, RAG, NLP, XAI, optimisation, BI, data engineering, streaming, MLOps, cloud, security, quantitative research, edge AI, technical training and publications."
+        keywords="enterprise AI platform Nigeria, RAG platform, MLOps SaaS, cloud landing zone Azure, AI operations software, data engineering platform Africa, quantitative research platform, enterprise AI publications"
       />
 
       <section className={`${styles.hero} ${styles.productHero}`}>
