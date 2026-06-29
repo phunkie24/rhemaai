@@ -353,9 +353,9 @@ export const SEED_PRODUCTS = [
 ]
 
 const METRICS = [
-  { value: String(SEED_PRODUCTS.length).padStart(2, '0'), label: 'platform products' },
-  { value: '06', label: 'product tiers' },
-  { value: 'Many', label: 'composable paths' },
+  { value: '04', label: 'platform product lines' },
+  { value: '24/7', label: 'observable operations' },
+  { value: '3x', label: 'cloud delivery coverage' },
 ]
 
 export default function ProductsPage() {
@@ -387,10 +387,11 @@ export default function ProductsPage() {
             transition={{ duration: 0.65 }}
           >
             <span className={styles.eyebrow}>RhemaAI Platform</span>
-            <h1>20 products built for <span className={styles.heroTitleAccent}>serious operating environments</span>.</h1>
+            <h1>Enterprise products for <span className={styles.heroTitleAccent}>governed AI, data and cloud operations</span>.</h1>
             <p>
-              Use one module as an accelerator or combine the suite into a full
-              AI, data, cloud, security and applied mathematics operating model.
+              Productized delivery systems for teams that need reusable platforms,
+              accountable automation and production-grade intelligence without
+              starting from scratch every time.
             </p>
             <div className={styles.actions}>
               <Link to="/contact" className={styles.primaryAction}>Book a platform session</Link>
@@ -406,14 +407,14 @@ export default function ProductsPage() {
             aria-label="RhemaAI Platform operating signals"
           >
             <div className={styles.panelHeader}>
-              <span>Platform catalogue</span>
+              <span>Platform telemetry</span>
               <strong>Enterprise ready</strong>
             </div>
             <div className={styles.signalGrid}>
               <span>Agents</span>
               <span>Data</span>
               <span>Cloud</span>
-              <span>Math</span>
+              <span>MLOps</span>
             </div>
             <div className={styles.pulseTrack}>
               <i />
@@ -421,9 +422,9 @@ export default function ProductsPage() {
               <i />
             </div>
             <div className={styles.panelRows}>
-              <div><span>Product tiers</span><strong>6</strong></div>
-              <div><span>Catalogue depth</span><strong>20</strong></div>
-              <div><span>Delivery model</span><strong>Composable</strong></div>
+              <div><span>Governance checks</span><strong>Active</strong></div>
+              <div><span>Release readiness</span><strong>92%</strong></div>
+              <div><span>Pipeline health</span><strong>Stable</strong></div>
             </div>
           </motion.div>
         </div>
@@ -433,7 +434,7 @@ export default function ProductsPage() {
         {METRICS.map((metric) => (
           <div key={metric.label}>
             <strong>{metric.value}</strong>
-            <span aria-hidden="true">|</span>
+            <span aria-hidden="true">&middot;</span>
             <span>{metric.label}</span>
           </div>
         ))}

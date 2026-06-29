@@ -161,6 +161,166 @@ export const SERVICES = [
       'Financial data analytics',
     ],
   },
+  {
+    id: 'digital-marketing',
+    icon: 'DM',
+    title: 'Digital Marketing',
+    description:
+      'AI-augmented digital marketing across the channels that matter, from LinkedIn B2B outreach and YouTube content strategy to email automation and paid social campaigns.',
+    tags: ['LinkedIn', 'YouTube', 'Facebook', 'Instagram', 'Email'],
+    color: '#0EA5E9',
+    highlight: false,
+    capabilities: [
+      'LinkedIn thought leadership & B2B outreach',
+      'YouTube channel strategy & content production',
+      'Facebook & Instagram paid campaign management',
+      'Email marketing automation & nurture sequences',
+    ],
+  },
+  {
+    id: 'cybersecurity',
+    icon: 'CS',
+    title: 'Cybersecurity',
+    description:
+      'Protect your cloud infrastructure and enterprise systems with security architecture, compliance auditing, IAM design, and continuous threat monitoring across AWS, Azure, and GCP.',
+    tags: ['AWS', 'Azure', 'GCP', 'Zero Trust', 'SIEM'],
+    color: '#F43F5E',
+    highlight: false,
+    capabilities: [
+      'Cloud security posture management (CSPM)',
+      'Identity & access management (IAM / Zero Trust)',
+      'Threat detection, SIEM & incident response',
+      'Compliance auditing (ISO 27001, SOC 2, NDPA)',
+    ],
+  },
+  {
+    id: 'statistical-analysis',
+    icon: 'SA',
+    title: 'Statistical Analysis',
+    description:
+      'Rigorous statistical methods applied to complex enterprise datasets, from exploratory analysis and hypothesis testing to Bayesian inference and high-dimensional data modelling.',
+    tags: ['Python', 'R', 'Bayesian', 'Hypothesis Testing', 'SciPy'],
+    color: '#06B6D4',
+    highlight: false,
+    capabilities: [
+      'Descriptive & inferential statistics',
+      'Regression, classification & hypothesis testing',
+      'Bayesian inference & probabilistic modelling',
+      'Multivariate & high-dimensional data analysis',
+    ],
+  },
+  {
+    id: 'industrial-mathematics',
+    icon: 'IM',
+    title: 'Industrial Mathematics',
+    description:
+      'Translate complex engineering and operational problems into mathematical models, driving process optimisation, simulation, and evidence-based decisions across energy, manufacturing, and logistics.',
+    tags: ['Optimisation', 'Simulation', 'ODE / PDE', 'Numerical Methods', 'SciPy'],
+    color: '#84CC16',
+    highlight: false,
+    capabilities: [
+      'Mathematical modelling & simulation',
+      'Operations research & convex optimisation',
+      'Differential equations for physical systems',
+      'Numerical methods & computational analysis',
+    ],
+  },
+  {
+    id: 'financial-mathematics',
+    icon: 'FM',
+    title: 'Financial Mathematics',
+    description:
+      'Quantitative finance solutions for pricing, risk, and portfolio problems, bridging stochastic calculus and functional analysis with production-grade financial systems.',
+    tags: ['Stochastic Calculus', 'Monte Carlo', 'VaR / CVaR', 'Quant Finance', 'QuantLib'],
+    color: '#F97316',
+    highlight: false,
+    capabilities: [
+      'Derivatives pricing & stochastic modelling',
+      'Risk modelling: VaR, CVaR & stress testing',
+      'Portfolio optimisation & asset allocation',
+      'Algorithmic & quantitative strategy development',
+    ],
+  },
+  {
+    id: 'explainable-ai',
+    icon: 'XA',
+    title: 'Explainable AI (XAI)',
+    description:
+      'Mathematical interpretability frameworks for AI models deployed in regulated industries, making black-box predictions auditable, defensible, and compliant with emerging AI regulation.',
+    tags: ['SHAP', 'LIME', 'Fairness', 'EU AI Act', 'Model Audit'],
+    color: '#A78BFA',
+    highlight: false,
+    capabilities: [
+      'SHAP, LIME & feature attribution analysis',
+      'Model transparency & audit trail design',
+      'Bias detection & fairness testing',
+      'XAI for finance, healthcare & legal systems',
+    ],
+  },
+  {
+    id: 'nlp-document-intelligence',
+    icon: 'NL',
+    title: 'NLP & Document Intelligence',
+    description:
+      'Transform unstructured text into enterprise knowledge through contract analysis, multilingual NLP, document classification, and semantic search systems tailored for African and global markets.',
+    tags: ['Transformers', 'spaCy', 'Semantic Search', 'HuggingFace', 'NER'],
+    color: '#34D399',
+    highlight: false,
+    capabilities: [
+      'Contract & document intelligence pipelines',
+      'Multilingual NLP for African language contexts',
+      'Semantic search & knowledge graph construction',
+      'Named entity recognition & text classification',
+    ],
+  },
+  {
+    id: 'technical-training',
+    icon: 'TT',
+    title: 'Technical Training & Capacity Building',
+    description:
+      'Enterprise upskilling programmes in AI, data engineering, cloud, and advanced mathematics, delivered by practitioners with real production experience and graduate-level mathematical depth.',
+    tags: ['Bootcamp', 'Corporate Training', 'AI Upskilling', 'Workshops', 'Certification'],
+    color: '#FBBF24',
+    highlight: false,
+    capabilities: [
+      'Agentic AI & LLM engineering bootcamps',
+      'Data engineering & cloud architecture programmes',
+      'Applied mathematics for AI & ML teams',
+      'Bespoke corporate training & workshops',
+    ],
+  },
+  {
+    id: 'quantitative-research',
+    icon: 'QR',
+    title: 'Quantitative Research & Consulting',
+    description:
+      'Mathematical consulting for organisations that need rigorous quantitative foundations, including actuarial modelling, applied functional analysis, and bespoke research for complex scientific and business problems.',
+    tags: ['Functional Analysis', 'Actuarial', 'Research', 'Applied Math', 'Consulting'],
+    color: '#E879F9',
+    highlight: false,
+    capabilities: [
+      'Functional analysis & operator theory applications',
+      'Actuarial & insurance modelling',
+      'Bespoke mathematical research & white papers',
+      'Academic-industry research partnerships',
+    ],
+  },
+  {
+    id: 'iot-edge-ai',
+    icon: 'IE',
+    title: 'IoT & Edge AI',
+    description:
+      'Deploy lightweight AI models directly on edge devices and IoT infrastructure, enabling real-time industrial monitoring, predictive maintenance, and low-latency intelligence at the network edge.',
+    tags: ['Edge AI', 'TensorFlow Lite', 'ONNX', 'IoT', 'MQTT'],
+    color: '#38BDF8',
+    highlight: false,
+    capabilities: [
+      'Edge model compression & quantisation',
+      'IoT sensor data pipelines & telemetry',
+      'Predictive maintenance & anomaly detection',
+      'Industrial AI for energy & manufacturing sectors',
+    ],
+  },
 ]
 
 export default SERVICES

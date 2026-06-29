@@ -3,9 +3,9 @@
   overflow: hidden;
   padding: 132px var(--section-pad-x) 78px;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94) 0%, rgba(16, 35, 58, 0.92) 42%, rgba(15, 61, 62, 0.9) 72%, rgba(31, 41, 55, 0.88) 100%),
+    linear-gradient(135deg, rgba(7, 11, 19, 0.94) 0%, rgba(11, 24, 39, 0.9) 48%, rgba(8, 47, 55, 0.86) 100%),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #06101d;
+    #070b13;
 }
 
 .hero::after {
@@ -13,7 +13,7 @@
   inset: auto 0 0;
   height: 6px;
   content: '';
-  background: linear-gradient(90deg, #67e8f9, #34d399, #fbbf24, #f43f5e, #7c3aed);
+  background: linear-gradient(90deg, #8b5cf6, #3b82f6, #06b6d4);
 }
 
 .heroGrid {

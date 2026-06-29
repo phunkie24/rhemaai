@@ -4,7 +4,7 @@ import { SERVICES } from '../../utils/servicesData'
 describe('SERVICES data', () => {
   it('exports the enterprise service catalog', () => {
     expect(Array.isArray(SERVICES)).toBe(true)
-    expect(SERVICES).toHaveLength(9)
+    expect(SERVICES).toHaveLength(19)
   })
 
   it('each service has required shape', () => {
@@ -56,5 +56,11 @@ describe('SERVICES data', () => {
     const fintech = SERVICES.find((s) => s.id === 'fintech-blockchain')
     expect(fintech).toBeDefined()
     expect(fintech.title).toMatch(/FinTech/i)
+  })
+
+  it('contains the new cybersecurity service', () => {
+    const cybersecurity = SERVICES.find((s) => s.id === 'cybersecurity')
+    expect(cybersecurity).toBeDefined()
+    expect(cybersecurity.tags).toContain('Zero Trust')
   })
 })

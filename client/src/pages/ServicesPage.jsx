@@ -181,7 +181,7 @@ export default function ServicesPage() {
                 <p className={styles.cardDesc}>{service.description}</p>
 
                 <ul className={styles.caps}>
-                  {service.capabilities.slice(0, 3).map((cap) => (
+                  {service.capabilities.slice(0, 4).map((cap) => (
                     <li key={cap} className={styles.cap}>
                       <span className={styles.capDot} style={{ background: service.color }} />
                       {cap}
