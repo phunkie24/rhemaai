@@ -5,16 +5,7 @@ const HOME_SERVICE_IDS = ['agentic-ai', 'data-engineering', 'data-science']
 const HOME_SERVICES = SERVICES.filter(s => HOME_SERVICE_IDS.includes(s.id))
 const MANAGED_SERVICES = SERVICES.find(s => s.id === 'managed-services')
 import SectionHeader from '@components/common/SectionHeader'
-import agenticMedia from '../../assets/services/agentic-ai-diagram.webp'
-import dataEngineeringMedia from '../../assets/services/data-engineering-diagram.webp'
-import dataScienceMedia from '../../assets/services/data-science-diagram.webp'
 import styles from './Services.module.css'
-
-const SERVICE_VISUALS = {
-  'agentic-ai': agenticMedia,
-  'data-engineering': dataEngineeringMedia,
-  'data-science': dataScienceMedia,
-}
 
 function ServiceCard({ service }) {
   return (
@@ -25,11 +16,6 @@ function ServiceCard({ service }) {
       {service.highlight && (
         <div className={styles.popularBadge}>Featured</div>
       )}
-
-      <div className={styles.cardMedia} aria-hidden="true">
-        <img src={SERVICE_VISUALS[service.id]} alt="" loading="lazy" decoding="async" />
-        <span>{service.icon}</span>
-      </div>
 
       <div className={styles.icon}>
         <span aria-hidden="true">{service.icon}</span>
@@ -83,8 +69,9 @@ export default function Services() {
           <div className={styles.managedCopy}>
             <h3>{MANAGED_SERVICES.title}</h3>
             <p>{MANAGED_SERVICES.description}</p>
+            {MANAGED_SERVICES.note && <p className={styles.managedNote}>{MANAGED_SERVICES.note}</p>}
           </div>
-          <Link to={`/services#${MANAGED_SERVICES.id}`} className={styles.managedLink}>
+          <Link to="/services" className={styles.managedLink}>
             Learn more<span className="sr-only"> about {MANAGED_SERVICES.title}</span>
           </Link>
         </div>

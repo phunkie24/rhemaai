@@ -113,6 +113,7 @@ export const SERVICES = [
     title: 'Managed Services',
     description:
       'Deployment is day one. We stay on to run, monitor, and optimise what we build — so your AI and data platforms keep delivering value long after go-live. Available as a monthly retainer alongside or independent of project delivery.',
+    note: 'Engage us project-by-project, or keep us on retainer to operate what we\'ve built. Senior-led, same team from architecture through operations.',
     tags: ['Azure Monitor', 'FinOps', 'SLA', 'SOC 2', 'Retainer'],
     color: '#334155',
     highlight: false,
@@ -124,6 +125,118 @@ export const SERVICES = [
       'Cost optimisation: continuous right-sizing of cloud resources, reserved instance/savings-plan management and workload-level cost attribution',
       'Ongoing application support: L2/L3 support for deployed applications, including fixes, minor enhancements, uptime monitoring and ticket-based SLAs',
       'Cloud FinOps: full FinOps practice covering budget governance, chargeback/showback models, unit economics tracking and executive cost dashboards',
+    ],
+  },
+  {
+    id: 'azure-monitoring',
+    icon: 'AM',
+    title: 'Azure Environment Monitoring',
+    description:
+      '24/7 infrastructure health monitoring, uptime/SLA tracking via Azure Monitor and Log Analytics, proactive alerting, and incident response playbooks.',
+    tags: ['Azure Monitor', 'Log Analytics', 'SLA', 'Alerting'],
+    color: '#2563EB',
+    highlight: false,
+    capabilities: [
+      '24/7 infrastructure health monitoring',
+      'Uptime and SLA tracking via Azure Monitor and Log Analytics',
+      'Proactive alerting on anomalies and threshold breaches',
+      'Incident response playbooks and escalation paths',
+    ],
+  },
+  {
+    id: 'ai-workload-management',
+    icon: 'WM',
+    title: 'AI Workload Management',
+    description:
+      'Ongoing operation of deployed agentic systems and LLM pipelines: performance tracking, retraining triggers, prompt/version control, and agent orchestration health checks.',
+    tags: ['Agentic AI', 'LLMOps', 'Prompt Versioning', 'Monitoring'],
+    color: '#4F46E5',
+    highlight: false,
+    capabilities: [
+      'Performance tracking for agentic systems and LLM pipelines',
+      'Retraining triggers based on drift and quality signals',
+      'Prompt and model version control',
+      'Agent orchestration health checks',
+    ],
+  },
+  {
+    id: 'data-platform-ops',
+    icon: 'DO',
+    title: 'Data Platform Operations',
+    description:
+      'Day-to-day running of lakehouse and warehouse environments across Databricks, Synapse, and Fabric — pipeline monitoring, job scheduling, data quality checks, schema drift detection.',
+    tags: ['Databricks', 'Synapse', 'Fabric', 'DataOps'],
+    color: '#0F766E',
+    highlight: false,
+    capabilities: [
+      'Day-to-day operation of Databricks, Synapse and Fabric environments',
+      'Pipeline monitoring and job scheduling',
+      'Data quality checks and validation',
+      'Schema drift detection',
+    ],
+  },
+  {
+    id: 'security-compliance-support',
+    icon: 'SC',
+    title: 'Security & Compliance Support',
+    description:
+      'Access control audits, vulnerability monitoring, and compliance reporting (SOC 2, GDPR, NDPR) for AI and data systems in production.',
+    tags: ['SOC 2', 'GDPR', 'NDPR', 'Access Control'],
+    color: '#B91C1C',
+    highlight: false,
+    capabilities: [
+      'Access control audits',
+      'Continuous vulnerability monitoring',
+      'Compliance reporting for SOC 2, GDPR and NDPR',
+      'Security reviews for production AI and data systems',
+    ],
+  },
+  {
+    id: 'cost-optimisation',
+    icon: 'CO',
+    title: 'Cost Optimisation',
+    description:
+      'Continuous right-sizing of cloud resources, reserved instance/savings-plan management, and workload-level cost attribution.',
+    tags: ['FinOps', 'Cost Management', 'Cloud Spend'],
+    color: '#65A30D',
+    highlight: false,
+    capabilities: [
+      'Continuous right-sizing of cloud resources',
+      'Reserved instance and savings-plan management',
+      'Workload-level cost attribution',
+      'Ongoing spend reviews and recommendations',
+    ],
+  },
+  {
+    id: 'application-support',
+    icon: 'AS',
+    title: 'Ongoing Application Support',
+    description:
+      'L2/L3 support for deployed applications — fixes, minor enhancements, uptime monitoring, ticket-based SLAs.',
+    tags: ['Support', 'SLA', 'L2/L3', 'Maintenance'],
+    color: '#0891B2',
+    highlight: false,
+    capabilities: [
+      'L2/L3 support for deployed applications',
+      'Bug fixes and minor enhancements',
+      'Uptime monitoring',
+      'Ticket-based SLAs',
+    ],
+  },
+  {
+    id: 'cloud-finops',
+    icon: 'CF',
+    title: 'Cloud FinOps',
+    description:
+      'Full FinOps practice: budget governance, chargeback/showback models, unit economics tracking, and executive cost dashboards.',
+    tags: ['FinOps', 'Budgeting', 'Chargeback', 'Dashboards'],
+    color: '#7C2D12',
+    highlight: false,
+    capabilities: [
+      'Budget governance',
+      'Chargeback and showback models',
+      'Unit economics tracking',
+      'Executive cost dashboards',
     ],
   },
   {

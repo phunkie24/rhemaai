@@ -1,8 +1,5 @@
 import { useState } from 'react'
 import SectionHeader from '@components/common/SectionHeader'
-import apaieMedia from '../../assets/case-studies/apaie-agent-designs-diagram.webp'
-import procureiqMedia from '../../assets/case-studies/procureiq-agents-diagram.webp'
-import seplatMedia from '../../assets/case-studies/seplat-edw-diagram.webp'
 import styles from './Industries.module.css'
 
 const INDUSTRIES = [
@@ -30,7 +27,6 @@ const CASE_STUDIES = [
     desc: 'SAP ECC to ADLS Gen2 to Databricks Bronze-Silver-Gold pipeline covering EAM, SRM, and SunSystems. Full medallion architecture with Azure Synapse Analytics.',
     tech: ['Databricks', 'Azure Synapse', 'SAP ECC', 'PySpark', 'ADLS Gen2'],
     metrics: '100+ tables mapped',
-    image: seplatMedia,
   },
   {
     tag: 'Enterprise AI',
@@ -38,7 +34,6 @@ const CASE_STUDIES = [
     desc: '5-agent AI system with Sourcing Intelligence, Bid Evaluation, PO Execution, Contract Intelligence, and Vendor Management agents. Full Nigerian Content compliance.',
     tech: ['Python Agents', 'FastAPI', 'Azure Gold Layer', 'Claude AI', 'MERN'],
     metrics: '5 specialist agents',
-    image: procureiqMedia,
   },
   {
     tag: 'Agentic AI',
@@ -46,7 +41,6 @@ const CASE_STUDIES = [
     desc: '378 agent designs across 5 operational clusters for oil and gas enterprise clients. Full MAS architecture with agentic design patterns.',
     tech: ['Multi-Agent Systems', 'ADAS Patterns', 'C# .NET', 'Azure', 'LLM'],
     metrics: '378 agent designs',
-    image: apaieMedia,
   },
 ]
 
@@ -84,10 +78,6 @@ export default function Industries() {
               key={cs.title}
               className={styles.caseCard}
             >
-              <div className={styles.caseMedia} aria-hidden="true">
-                <img src={cs.image} alt="" loading="lazy" decoding="async" />
-                <span>{cs.metrics}</span>
-              </div>
               <div className={styles.caseTag}>{cs.tag}</div>
               <h3 className={styles.caseTitle}>{cs.title}</h3>
               <p className={styles.caseDesc}>{cs.desc}</p>

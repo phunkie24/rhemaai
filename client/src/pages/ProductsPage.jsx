@@ -415,8 +415,32 @@ const METRICS = [
   { value: '3x', label: 'cloud delivery coverage' },
 ]
 
-function ProductCard({ product, accent, categoryName }) {
+function isInternalHref(href = '') {
+  return href.startsWith('/') && !href.startsWith('//')
+}
+
+function CardLink({ link }) {
+  if (isInternalHref(link.href)) {
+    return (
+      <Link to={link.href} className={link.className || styles.textAction}>
+        {link.label}
+      </Link>
+    )
+  }
+
+  return (
+    <a href={link.href} className={link.className || styles.textAction} target="_blank" rel="noopener noreferrer">
+      {link.label}
+    </a>
+  )
+}
+
+function ProductCard({ product, accent }) {
   const detailHref = `/products/${product.slug || product._id}`
+  const featurePreview = (product.features || []).slice(0, 3)
+  const extraFeatureCount = Math.max((product.features?.length || 0) - featurePreview.length, 0)
+  const tagPreview = (product.tags || []).filter((tag) => tag !== 'Flagship').slice(0, 3)
+  const extraTagCount = Math.max(((product.tags || []).filter((tag) => tag !== 'Flagship').length) - tagPreview.length, 0)
   const secondaryLinks = [
     product.pricing?.paystackUrl && { href: product.pricing.paystackUrl, label: 'Buy Now - Paystack', className: styles.btnPaystack },
     product.demoUrl && { href: product.demoUrl, label: 'Open demo' },
@@ -426,51 +450,65 @@ function ProductCard({ product, accent, categoryName }) {
 
   return (
     <article className={styles.productCard} style={{ '--accent': accent }}>
-      <div className={styles.pillRow}>
-        {product.featured && <span className={styles.pillFlagship}>Flagship</span>}
-        <span className={styles.pillCategory}>{categoryName}</span>
+      <div className={styles.productCardHeader}>
+        {product.featured && (
+          <div className={styles.pillRow}>
+            <span className={styles.pillFlagship}>Flagship</span>
+          </div>
+        )}
+        <h3 className={styles.productName}>
+          <Link to={detailHref}>{product.name}</Link>
+        </h3>
+        {product.kicker && <span className={styles.productKicker}>{product.kicker}</span>}
       </div>
-      <h3 className={styles.productName}>
-        <Link to={detailHref}>{product.name}</Link>
-      </h3>
-      {product.kicker && <span className={styles.productKicker}>{product.kicker}</span>}
-      <p>{product.summary || product.description}</p>
+
+      <p className={styles.productSummary}>{product.summary || product.description}</p>
 
       {product.features?.length > 0 && (
         <ul className={styles.productFeatures}>
-          {product.features.map((feature) => <li key={feature}>{feature}</li>)}
+          {featurePreview.map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
       )}
 
-      <div className={styles.tagRow}>
-        {(product.tags || []).filter((tag) => tag !== 'Flagship').map((tag) => <em key={tag}>{tag}</em>)}
-      </div>
+      {extraFeatureCount > 0 && (
+        <span className={styles.moreFeatures}>+{extraFeatureCount} more capabilities</span>
+      )}
 
-      <div className={styles.priceRow}>
-        {product.pricing?.amountNGN > 0 && (
-          <span className={styles.priceNGN}>NGN {Number(product.pricing.amountNGN).toLocaleString()}</span>
-        )}
-        {product.pricing?.amount > 0 && (
-          <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
-        )}
-        {(!product.pricing?.amount && !product.pricing?.amountNGN) && (
-          <span className={styles.priceLabel}>{product.pricing?.label || 'Contact sales'}</span>
-        )}
+      <div className={styles.productCardMeta}>
+        <div className={styles.tagRow}>
+          {tagPreview.map((tag) => <em key={tag}>{tag}</em>)}
+          {extraTagCount > 0 && <em>+{extraTagCount}</em>}
+        </div>
+
+        <div className={styles.priceRow}>
+          {product.pricing?.amountNGN > 0 && (
+            <span className={styles.priceNGN}>NGN {Number(product.pricing.amountNGN).toLocaleString()}</span>
+          )}
+          {product.pricing?.amount > 0 && (
+            <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
+          )}
+          {(!product.pricing?.amount && !product.pricing?.amountNGN) && (
+            <Link to="/contact" className={styles.priceContact}>Pricing on request</Link>
+          )}
+        </div>
       </div>
 
       {secondaryLinks.length > 0 && (
-        <div className={styles.cardActions}>
+        <div className={styles.auxActions}>
           {secondaryLinks.map((link) => (
-            <a key={link.label} href={link.href} className={link.className || styles.textAction} target="_blank" rel="noopener noreferrer">
-              {link.label}
-            </a>
+            <CardLink key={link.label} link={link} />
           ))}
         </div>
       )}
 
-      <Link to={detailHref} className={styles.productCta}>
-        View full details <span aria-hidden="true">&rarr;</span>
-      </Link>
+      <div className={styles.cardActions}>
+        <Link to={detailHref} className={styles.productCta}>
+          View details <span aria-hidden="true">&rarr;</span>
+        </Link>
+        <Link to="/contact" className={styles.salesCta}>
+          Contact sales
+        </Link>
+      </div>
     </article>
   )
 }
@@ -579,16 +617,10 @@ export default function ProductsPage() {
         ))}
       </section>
 
-      <section className={styles.section}>
-        <div className={styles.sectionHeader}>
+      <section className={`${styles.section} ${styles.productSuiteSection}`}>
+        <div className={`${styles.sectionHeader} ${styles.productSuiteHeader}`}>
           <span className={styles.eyebrow}>Product Suite</span>
-          <h2>Composable modules across seven specialist categories.</h2>
-          <p>
-            The catalogue spans agentic AI engineering, data engineering and
-            platforms, data science and analytics, cloud architecture, MLOps
-            and DataOps, enterprise software engineering, and fintech and
-            blockchain.
-          </p>
+          <h2>Composable product modules.</h2>
         </div>
 
         {activeMeta && (
@@ -606,7 +638,6 @@ export default function ProductsPage() {
                 key={product._id || product.slug || product.name}
                 product={product}
                 accent={cat?.color || '#526071'}
-                categoryName={cat?.name || product.kicker || 'Platform'}
               />
             )
           })}

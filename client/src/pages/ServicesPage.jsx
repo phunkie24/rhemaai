@@ -157,7 +157,7 @@ export default function ServicesPage() {
           </div>
 
           <div className={styles.grid}>
-            {SERVICES.map((service) => (
+            {SERVICES.filter((service) => service.id !== 'managed-services').map((service) => (
               <div
                 key={service.id}
                 id={service.id}
