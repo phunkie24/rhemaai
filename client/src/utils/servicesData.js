@@ -108,6 +108,25 @@ export const SERVICES = [
     ],
   },
   {
+    id: 'managed-services',
+    icon: 'MS',
+    title: 'Managed Services',
+    description:
+      'Deployment is day one. We stay on to run, monitor, and optimise what we build — so your AI and data platforms keep delivering value long after go-live. Available as a monthly retainer alongside or independent of project delivery.',
+    tags: ['Azure Monitor', 'FinOps', 'SLA', 'SOC 2', 'Retainer'],
+    color: '#334155',
+    highlight: false,
+    capabilities: [
+      'Azure environment monitoring: 24/7 infrastructure health, uptime/SLA tracking via Azure Monitor and Log Analytics, proactive alerting and incident response playbooks',
+      'AI workload management: ongoing operation of agentic systems and LLM pipelines, including performance tracking, retraining triggers, prompt/version control and agent orchestration health checks',
+      'Data platform operations: day-to-day running of lakehouse and warehouse environments across Databricks, Synapse and Fabric, with pipeline monitoring, job scheduling, data quality checks and schema drift detection',
+      'Security & compliance support: access control audits, vulnerability monitoring and compliance reporting (SOC 2, GDPR, NDPR) for AI and data systems in production',
+      'Cost optimisation: continuous right-sizing of cloud resources, reserved instance/savings-plan management and workload-level cost attribution',
+      'Ongoing application support: L2/L3 support for deployed applications, including fixes, minor enhancements, uptime monitoring and ticket-based SLAs',
+      'Cloud FinOps: full FinOps practice covering budget governance, chargeback/showback models, unit economics tracking and executive cost dashboards',
+    ],
+  },
+  {
     id: 'ai-advisory',
     icon: 'AV',
     title: 'AI Advisory & Governance',

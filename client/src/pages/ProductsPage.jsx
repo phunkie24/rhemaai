@@ -28,6 +28,7 @@ function catalogueProduct({
   featured = false,
   aliases = [],
   productUrl,
+  group,
 }) {
   return {
     _id: `seed-${id}`,
@@ -35,8 +36,10 @@ function catalogueProduct({
     name,
     kicker,
     category: 'platform',
+    group,
     summary,
     description: productDescription(summary, features),
+    features,
     tags,
     featured,
     aliases,
@@ -44,6 +47,23 @@ function catalogueProduct({
     pricing: { label: 'Contact sales' },
   }
 }
+
+// Colors mirror the service practice-area colors in utils/servicesData.js so
+// the products page reads as one taxonomy with the services page.
+export const PRODUCT_CATEGORIES = [
+  { id: 'agentic-ai', name: 'Agentic AI Engineering', color: '#3157D5' },
+  { id: 'data-engineering', name: 'Data Engineering & Platforms', color: '#0E9488' },
+  { id: 'data-science', name: 'Data Science & Analytics', color: '#B7791F' },
+  { id: 'cloud-architecture', name: 'Cloud Architecture', color: '#2447B8' },
+  { id: 'mlops-dataops', name: 'MLOps & DataOps', color: '#C2415D' },
+  { id: 'enterprise-software', name: 'Enterprise Software Eng.', color: '#10275F' },
+  { id: 'fintech-blockchain', name: 'FinTech & Blockchain', color: '#6F5B22' },
+]
+
+// Rhema Academy (training) and Rhema Press (publications) don't fit any
+// engineering/platform category, so they're kept in the catalogue for
+// direct product-detail links but left out of this categorised grid.
+const EXCLUDED_FROM_GRID = ['rhema-academy', 'rhema-press']
 
 function productIdentity(product) {
   return product.slug || product._id || product.name
@@ -68,6 +88,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'nexus-aos',
     slug: 'nexus-aos',
+    group: 'agentic-ai',
     name: 'Nexus AOS',
     kicker: 'Agentic Orchestration System',
     summary: 'Enterprise control plane for deploying, monitoring and governing multi-agent AI systems across complex business workflows with human-in-the-loop approvals and measurable outcomes.',
@@ -84,6 +105,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'apex-rag',
     slug: 'apex-rag',
+    group: 'agentic-ai',
     name: 'Apex RAG',
     kicker: 'Retrieval-Augmented Generation Platform',
     summary: 'Production RAG infrastructure with vector indexing, hybrid search, re-ranking pipelines and enterprise knowledge graph connectors for grounded, hallucination-controlled AI.',
@@ -98,6 +120,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'lyra-nlp',
     slug: 'lyra-nlp',
+    group: 'agentic-ai',
     name: 'Lyra NLP',
     kicker: 'NLP & Document Intelligence Platform',
     summary: 'Transform unstructured enterprise text into structured intelligence for contract analysis, document classification, semantic search and multilingual NLP across African and global markets.',
@@ -112,6 +135,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'aura-xai',
     slug: 'aura-xai',
+    group: 'agentic-ai',
     name: 'Aura XAI',
     kicker: 'Explainable AI & Model Interpretability',
     summary: 'Mathematical interpretability infrastructure for regulated AI deployments, making model predictions auditable, bias-tested and aligned with model risk standards.',
@@ -126,6 +150,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'vega-oas',
     slug: 'vega-oas',
+    group: 'data-science',
     name: 'Vega OAS',
     kicker: 'Optimisation & Analytics System',
     summary: 'Convex and nonlinear optimisation engine for enterprise decision problems across supply chain, resource scheduling, portfolio allocation and operations research.',
@@ -141,6 +166,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'prism-bi',
     slug: 'prism-bi',
+    group: 'data-science',
     name: 'Prism BI',
     kicker: 'Business Intelligence & Decision Platform',
     summary: 'AI-powered BI layer that transforms warehouse data into narrative intelligence through automated executive dashboards, natural language querying and recommendations.',
@@ -155,6 +181,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'orbit-cx',
     slug: 'orbit-cx',
+    group: 'data-science',
     name: 'Orbit CX',
     kicker: 'Customer Intelligence & Segmentation',
     summary: '360-degree customer intelligence platform with ML-driven segmentation, CLV modelling, churn prediction and AI-powered personalisation engines.',
@@ -169,6 +196,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'stratum-dx',
     slug: 'stratum-dx',
+    group: 'data-engineering',
     name: 'Stratum DX',
     kicker: 'Data Engineering & Analytics Platform',
     summary: 'Medallion lakehouse accelerator with governed ingestion, Bronze-Silver-Gold transformation layers, lineage tracking, analytics products and trusted reporting foundations.',
@@ -185,6 +213,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'flux-cdc',
     slug: 'flux-cdc',
+    group: 'data-engineering',
     name: 'Flux CDC',
     kicker: 'Real-Time Streaming & Change Data Capture',
     summary: 'High-throughput real-time data streaming platform with CDC pipelines, event-driven architecture, schema registry and exactly-once delivery guarantees.',
@@ -199,6 +228,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'meridian-dq',
     slug: 'meridian-dq',
+    group: 'data-engineering',
     name: 'Meridian DQ',
     kicker: 'Data Quality & Observability Platform',
     summary: 'Continuous data quality monitoring with rule engines, anomaly detection, pipeline observability and trust scores for full visibility into data asset health.',
@@ -213,6 +243,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'corda-fs',
     slug: 'corda-fs',
+    group: 'data-engineering',
     name: 'Corda FS',
     kicker: 'Feature Store & ML Data Platform',
     summary: 'Centralised feature store eliminating training-serving skew with versioned feature pipelines, point-in-time correctness and online/offline serving.',
@@ -227,6 +258,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'helix-lz',
     slug: 'helix-lz',
+    group: 'cloud-architecture',
     name: 'Helix LZ',
     kicker: 'Cloud Landing Zone Kit',
     summary: 'Secure, opinionated multi-cloud architecture patterns across Azure, AWS and GCP with governance rails, cost controls and GitOps pipelines from day one.',
@@ -242,6 +274,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'krato-ml',
     slug: 'krato-ml',
+    group: 'mlops-dataops',
     name: 'Krato ML',
     kicker: 'MLOps Command Stack',
     summary: 'End-to-end ML lifecycle platform covering experiment tracking, model registry, CI/CD for ML, drift monitoring and automated retraining workflows.',
@@ -257,6 +290,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'cipher-gx',
     slug: 'cipher-gx',
+    group: 'cloud-architecture',
     name: 'Cipher GX',
     kicker: 'Cybersecurity & Cloud Security Posture',
     summary: 'Unified cloud security and governance platform for continuous CSPM, Zero Trust IAM, threat detection, SIEM integration and regulatory compliance.',
@@ -271,6 +305,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'axiom-qr',
     slug: 'axiom-qr',
+    group: 'data-science',
     name: 'Axiom QR',
     kicker: 'Quantitative Research & Statistical Modelling',
     summary: 'Mathematical consulting and research platform grounded in functional analysis, statistical modelling, actuarial work and bespoke quantitative research.',
@@ -285,6 +320,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'ledger-fm',
     slug: 'ledger-fm',
+    group: 'fintech-blockchain',
     name: 'Ledger FM',
     kicker: 'Financial Mathematics & Risk Platform',
     summary: 'Quantitative finance solutions bridging stochastic calculus and production financial systems for derivatives pricing, risk modelling and portfolio optimisation.',
@@ -299,6 +335,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'sigma-im',
     slug: 'sigma-im',
+    group: 'data-science',
     name: 'Sigma IM',
     kicker: 'Industrial Mathematics & Simulation',
     summary: 'Mathematical modelling and simulation for engineering and operational problems across energy, manufacturing, logistics and physical systems.',
@@ -313,6 +350,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'volta-ei',
     slug: 'volta-ei',
+    group: 'mlops-dataops',
     name: 'Volta EI',
     kicker: 'Edge AI & IoT Intelligence Platform',
     summary: 'Deploy lightweight, compressed AI models on edge devices and IoT infrastructure for industrial monitoring, predictive maintenance and edge inference.',
@@ -327,6 +365,7 @@ export const SEED_PRODUCTS = [
   catalogueProduct({
     id: 'forge-se',
     slug: 'forge-se',
+    group: 'enterprise-software',
     name: 'Forge SE',
     kicker: 'Enterprise Software Engineering Accelerator',
     summary: 'Production-grade backend and API accelerator patterns for C# .NET, Python FastAPI and MERN systems engineered for enterprise reliability.',
@@ -376,8 +415,71 @@ const METRICS = [
   { value: '3x', label: 'cloud delivery coverage' },
 ]
 
+function ProductCard({ product, accent, categoryName }) {
+  const detailHref = `/products/${product.slug || product._id}`
+  const secondaryLinks = [
+    product.pricing?.paystackUrl && { href: product.pricing.paystackUrl, label: 'Buy Now - Paystack', className: styles.btnPaystack },
+    product.demoUrl && { href: product.demoUrl, label: 'Open demo' },
+    product.productUrl && { href: product.productUrl, label: 'View product' },
+    product.assetUrl && { href: product.assetUrl, label: 'Download package' },
+  ].filter(Boolean)
+
+  return (
+    <article className={styles.productCard} style={{ '--accent': accent }}>
+      <div className={styles.pillRow}>
+        {product.featured && <span className={styles.pillFlagship}>Flagship</span>}
+        <span className={styles.pillCategory}>{categoryName}</span>
+      </div>
+      <h3 className={styles.productName}>
+        <Link to={detailHref}>{product.name}</Link>
+      </h3>
+      {product.kicker && <span className={styles.productKicker}>{product.kicker}</span>}
+      <p>{product.summary || product.description}</p>
+
+      {product.features?.length > 0 && (
+        <ul className={styles.productFeatures}>
+          {product.features.map((feature) => <li key={feature}>{feature}</li>)}
+        </ul>
+      )}
+
+      <div className={styles.tagRow}>
+        {(product.tags || []).filter((tag) => tag !== 'Flagship').map((tag) => <em key={tag}>{tag}</em>)}
+      </div>
+
+      <div className={styles.priceRow}>
+        {product.pricing?.amountNGN > 0 && (
+          <span className={styles.priceNGN}>NGN {Number(product.pricing.amountNGN).toLocaleString()}</span>
+        )}
+        {product.pricing?.amount > 0 && (
+          <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
+        )}
+        {(!product.pricing?.amount && !product.pricing?.amountNGN) && (
+          <span className={styles.priceLabel}>{product.pricing?.label || 'Contact sales'}</span>
+        )}
+      </div>
+
+      {secondaryLinks.length > 0 && (
+        <div className={styles.cardActions}>
+          {secondaryLinks.map((link) => (
+            <a key={link.label} href={link.href} className={link.className || styles.textAction} target="_blank" rel="noopener noreferrer">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <Link to={detailHref} className={styles.productCta}>
+        View full details <span aria-hidden="true">&rarr;</span>
+      </Link>
+    </article>
+  )
+}
+
+const CATEGORY_FILTERS = [{ id: 'all', name: 'All' }, ...PRODUCT_CATEGORIES]
+
 export default function ProductsPage() {
   const [products, setProducts] = useState(SEED_PRODUCTS)
+  const [activeCategory, setActiveCategory] = useState('all')
 
   useEffect(() => {
     productsAPI.getAll({ limit: 48 })
@@ -386,6 +488,12 @@ export default function ProductsPage() {
       })
       .catch(() => { /* seed products stay visible */ })
   }, [])
+
+  const visibleProducts = products.filter((product) => !EXCLUDED_FROM_GRID.includes(product.slug))
+  const filteredProducts = activeCategory === 'all'
+    ? visibleProducts
+    : visibleProducts.filter((product) => product.group === activeCategory)
+  const activeMeta = PRODUCT_CATEGORIES.find((cat) => cat.id === activeCategory)
 
   return (
     <div className={styles.page}>
@@ -458,54 +566,55 @@ export default function ProductsPage() {
         ))}
       </section>
 
+      <section className={styles.filterBand}>
+        {CATEGORY_FILTERS.map((cat) => (
+          <button
+            key={cat.id}
+            type="button"
+            className={activeCategory === cat.id ? styles.activeFilter : ''}
+            onClick={() => setActiveCategory(cat.id)}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </section>
+
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <span className={styles.eyebrow}>Product Suite</span>
-          <h2>Composable modules across six product tiers.</h2>
+          <h2>Composable modules across seven specialist categories.</h2>
           <p>
-            The catalogue spans agentic AI, optimisation, analytics, data
-            platforms, cloud operations, security, applied mathematics and
-            enablement.
+            The catalogue spans agentic AI engineering, data engineering and
+            platforms, data science and analytics, cloud architecture, MLOps
+            and DataOps, enterprise software engineering, and fintech and
+            blockchain.
           </p>
         </div>
 
+        {activeMeta && (
+          <div className={styles.categoryLabel} style={{ '--accent': activeMeta.color }}>
+            <span>{activeMeta.name}</span>
+            <div className={styles.categoryLine} />
+          </div>
+        )}
+
         <div className={styles.productGrid}>
-          {products.map((product) => (
-            <article
-              key={product._id || product.slug || product.name}
-              className={styles.productCard}
-            >
-              <span>{product.kicker || product.category}</span>
-              <h3>
-                <Link to={`/products/${product.slug || product._id}`}>{product.name}</Link>
-              </h3>
-              <p>{product.summary || product.description}</p>
-              <div className={styles.tagRow}>
-                {(product.tags || []).map((tag) => <em key={tag}>{tag}</em>)}
-              </div>
-              <div className={styles.priceRow}>
-                {product.pricing?.amountNGN > 0 && (
-                  <span className={styles.priceNGN}>NGN {Number(product.pricing.amountNGN).toLocaleString()}</span>
-                )}
-                {product.pricing?.amount > 0 && (
-                  <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
-                )}
-                {(!product.pricing?.amount && !product.pricing?.amountNGN) && (
-                  <span className={styles.priceLabel}>{product.pricing?.label || 'Contact sales'}</span>
-                )}
-              </div>
-              <div className={styles.cardActions}>
-                <Link to={`/products/${product.slug || product._id}`} className={styles.textAction}>View details</Link>
-                {product.pricing?.paystackUrl && (
-                  <a href={product.pricing.paystackUrl} className={styles.btnPaystack} target="_blank" rel="noopener noreferrer">Buy Now - Paystack</a>
-                )}
-                {product.demoUrl && <a href={product.demoUrl} className={styles.textAction}>Open demo</a>}
-                {product.productUrl && <a href={product.productUrl} className={styles.textAction}>View product</a>}
-                {product.assetUrl && <a href={product.assetUrl} className={styles.textAction}>Download package</a>}
-              </div>
-            </article>
-          ))}
+          {filteredProducts.map((product) => {
+            const cat = PRODUCT_CATEGORIES.find((c) => c.id === product.group)
+            return (
+              <ProductCard
+                key={product._id || product.slug || product.name}
+                product={product}
+                accent={cat?.color || '#526071'}
+                categoryName={cat?.name || product.kicker || 'Platform'}
+              />
+            )
+          })}
         </div>
+
+        {filteredProducts.length === 0 && (
+          <div className={styles.stateText}>No products in this category yet.</div>
+        )}
       </section>
 
       <section className={styles.ctaBand}>

@@ -3,6 +3,7 @@ import { SERVICES } from '@utils/servicesData'
 
 const HOME_SERVICE_IDS = ['agentic-ai', 'data-engineering', 'data-science']
 const HOME_SERVICES = SERVICES.filter(s => HOME_SERVICE_IDS.includes(s.id))
+const MANAGED_SERVICES = SERVICES.find(s => s.id === 'managed-services')
 import SectionHeader from '@components/common/SectionHeader'
 import agenticMedia from '../../assets/services/agentic-ai-diagram.webp'
 import dataEngineeringMedia from '../../assets/services/data-engineering-diagram.webp'
@@ -75,6 +76,19 @@ export default function Services() {
           <ServiceCard key={service.id} service={service} />
         ))}
       </div>
+
+      {MANAGED_SERVICES && (
+        <div className={styles.managedBand} style={{ '--service-color': MANAGED_SERVICES.color }}>
+          <div className={styles.managedIcon} aria-hidden="true">{MANAGED_SERVICES.icon}</div>
+          <div className={styles.managedCopy}>
+            <h3>{MANAGED_SERVICES.title}</h3>
+            <p>{MANAGED_SERVICES.description}</p>
+          </div>
+          <Link to={`/services#${MANAGED_SERVICES.id}`} className={styles.managedLink}>
+            Learn more<span className="sr-only"> about {MANAGED_SERVICES.title}</span>
+          </Link>
+        </div>
+      )}
 
       <div className={styles.cta}>
         <Link to="/services" className={styles.allServicesBtn}>
