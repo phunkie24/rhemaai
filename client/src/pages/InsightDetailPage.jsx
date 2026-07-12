@@ -1,143 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import PageSEO from '@components/common/PageSEO'
 import { Link, useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript'
-import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
-import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
-import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash'
-import json from 'react-syntax-highlighter/dist/esm/languages/prism/json'
-import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml'
-import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
-import markup from 'react-syntax-highlighter/dist/esm/languages/prism/markup'
-import sql from 'react-syntax-highlighter/dist/esm/languages/prism/sql'
-
-SyntaxHighlighter.registerLanguage('javascript', javascript)
-SyntaxHighlighter.registerLanguage('jsx', javascript)
-SyntaxHighlighter.registerLanguage('typescript', typescript)
-SyntaxHighlighter.registerLanguage('tsx', typescript)
-SyntaxHighlighter.registerLanguage('python', python)
-SyntaxHighlighter.registerLanguage('bash', bash)
-SyntaxHighlighter.registerLanguage('shell', bash)
-SyntaxHighlighter.registerLanguage('sh', bash)
-SyntaxHighlighter.registerLanguage('json', json)
-SyntaxHighlighter.registerLanguage('yaml', yaml)
-SyntaxHighlighter.registerLanguage('css', css)
-SyntaxHighlighter.registerLanguage('html', markup)
-SyntaxHighlighter.registerLanguage('xml', markup)
-SyntaxHighlighter.registerLanguage('sql', sql)
+import MarkdownContent from '@components/common/MarkdownContent'
 import { insightsAPI } from '@utils/api'
 import { CATEGORIES, SEED_ARTICLES } from './InsightsPage'
 import styles from './ContentPage.module.css'
-
-function safeHref(value = '') {
-  const href = value.trim()
-  if (
-    href.startsWith('/') ||
-    href.startsWith('#') ||
-    href.startsWith('https://') ||
-    href.startsWith('http://') ||
-    href.startsWith('mailto:')
-  ) return href
-  return '#'
-}
-
-const MD_COMPONENTS = {
-  // Fenced code blocks (language class present) → syntax highlighted
-  // Inline code (no language class) → styled span
-  pre({ children }) {
-    return <>{children}</>
-  },
-  code({ className, children }) {
-    const match = /language-(\w+)/.exec(className || '')
-    if (match) {
-      return (
-        <SyntaxHighlighter
-          language={match[1]}
-          style={vscDarkPlus}
-          customStyle={{
-            margin: '28px 0',
-            borderRadius: '10px',
-            fontSize: '14px',
-            lineHeight: '1.65',
-          }}
-          showLineNumbers
-          wrapLongLines
-        >
-          {String(children).replace(/\n$/, '')}
-        </SyntaxHighlighter>
-      )
-    }
-    return <code className={styles.inlineCode}>{children}</code>
-  },
-
-  // Images → figure with caption (alt text becomes caption)
-  img({ src, alt }) {
-    return (
-      <figure className={styles.figure}>
-        <img src={src} alt={alt || ''} className={styles.articleImage} loading="lazy" />
-        {alt && <figcaption className={styles.figcaption}>{alt}</figcaption>}
-      </figure>
-    )
-  },
-
-  // Links — external links open in new tab safely
-  a({ href, children }) {
-    const safe = safeHref(href)
-    const isExternal = safe.startsWith('http')
-    return (
-      <a
-        href={safe}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-      >
-        {children}
-      </a>
-    )
-  },
-
-  // Tables — wrapped for horizontal scroll on mobile
-  table({ children }) {
-    return (
-      <div className={styles.tableWrap}>
-        <table className={styles.table}>{children}</table>
-      </div>
-    )
-  },
-  th({ children }) {
-    return <th className={styles.th}>{children}</th>
-  },
-  td({ children }) {
-    return <td className={styles.td}>{children}</td>
-  },
-
-  // Blockquote
-  blockquote({ children }) {
-    return <blockquote className={styles.blockquote}>{children}</blockquote>
-  },
-
-  // Headings — cap at h2 so SEO h1 remains the article title
-  h1({ children }) {
-    return <h2 className={styles.articleH2}>{children}</h2>
-  },
-  h2({ children }) {
-    return <h2 className={styles.articleH2}>{children}</h2>
-  },
-  h3({ children }) {
-    return <h3 className={styles.articleH3}>{children}</h3>
-  },
-  h4({ children }) {
-    return <h4 className={styles.articleH4}>{children}</h4>
-  },
-
-  // Horizontal rule
-  hr() {
-    return <hr className={styles.hr} />
-  },
-}
 
 const BODY_SECTIONS = [
   {
@@ -232,9 +99,9 @@ export default function InsightDetailPage() {
           <div className={styles.detailLayout}>
             <div className={styles.detailMain}>
               {content ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>
+                <MarkdownContent>
                   {content}
-                </ReactMarkdown>
+                </MarkdownContent>
               ) : (
                 <>
                   <p>
@@ -265,9 +132,9 @@ export default function InsightDetailPage() {
       ) : (
         <article className={styles.article}>
           {content ? (
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>
+            <MarkdownContent>
               {content}
-            </ReactMarkdown>
+            </MarkdownContent>
           ) : (
             <>
               <p>

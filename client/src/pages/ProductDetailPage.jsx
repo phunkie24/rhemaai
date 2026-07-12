@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import MarkdownContent from '@components/common/MarkdownContent'
 import PageSEO from '@components/common/PageSEO'
 import { productsAPI } from '@utils/api'
 import { SEED_PRODUCTS } from './ProductsPage'
@@ -89,9 +88,9 @@ export default function ProductDetailPage() {
           <article className={styles.detailMain}>
             <h2>Overview</h2>
             {description ? (
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <MarkdownContent>
                 {description}
-              </ReactMarkdown>
+              </MarkdownContent>
             ) : (
               <p>
                 This product is designed as a reusable enterprise accelerator for AI,

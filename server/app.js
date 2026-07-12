@@ -14,6 +14,8 @@ import caseStudiesRoutes from './routes/caseStudies.js'
 import coursesRoutes from './routes/courses.js'
 import adminRoutes from './routes/admin.js'
 import webhookRoutes from './routes/webhooks.js'
+import sitemapRoutes from './routes/sitemap.js'
+import prerenderRoutes from './routes/prerender.js'
 
 const app = express()
 
@@ -68,6 +70,12 @@ app.use('/api/products', productsRoutes)
 app.use('/api/case-studies', caseStudiesRoutes)
 app.use('/api/courses', coursesRoutes)
 app.use('/api/admin', adminRoutes)
+app.use('/api/sitemap.xml', sitemapRoutes)
+
+// Bot-only prerendered meta tags for page routes (see routes/prerender.js).
+// nginx only proxies known crawler user agents here — real users never hit
+// this in production; it's mounted at the root so paths match the SPA's.
+app.use('/', prerenderRoutes)
 
 // Swagger UI — dynamic import keeps swagger-jsdoc out of Jest's module graph
 if (process.env.NODE_ENV !== 'test') {

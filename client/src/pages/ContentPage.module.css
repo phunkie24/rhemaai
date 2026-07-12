@@ -260,6 +260,21 @@
   padding-left: 4px;
 }
 
+.article li:has(input[type='checkbox']),
+.content li:has(input[type='checkbox']) {
+  list-style: none;
+  padding-left: 0;
+}
+
+.article input[type='checkbox'],
+.content input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  margin: 0 8px 0 -22px;
+  accent-color: var(--accent-teal);
+  vertical-align: -2px;
+}
+
 .article strong,
 .content strong {
   color: var(--text-primary);
@@ -293,6 +308,25 @@
   font-size: 0.92em;
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
   font-weight: 700;
+}
+
+.codeBlock {
+  overflow-x: auto;
+  margin: 28px 0;
+  padding: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 10px;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.codeBlock code {
+  color: inherit;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
 }
 
 /* ── Article headings (used by MD_COMPONENTS) ── */

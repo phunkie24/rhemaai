@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import MarkdownContent from '@components/common/MarkdownContent'
 import PageSEO from '@components/common/PageSEO'
 import { publicationsAPI } from '@utils/api'
 import { SEED_PUBLICATIONS } from './PublicationsPage'
@@ -91,9 +90,9 @@ export default function PublicationDetailPage() {
         <div className={styles.detailLayout}>
           <article className={styles.detailMain}>
             {body ? (
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <MarkdownContent>
                 {body}
-              </ReactMarkdown>
+              </MarkdownContent>
             ) : (
               <>
                 <h2>About this publication</h2>
