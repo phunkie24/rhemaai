@@ -162,18 +162,13 @@ export default function ServicesPage() {
                 key={service.id}
                 id={service.id}
                 className={`${styles.card} ${service.highlight ? styles.cardFeatured : ''}`}
+                style={{ '--service-color': service.color }}
               >
                 {service.highlight && (
                   <span className={styles.featuredBadge}>Featured</span>
                 )}
 
-                <div
-                  className={styles.cardIcon}
-                  style={{
-                    background: service.color + '1A',
-                    borderColor: service.color + '40',
-                  }}
-                >
+                <div className={styles.cardIcon}>
                   {service.icon}
                 </div>
 
@@ -183,7 +178,7 @@ export default function ServicesPage() {
                 <ul className={styles.caps}>
                   {service.capabilities.slice(0, 4).map((cap) => (
                     <li key={cap} className={styles.cap}>
-                      <span className={styles.capDot} style={{ background: service.color }} />
+                      <span className={styles.capDot} />
                       {cap}
                     </li>
                   ))}
@@ -198,7 +193,6 @@ export default function ServicesPage() {
                 <Link
                   to="/contact"
                   className={styles.cardLink}
-                  style={{ color: service.color }}
                 >
                   Start a conversation
                 </Link>

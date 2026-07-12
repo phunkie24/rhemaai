@@ -407,42 +407,85 @@
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #d6e4ef;
-  border-radius: var(--radius-xl);
+  --edge-soft: color-mix(in srgb, var(--service-color), transparent 84%);
+  --edge-mid: color-mix(in srgb, var(--service-color), white 18%);
+  --edge-dark: color-mix(in srgb, var(--service-color), black 32%);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 93%) 0%, #fff 42%, #fff 100%);
+  border: 1px solid color-mix(in srgb, var(--service-color), white 68%);
+  border-top: 7px solid var(--edge-mid);
+  border-left: 5px solid color-mix(in srgb, var(--service-color), white 24%);
+  border-radius: 8px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.07);
+  isolation: isolate;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset -8px -8px 0 rgba(15, 23, 42, 0.035),
+    8px 9px 0 var(--edge-soft),
+    0 18px 46px rgba(15, 23, 42, 0.075);
   transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--service-color), transparent 18%) 0 7px, transparent 7px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, transparent 42%),
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--service-color), transparent 78%) 0%, transparent 44%);
+  pointer-events: none;
 }
 
 .card::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 0%, rgba(14, 148, 136, 0.08) 45%, transparent 78%);
-  transform: translateX(-110%);
-  transition: transform 0.7s ease;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 92px;
+  height: 92px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 48%,
+    color-mix(in srgb, var(--edge-dark), transparent 8%) 49%,
+    color-mix(in srgb, var(--service-color), white 18%) 100%
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  opacity: 0.42;
+  transform-origin: bottom right;
+  transition: opacity var(--transition-base), transform var(--transition-base);
   pointer-events: none;
 }
 
 .card:hover {
-  border-color: var(--border-mid);
-  box-shadow: var(--glow-md);
-  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--service-color), white 44%);
+  border-top-color: color-mix(in srgb, var(--service-color), white 26%);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 1),
+    inset -8px -8px 0 rgba(15, 23, 42, 0.045),
+    12px 13px 0 color-mix(in srgb, var(--service-color), transparent 80%),
+    0 28px 64px color-mix(in srgb, var(--service-color), transparent 78%),
+    0 18px 46px rgba(15, 23, 42, 0.1);
+  transform: translate(-2px, -7px);
 }
 
 .card:hover::after {
-  transform: translateX(110%);
+  opacity: 0.7;
+  transform: scale(1.06);
 }
 
 .cardFeatured {
-  border-color: var(--border-mid);
-  background: linear-gradient(150deg, #fff 0%, var(--brand-50) 100%);
+  border-color: color-mix(in srgb, var(--service-color), white 50%);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 88%) 0%, #fff 50%, #fff 100%);
 }
 
 .featuredBadge {
@@ -454,18 +497,22 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--brand-600);
-  background: var(--brand-50);
-  border: 1px solid var(--border-mid);
+  color: #fff;
+  background: linear-gradient(135deg, var(--service-color), color-mix(in srgb, var(--service-color), white 26%));
+  border: 1px solid rgba(255, 255, 255, 0.66);
   padding: 3px 10px;
   border-radius: var(--radius-full);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--service-color), transparent 70%);
 }
 
 .cardIcon {
   width: 52px;
   height: 52px;
-  border-radius: var(--radius-md);
-  border: 1px solid;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--service-color), white 48%);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 82%), color-mix(in srgb, var(--service-color), white 95%));
+  color: var(--service-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -473,6 +520,12 @@
   font-size: 15px;
   font-weight: 900;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+    0 7px 0 color-mix(in srgb, var(--service-color), transparent 78%),
+    0 14px 28px rgba(15, 23, 42, 0.08);
 }
 
 .cardTitle {
@@ -482,6 +535,8 @@
   color: var(--text-primary);
   line-height: 1.25;
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .cardDesc {
@@ -489,6 +544,8 @@
   color: var(--text-secondary);
   line-height: 1.65;
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .caps {
@@ -498,6 +555,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 .cap {
@@ -513,6 +572,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  background: var(--service-color);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--service-color), transparent 88%);
   flex-shrink: 0;
   margin-top: 5px;
 }
@@ -522,14 +583,17 @@
   flex-wrap: wrap;
   gap: 6px;
   margin-top: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .tag {
   font-size: 10px;
   font-weight: 600;
   padding: 4px 10px;
-  background: var(--gray-50);
-  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--service-color), transparent 91%);
+  color: color-mix(in srgb, var(--service-color), black 16%);
+  border: 1px solid color-mix(in srgb, var(--service-color), transparent 78%);
   border-radius: var(--radius-full);
 }
 
@@ -539,12 +603,25 @@
   gap: 4px;
   font-size: var(--text-sm);
   font-weight: 700;
+  color: var(--service-color);
   text-decoration: none;
   transition: gap var(--transition-fast);
+  position: relative;
+  z-index: 1;
+}
+
+.cardLink::after {
+  content: '>';
+  transition: transform var(--transition-fast);
 }
 
 .cardLink:hover {
   gap: 10px;
+  color: color-mix(in srgb, var(--service-color), black 18%);
+}
+
+.cardLink:hover::after {
+  transform: translateX(3px);
 }
 
 @keyframes livePulse {

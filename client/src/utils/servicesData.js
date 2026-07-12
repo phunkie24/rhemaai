@@ -6,7 +6,7 @@ export const SERVICES = [
     description:
       'Design and deploy governed multi-agent systems, LLM orchestration pipelines, RAG architectures, AI copilots, and enterprise automation workflows.',
     tags: ['ADAS', 'LangGraph', 'MCP', 'RAG', 'LLM', 'AutoGen'],
-    color: '#3157D5',
+    color: '#0B5AA5',
     highlight: true,
     capabilities: [
       'Multi-agent orchestration (ADAS)',
@@ -24,7 +24,7 @@ export const SERVICES = [
     description:
       'Production LLM architecture covering foundation model selection, prompt engineering, domain fine-tuning, evaluation frameworks, GenAI safety guardrails, and deployment observability.',
     tags: ['GPT-4o', 'Claude', 'Gemini', 'Llama', 'LangChain', 'RAGAS'],
-    color: '#7C3AED',
+    color: '#7300CC',
     highlight: true,
     capabilities: [
       'Foundation model selection & benchmarking',
@@ -42,7 +42,7 @@ export const SERVICES = [
     description:
       'Medallion lakehouse architectures, high-throughput ETL/ELT pipelines, real-time Spark/Kafka processing, Databricks, Synapse, and enterprise warehouse modernisation.',
     tags: ['Databricks', 'Synapse', 'Delta Lake', 'Kafka', 'Airflow'],
-    color: '#0E9488',
+    color: '#0D6DCA',
     highlight: true,
     capabilities: [
       'Bronze-Silver-Gold medallion architecture',
@@ -60,7 +60,7 @@ export const SERVICES = [
     description:
       'Predictive modelling, statistical analysis, demand forecasting, customer intelligence, prescriptive optimisation, and executive-grade decision intelligence.',
     tags: ['Predictive', 'Forecasting', 'Statistical ML', 'Power BI', 'Python'],
-    color: '#B7791F',
+    color: '#5A1098',
     highlight: true,
     capabilities: [
       'Predictive & prescriptive modelling',
@@ -78,7 +78,7 @@ export const SERVICES = [
     description:
       'Multi-cloud architecture across Azure, AWS and GCP with Infrastructure-as-Code, Kubernetes orchestration, DevOps/GitOps pipelines, security controls, and cost governance.',
     tags: ['Azure', 'AWS', 'GCP', 'Kubernetes', 'Terraform'],
-    color: '#2447B8',
+    color: '#1515D8',
     highlight: false,
     capabilities: [
       'Azure, AWS and GCP certified architecture',
@@ -96,7 +96,7 @@ export const SERVICES = [
     description:
       'End-to-end ML lifecycle management with experiment tracking, model registry, CI/CD for ML, drift monitoring, feature stores, and DataOps governance frameworks.',
     tags: ['MLflow', 'AzureML', 'SageMaker', 'CI/CD', 'Feature Store'],
-    color: '#C2415D',
+    color: '#A5009D',
     highlight: false,
     capabilities: [
       'ML pipeline automation',
@@ -115,7 +115,7 @@ export const SERVICES = [
       'Deployment is day one. We stay on to run, monitor, and optimise what we build — so your AI and data platforms keep delivering value long after go-live. Available as a monthly retainer alongside or independent of project delivery.',
     note: 'Engage us project-by-project, or keep us on retainer to operate what we\'ve built. Senior-led, same team from architecture through operations.',
     tags: ['Azure Monitor', 'FinOps', 'SLA', 'SOC 2', 'Retainer'],
-    color: '#334155',
+    color: '#3A3AF2',
     highlight: false,
     capabilities: [
       'Azure environment monitoring: 24/7 infrastructure health, uptime/SLA tracking via Azure Monitor and Log Analytics, proactive alerting and incident response playbooks',
@@ -134,7 +134,7 @@ export const SERVICES = [
     description:
       '24/7 infrastructure health monitoring, uptime/SLA tracking via Azure Monitor and Log Analytics, proactive alerting, and incident response playbooks.',
     tags: ['Azure Monitor', 'Log Analytics', 'SLA', 'Alerting'],
-    color: '#2563EB',
+    color: '#118CF2',
     highlight: false,
     capabilities: [
       '24/7 infrastructure health monitoring',
@@ -150,7 +150,7 @@ export const SERVICES = [
     description:
       'Ongoing operation of deployed agentic systems and LLM pipelines: performance tracking, retraining triggers, prompt/version control, and agent orchestration health checks.',
     tags: ['Agentic AI', 'LLMOps', 'Prompt Versioning', 'Monitoring'],
-    color: '#4F46E5',
+    color: '#3A3AF2',
     highlight: false,
     capabilities: [
       'Performance tracking for agentic systems and LLM pipelines',
@@ -166,7 +166,7 @@ export const SERVICES = [
     description:
       'Day-to-day running of lakehouse and warehouse environments across Databricks, Synapse, and Fabric — pipeline monitoring, job scheduling, data quality checks, schema drift detection.',
     tags: ['Databricks', 'Synapse', 'Fabric', 'DataOps'],
-    color: '#0F766E',
+    color: '#3B9AF2',
     highlight: false,
     capabilities: [
       'Day-to-day operation of Databricks, Synapse and Fabric environments',
@@ -182,7 +182,7 @@ export const SERVICES = [
     description:
       'Access control audits, vulnerability monitoring, and compliance reporting (SOC 2, GDPR, NDPR) for AI and data systems in production.',
     tags: ['SOC 2', 'GDPR', 'NDPR', 'Access Control'],
-    color: '#B91C1C',
+    color: '#D00567',
     highlight: false,
     capabilities: [
       'Access control audits',
@@ -198,7 +198,7 @@ export const SERVICES = [
     description:
       'Continuous right-sizing of cloud resources, reserved instance/savings-plan management, and workload-level cost attribution.',
     tags: ['FinOps', 'Cost Management', 'Cloud Spend'],
-    color: '#65A30D',
+    color: '#9632F2',
     highlight: false,
     capabilities: [
       'Continuous right-sizing of cloud resources',
@@ -214,7 +214,7 @@ export const SERVICES = [
     description:
       'L2/L3 support for deployed applications — fixes, minor enhancements, uptime monitoring, ticket-based SLAs.',
     tags: ['Support', 'SLA', 'L2/L3', 'Maintenance'],
-    color: '#0891B2',
+    color: '#66B0F2',
     highlight: false,
     capabilities: [
       'L2/L3 support for deployed applications',
@@ -230,7 +230,7 @@ export const SERVICES = [
     description:
       'Full FinOps practice: budget governance, chargeback/showback models, unit economics tracking, and executive cost dashboards.',
     tags: ['FinOps', 'Budgeting', 'Chargeback', 'Dashboards'],
-    color: '#7C2D12',
+    color: '#A00447',
     highlight: false,
     capabilities: [
       'Budget governance',
@@ -246,7 +246,7 @@ export const SERVICES = [
     description:
       'AI readiness assessment, transformation roadmaps, responsible AI policy, model risk management, regulatory compliance, and board-level AI governance for enterprise programmes.',
     tags: ['AI Strategy', 'Responsible AI', 'EU AI Act', 'NIST RMF', 'Model Risk', 'Governance'],
-    color: '#047857',
+    color: '#8A0CF2',
     highlight: false,
     capabilities: [
       'AI readiness & opportunity mapping',
@@ -264,7 +264,7 @@ export const SERVICES = [
     description:
       'Production-grade backend systems, REST and GraphQL APIs, microservices, and SaaS platforms in C# .NET, Python FastAPI, and Node.js, built for enterprise scale.',
     tags: ['C# .NET', 'FastAPI', 'MERN', 'Microservices', 'GraphQL'],
-    color: '#10275F',
+    color: '#0B5AA5',
     highlight: false,
     capabilities: [
       'C# ASP.NET Core 10 systems',
@@ -282,7 +282,7 @@ export const SERVICES = [
     description:
       'Digital finance platforms, payment integrations, blockchain services, Web3 APIs, and regulatory-aware financial technology solutions for secure transaction flows.',
     tags: ['Solidity', 'Ethereum', 'Web3', 'DeFi', 'Payments'],
-    color: '#6F5B22',
+    color: '#A5009D',
     highlight: false,
     capabilities: [
       'Ethereum smart contract development',
@@ -300,7 +300,7 @@ export const SERVICES = [
     description:
       'AI-augmented digital marketing across the channels that matter, from LinkedIn B2B outreach and YouTube content strategy to email automation and paid social campaigns.',
     tags: ['LinkedIn', 'YouTube', 'Facebook', 'Instagram', 'Email'],
-    color: '#0EA5E9',
+    color: '#0D6DCA',
     highlight: false,
     capabilities: [
       'LinkedIn thought leadership & B2B outreach',
@@ -316,7 +316,7 @@ export const SERVICES = [
     description:
       'Protect your cloud infrastructure and enterprise systems with security architecture, compliance auditing, IAM design, and continuous threat monitoring across AWS, Azure, and GCP.',
     tags: ['AWS', 'Azure', 'GCP', 'Zero Trust', 'SIEM'],
-    color: '#F43F5E',
+    color: '#FA0C75',
     highlight: false,
     capabilities: [
       'Cloud security posture management (CSPM)',
@@ -332,7 +332,7 @@ export const SERVICES = [
     description:
       'Rigorous statistical methods applied to complex enterprise datasets, from exploratory analysis and hypothesis testing to Bayesian inference and high-dimensional data modelling.',
     tags: ['Python', 'R', 'Bayesian', 'Hypothesis Testing', 'SciPy'],
-    color: '#06B6D4',
+    color: '#118CF2',
     highlight: false,
     capabilities: [
       'Descriptive & inferential statistics',
@@ -348,7 +348,7 @@ export const SERVICES = [
     description:
       'Translate complex engineering and operational problems into mathematical models, driving process optimisation, simulation, and evidence-based decisions across energy, manufacturing, and logistics.',
     tags: ['Optimisation', 'Simulation', 'ODE / PDE', 'Numerical Methods', 'SciPy'],
-    color: '#84CC16',
+    color: '#5A1098',
     highlight: false,
     capabilities: [
       'Mathematical modelling & simulation',
@@ -364,7 +364,7 @@ export const SERVICES = [
     description:
       'Quantitative finance solutions for pricing, risk, and portfolio problems, bridging stochastic calculus and functional analysis with production-grade financial systems.',
     tags: ['Stochastic Calculus', 'Monte Carlo', 'VaR / CVaR', 'Quant Finance', 'QuantLib'],
-    color: '#F97316',
+    color: '#A00447',
     highlight: false,
     capabilities: [
       'Derivatives pricing & stochastic modelling',
@@ -380,7 +380,7 @@ export const SERVICES = [
     description:
       'Mathematical interpretability frameworks for AI models deployed in regulated industries, making black-box predictions auditable, defensible, and compliant with emerging AI regulation.',
     tags: ['SHAP', 'LIME', 'Fairness', 'EU AI Act', 'Model Audit'],
-    color: '#A78BFA',
+    color: '#9632F2',
     highlight: false,
     capabilities: [
       'SHAP, LIME & feature attribution analysis',
@@ -396,7 +396,7 @@ export const SERVICES = [
     description:
       'Transform unstructured text into enterprise knowledge through contract analysis, multilingual NLP, document classification, and semantic search systems tailored for African and global markets.',
     tags: ['Transformers', 'spaCy', 'Semantic Search', 'HuggingFace', 'NER'],
-    color: '#34D399',
+    color: '#6366F1',
     highlight: false,
     capabilities: [
       'Contract & document intelligence pipelines',
@@ -412,7 +412,7 @@ export const SERVICES = [
     description:
       'Enterprise upskilling programmes in AI, data engineering, cloud, and advanced mathematics, delivered by practitioners with real production experience and graduate-level mathematical depth.',
     tags: ['Bootcamp', 'Corporate Training', 'AI Upskilling', 'Workshops', 'Certification'],
-    color: '#FBBF24',
+    color: '#CE0DCC',
     highlight: false,
     capabilities: [
       'Agentic AI & LLM engineering bootcamps',
@@ -428,7 +428,7 @@ export const SERVICES = [
     description:
       'Mathematical consulting for organisations that need rigorous quantitative foundations, including actuarial modelling, applied functional analysis, and bespoke research for complex scientific and business problems.',
     tags: ['Functional Analysis', 'Actuarial', 'Research', 'Applied Math', 'Consulting'],
-    color: '#E879F9',
+    color: '#A5009D',
     highlight: false,
     capabilities: [
       'Functional analysis & operator theory applications',
@@ -444,7 +444,7 @@ export const SERVICES = [
     description:
       'Deploy lightweight AI models directly on edge devices and IoT infrastructure, enabling real-time industrial monitoring, predictive maintenance, and low-latency intelligence at the network edge.',
     tags: ['Edge AI', 'TensorFlow Lite', 'ONNX', 'IoT', 'MQTT'],
-    color: '#38BDF8',
+    color: '#3B9AF2',
     highlight: false,
     capabilities: [
       'Edge model compression & quantisation',

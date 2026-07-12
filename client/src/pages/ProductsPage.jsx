@@ -53,7 +53,7 @@ function catalogueProduct({
 export const PRODUCT_CATEGORIES = [
   { id: 'agentic-ai', name: 'Agentic AI Engineering', color: '#3157D5' },
   { id: 'data-engineering', name: 'Data Engineering & Platforms', color: '#0E9488' },
-  { id: 'data-science', name: 'Data Science & Analytics', color: '#B7791F' },
+  { id: 'data-science', name: 'Data Science & Analytics', color: '#7C3AED' },
   { id: 'cloud-architecture', name: 'Cloud Architecture', color: '#2447B8' },
   { id: 'mlops-dataops', name: 'MLOps & DataOps', color: '#C2415D' },
   { id: 'enterprise-software', name: 'Enterprise Software Eng.', color: '#10275F' },
