@@ -45,7 +45,7 @@ const options = {
           type: 'object',
           required: ['name', 'email', 'message'],
           properties: {
-            name:    { type: 'string', minLength: 2, maxLength: 100, example: 'Funke Yusuf' },
+            name:    { type: 'string', minLength: 2, maxLength: 100, example: 'Funke R. Yusuf' },
             email:   { type: 'string', format: 'email', example: 'funke@company.com' },
             company: { type: 'string', maxLength: 150, example: 'Acme Enterprises Ltd' },
             service: {

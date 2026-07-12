@@ -59,7 +59,7 @@ export default function WhyUs() {
       <div className={styles.inner}>
         <div className={styles.visual}>
           <div className={styles.visualImageCard}>
-            <img src={founderMedia} alt="Funke Yusuf" loading="lazy" decoding="async" />
+            <img src={founderMedia} alt="Funke R. Yusuf" loading="lazy" decoding="async" />
             <div>
               <span>Senior-led delivery</span>
               <strong>Architecture grounded in mathematics and production reality</strong>

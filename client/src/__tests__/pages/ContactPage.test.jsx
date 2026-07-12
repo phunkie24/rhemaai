@@ -29,7 +29,7 @@ describe('ContactPage', () => {
 
   it('renders all form fields', () => {
     render(<ContactPage />)
-    expect(screen.getByPlaceholderText(/Funke Yusuf/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/Funke R\. Yusuf/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/you@company\.com/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/Acme Enterprises/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/Tell us about your project/i)).toBeInTheDocument()
@@ -65,7 +65,7 @@ describe('ContactPage', () => {
     mockSubmit.mockResolvedValueOnce({ success: true })
     render(<ContactPage />)
 
-    await user.type(screen.getByPlaceholderText(/Funke Yusuf/i), 'Amaka Okafor')
+    await user.type(screen.getByPlaceholderText(/Funke R\. Yusuf/i), 'Amaka Okafor')
     await user.type(screen.getByPlaceholderText(/you@company\.com/i), 'amaka@corp.ng')
     await user.type(
       screen.getByPlaceholderText(/Tell us about your project/i),
@@ -85,7 +85,7 @@ describe('ContactPage', () => {
     mockSubmit.mockRejectedValueOnce(new Error('Server error'))
     render(<ContactPage />)
 
-    await user.type(screen.getByPlaceholderText(/Funke Yusuf/i), 'Amaka')
+    await user.type(screen.getByPlaceholderText(/Funke R\. Yusuf/i), 'Amaka')
     await user.type(screen.getByPlaceholderText(/you@company\.com/i), 'amaka@corp.ng')
     await user.type(
       screen.getByPlaceholderText(/Tell us about your project/i),
@@ -104,7 +104,7 @@ describe('ContactPage', () => {
     mockSubmit.mockResolvedValueOnce({ success: true })
     render(<ContactPage />)
 
-    await user.type(screen.getByPlaceholderText(/Funke Yusuf/i), 'Test User')
+    await user.type(screen.getByPlaceholderText(/Funke R\. Yusuf/i), 'Test User')
     await user.type(screen.getByPlaceholderText(/you@company\.com/i), 'test@test.com')
     await user.type(
       screen.getByPlaceholderText(/Tell us about your project/i),
@@ -130,7 +130,7 @@ describe('ContactPage', () => {
     )
     render(<ContactPage />)
 
-    await user.type(screen.getByPlaceholderText(/Funke Yusuf/i), 'Test')
+    await user.type(screen.getByPlaceholderText(/Funke R\. Yusuf/i), 'Test')
     await user.type(screen.getByPlaceholderText(/you@company\.com/i), 'test@test.com')
     await user.type(
       screen.getByPlaceholderText(/Tell us about your project/i),

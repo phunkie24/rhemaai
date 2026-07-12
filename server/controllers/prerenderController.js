@@ -91,7 +91,7 @@ const STATIC_PAGES = {
   },
   '/about': {
     title: 'About RhemaAI Solutions Ltd | Enterprise AI & Data Engineering Firm Nigeria',
-    description: 'RhemaAI Solutions Ltd is a Nigeria-based enterprise AI and data engineering consultancy led by Funke Yusuf. Azure, AWS and GCP certified. 10,000+ agentic AI implementations across fintech, energy, healthcare and manufacturing globally.',
+    description: 'RhemaAI Solutions Ltd is a Nigeria-based enterprise AI and data engineering consultancy led by Funke R. Yusuf. Azure, AWS and GCP certified. 10,000+ agentic AI implementations across fintech, energy, healthcare and manufacturing globally.',
   },
   '/insights': {
     title: 'AI & Data Engineering Research | RhemaAI Labs',

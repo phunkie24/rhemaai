@@ -62,16 +62,16 @@ export default function AboutPage() {
     <>
       <PageSEO
         title="About RhemaAI Solutions Ltd | Enterprise AI & Data Engineering Firm Nigeria"
-        description="RhemaAI Solutions Ltd is a Nigeria-based enterprise AI and data engineering consultancy led by Funke Yusuf. Azure, AWS and GCP certified. 10,000+ agentic AI implementations across fintech, energy, healthcare and manufacturing globally."
-        keywords="RhemaAI Solutions Nigeria, AI consulting firm Africa, data engineering company Nigeria, Funke Yusuf AI expert, enterprise AI consulting Lagos, agentic AI pioneer, Azure certified consultant"
+        description="RhemaAI Solutions Ltd is a Nigeria-based enterprise AI and data engineering consultancy led by Funke R. Yusuf. Azure, AWS and GCP certified. 10,000+ agentic AI implementations across fintech, energy, healthcare and manufacturing globally."
+        keywords="RhemaAI Solutions Nigeria, AI consulting firm Africa, data engineering company Nigeria, Funke R. Yusuf AI expert, enterprise AI consulting Lagos, agentic AI pioneer, Azure certified consultant"
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'Person',
-          name: 'Funke Yusuf',
+          name: 'Funke R. Yusuf',
           jobTitle: 'Founder & Chief AI Engineer',
           worksFor: { '@type': 'Organization', name: 'RhemaAI Solutions Ltd', url: 'https://rhemaaisolutions.tech' },
           url: 'https://rhemaaisolutions.tech/about',
-          knowsAbout: ['Agentic AI', 'Data Engineering', 'Machine Learning', 'Azure Cloud', 'Data Science', 'Business Intelligence', 'MLOps'],
+          knowsAbout: ['Agentic AI', 'Data Engineering', 'Machine Learning', 'Azure Cloud', 'Data Science', 'Business Intelligence', 'MLOps', 'Functional Analysis', 'Predictive Analytics'],
         }}
       />
 
@@ -133,16 +133,16 @@ export default function AboutPage() {
         <div className="container">
           <div className={styles.founderInner}>
             <div className={styles.founderPhotoWrap}>
-              <img src={founderPhoto} alt="Funke Yusuf" className={styles.founderPhoto} loading="lazy" decoding="async" />
+              <img src={founderPhoto} alt="Funke R. Yusuf" className={styles.founderPhoto} loading="lazy" decoding="async" />
               <div className={styles.founderPhotoBorder} />
             </div>
             <div className={styles.founderCopy}>
               <span className={styles.sectionLabel}>Leadership</span>
-              <h2 className={styles.founderName}>Funke Yusuf</h2>
+              <h2 className={styles.founderName}>Funke R. Yusuf</h2>
               <p className={styles.founderRole}>Data &amp; AI Architect &nbsp;·&nbsp; Enterprise AI Consultant &nbsp;·&nbsp; Founder, RhemaAI</p>
               <div className={styles.founderDivider} />
               <p className={styles.founderBio}>
-                Funke founded RhemaAI Solutions Ltd to bring rigorous, mathematics-backed AI and data engineering
+                Funke R. Yusuf founded RhemaAI Solutions Ltd to bring rigorous, mathematics-backed AI and data engineering
                 to enterprise organisations across Africa, Europe, and beyond. With certifications across Azure,
                 AWS, and GCP, and hands-on delivery of 10,000+ agentic AI patterns, she leads every engagement
                 from architecture through to production.
@@ -150,6 +150,8 @@ export default function AboutPage() {
               <div className={styles.founderTags}>
                 <span>Applied Mathematics</span>
                 <span>Agentic AI</span>
+                <span>Functional Analysis</span>
+                <span>Predictive Analytics</span>
                 <span>Data Lakehouse</span>
                 <span>Cloud Architecture</span>
                 <span>MLOps</span>

@@ -132,7 +132,7 @@ export default function ContactPage() {
                     <label>Full Name *</label>
                     <input
                       {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Minimum 2 characters' } })}
-                      placeholder="Funke Yusuf"
+                      placeholder="Funke R. Yusuf"
                       className={errors.name ? styles.inputError : ''}
                     />
                     {errors.name && <span className={styles.errorMsg}>{errors.name.message}</span>}
