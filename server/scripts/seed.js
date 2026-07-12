@@ -739,19 +739,43 @@ async function seed() {
     await connectDB()
     console.log('🌱 Connected to database. Starting seed...')
 
-    await Insight.deleteMany({})
-    await Subscriber.deleteMany({})
-    await Contact.deleteMany({})
-    console.log('🗑  Cleared existing data')
+    // Upsert-by-slug, never delete: this script must be safe to re-run
+    // against a database that already has real content in it (articles
+    // uploaded via the admin panel, real subscribers, real contact
+    // submissions). $setOnInsert only writes fields when INSERTING a new
+    // document — it never touches or overwrites an existing one.
+    await Promise.all(insights.map((insight) => (
+      Insight.updateOne(
+        { slug: insight.slug },
+        { $setOnInsert: insight },
+        { upsert: true }
+      )
+    )))
+    console.log(`Verified ${insights.length} insights`)
 
-    await Insight.insertMany(insights)
-    console.log(`✅ Seeded ${insights.length} insights`)
+    // Subscribers and Contacts below are fake demo records (test emails,
+    // test enquiries) — never inserted unless --demo is passed explicitly.
+    // They must never run against a database holding real subscribers or
+    // real customer enquiries.
+    if (process.argv.includes('--demo')) {
+      await Promise.all(subscribers.map((subscriber) => (
+        Subscriber.updateOne(
+          { email: subscriber.email },
+          { $setOnInsert: subscriber },
+          { upsert: true }
+        )
+      )))
+      console.log(`Verified ${subscribers.length} demo subscribers (--demo)`)
 
-    await Subscriber.insertMany(subscribers)
-    console.log(`✅ Seeded ${subscribers.length} subscribers`)
-
-    await Contact.insertMany(contacts)
-    console.log(`✅ Seeded ${contacts.length} contacts`)
+      await Promise.all(contacts.map((contact) => (
+        Contact.updateOne(
+          { email: contact.email, message: contact.message },
+          { $setOnInsert: contact },
+          { upsert: true }
+        )
+      )))
+      console.log(`Verified ${contacts.length} demo contacts (--demo)`)
+    }
 
     await Promise.all(publications.map((publication) => (
       Publication.updateOne(
