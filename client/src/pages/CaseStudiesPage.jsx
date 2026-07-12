@@ -6,13 +6,19 @@ import { caseStudiesAPI } from '@utils/api'
 import styles from './CaseStudiesPage.module.css'
 
 const INDUSTRY_ACCENTS = {
-  FinTech: '#10B981',
-  Energy: '#F59E0B',
-  Enterprise: '#6366F1',
-  Retail: '#0EA5E9',
-  Healthcare: '#F43F5E',
-  Manufacturing: '#8B5CF6',
-  'Data Engineering': '#06B6D4',
+  FinTech: '#D005D0',
+  Energy: '#1515D8',
+  Enterprise: '#5A1098',
+  Retail: '#3B9AF2',
+  Healthcare: '#A5009D',
+  Manufacturing: '#8A0CF2',
+  'Data Engineering': '#05D9E8',
+}
+
+const ALL_ACCENT = '#3A3AF2'
+
+function getIndustryAccent(industry) {
+  return industry === 'All' ? ALL_ACCENT : (INDUSTRY_ACCENTS[industry] || '#9632F2')
 }
 
 function caseItem({ id, industry, client, kpi1, kpi2, summary, tags }) {
@@ -24,7 +30,7 @@ function caseItem({ id, industry, client, kpi1, kpi2, summary, tags }) {
     kpi2,
     summary,
     tags,
-    accent: INDUSTRY_ACCENTS[industry] || '#9B6DFF',
+    accent: getIndustryAccent(industry),
   }
 }
 
@@ -413,6 +419,7 @@ export default function CaseStudiesPage() {
                 <button
                   key={f}
                   className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
+                  style={{ '--accent': getIndustryAccent(f) }}
                   onClick={() => setActive(f)}
                 >
                   {f}
@@ -440,20 +447,18 @@ export default function CaseStudiesPage() {
                     style={{ '--accent': cs.accent }}
                   >
                     <div className={styles.cardHead}>
-                      <span className={styles.industryTag} style={{ color: cs.accent }}>
-                        {cs.industry}
-                      </span>
+                      <span className={styles.industryTag}>{cs.industry}</span>
                       <p className={styles.clientName}>{cs.client}</p>
                     </div>
 
                     <div className={styles.kpis}>
                       <div className={styles.kpi}>
-                        <strong className={styles.kpiVal} style={{ color: cs.accent }}>{cs.kpi1.value}</strong>
+                        <strong className={styles.kpiVal}>{cs.kpi1.value}</strong>
                         <span className={styles.kpiLabel}>{cs.kpi1.label}</span>
                       </div>
                       <div className={styles.kpiDiv} />
                       <div className={styles.kpi}>
-                        <strong className={styles.kpiVal} style={{ color: cs.accent }}>{cs.kpi2.value}</strong>
+                        <strong className={styles.kpiVal}>{cs.kpi2.value}</strong>
                         <span className={styles.kpiLabel}>{cs.kpi2.label}</span>
                       </div>
                     </div>

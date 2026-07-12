@@ -140,7 +140,7 @@
 .filters {
   display: flex;
   flex-wrap: nowrap;
-  gap: 8px;
+  gap: 12px;
   overflow-x: auto;
   overflow-y: hidden;
   margin-bottom: 28px;
@@ -160,29 +160,37 @@
 
 .filterBtn {
   flex: 0 0 auto;
-  min-height: 36px;
-  padding: 7px 18px;
-  border: 1px solid var(--border-mid);
+  min-height: 42px;
+  padding: 9px 20px;
+  border: 1px solid color-mix(in srgb, var(--accent), #dbe7f0 76%);
   border-radius: var(--radius-full);
-  background: #fff;
-  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--accent), #fff 94%);
+  color: color-mix(in srgb, var(--accent), #334155 58%);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 900;
   cursor: pointer;
-  transition: all 0.15s ease;
   white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.84),
+    inset 0 -3px 0 color-mix(in srgb, var(--accent), transparent 90%);
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .filterBtn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
+  border-color: color-mix(in srgb, var(--accent), #dbe7f0 45%);
+  color: color-mix(in srgb, var(--accent), black 10%);
+  background: color-mix(in srgb, var(--accent), #fff 88%);
+  transform: translateY(-1px);
 }
 
 .filterActive {
-  background: var(--primary);
-  border-color: var(--primary);
+  background: var(--accent);
+  border-color: color-mix(in srgb, var(--accent), black 4%);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(49, 87, 213, 0.25);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -4px 0 color-mix(in srgb, var(--accent), black 20%),
+    0 12px 26px color-mix(in srgb, var(--accent), transparent 72%);
 }
 
 .filterActive:hover {
@@ -198,22 +206,75 @@
 
 /* ── Card ────────────────────────────────────────────────── */
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 18px;
   min-height: 100%;
   padding: 24px;
-  border: 1px solid var(--border-light);
-  border-top: 4px solid var(--accent, var(--primary));
-  border-radius: var(--radius-lg);
-  background: #fff;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid color-mix(in srgb, var(--accent), #d8e3ed 72%);
+  border-top: 6px solid var(--accent);
+  border-left: 5px solid color-mix(in srgb, var(--accent), #fff 20%);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--accent), #fff 92%) 0%, #fff 42%, #fff 100%);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.92),
+    inset -7px -7px 0 rgba(15, 23, 42, 0.035),
+    8px 9px 0 color-mix(in srgb, var(--accent), transparent 86%),
+    0 18px 46px rgba(15, 23, 42, 0.08);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent), transparent 18%) 0 7px, transparent 7px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, transparent 42%),
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--accent), transparent 78%) 0%, transparent 44%);
+  pointer-events: none;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 94px;
+  height: 94px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 48%,
+    color-mix(in srgb, var(--accent), transparent 32%) 49%,
+    color-mix(in srgb, var(--accent), #fff 20%) 100%
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  opacity: 0.44;
+  pointer-events: none;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--accent), #d8e3ed 40%);
+  border-top-color: color-mix(in srgb, var(--accent), #fff 18%);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.96),
+    inset -7px -7px 0 rgba(15, 23, 42, 0.045),
+    12px 13px 0 color-mix(in srgb, var(--accent), transparent 82%),
+    0 26px 64px color-mix(in srgb, var(--accent), transparent 80%),
+    0 18px 46px rgba(15, 23, 42, 0.1);
 }
 
 .cardHead {
@@ -222,6 +283,16 @@
 }
 
 .industryTag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 26px;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent), #fff 66%);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--accent), black 8%);
+  background: color-mix(in srgb, var(--accent), #fff 88%);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent), transparent 84%);
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -253,6 +324,7 @@
 }
 
 .kpiVal {
+  color: var(--accent);
   font-family: var(--font-display);
   font-size: 24px;
   font-weight: 900;
@@ -290,8 +362,9 @@
 .tag {
   padding: 5px 9px;
   border-radius: var(--radius-md);
-  background: var(--gray-50);
-  color: var(--text-secondary);
+  border: 1px solid color-mix(in srgb, var(--accent), #dbe7f0 76%);
+  background: color-mix(in srgb, var(--accent), #fff 94%);
+  color: color-mix(in srgb, var(--accent), #475569 54%);
   font-size: 11px;
   font-weight: 800;
 }
