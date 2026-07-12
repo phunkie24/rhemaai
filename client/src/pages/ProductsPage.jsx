@@ -60,6 +60,59 @@ export const PRODUCT_CATEGORIES = [
   { id: 'fintech-blockchain', name: 'FinTech & Blockchain', color: '#6F5B22' },
 ]
 
+const PRODUCT_GROUP_BY_SLUG = {
+  'nexus-aos': 'agentic-ai',
+  'apex-rag': 'agentic-ai',
+  'lyra-nlp': 'agentic-ai',
+  'aura-xai': 'agentic-ai',
+  'vega-oas': 'data-science',
+  'prism-bi': 'data-science',
+  'orbit-cx': 'data-science',
+  'axiom-qr': 'data-science',
+  'sigma-im': 'data-science',
+  'stratum-dx': 'data-engineering',
+  'flux-cdc': 'data-engineering',
+  'meridian-dq': 'data-engineering',
+  'corda-fs': 'data-engineering',
+  'helix-lz': 'cloud-architecture',
+  'cipher-gx': 'cloud-architecture',
+  'krato-ml': 'mlops-dataops',
+  'volta-ei': 'mlops-dataops',
+  'forge-se': 'enterprise-software',
+  'ledger-fm': 'fintech-blockchain',
+}
+
+const GROUP_KEYWORDS = [
+  {
+    id: 'agentic-ai',
+    terms: ['agentic', 'agent', 'multi-agent', 'rag', 'retrieval', 'nlp', 'document ai', 'xai', 'explainable', 'language ai', 'llm'],
+  },
+  {
+    id: 'data-engineering',
+    terms: ['data engineering', 'lakehouse', 'streaming', 'cdc', 'data quality', 'feature store', 'data platform', 'lineage', 'pipeline'],
+  },
+  {
+    id: 'data-science',
+    terms: ['data science', 'analytics', 'optimisation', 'optimization', 'bi', 'customer intelligence', 'quantitative', 'statistical', 'simulation', 'industrial mathematics'],
+  },
+  {
+    id: 'cloud-architecture',
+    terms: ['cloud', 'landing zone', 'cybersecurity', 'security posture', 'zero trust', 'cspm', 'azure', 'aws', 'gcp'],
+  },
+  {
+    id: 'mlops-dataops',
+    terms: ['mlops', 'dataops', 'modelops', 'edge ai', 'iot', 'drift', 'model registry', 'ml lifecycle'],
+  },
+  {
+    id: 'enterprise-software',
+    terms: ['enterprise software', 'software engineering', 'api', '.net', 'fastapi', 'mern', 'backend'],
+  },
+  {
+    id: 'fintech-blockchain',
+    terms: ['fintech', 'blockchain', 'financial mathematics', 'risk', 'portfolio', 'quant finance', 'ledger'],
+  },
+]
+
 // Rhema Academy (training) and Rhema Press (publications) don't fit any
 // engineering/platform category, so they're kept in the catalogue for
 // direct product-detail links but left out of this categorised grid.
@@ -82,6 +135,35 @@ function mergeProducts(apiProducts = []) {
   })
 
   return merged
+}
+
+function resolveProductGroup(product = {}) {
+  if (PRODUCT_CATEGORIES.some((cat) => cat.id === product.group)) return product.group
+
+  const key = product.slug || product._id || ''
+  if (PRODUCT_GROUP_BY_SLUG[key]) return PRODUCT_GROUP_BY_SLUG[key]
+
+  const haystack = [
+    product.name,
+    product.kicker,
+    product.summary,
+    product.description,
+    product.category,
+    ...(product.tags || []),
+    ...(product.features || []),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+
+  return GROUP_KEYWORDS.find((group) => (
+    group.terms.some((term) => haystack.includes(term))
+  ))?.id || 'enterprise-software'
+}
+
+function productCategoryMeta(product) {
+  const group = resolveProductGroup(product)
+  return PRODUCT_CATEGORIES.find((cat) => cat.id === group) || PRODUCT_CATEGORIES[0]
 }
 
 export const SEED_PRODUCTS = [
@@ -530,7 +612,7 @@ export default function ProductsPage() {
   const visibleProducts = products.filter((product) => !EXCLUDED_FROM_GRID.includes(product.slug))
   const filteredProducts = activeCategory === 'all'
     ? visibleProducts
-    : visibleProducts.filter((product) => product.group === activeCategory)
+    : visibleProducts.filter((product) => resolveProductGroup(product) === activeCategory)
   const activeMeta = PRODUCT_CATEGORIES.find((cat) => cat.id === activeCategory)
 
   return (
@@ -632,12 +714,12 @@ export default function ProductsPage() {
 
         <div className={styles.productGrid}>
           {filteredProducts.map((product) => {
-            const cat = PRODUCT_CATEGORIES.find((c) => c.id === product.group)
+            const cat = productCategoryMeta(product)
             return (
               <ProductCard
                 key={product._id || product.slug || product.name}
                 product={product}
-                accent={cat?.color || '#526071'}
+                accent={cat.color}
               />
             )
           })}
