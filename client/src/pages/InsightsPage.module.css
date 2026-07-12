@@ -51,7 +51,7 @@
   background: white;
   border-bottom: 1px solid var(--border-light);
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
   position: sticky;
   top: 68px;
@@ -59,28 +59,33 @@
 }
 
 .filterBtn {
-  padding: 8px 18px;
+  padding: 9px 20px;
   border-radius: var(--radius-full);
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--off-white);
-  border: 1px solid var(--border-light);
+  font-weight: 700;
+  color: color-mix(in srgb, var(--cat-color), #31435a 58%);
+  background: color-mix(in srgb, var(--cat-color), white 94%);
+  border: 1px solid color-mix(in srgb, var(--cat-color), white 72%);
   cursor: pointer;
   transition: var(--transition-fast);
   font-family: var(--font-body);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
 .filterBtn:hover {
-  color: var(--primary);
-  border-color: var(--border-mid);
-  background: var(--brand-50);
+  color: color-mix(in srgb, var(--cat-color), black 8%);
+  border-color: color-mix(in srgb, var(--cat-color), white 48%);
+  background: color-mix(in srgb, var(--cat-color), white 88%);
+  transform: translateY(-1px);
 }
 
 .filterActive {
-  background: var(--primary) !important;
+  background: var(--cat-color) !important;
   color: white !important;
-  border-color: var(--primary) !important;
+  border-color: color-mix(in srgb, var(--cat-color), black 4%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 12px 26px color-mix(in srgb, var(--cat-color), transparent 72%);
 }
 
 /* Articles */
@@ -106,19 +111,25 @@
 /* Article Card */
 .card {
   background: white;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--cat-color), white 70%);
+  border-top: 5px solid var(--cat-color);
+  border-radius: 8px;
   padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   cursor: default;
   transition: var(--transition-base);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86),
+    0 12px 30px rgba(15, 23, 42, 0.055);
 }
 
 .card:hover {
-  border-color: var(--border-mid);
-  box-shadow: var(--glow-sm);
+  border-color: color-mix(in srgb, var(--cat-color), white 42%);
+  box-shadow:
+    0 18px 42px color-mix(in srgb, var(--cat-color), transparent 82%),
+    0 12px 30px rgba(15, 23, 42, 0.08);
 }
 
 .cardTop {
@@ -133,11 +144,11 @@
   font-weight: 700;
   letter-spacing: 0.7px;
   text-transform: uppercase;
-  color: var(--primary);
-  background: var(--brand-50);
+  color: color-mix(in srgb, var(--cat-color), black 8%);
+  background: color-mix(in srgb, var(--cat-color), white 90%);
   padding: 3px 11px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(107,70,255,0.15);
+  border: 1px solid color-mix(in srgb, var(--cat-color), white 68%);
 }
 
 .cardRead {
@@ -161,7 +172,7 @@
 }
 
 .cardTitle a:hover {
-  color: var(--primary);
+  color: var(--cat-color);
 }
 
 .cardExcerpt {
@@ -180,11 +191,11 @@
 .cardTag {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
-  background: var(--gray-50);
+  color: color-mix(in srgb, var(--cat-color), #475569 54%);
+  background: color-mix(in srgb, var(--cat-color), white 94%);
   padding: 3px 9px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border-light);
+  border: 1px solid color-mix(in srgb, var(--cat-color), white 80%);
 }
 
 .cardFooter {
@@ -204,14 +215,14 @@
 .cardLink {
   font-size: 13px;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--cat-color);
   text-decoration: none;
   transition: var(--transition-fast);
   white-space: nowrap;
 }
 
 .cardLink:hover {
-  color: var(--primary-hover);
+  color: color-mix(in srgb, var(--cat-color), black 18%);
 }
 
 /* Newsletter Banner */

@@ -8,10 +8,19 @@ import authorPortrait from '../assets/author_portrait.webp'
 import styles from './PlatformPages.module.css'
 
 const TYPES = [
-  { value: 'all', label: 'All' },
-  { value: 'book', label: 'Books' },
-  { value: 'whitepaper', label: 'White Papers' },
+  { value: 'all', label: 'All', color: '#7300CC' },
+  { value: 'book', label: 'Books', color: '#5A1098', singular: 'Book' },
+  { value: 'whitepaper', label: 'White Papers', color: '#A5009D', singular: 'White Paper' },
 ]
+
+export function getPublicationTypeMeta(type) {
+  return TYPES.find((item) => item.value === type) || {
+    value: type || 'publication',
+    label: type || 'Publication',
+    singular: type || 'Publication',
+    color: '#7300CC',
+  }
+}
 
 export const SEED_PUBLICATIONS = [
   {
@@ -54,7 +63,7 @@ export const SEED_PUBLICATIONS = [
 ]
 
 function typeLabel(type) {
-  return TYPES.find((item) => item.value === type)?.label || type
+  return getPublicationTypeMeta(type).label
 }
 
 function formatPrice(price = {}) {
@@ -63,6 +72,7 @@ function formatPrice(price = {}) {
 }
 
 function PublicationCard({ publication }) {
+  const typeMeta    = getPublicationTypeMeta(publication.type)
   const paystackUrl = publication.price?.paystackUrl
   const kindleUrl   = publication.price?.kindleUrl
   const price       = publication.price
@@ -70,6 +80,7 @@ function PublicationCard({ publication }) {
   return (
     <article
       className={styles.publicationCard}
+      style={{ '--publication-color': typeMeta.color, '--accent': typeMeta.color }}
     >
       <div className={styles.publicationTop}>
         <span>{typeLabel(publication.type)}</span>
@@ -185,12 +196,13 @@ export default function PublicationsPage() {
         </div>
       </section>
 
-      <section className={styles.filterBand}>
+      <section className={`${styles.filterBand} ${styles.publicationFilterBand}`}>
         {TYPES.map((type) => (
           <button
             key={type.value}
             type="button"
             className={activeType === type.value ? styles.activeFilter : ''}
+            style={{ '--publication-color': type.color }}
             onClick={() => setActiveType(type.value)}
           >
             {type.label}

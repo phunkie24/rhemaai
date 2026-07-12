@@ -6,15 +6,19 @@ import { insightsAPI } from '@utils/api'
 import styles from './InsightsPage.module.css'
 
 export const CATEGORIES = [
-  { value: 'all',              label: 'All Topics' },
-  { value: 'agentic-ai',       label: 'Agentic AI' },
-  { value: 'data-engineering', label: 'Data Engineering' },
-  { value: 'data-science',     label: 'Data Science & Analytics' },
-  { value: 'cloud-architecture',label: 'Cloud Architecture' },
-  { value: 'mlops',            label: 'MLOps & DataOps' },
-  { value: 'enterprise-ai',    label: 'Enterprise AI' },
-  { value: 'fintech',          label: 'FinTech' },
+  { value: 'all',               label: 'All Topics',               color: '#0B5AA5' },
+  { value: 'agentic-ai',        label: 'Agentic AI',               color: '#1515D8' },
+  { value: 'data-engineering',  label: 'Data Engineering',         color: '#118CF2' },
+  { value: 'data-science',      label: 'Data Science & Analytics', color: '#5A1098' },
+  { value: 'cloud-architecture',label: 'Cloud Architecture',       color: '#3A3AF2' },
+  { value: 'mlops',             label: 'MLOps & DataOps',          color: '#A5009D' },
+  { value: 'enterprise-ai',     label: 'Enterprise AI',            color: '#7300CC' },
+  { value: 'fintech',           label: 'FinTech',                  color: '#D00567' },
 ]
+
+export function getCategoryMeta(value) {
+  return CATEGORIES.find((category) => category.value === value) || CATEGORIES[0]
+}
 
 // Static seed articles (shown while API loads or if no data yet)
 export const SEED_ARTICLES = [
@@ -27,13 +31,15 @@ export const SEED_ARTICLES = [
 ]
 
 function ArticleCard({ article, index }) {
-  const catLabel = CATEGORIES.find(c => c.value === article.category)?.label || article.category
+  const category = getCategoryMeta(article.category)
+  const catLabel = category.value === 'all' && article.category ? article.category : category.label
   const date = new Date(article.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
   const href = `/insights/${article.slug || article._id}`
 
   return (
     <motion.article
       className={styles.card}
+      style={{ '--cat-color': category.color }}
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.5 }}
@@ -108,6 +114,7 @@ export default function InsightsPage() {
           <button
             key={cat.value}
             className={`${styles.filterBtn} ${activeCategory === cat.value ? styles.filterActive : ''}`}
+            style={{ '--cat-color': cat.color }}
             onClick={() => setActiveCategory(cat.value)}
           >
             {cat.label}

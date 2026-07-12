@@ -3,7 +3,7 @@ import PageSEO from '@components/common/PageSEO'
 import { Link, useParams } from 'react-router-dom'
 import MarkdownContent from '@components/common/MarkdownContent'
 import { insightsAPI } from '@utils/api'
-import { CATEGORIES, SEED_ARTICLES } from './InsightsPage'
+import { getCategoryMeta, SEED_ARTICLES } from './InsightsPage'
 import styles from './ContentPage.module.css'
 
 const BODY_SECTIONS = [
@@ -61,7 +61,8 @@ export default function InsightDetailPage() {
     )
   }
 
-  const category = CATEGORIES.find((cat) => cat.value === article.category)?.label || article.category
+  const categoryMeta = getCategoryMeta(article.category)
+  const category = categoryMeta.value === 'all' && article.category ? article.category : categoryMeta.label
   const date = new Date(article.publishedAt).toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
@@ -70,7 +71,7 @@ export default function InsightDetailPage() {
   const content = article.content?.trim()
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} style={{ '--content-accent': categoryMeta.color }}>
       <PageSEO
         title={article.seo?.metaTitle || article.title}
         description={article.seo?.metaDescription || article.excerpt}

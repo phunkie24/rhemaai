@@ -47,7 +47,13 @@
   inset: auto 0 0;
   height: 5px;
   content: '';
-  background: linear-gradient(90deg, #67e8f9, #34d399, #bef264, #9b6dff);
+  background:
+    linear-gradient(
+      90deg,
+      var(--content-accent, #67e8f9),
+      color-mix(in srgb, var(--content-accent, #67e8f9), white 34%),
+      color-mix(in srgb, var(--content-accent, #67e8f9), #a5009d 42%)
+    );
 }
 
 .heroInner,
@@ -70,7 +76,7 @@
   align-items: center;
   gap: 9px;
   margin-bottom: 16px;
-  color: #67e8f9;
+  color: color-mix(in srgb, var(--content-accent, #67e8f9), white 24%);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -81,8 +87,8 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: var(--accent-teal);
-  box-shadow: 0 0 0 4px rgba(14, 148, 136, 0.16);
+  background: var(--content-accent, var(--accent-teal));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--content-accent, var(--accent-teal)), transparent 82%);
   content: '';
 }
 

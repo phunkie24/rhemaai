@@ -603,11 +603,15 @@
   width: 100%;
   height: clamp(240px, 18vw, 360px);
   margin-top: 12px;
+  border: 1px solid color-mix(in srgb, var(--publication-color), #dbe7f0 72%);
   border-radius: 8px;
   object-fit: contain;
   object-position: center;
-  background: #f3f4f6;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--publication-color), #fff 92%), #f8fafc);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    0 8px 22px color-mix(in srgb, var(--publication-color), transparent 84%);
 }
 
 .publicationCard h2 {
@@ -624,7 +628,7 @@
 }
 
 .publicationCard h2 a:hover {
-  color: #0f766e;
+  color: var(--publication-color);
 }
 
 .publicationCard p {
@@ -650,6 +654,12 @@
   font-size: 11px;
   font-style: normal;
   font-weight: 700;
+}
+
+.publicationCard .tagRow em {
+  border-color: color-mix(in srgb, var(--publication-color) 24%, #dbe7f0);
+  color: color-mix(in srgb, var(--publication-color) 70%, #475569);
+  background: color-mix(in srgb, var(--publication-color) 8%, #f8fafc);
 }
 
 .cardActions {
@@ -716,12 +726,103 @@
   background: linear-gradient(135deg, #67e8f9, #bef264);
 }
 
+.publicationFilterBand {
+  gap: 12px;
+}
+
+.publicationFilterBand button {
+  min-height: 42px;
+  padding: 9px 22px;
+  color: color-mix(in srgb, var(--publication-color), #334155 56%);
+  border-color: color-mix(in srgb, var(--publication-color), #dbe7f0 76%);
+  background: color-mix(in srgb, var(--publication-color), #fff 94%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.publicationFilterBand button:hover {
+  color: color-mix(in srgb, var(--publication-color), black 10%);
+  border-color: color-mix(in srgb, var(--publication-color), #dbe7f0 45%);
+  background: color-mix(in srgb, var(--publication-color), #fff 88%);
+}
+
+.publicationFilterBand .activeFilter {
+  color: #fff;
+  border-color: color-mix(in srgb, var(--publication-color), black 4%);
+  background: var(--publication-color);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 12px 26px color-mix(in srgb, var(--publication-color), transparent 72%);
+}
+
 .publicationTop strong {
   padding: 4px 8px;
   border-radius: 99px;
   color: #78350f;
   background: #fef3c7;
   font-size: 11px;
+}
+
+.publicationCard {
+  position: relative;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--publication-color), #d6e4ef 72%);
+  border-top: 6px solid var(--publication-color);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--publication-color), #fff 92%) 0%, #fff 44%, #fff 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 18px 44px rgba(15, 23, 42, 0.07),
+    0 10px 28px color-mix(in srgb, var(--publication-color), transparent 88%);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.publicationCard:hover {
+  border-color: color-mix(in srgb, var(--publication-color), #d6e4ef 42%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 24px 54px rgba(15, 23, 42, 0.11),
+    0 16px 34px color-mix(in srgb, var(--publication-color), transparent 82%);
+  transform: translateY(-2px);
+}
+
+.publicationCard::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 110px;
+  height: 110px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 48%,
+    color-mix(in srgb, var(--publication-color), transparent 42%) 49%,
+    color-mix(in srgb, var(--publication-color), #fff 26%) 100%
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.publicationCard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.publicationCard .publicationTop span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--publication-color), #fff 68%);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--publication-color), black 8%);
+  background: color-mix(in srgb, var(--publication-color), #fff 88%);
+}
+
+.publicationCard .publicationTop strong {
+  color: #fff;
+  background: linear-gradient(135deg, var(--publication-color), color-mix(in srgb, var(--publication-color), #fff 24%));
 }
 
 .priceRow {
@@ -744,7 +845,7 @@
 }
 
 .priceFree {
-  color: #0f766e;
+  color: color-mix(in srgb, var(--publication-color, #0f766e), black 10%);
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -814,6 +915,14 @@
   font-size: 13px;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.publicationCard .textAction {
+  color: var(--publication-color);
+}
+
+.publicationCard .textAction:hover {
+  color: color-mix(in srgb, var(--publication-color), black 18%);
 }
 
 .stateText {

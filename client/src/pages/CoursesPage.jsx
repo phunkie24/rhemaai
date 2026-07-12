@@ -6,14 +6,14 @@ import { coursesAPI } from '@utils/api'
 import styles from './CoursesPage.module.css'
 
 export const CATEGORIES = [
-  { key: 'all', label: 'All Courses', color: '#2563EB' },
-  { key: 'data-engineering', label: 'Data Engineering', color: '#0F766E' },
-  { key: 'machine-learning', label: 'Machine Learning', color: '#D97706' },
-  { key: 'generative-ai', label: 'Generative AI', color: '#7C3AED' },
-  { key: 'agentic-ai', label: 'Agentic AI', color: '#3157D5' },
-  { key: 'software-engineering', label: 'Software Engineering', color: '#E11D48' },
-  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#0284C7' },
-  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#047857' },
+  { key: 'all', label: 'All Courses', color: '#3A3AF2' },
+  { key: 'data-engineering', label: 'Data Engineering', color: '#05D9E8' },
+  { key: 'machine-learning', label: 'Machine Learning', color: '#118CF2' },
+  { key: 'generative-ai', label: 'Generative AI', color: '#8A0CF2' },
+  { key: 'agentic-ai', label: 'Agentic AI', color: '#1515D8' },
+  { key: 'software-engineering', label: 'Software Engineering', color: '#D005D0' },
+  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#3B9AF2' },
+  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#5A1098' },
 ]
 
 export const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
@@ -65,7 +65,7 @@ export const SEED_COURSES = [
   },
 ]
 
-function getCategoryMeta(key) {
+export function getCategoryMeta(key) {
   return CATEGORIES.find((category) => category.key === key) || CATEGORIES[0]
 }
 
@@ -325,7 +325,7 @@ export default function CoursesPage() {
               key={category.key}
               type="button"
               className={`${styles.filterBtn} ${activeCategory === category.key ? styles.filterActive : ''}`}
-              style={activeCategory === category.key ? { '--active-color': category.color } : {}}
+              style={{ '--cat-color': category.color }}
               onClick={() => handleCategory(category.key)}
             >
               {category.label}

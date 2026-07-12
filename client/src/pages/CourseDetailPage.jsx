@@ -3,11 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 import PageSEO from '@components/common/PageSEO'
 import { coursesAPI } from '@utils/api'
 import enterpriseOpsImage from '../assets/enterprise-ai-operations.webp'
-import { CATEGORIES, LEVEL_COLOR, LEVEL_LABEL, SEED_COURSES } from './CoursesPage'
+import { getCategoryMeta, LEVEL_COLOR, LEVEL_LABEL, SEED_COURSES } from './CoursesPage'
 import styles from './ContentPage.module.css'
 
 function categoryLabel(key) {
-  return CATEGORIES.find((category) => category.key === key)?.label || key || 'Course'
+  return key ? getCategoryMeta(key).label : 'Course'
 }
 
 function priceLabel(pricing = {}) {
@@ -63,9 +63,10 @@ export default function CourseDetailPage() {
   const paid = isPaid(pricing)
   const canWatch = course.youtubeId && !paid
   const thumbnail = course.thumbnail || enterpriseOpsImage
+  const category = getCategoryMeta(course.category)
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} style={{ '--content-accent': category.color }}>
       <PageSEO
         title={course.seo?.metaTitle || course.title}
         description={course.seo?.metaDescription || course.description || course.title}

@@ -3,13 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 import MarkdownContent from '@components/common/MarkdownContent'
 import PageSEO from '@components/common/PageSEO'
 import { publicationsAPI } from '@utils/api'
-import { SEED_PUBLICATIONS } from './PublicationsPage'
+import { getPublicationTypeMeta, SEED_PUBLICATIONS } from './PublicationsPage'
 import styles from './ContentPage.module.css'
 
 function typeLabel(type) {
-  if (type === 'whitepaper') return 'White Paper'
-  if (type === 'book') return 'Book'
-  return type || 'Publication'
+  return getPublicationTypeMeta(type).singular || getPublicationTypeMeta(type).label
 }
 
 function priceLabel(price = {}) {
@@ -59,9 +57,10 @@ export default function PublicationDetailPage() {
 
   const body = publication.body?.trim()
   const price = publication.price || {}
+  const typeMeta = getPublicationTypeMeta(publication.type)
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} style={{ '--content-accent': typeMeta.color }}>
       <PageSEO
         title={publication.seo?.metaTitle || publication.title}
         description={publication.seo?.metaDescription || publication.summary}
