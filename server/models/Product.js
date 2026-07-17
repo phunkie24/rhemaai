@@ -25,6 +25,19 @@ const productSchema = new mongoose.Schema(
       enum: ['saas', 'platform', 'tool', 'accelerator', 'api', 'template'],
       default: 'saas',
     },
+    group: {
+      type: String,
+      enum: [
+        'agentic-ai',
+        'data-engineering',
+        'data-science',
+        'cloud-architecture',
+        'mlops-dataops',
+        'enterprise-software',
+        'fintech-blockchain',
+      ],
+      default: 'agentic-ai',
+    },
     summary: {
       type: String,
       required: true,
@@ -63,6 +76,7 @@ const productSchema = new mongoose.Schema(
 )
 
 productSchema.index({ category: 1, published: 1, publishedAt: -1 })
+productSchema.index({ group: 1, published: 1, publishedAt: -1 })
 productSchema.index({ featured: -1, publishedAt: -1 })
 
 export default mongoose.model('Product', productSchema)

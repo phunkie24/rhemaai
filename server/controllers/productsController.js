@@ -3,12 +3,31 @@ import Product from '../models/Product.js'
 import { parsePagination } from '../utils/pagination.js'
 
 const PRODUCT_CATEGORIES = new Set(['saas', 'platform', 'tool', 'accelerator', 'api', 'template', 'all'])
+const PRODUCT_GROUPS = new Set([
+  'agentic-ai',
+  'data-engineering',
+  'data-science',
+  'cloud-architecture',
+  'mlops-dataops',
+  'enterprise-software',
+  'fintech-blockchain',
+  'all',
+])
 
 const productSchema = Joi.object({
   name: Joi.string().trim().min(2).max(160).required(),
   slug: Joi.string().trim().max(180).allow('', null),
   kicker: Joi.string().trim().max(80).allow('', null),
   category: Joi.string().valid('saas', 'platform', 'tool', 'accelerator', 'api', 'template').default('saas'),
+  group: Joi.string().valid(
+    'agentic-ai',
+    'data-engineering',
+    'data-science',
+    'cloud-architecture',
+    'mlops-dataops',
+    'enterprise-software',
+    'fintech-blockchain'
+  ).default('agentic-ai'),
   summary: Joi.string().trim().min(10).max(360).required(),
   description: Joi.string().trim().max(6000).allow('', null),
   tags: Joi.array().items(Joi.string().trim().max(40)).max(12).default([]),
@@ -100,15 +119,19 @@ function validateProduct(req, res) {
 
 export async function getProducts(req, res, next) {
   try {
-    const { category } = req.query
+    const { category, group } = req.query
     const { page, limit, skip } = parsePagination(req.query, { defaultLimit: 12, maxLimit: 48 })
 
     if (category && !PRODUCT_CATEGORIES.has(category)) {
       return res.status(400).json({ message: 'Invalid product category.' })
     }
+    if (group && !PRODUCT_GROUPS.has(group)) {
+      return res.status(400).json({ message: 'Invalid product group.' })
+    }
 
     const filter = { published: true }
     if (category && category !== 'all') filter.category = category
+    if (group && group !== 'all') filter.group = group
 
     const [products, total] = await Promise.all([
       Product.find(filter)
@@ -140,11 +163,19 @@ export async function getProductBySlug(req, res, next) {
 
 export async function listAdminProducts(req, res, next) {
   try {
-    const { category, published } = req.query
+    const { category, group, published } = req.query
     const { page, limit, skip } = parsePagination(req.query, { defaultLimit: 30, maxLimit: 100 })
+
+    if (category && !PRODUCT_CATEGORIES.has(category)) {
+      return res.status(400).json({ message: 'Invalid product category.' })
+    }
+    if (group && !PRODUCT_GROUPS.has(group)) {
+      return res.status(400).json({ message: 'Invalid product group.' })
+    }
 
     const filter = {}
     if (category && category !== 'all') filter.category = category
+    if (group && group !== 'all') filter.group = group
     if (published === 'true') filter.published = true
     if (published === 'false') filter.published = false
 

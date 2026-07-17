@@ -416,7 +416,7 @@
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 11%, #fff) 0%, transparent 100%);
 }
 
-/* ── Category grouping ── */
+/* Category grouping */
 .categoryLabel {
   display: flex;
   align-items: center;
@@ -439,7 +439,7 @@
   background: color-mix(in srgb, var(--accent) 35%, #dbe7f0);
 }
 
-/* ── Card header pills ── */
+/* Card header pills */
 .pillRow {
   display: flex;
   gap: 8px;
@@ -503,7 +503,7 @@
   -webkit-line-clamp: 4;
 }
 
-/* ── Feature bullets ── */
+/* Feature bullets */
 .productFeatures {
   list-style: none;
   display: flex;
@@ -553,7 +553,7 @@
   padding: 18px 24px 0 28px;
 }
 
-/* ── Full-width gradient CTA (bleeds to card edges) ── */
+/* Full-width gradient CTA (bleeds to card edges) */
 .productCta {
   display: inline-flex;
   align-items: center;
@@ -712,7 +712,7 @@
 .filterBand button {
   min-height: 38px;
   padding: 8px 14px;
-  border: 1px solid #dbe7f0;
+  border: 1px solid color-mix(in srgb, var(--accent, #67e8f9) 16%, #dbe7f0);
   border-radius: 99px;
   color: #475569;
   background: #f8fafc;
@@ -720,10 +720,17 @@
   cursor: pointer;
 }
 
+.filterBand button:hover {
+  color: color-mix(in srgb, var(--accent, #67e8f9) 72%, #0f172a);
+  border-color: color-mix(in srgb, var(--accent, #67e8f9) 36%, #dbe7f0);
+  background: color-mix(in srgb, var(--accent, #67e8f9) 7%, #fff);
+}
+
 .filterBand .activeFilter {
   color: #06101d;
-  border-color: transparent;
-  background: linear-gradient(135deg, #67e8f9, #bef264);
+  border-color: color-mix(in srgb, var(--accent, #67e8f9) 36%, transparent);
+  background: linear-gradient(135deg, var(--accent, #67e8f9), color-mix(in srgb, var(--accent, #67e8f9) 55%, #bef264));
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--accent, #67e8f9) 18%, transparent);
 }
 
 .publicationFilterBand {

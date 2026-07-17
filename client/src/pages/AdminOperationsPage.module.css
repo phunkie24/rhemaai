@@ -116,7 +116,8 @@
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+  align-items: start;
   gap: 22px;
   padding: 28px var(--section-pad-x) 72px;
 }
@@ -132,7 +133,8 @@
 
 .editor {
   display: grid;
-  gap: 18px;
+  align-content: start;
+  gap: 14px;
   padding: 22px;
 }
 
@@ -162,20 +164,38 @@
 .twoCol,
 .priceGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  align-items: start;
+  gap: 12px 14px;
+}
+
+.twoCol {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .priceGrid {
-  grid-template-columns: 0.8fr 0.6fr 1fr 1.2fr;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.editor > .twoCol,
+.editor > .priceGrid,
+.editor > label {
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
 }
 
 .page label {
   display: grid;
+  min-width: 0;
   gap: 7px;
   color: #334155;
   font-size: 13px;
   font-weight: 800;
+}
+
+.page .keyPanel label {
+  color: rgba(255,255,255,0.84);
 }
 
 .page input,
@@ -187,9 +207,26 @@
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   color: #0f172a;
-  background: #f8fafc;
+  background: #fff;
   font: inherit;
   font-size: 14px;
+}
+
+.page input[type="file"] {
+  min-height: 46px;
+  padding: 8px;
+}
+
+.page input[type="file"]::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 7px;
+  color: #0f172a;
+  background: #e0f2fe;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .page textarea {
@@ -322,7 +359,7 @@
   background: #7f1d1d;
 }
 
-/* ── Architecture image upload row ── */
+/* Architecture image upload row */
 .archRow {
   display: grid;
   gap: 14px;

@@ -82,6 +82,8 @@ const PRODUCT_GROUP_BY_SLUG = {
   'ledger-fm': 'fintech-blockchain',
 }
 
+const ALL_PRODUCTS_ACCENT = '#75E8A1'
+
 const GROUP_KEYWORDS = [
   {
     id: 'agentic-ai',
@@ -597,6 +599,10 @@ function ProductCard({ product, accent }) {
 
 const CATEGORY_FILTERS = [{ id: 'all', name: 'All' }, ...PRODUCT_CATEGORIES]
 
+function filterAccent(category) {
+  return category.id === 'all' ? ALL_PRODUCTS_ACCENT : category.color
+}
+
 export default function ProductsPage() {
   const [products, setProducts] = useState(SEED_PRODUCTS)
   const [activeCategory, setActiveCategory] = useState('all')
@@ -692,6 +698,7 @@ export default function ProductsPage() {
             key={cat.id}
             type="button"
             className={activeCategory === cat.id ? styles.activeFilter : ''}
+            style={{ '--accent': filterAccent(cat) }}
             onClick={() => setActiveCategory(cat.id)}
           >
             {cat.name}

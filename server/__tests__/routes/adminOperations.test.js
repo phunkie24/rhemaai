@@ -61,6 +61,7 @@ describe('Product operations', () => {
       .send({
         name: 'AI Workflow SaaS',
         category: 'saas',
+        group: 'agentic-ai',
         summary: 'A SaaS product record for AI workflow operations.',
         description: 'Full product notes and release details.',
         assetUrl: '/api/uploads/release.zip',
@@ -76,6 +77,7 @@ describe('Product operations', () => {
 
     expect(res.status).toBe(201)
     expect(res.body.product.slug).toBe('ai-workflow-saas')
+    expect(res.body.product.group).toBe('agentic-ai')
     expect(res.body.product.assetUrl).toBe('/api/uploads/release.zip')
     expect(res.body.product.pricing.label).toBe('Monthly')
   })

@@ -20,6 +20,16 @@ const PRODUCT_CATEGORIES = [
   { value: 'template', label: 'Template' },
 ]
 
+const PRODUCT_GROUPS = [
+  { value: 'agentic-ai', label: 'Agentic AI Engineering' },
+  { value: 'data-engineering', label: 'Data Engineering & Platforms' },
+  { value: 'data-science', label: 'Data Science & Analytics' },
+  { value: 'cloud-architecture', label: 'Cloud Architecture' },
+  { value: 'mlops-dataops', label: 'MLOps & DataOps' },
+  { value: 'enterprise-software', label: 'Enterprise Software Eng.' },
+  { value: 'fintech-blockchain', label: 'FinTech & Blockchain' },
+]
+
 const INSIGHT_CATEGORIES = [
   { value: 'agentic-ai', label: 'Agentic AI' },
   { value: 'data-engineering', label: 'Data Engineering' },
@@ -47,6 +57,7 @@ const emptyProductForm = {
   slug: '',
   kicker: '',
   category: 'saas',
+  group: 'agentic-ai',
   summary: '',
   description: '',
   tagsText: '',
@@ -206,11 +217,63 @@ const apiConfig = {
   },
 }
 
-function splitList(value = '') {
+function splitList(value = '', maxItems = Infinity) {
   return value
     .split(',')
     .map((item) => item.trim())
     .filter(Boolean)
+    .slice(0, maxItems)
+}
+
+function cleanText(value) {
+  const text = typeof value === 'string' ? value.trim() : value
+  return text === '' || text == null ? undefined : text
+}
+
+function cleanNumber(value, fallback = 0) {
+  const number = Number(value)
+  return Number.isFinite(number) && number >= 0 ? number : fallback
+}
+
+function cleanInteger(value, fallback = 5, min = 1, max = 120) {
+  const number = Math.trunc(Number(value))
+  if (!Number.isFinite(number)) return fallback
+  return Math.min(Math.max(number, min), max)
+}
+
+function cleanCurrency(value, fallback = 'USD') {
+  const currency = (cleanText(value) || fallback).toUpperCase()
+  return /^[A-Z]{3}$/.test(currency) ? currency : fallback
+}
+
+function normalizeOptionalUrl(value, { allowRelative = true } = {}) {
+  const url = cleanText(value)
+  if (!url) return undefined
+  if (allowRelative && /^\/(?!\/)/.test(url)) return url
+  if (/^[a-z][a-z\d+\-.]*:/i.test(url)) return url
+  if (/^(?:www\.)?[\w.-]+\.[a-z]{2,}(?:[/:?#]|$)/i.test(url)) return `https://${url}`
+  return undefined
+}
+
+function normalizeRequiredUrl(value) {
+  const url = cleanText(value)
+  if (!url) return ''
+  if (/^[A-Za-z0-9_-]{11}$/.test(url)) return `https://www.youtube.com/watch?v=${url}`
+  return normalizeOptionalUrl(url, { allowRelative: false }) || url
+}
+
+function buildSeo(form, includeKeywords = true) {
+  const seo = {
+    metaTitle: cleanText(form.seoMetaTitle),
+    metaDescription: cleanText(form.seoMetaDescription),
+  }
+
+  if (includeKeywords) {
+    seo.canonicalUrl = normalizeOptionalUrl(form.canonicalUrl)
+    seo.keywords = splitList(form.keywordsText, 16)
+  }
+
+  return seo
 }
 
 function stripMarkdown(value = '') {
@@ -258,6 +321,7 @@ function productToForm(product) {
     slug: product.slug || '',
     kicker: product.kicker || '',
     category: product.category || 'saas',
+    group: product.group || 'agentic-ai',
     summary: product.summary || '',
     description: product.description || '',
     tagsText: (product.tags || []).join(', '),
@@ -283,33 +347,29 @@ function productToForm(product) {
 function formToProduct(form) {
   return {
     _id: form._id || undefined,
-    name: form.name,
-    slug: form.slug,
-    kicker: form.kicker,
+    name: cleanText(form.name),
+    slug: cleanText(form.slug),
+    kicker: cleanText(form.kicker),
     category: form.category,
-    summary: form.summary,
-    description: form.description,
-    tags: splitList(form.tagsText),
-    logoUrl: form.logoUrl,
-    assetUrl: form.assetUrl,
-    demoUrl: form.demoUrl,
-    productUrl: form.productUrl,
-    version: form.version,
+    group: form.group,
+    summary: cleanText(form.summary),
+    description: cleanText(form.description),
+    tags: splitList(form.tagsText, 12),
+    logoUrl: normalizeOptionalUrl(form.logoUrl),
+    assetUrl: normalizeOptionalUrl(form.assetUrl),
+    demoUrl: normalizeOptionalUrl(form.demoUrl),
+    productUrl: normalizeOptionalUrl(form.productUrl),
+    version: cleanText(form.version) || '1.0.0',
     pricing: {
-      amount:      Number(form.priceAmount || 0),
-      amountNGN:   Number(form.priceNGN || 0),
-      currency:    form.priceCurrency,
-      label:       form.priceLabel,
-      paystackUrl: form.paystackUrl,
+      amount:      cleanNumber(form.priceAmount),
+      amountNGN:   cleanNumber(form.priceNGN),
+      currency:    cleanCurrency(form.priceCurrency),
+      label:       cleanText(form.priceLabel) || 'Contact sales',
+      paystackUrl: normalizeOptionalUrl(form.paystackUrl, { allowRelative: false }),
     },
     featured: form.featured,
     published: form.published,
-    seo: {
-      metaTitle: form.seoMetaTitle,
-      metaDescription: form.seoMetaDescription,
-      canonicalUrl: form.canonicalUrl,
-      keywords: splitList(form.keywordsText),
-    },
+    seo: buildSeo(form),
   }
 }
 
@@ -341,31 +401,26 @@ function caseStudyToForm(caseStudy) {
 function formToCaseStudy(form) {
   return {
     _id: form._id || undefined,
-    title: form.title,
-    slug: form.slug,
-    industry: form.industry,
-    client: form.client,
+    title: cleanText(form.title),
+    slug: cleanText(form.slug),
+    industry: cleanText(form.industry),
+    client: cleanText(form.client),
     kpi1: {
-      value: form.kpi1Value,
-      label: form.kpi1Label,
+      value: cleanText(form.kpi1Value),
+      label: cleanText(form.kpi1Label),
     },
     kpi2: {
-      value: form.kpi2Value,
-      label: form.kpi2Label,
+      value: cleanText(form.kpi2Value),
+      label: cleanText(form.kpi2Label),
     },
-    summary: form.summary,
-    body: form.body,
-    tags: splitList(form.tagsText),
-    accent: form.accent,
-    coverImage: form.coverImage,
+    summary: cleanText(form.summary),
+    body: cleanText(form.body),
+    tags: splitList(form.tagsText, 12),
+    accent: cleanText(form.accent) || '#9B6DFF',
+    coverImage: normalizeOptionalUrl(form.coverImage),
     featured: form.featured,
     published: form.published,
-    seo: {
-      metaTitle: form.seoMetaTitle,
-      metaDescription: form.seoMetaDescription,
-      canonicalUrl: form.canonicalUrl,
-      keywords: splitList(form.keywordsText),
-    },
+    seo: buildSeo(form),
   }
 }
 
@@ -392,24 +447,21 @@ function researchToForm(article) {
 function formToResearch(form) {
   return {
     _id: form._id || undefined,
-    title: form.title,
-    slug: form.slug,
-    excerpt: form.excerpt,
+    title: cleanText(form.title),
+    slug: cleanText(form.slug),
+    excerpt: cleanText(form.excerpt),
     content: normalizeMarkdownInput(form.content),
     category: form.category,
-    tags: splitList(form.tagsText),
-    coverImage: form.coverImage,
-    architectureImage: form.architectureImage,
-    readTime: Number(form.readTime || 5),
+    tags: splitList(form.tagsText, 12),
+    coverImage: normalizeOptionalUrl(form.coverImage),
+    architectureImage: normalizeOptionalUrl(form.architectureImage),
+    readTime: cleanInteger(form.readTime),
     published: form.published,
     author: {
-      name: form.authorName,
-      avatar: form.authorAvatar,
+      name: cleanText(form.authorName) || 'RhemaAI Solutions Ltd Team',
+      avatar: normalizeOptionalUrl(form.authorAvatar),
     },
-    seo: {
-      metaTitle: form.seoMetaTitle,
-      metaDescription: form.seoMetaDescription,
-    },
+    seo: buildSeo(form, false),
   }
 }
 
@@ -442,37 +494,35 @@ function publicationToForm(publication) {
 }
 
 function formToPublication(form) {
+  const paystackUrl = normalizeOptionalUrl(form.paystackUrl, { allowRelative: false })
+  const kindleUrl = normalizeOptionalUrl(form.kindleUrl, { allowRelative: false })
+
   return {
     _id: form._id || undefined,
-    title: form.title,
-    slug: form.slug,
+    title: cleanText(form.title),
+    slug: cleanText(form.slug),
     type: form.type,
-    summary: form.summary,
+    summary: cleanText(form.summary),
     body: normalizeMarkdownInput(form.body),
-    coverImage: form.coverImage,
-    documentUrl: form.documentUrl,
-    documentLabel: form.documentLabel,
-    tags: splitList(form.tagsText),
+    coverImage: normalizeOptionalUrl(form.coverImage),
+    documentUrl: normalizeOptionalUrl(form.documentUrl),
+    documentLabel: cleanText(form.documentLabel),
+    tags: splitList(form.tagsText, 12),
     price: {
-      amount:     Number(form.priceAmount || 0),
-      amountNGN:  Number(form.priceNGN || 0),
-      currency:   form.priceCurrency,
-      label:      form.priceLabel,
-      paystackUrl: form.paystackUrl,
-      kindleUrl:  form.kindleUrl,
-      paymentUrl: form.paystackUrl || form.kindleUrl,
+      amount:     cleanNumber(form.priceAmount),
+      amountNGN:  cleanNumber(form.priceNGN),
+      currency:   cleanCurrency(form.priceCurrency),
+      label:      cleanText(form.priceLabel) || 'Free',
+      paystackUrl,
+      kindleUrl,
+      paymentUrl: paystackUrl || kindleUrl,
     },
     featured: form.featured,
     published: form.published,
     author: {
-      name: form.authorName,
+      name: cleanText(form.authorName) || 'RhemaAI Solutions Ltd',
     },
-    seo: {
-      metaTitle: form.seoMetaTitle,
-      metaDescription: form.seoMetaDescription,
-      canonicalUrl: form.canonicalUrl,
-      keywords: splitList(form.keywordsText),
-    },
+    seo: buildSeo(form),
   }
 }
 
@@ -504,32 +554,29 @@ function courseToForm(course) {
 }
 
 function formToCourse(form) {
+  const isFree = !!form.isFree
+
   const payload = {
-    title: form.title,
-    slug: form.slug || form.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-    description: form.description,
+    title: cleanText(form.title),
+    slug: cleanText(form.slug),
+    description: cleanText(form.description),
     category: form.category,
-    youtubeUrl: form.youtubeUrl,
-    instructor: form.instructor,
-    duration: form.duration,
+    youtubeUrl: normalizeRequiredUrl(form.youtubeUrl),
+    instructor: cleanText(form.instructor) || 'RhemaAI Technologies',
+    duration: cleanText(form.duration),
     level: form.level,
-    tags: splitList(form.tagsText),
+    tags: splitList(form.tagsText, 16),
     pricing: {
-      isFree:     form.isFree,
-      amount:     Number(form.priceAmount) || 0,
-      amountNGN:  Number(form.priceNGN) || 0,
-      currency:   form.priceCurrency || 'USD',
-      label:      form.priceLabel || (form.isFree ? 'Free' : 'Paid'),
-      paymentUrl: form.paymentUrl || '',
+      isFree,
+      amount:     isFree ? 0 : cleanNumber(form.priceAmount),
+      amountNGN:  isFree ? 0 : cleanNumber(form.priceNGN),
+      currency:   cleanCurrency(form.priceCurrency),
+      label:      cleanText(form.priceLabel) || (isFree ? 'Free' : 'Paid'),
+      paymentUrl: isFree ? undefined : normalizeOptionalUrl(form.paymentUrl, { allowRelative: false }),
     },
     featured: form.featured,
     published: form.published,
-    seo: {
-      metaTitle: form.seoMetaTitle,
-      metaDescription: form.seoMetaDescription,
-      canonicalUrl: form.canonicalUrl,
-      keywords: splitList(form.keywordsText),
-    },
+    seo: buildSeo(form),
   }
   if (form._id) payload._id = form._id
   return payload
@@ -800,8 +847,8 @@ export default function AdminOperationsPage() {
           />
           <button type="button" onClick={() => loadItems(activeArea)}>Refresh</button>
           {keyStatus === 'verifying' && <span className={styles.keyVerifying}>Verifying...</span>}
-          {keyStatus === 'ok'        && <span className={styles.keyOk}>Key accepted — authenticated</span>}
-          {keyStatus === 'error'     && <span className={styles.keyError}>Invalid key — access denied</span>}
+          {keyStatus === 'ok'        && <span className={styles.keyOk}>Key accepted - authenticated</span>}
+          {keyStatus === 'error'     && <span className={styles.keyError}>Invalid key - access denied</span>}
         </div>
       </section>
 
@@ -843,14 +890,26 @@ export default function AdminOperationsPage() {
               </div>
               <div className={styles.twoCol}>
                 <label>
-                  Category
+                  Product type
                   <select value={form.category} onChange={(event) => updateForm('category', event.target.value)}>
                     {PRODUCT_CATEGORIES.map((category) => <option key={category.value} value={category.value}>{category.label}</option>)}
                   </select>
                 </label>
                 <label>
+                  Product group
+                  <select value={form.group} onChange={(event) => updateForm('group', event.target.value)}>
+                    {PRODUCT_GROUPS.map((group) => <option key={group.value} value={group.value}>{group.label}</option>)}
+                  </select>
+                </label>
+              </div>
+              <div className={styles.twoCol}>
+                <label>
                   Kicker
                   <input value={form.kicker} onChange={(event) => updateForm('kicker', event.target.value)} placeholder="SaaS operations" />
+                </label>
+                <label>
+                  Tags
+                  <input value={form.tagsText} onChange={(event) => updateForm('tagsText', event.target.value)} placeholder="SaaS, AI, Workflow" />
                 </label>
               </div>
               <label>
@@ -897,7 +956,7 @@ export default function AdminOperationsPage() {
                   <input value={form.version} onChange={(event) => updateForm('version', event.target.value)} />
                 </label>
                 <label>
-                  Sale price (NGN) ₦
+                  Sale price (NGN)
                   <input type="number" min="0" step="0.01" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                 </label>
                 <label>
@@ -906,16 +965,12 @@ export default function AdminOperationsPage() {
                 </label>
                 <label>
                   Price label
-                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="Contact sales / ₦5,000" />
+                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="Contact sales / NGN 5,000" />
                 </label>
               </div>
               <label>
                 Paystack payment link
                 <input value={form.paystackUrl} onChange={(event) => updateForm('paystackUrl', event.target.value)} placeholder="https://paystack.com/pay/..." />
-              </label>
-              <label>
-                Tags
-                <input value={form.tagsText} onChange={(event) => updateForm('tagsText', event.target.value)} placeholder="SaaS, AI, Workflow" />
               </label>
             </>
           )}
@@ -1148,7 +1203,7 @@ export default function AdminOperationsPage() {
                 {!form.isFree && (
                   <>
                     <label>
-                      Sale price (NGN) ₦
+                      Sale price (NGN)
                       <input type="number" min="0" step="0.01" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                     </label>
                     <label>
@@ -1247,7 +1302,7 @@ export default function AdminOperationsPage() {
               </div>
               <div className={styles.priceGrid}>
                 <label>
-                  Sale price (NGN) ₦
+                  Sale price (NGN)
                   <input type="number" min="0" step="0.01" value={form.priceNGN} onChange={(event) => updateForm('priceNGN', event.target.value)} placeholder="0" />
                 </label>
                 <label>
@@ -1256,7 +1311,7 @@ export default function AdminOperationsPage() {
                 </label>
                 <label>
                   Price label
-                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="Free / ₦5,000 / $9.99" />
+                  <input value={form.priceLabel} onChange={(event) => updateForm('priceLabel', event.target.value)} placeholder="Free / NGN 5,000 / $9.99" />
                 </label>
                 <label>
                   Amazon Kindle URL

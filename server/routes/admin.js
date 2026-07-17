@@ -74,6 +74,7 @@ const router = Router()
  *               slug:        { type: string }
  *               kicker:      { type: string }
  *               category:    { type: string, enum: [saas, platform, tool, accelerator, api, template] }
+ *               group:       { type: string, enum: [agentic-ai, data-engineering, data-science, cloud-architecture, mlops-dataops, enterprise-software, fintech-blockchain] }
  *               summary:     { type: string }
  *               description: { type: string }
  *               tags:        { type: array, items: { type: string } }

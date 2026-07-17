@@ -6,19 +6,35 @@ import { caseStudiesAPI } from '@utils/api'
 import styles from './CaseStudiesPage.module.css'
 
 const INDUSTRY_ACCENTS = {
-  FinTech: '#D005D0',
-  Energy: '#1515D8',
   Enterprise: '#5A1098',
+  'Data Engineering': '#05D9E8',
+  Manufacturing: '#8A0CF2',
+  Energy: '#1515D8',
   Retail: '#3B9AF2',
   Healthcare: '#A5009D',
-  Manufacturing: '#8A0CF2',
-  'Data Engineering': '#05D9E8',
+  FinTech: '#D005D0',
 }
 
 const ALL_ACCENT = '#3A3AF2'
+const INDUSTRY_ORDER = Object.keys(INDUSTRY_ACCENTS)
 
 function getIndustryAccent(industry) {
   return industry === 'All' ? ALL_ACCENT : (INDUSTRY_ACCENTS[industry] || '#9632F2')
+}
+
+function getCaseAccent(caseStudy) {
+  return getIndustryAccent(caseStudy?.industry)
+}
+
+function sortIndustries(industries) {
+  return [...industries].sort((a, b) => {
+    const indexA = INDUSTRY_ORDER.indexOf(a)
+    const indexB = INDUSTRY_ORDER.indexOf(b)
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b)
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
 }
 
 function caseItem({ id, industry, client, kpi1, kpi2, summary, tags }) {
@@ -30,7 +46,6 @@ function caseItem({ id, industry, client, kpi1, kpi2, summary, tags }) {
     kpi2,
     summary,
     tags,
-    accent: getIndustryAccent(industry),
   }
 }
 
@@ -357,7 +372,7 @@ export default function CaseStudiesPage() {
   const [cases, setCases] = useState(CASES)
   const filters = useMemo(() => {
     const industries = Array.from(new Set(cases.map((item) => item.industry))).filter(Boolean)
-    return ['All', ...industries]
+    return ['All', ...sortIndustries(industries)]
   }, [cases])
   const filtered = active === 'All' ? cases : cases.filter((c) => c.industry === active)
 
@@ -444,7 +459,7 @@ export default function CaseStudiesPage() {
                     variants={cardAnim}
                     initial="hidden"
                     animate="show"
-                    style={{ '--accent': cs.accent }}
+                    style={{ '--accent': getCaseAccent(cs) }}
                   >
                     <div className={styles.cardHead}>
                       <span className={styles.industryTag}>{cs.industry}</span>

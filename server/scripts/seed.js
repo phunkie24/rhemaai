@@ -419,12 +419,35 @@ ${features.map((feature) => `- ${feature}`).join('\n')}
 Use this product as a focused accelerator, or combine it with adjacent RhemaAI platform modules for a fuller AI, data, cloud, or mathematics operating model.`
 }
 
+const PRODUCT_GROUP_BY_SLUG = {
+  'nexus-aos': 'agentic-ai',
+  'apex-rag': 'agentic-ai',
+  'lyra-nlp': 'agentic-ai',
+  'aura-xai': 'agentic-ai',
+  'vega-oas': 'data-science',
+  'prism-bi': 'data-science',
+  'orbit-cx': 'data-science',
+  'axiom-qr': 'data-science',
+  'sigma-im': 'data-science',
+  'stratum-dx': 'data-engineering',
+  'flux-cdc': 'data-engineering',
+  'meridian-dq': 'data-engineering',
+  'corda-fs': 'data-engineering',
+  'helix-lz': 'cloud-architecture',
+  'cipher-gx': 'cloud-architecture',
+  'krato-ml': 'mlops-dataops',
+  'volta-ei': 'mlops-dataops',
+  'forge-se': 'enterprise-software',
+  'ledger-fm': 'fintech-blockchain',
+}
+
 function product({ slug, name, kicker, summary, tags, features, featured = false, productUrl }) {
   return {
     slug,
     name,
     kicker,
     category: 'platform',
+    group: PRODUCT_GROUP_BY_SLUG[slug] || 'enterprise-software',
     summary,
     description: productDescription(summary, features),
     tags,
