@@ -27,7 +27,7 @@ const productSchema = Joi.object({
     'mlops-dataops',
     'enterprise-software',
     'fintech-blockchain'
-  ).default('agentic-ai'),
+  ).allow('', null),
   summary: Joi.string().trim().min(10).max(360).required(),
   description: Joi.string().trim().max(6000).allow('', null),
   tags: Joi.array().items(Joi.string().trim().max(40)).max(12).default([]),
@@ -82,6 +82,7 @@ function normalizeProduct(value) {
     ...value,
     slug: slugify(value.slug || value.name),
     kicker: cleanOptional(value.kicker),
+    group: cleanOptional(value.group),
     description: cleanOptional(value.description),
     logoUrl: cleanOptional(value.logoUrl),
     assetUrl: cleanOptional(value.assetUrl),

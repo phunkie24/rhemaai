@@ -81,6 +81,23 @@ describe('Product operations', () => {
     expect(res.body.product.assetUrl).toBe('/api/uploads/release.zip')
     expect(res.body.product.pricing.label).toBe('Monthly')
   })
+
+  it('does not force products without a group into Agentic AI', async () => {
+    const res = await request(app)
+      .post('/api/admin/products')
+      .send({
+        name: 'Cloud Migration Toolkit',
+        category: 'tool',
+        summary: 'A product record that should stay ungrouped until the UI classifies it.',
+        description: 'Cloud architecture tooling notes and implementation details.',
+        tags: ['Cloud', 'Azure'],
+        published: true,
+      })
+
+    expect(res.status).toBe(201)
+    expect(res.body.product.slug).toBe('cloud-migration-toolkit')
+    expect(res.body.product.group).toBeUndefined()
+  })
 })
 
 describe('Case study operations', () => {

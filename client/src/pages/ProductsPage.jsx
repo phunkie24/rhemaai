@@ -140,10 +140,11 @@ function mergeProducts(apiProducts = []) {
 }
 
 function resolveProductGroup(product = {}) {
-  if (PRODUCT_CATEGORIES.some((cat) => cat.id === product.group)) return product.group
-
   const key = product.slug || product._id || ''
   if (PRODUCT_GROUP_BY_SLUG[key]) return PRODUCT_GROUP_BY_SLUG[key]
+
+  const validGroup = PRODUCT_CATEGORIES.some((cat) => cat.id === product.group) ? product.group : ''
+  if (validGroup && validGroup !== 'agentic-ai') return validGroup
 
   const haystack = [
     product.name,
@@ -158,9 +159,11 @@ function resolveProductGroup(product = {}) {
     .join(' ')
     .toLowerCase()
 
-  return GROUP_KEYWORDS.find((group) => (
+  const inferredGroup = GROUP_KEYWORDS.find((group) => (
     group.terms.some((term) => haystack.includes(term))
-  ))?.id || 'enterprise-software'
+  ))?.id
+
+  return inferredGroup || validGroup || 'enterprise-software'
 }
 
 function productCategoryMeta(product) {

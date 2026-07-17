@@ -36,7 +36,6 @@ const productSchema = new mongoose.Schema(
         'enterprise-software',
         'fintech-blockchain',
       ],
-      default: 'agentic-ai',
     },
     summary: {
       type: String,

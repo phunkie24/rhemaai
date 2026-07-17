@@ -30,6 +30,59 @@ const PRODUCT_GROUPS = [
   { value: 'fintech-blockchain', label: 'FinTech & Blockchain' },
 ]
 
+const PRODUCT_GROUP_BY_SLUG = {
+  'nexus-aos': 'agentic-ai',
+  'apex-rag': 'agentic-ai',
+  'lyra-nlp': 'agentic-ai',
+  'aura-xai': 'agentic-ai',
+  'vega-oas': 'data-science',
+  'prism-bi': 'data-science',
+  'orbit-cx': 'data-science',
+  'axiom-qr': 'data-science',
+  'sigma-im': 'data-science',
+  'stratum-dx': 'data-engineering',
+  'flux-cdc': 'data-engineering',
+  'meridian-dq': 'data-engineering',
+  'corda-fs': 'data-engineering',
+  'helix-lz': 'cloud-architecture',
+  'cipher-gx': 'cloud-architecture',
+  'krato-ml': 'mlops-dataops',
+  'volta-ei': 'mlops-dataops',
+  'forge-se': 'enterprise-software',
+  'ledger-fm': 'fintech-blockchain',
+}
+
+const PRODUCT_GROUP_KEYWORDS = [
+  {
+    value: 'agentic-ai',
+    terms: ['agentic', 'agent', 'multi-agent', 'rag', 'retrieval', 'nlp', 'document ai', 'xai', 'explainable', 'language ai', 'llm'],
+  },
+  {
+    value: 'data-engineering',
+    terms: ['data engineering', 'lakehouse', 'streaming', 'cdc', 'data quality', 'feature store', 'data platform', 'lineage', 'pipeline'],
+  },
+  {
+    value: 'data-science',
+    terms: ['data science', 'analytics', 'optimisation', 'optimization', 'bi', 'customer intelligence', 'quantitative', 'statistical', 'simulation', 'industrial mathematics'],
+  },
+  {
+    value: 'cloud-architecture',
+    terms: ['cloud', 'landing zone', 'cybersecurity', 'security posture', 'zero trust', 'cspm', 'azure', 'aws', 'gcp'],
+  },
+  {
+    value: 'mlops-dataops',
+    terms: ['mlops', 'dataops', 'modelops', 'edge ai', 'iot', 'drift', 'model registry', 'ml lifecycle'],
+  },
+  {
+    value: 'enterprise-software',
+    terms: ['enterprise software', 'software engineering', 'api', '.net', 'fastapi', 'mern', 'backend'],
+  },
+  {
+    value: 'fintech-blockchain',
+    terms: ['fintech', 'blockchain', 'financial mathematics', 'risk', 'portfolio', 'quant finance', 'ledger'],
+  },
+]
+
 const INSIGHT_CATEGORIES = [
   { value: 'agentic-ai', label: 'Agentic AI' },
   { value: 'data-engineering', label: 'Data Engineering' },
@@ -57,7 +110,7 @@ const emptyProductForm = {
   slug: '',
   kicker: '',
   category: 'saas',
-  group: 'agentic-ai',
+  group: '',
   summary: '',
   description: '',
   tagsText: '',
@@ -314,6 +367,33 @@ function normalizeMarkdownInput(content = '') {
     .trim()
 }
 
+function inferProductGroup(product = {}) {
+  const key = product.slug || product._id || ''
+  if (PRODUCT_GROUP_BY_SLUG[key]) return PRODUCT_GROUP_BY_SLUG[key]
+
+  const validGroup = PRODUCT_GROUPS.some((group) => group.value === product.group) ? product.group : ''
+  if (validGroup && validGroup !== 'agentic-ai') return validGroup
+
+  const haystack = [
+    product.name,
+    product.kicker,
+    product.summary,
+    product.description,
+    product.category,
+    ...(product.tags || []),
+    ...(product.features || []),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+
+  const inferredGroup = PRODUCT_GROUP_KEYWORDS.find((group) => (
+    group.terms.some((term) => haystack.includes(term))
+  ))?.value
+
+  return inferredGroup || validGroup || ''
+}
+
 function productToForm(product) {
   return {
     _id: product._id,
@@ -321,7 +401,7 @@ function productToForm(product) {
     slug: product.slug || '',
     kicker: product.kicker || '',
     category: product.category || 'saas',
-    group: product.group || 'agentic-ai',
+    group: inferProductGroup(product),
     summary: product.summary || '',
     description: product.description || '',
     tagsText: (product.tags || []).join(', '),
@@ -351,7 +431,7 @@ function formToProduct(form) {
     slug: cleanText(form.slug),
     kicker: cleanText(form.kicker),
     category: form.category,
-    group: form.group,
+    group: cleanText(form.group),
     summary: cleanText(form.summary),
     description: cleanText(form.description),
     tags: splitList(form.tagsText, 12),
@@ -898,6 +978,7 @@ export default function AdminOperationsPage() {
                 <label>
                   Product group
                   <select value={form.group} onChange={(event) => updateForm('group', event.target.value)}>
+                    <option value="">Auto</option>
                     {PRODUCT_GROUPS.map((group) => <option key={group.value} value={group.value}>{group.label}</option>)}
                   </select>
                 </label>
