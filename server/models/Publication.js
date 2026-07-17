@@ -29,7 +29,7 @@ const publicationSchema = new mongoose.Schema(
     body: {
       type: String,
       trim: true,
-      maxlength: 10000,
+      maxlength: 150000,
     },
     coverImage: String,
     documentUrl: String,

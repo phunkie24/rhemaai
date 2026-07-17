@@ -6,7 +6,7 @@ const insightSchema = Joi.object({
   title: Joi.string().trim().min(2).max(200).required(),
   slug: Joi.string().trim().max(220).allow('', null),
   excerpt: Joi.string().trim().min(10).max(400).required(),
-  content: Joi.string().trim().min(10).max(20000).required(),
+  content: Joi.string().trim().min(10).max(150000).required(),
   category: Joi.string().valid(
     'agentic-ai',
     'data-engineering',

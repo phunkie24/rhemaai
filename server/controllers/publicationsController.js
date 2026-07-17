@@ -27,7 +27,7 @@ const publicationSchema = Joi.object({
   slug: Joi.string().trim().max(220).allow('', null),
   type: Joi.string().valid('book', 'whitepaper').required(),
   summary: Joi.string().trim().min(10).max(500).required(),
-  body: Joi.string().trim().max(10000).allow('', null),
+  body: Joi.string().trim().max(150000).allow('', null),
   coverImage: Joi.string().trim().uri({ allowRelative: true }).allow('', null),
   documentUrl: Joi.string().trim().uri({ allowRelative: true }).allow('', null),
   documentLabel: Joi.string().trim().max(120).allow('', null),

@@ -16,7 +16,11 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    const message = error.response?.data?.message || 'Something went wrong'
+    const data = error.response?.data
+    const details = Array.isArray(data?.errors) ? data.errors.join(' ') : ''
+    const message = details
+      ? `${data.message}: ${details}`
+      : data?.message || 'Something went wrong'
     return Promise.reject(new Error(message))
   }
 )
