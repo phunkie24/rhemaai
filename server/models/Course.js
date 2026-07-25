@@ -20,6 +20,7 @@ const courseSchema = new mongoose.Schema(
     },
     youtubeUrl: { type: String, required: true, trim: true },
     youtubeId:  { type: String, trim: true },
+    youtubePlaylistId: { type: String, trim: true },
     thumbnail:  { type: String, trim: true },
     instructor: { type: String, trim: true, default: 'RhemaAI Technologies' },
     duration:   { type: String, trim: true },

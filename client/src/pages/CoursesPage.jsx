@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageSEO from '@components/common/PageSEO'
+import CourseThumbnail from '@components/common/CourseThumbnail'
 import { Link } from 'react-router-dom'
 import { coursesAPI } from '@utils/api'
+import { getYouTubeEmbedUrl, getYouTubeMedia } from '@utils/youtube'
 import styles from './CoursesPage.module.css'
 
 export const CATEGORIES = [
@@ -74,7 +76,7 @@ function formatPaidPrice(pricing = {}) {
 }
 
 function YoutubeModal({ course, onClose }) {
-  const embedUrl = `https://www.youtube-nocookie.com/embed/${course.youtubeId}?autoplay=1&rel=0`
+  const embedUrl = getYouTubeEmbedUrl(course, { autoplay: true })
 
   useEffect(() => {
     const handleKey = (event) => {
@@ -165,6 +167,7 @@ function YoutubeModal({ course, onClose }) {
 
 function CourseCard({ course }) {
   const category = getCategoryMeta(course.category)
+  const { playlistId } = getYouTubeMedia(course)
 
   return (
     <motion.article
@@ -173,6 +176,10 @@ function CourseCard({ course }) {
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
     >
       <Link to={`/courses/${course.slug || course._id}`} className={styles.cardLink} aria-label={`Open ${course.title}`}>
+      <div className={styles.cardMedia}>
+        <CourseThumbnail course={course} alt={`${course.title} course preview`} loading="lazy" />
+        <span className={styles.mediaKind}>{playlistId ? 'Playlist' : 'Video course'}</span>
+      </div>
       <div className={styles.cardBody}>
         <div className={styles.cardBadges}>
           {course.featured && <span className={styles.featuredBadge}>Featured</span>}

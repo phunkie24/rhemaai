@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import PageSEO from '@components/common/PageSEO'
+import CourseThumbnail from '@components/common/CourseThumbnail'
 import { coursesAPI } from '@utils/api'
 import enterpriseOpsImage from '../assets/enterprise-ai-operations.webp'
+import { getCourseThumbnail, getYouTubeEmbedUrl } from '@utils/youtube'
 import { getCategoryMeta, LEVEL_COLOR, LEVEL_LABEL, SEED_COURSES } from './CoursesPage'
 import styles from './ContentPage.module.css'
 
@@ -61,8 +63,9 @@ export default function CourseDetailPage() {
 
   const pricing = course.pricing || {}
   const paid = isPaid(pricing)
-  const canWatch = course.youtubeId && !paid
-  const thumbnail = course.thumbnail || enterpriseOpsImage
+  const embedUrl = paid ? '' : getYouTubeEmbedUrl(course)
+  const canWatch = !!embedUrl
+  const thumbnail = getCourseThumbnail(course) || enterpriseOpsImage
   const category = getCategoryMeta(course.category)
 
   return (
@@ -96,14 +99,14 @@ export default function CourseDetailPage() {
             {canWatch ? (
               <div className={styles.videoFrame}>
                 <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${course.youtubeId}?rel=0`}
+                  src={embedUrl}
                   title={course.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>
             ) : (
-              <img className={styles.featureImage} src={thumbnail} alt="" loading="lazy" />
+              <CourseThumbnail course={course} className={styles.featureImage} alt={`${course.title} course preview`} loading="lazy" />
             )}
 
             <h2>Course Overview</h2>

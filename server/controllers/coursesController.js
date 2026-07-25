@@ -12,14 +12,56 @@ const COURSE_CATEGORIES = [
   'advanced-analytics',
 ]
 
+function extractYoutubeMedia(url = '') {
+  try {
+    const parsed = new URL(url)
+    const hostname = parsed.hostname.toLowerCase().replace(/^www\./, '')
+    const isYoutube = hostname === 'youtube.com'
+      || hostname === 'm.youtube.com'
+      || hostname === 'music.youtube.com'
+      || hostname === 'youtube-nocookie.com'
+    const isShortUrl = hostname === 'youtu.be'
+
+    if (!isYoutube && !isShortUrl) return { videoId: null, playlistId: null }
+
+    const pathParts = parsed.pathname.split('/').filter(Boolean)
+    let videoId = null
+
+    if (isShortUrl) {
+      videoId = pathParts[0] || null
+    } else if (parsed.pathname === '/watch') {
+      videoId = parsed.searchParams.get('v')
+    } else if (['embed', 'shorts', 'live', 'v'].includes(pathParts[0])) {
+      videoId = pathParts[1] === 'videoseries' ? null : pathParts[1]
+    }
+
+    const playlistId = parsed.searchParams.get('list')
+    const validVideoId = /^[A-Za-z0-9_-]{11}$/.test(videoId || '') ? videoId : null
+    const validPlaylistId = /^[A-Za-z0-9_-]{10,100}$/.test(playlistId || '') ? playlistId : null
+
+    return { videoId: validVideoId, playlistId: validPlaylistId }
+  } catch {
+    return { videoId: null, playlistId: null }
+  }
+}
+
+function validateYoutubeUrl(value, helpers) {
+  const { videoId, playlistId } = extractYoutubeMedia(value)
+  if (!videoId && !playlistId) {
+    return helpers.message('"youtubeUrl" must be a valid YouTube video or playlist URL')
+  }
+  return value
+}
+
 const courseSchema = Joi.object({
   title:       Joi.string().trim().min(2).max(200).required(),
   slug:        Joi.string().trim().max(220).allow('', null),
   description: Joi.string().trim().max(2000).allow('', null),
   category:    Joi.string().valid(...COURSE_CATEGORIES).required(),
-  youtubeUrl:  Joi.string().trim().uri().required(),
+  youtubeUrl:  Joi.string().trim().uri().custom(validateYoutubeUrl).required(),
   youtubeId:   Joi.string().trim().max(20).allow('', null),
-  thumbnail:   Joi.string().trim().uri({ allowRelative: false }).allow('', null),
+  youtubePlaylistId: Joi.string().trim().max(100).allow('', null),
+  thumbnail:   Joi.string().trim().uri({ allowRelative: true }).allow('', null),
   instructor:  Joi.string().trim().max(120).allow('', null).default('RhemaAI Technologies'),
   duration:    Joi.string().trim().max(40).allow('', null),
   level:       Joi.string().valid('beginner', 'intermediate', 'advanced').default('intermediate'),
@@ -57,34 +99,51 @@ function cleanOptional(value) {
   return value === '' || value === null ? undefined : value
 }
 
-function stripVideoIfPaid(course) {
+function youtubeThumbnail(videoId) {
+  return videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : undefined
+}
+
+function isGeneratedYoutubeThumbnail(value = '') {
+  return /^https:\/\/(?:img\.youtube\.com|i\.ytimg\.com)\/vi\/[A-Za-z0-9_-]{11}\/(?:maxresdefault|hqdefault)\.jpg(?:\?.*)?$/i.test(value)
+}
+
+function addYoutubeMedia(course) {
   const c = course.toObject ? course.toObject() : { ...course }
+  const media = extractYoutubeMedia(c.youtubeUrl || '')
+  const videoId = media.videoId || c.youtubeId
+
+  if (videoId) c.youtubeId = videoId
+  if (media.playlistId || c.youtubePlaylistId) {
+    c.youtubePlaylistId = media.playlistId || c.youtubePlaylistId
+  }
+  if (videoId && (!c.thumbnail || isGeneratedYoutubeThumbnail(c.thumbnail))) {
+    c.thumbnail = youtubeThumbnail(videoId)
+  }
+
+  return c
+}
+
+function stripVideoIfPaid(course) {
+  const c = addYoutubeMedia(course)
   if (!c.pricing?.isFree || (c.pricing?.amount > 0) || (c.pricing?.amountNGN > 0)) {
     delete c.youtubeUrl
     delete c.youtubeId
+    delete c.youtubePlaylistId
   }
   return c
 }
 
-function extractYoutubeId(url = '') {
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/,
-    /youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/,
-  ]
-  for (const pattern of patterns) {
-    const match = url.match(pattern)
-    if (match) return match[1]
-  }
-  return null
-}
-
 function normalizeCourse(value) {
-  const id = extractYoutubeId(value.youtubeUrl || '')
+  const { videoId, playlistId } = extractYoutubeMedia(value.youtubeUrl || '')
+  const suppliedThumbnail = cleanOptional(value.thumbnail)
   return {
     ...value,
     slug: slugify(value.slug || value.title),
-    youtubeId: id || cleanOptional(value.youtubeId),
-    thumbnail: cleanOptional(value.thumbnail) || (id ? `https://img.youtube.com/vi/${id}/maxresdefault.jpg` : undefined),
+    youtubeId: videoId || undefined,
+    youtubePlaylistId: playlistId || undefined,
+    thumbnail: suppliedThumbnail && !isGeneratedYoutubeThumbnail(suppliedThumbnail)
+      ? suppliedThumbnail
+      : youtubeThumbnail(videoId),
     description: cleanOptional(value.description),
     instructor: cleanOptional(value.instructor) || 'RhemaAI Technologies',
     duration: cleanOptional(value.duration),
@@ -162,7 +221,7 @@ export async function listAdminCourses(req, res, next) {
       Course.find().sort({ updatedAt: -1 }).skip(skip).limit(limit),
       Course.countDocuments(),
     ])
-    res.json({ courses, total, page, pages: Math.ceil(total / limit) })
+    res.json({ courses: courses.map(addYoutubeMedia), total, page, pages: Math.ceil(total / limit) })
   } catch (err) {
     next(err)
   }

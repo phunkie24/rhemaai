@@ -378,7 +378,8 @@ const router = Router()
  *               category:
  *                 type: string
  *                 enum: [data-engineering, machine-learning, generative-ai, agentic-ai, software-engineering, cloud-architecture, advanced-analytics]
- *               youtubeUrl:  { type: string }
+ *               youtubeUrl:  { type: string, description: YouTube video or playlist URL }
+ *               thumbnail:   { type: string, description: Optional custom thumbnail URL }
  *               instructor:  { type: string }
  *               duration:    { type: string }
  *               level:       { type: string, enum: [beginner, intermediate, advanced] }

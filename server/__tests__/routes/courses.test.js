@@ -126,7 +126,39 @@ describe('Admin course operations', () => {
     expect(res.status).toBe(201)
     expect(res.body.course.slug).toBe('intro-to-data-engineering')
     expect(res.body.course.youtubeId).toBe('dQw4w9WgXcQ')
-    expect(res.body.course.thumbnail).toMatch(/img\.youtube\.com\/vi\/dQw4w9WgXcQ/)
+    expect(res.body.course.thumbnail).toBe('https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg')
+  })
+
+  it('creates a course from a YouTube playlist URL', async () => {
+    const playlistId = 'PL1234567890abcdefghijklmnop'
+    const res = await request(app)
+      .post('/api/admin/courses')
+      .send({
+        title: 'Data Engineering Playlist',
+        category: 'data-engineering',
+        youtubeUrl: `https://www.youtube.com/playlist?list=${playlistId}`,
+        published: true,
+      })
+
+    expect(res.status).toBe(201)
+    expect(res.body.course.youtubePlaylistId).toBe(playlistId)
+    expect(res.body.course.youtubeId).toBeUndefined()
+  })
+
+  it('extracts both the video and playlist IDs from a playlist watch URL', async () => {
+    const playlistId = 'PL1234567890abcdefghijklmnop'
+    const res = await request(app)
+      .post('/api/admin/courses')
+      .send({
+        title: 'Agentic AI Video Series',
+        category: 'agentic-ai',
+        youtubeUrl: `https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=${playlistId}`,
+      })
+
+    expect(res.status).toBe(201)
+    expect(res.body.course.youtubeId).toBe('dQw4w9WgXcQ')
+    expect(res.body.course.youtubePlaylistId).toBe(playlistId)
+    expect(res.body.course.thumbnail).toBe('https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg')
   })
 
   it('creates a paid course with pricing and payment URL', async () => {
@@ -174,6 +206,19 @@ describe('Admin course operations', () => {
 
     expect(res.status).toBe(400)
     expect(res.body.message).toBe('Validation failed')
+  })
+
+  it('rejects a non-YouTube URL', async () => {
+    const res = await request(app)
+      .post('/api/admin/courses')
+      .send({
+        title: 'Unsupported Video Host',
+        category: 'agentic-ai',
+        youtubeUrl: 'https://example.com/video/dQw4w9WgXcQ',
+      })
+
+    expect(res.status).toBe(400)
+    expect(res.body.errors.join(' ')).toMatch(/YouTube video or playlist URL/)
   })
 
   it('rejects duplicate slugs', async () => {

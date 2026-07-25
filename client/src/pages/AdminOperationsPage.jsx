@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import PageSEO from '@components/common/PageSEO'
+import CourseThumbnail from '@components/common/CourseThumbnail'
 import { adminAPI } from '@utils/api'
+import { getYouTubeEmbedUrl, getYouTubeMedia } from '@utils/youtube'
 import styles from './AdminOperationsPage.module.css'
 
 const AREAS = [
@@ -206,6 +208,7 @@ const emptyCourseForm = {
   description: '',
   category: 'data-engineering',
   youtubeUrl: '',
+  thumbnail: '',
   instructor: 'RhemaAI Technologies',
   duration: '',
   level: 'intermediate',
@@ -614,6 +617,7 @@ function courseToForm(course) {
     description: course.description || '',
     category: course.category || 'data-engineering',
     youtubeUrl: course.youtubeUrl || '',
+    thumbnail: course.thumbnail || '',
     instructor: course.instructor || 'RhemaAI Technologies',
     duration: course.duration || '',
     level: course.level || 'intermediate',
@@ -642,6 +646,7 @@ function formToCourse(form) {
     description: cleanText(form.description),
     category: form.category,
     youtubeUrl: normalizeRequiredUrl(form.youtubeUrl),
+    thumbnail: normalizeOptionalUrl(form.thumbnail),
     instructor: cleanText(form.instructor) || 'RhemaAI Technologies',
     duration: cleanText(form.duration),
     level: form.level,
@@ -718,6 +723,12 @@ export default function AdminOperationsPage() {
 
   const activeMeta = AREAS.find((area) => area.key === activeArea)
   const form = forms[activeArea]
+  const coursePreview = useMemo(() => ({
+    youtubeUrl: activeArea === 'courses' ? form.youtubeUrl : '',
+    thumbnail: activeArea === 'courses' ? form.thumbnail : '',
+  }), [activeArea, form.thumbnail, form.youtubeUrl])
+  const courseMedia = useMemo(() => getYouTubeMedia(coursePreview), [coursePreview])
+  const courseEmbedUrl = useMemo(() => getYouTubeEmbedUrl(coursePreview), [coursePreview])
 
   const seoScore = useMemo(() => {
     let score = 0
@@ -1228,14 +1239,54 @@ export default function AdminOperationsPage() {
                 </label>
               </div>
               <label>
-                YouTube URL *
+                YouTube video or playlist URL *
                 <input
                   value={form.youtubeUrl}
                   onChange={(event) => updateForm('youtubeUrl', event.target.value)}
-                  placeholder="https://www.youtube.com/watch?v=..."
+                  placeholder="https://www.youtube.com/watch?v=... or /playlist?list=..."
                   required
                 />
               </label>
+              <div className={styles.twoCol}>
+                <label>
+                  Thumbnail URL
+                  <input
+                    value={form.thumbnail}
+                    onChange={(event) => updateForm('thumbnail', event.target.value)}
+                    placeholder="Recommended for playlist-only URLs; video thumbnails are automatic"
+                  />
+                </label>
+                <label>
+                  Thumbnail upload
+                  <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    disabled={!!uploading}
+                    onChange={(event) => handleUpload(event, 'thumbnail')}
+                  />
+                </label>
+              </div>
+              {(courseEmbedUrl || form.thumbnail || courseMedia.videoId) && (
+                <div className={styles.coursePreview}>
+                  <span>{courseMedia.playlistId ? 'Playlist preview' : 'Video preview'}</span>
+                  <div className={styles.coursePreviewGrid}>
+                    {(form.thumbnail || courseMedia.videoId) && (
+                      <CourseThumbnail
+                        course={coursePreview}
+                        alt="Course thumbnail preview"
+                      />
+                    )}
+                    {courseEmbedUrl && (
+                      <iframe
+                        src={courseEmbedUrl}
+                        title="YouTube course preview"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
               <label>
                 Description
                 <textarea rows="3" value={form.description} onChange={(event) => updateForm('description', event.target.value)} placeholder="What will students learn in this course?" />
