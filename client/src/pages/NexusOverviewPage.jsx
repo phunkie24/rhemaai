@@ -120,7 +120,7 @@ export default function NexusOverviewPage() {
           <NexusSectionHeader
             eyebrow="CADABA differentiation"
             title="A Cognitive and Governance Model Underneath the Platform"
-            description="CADABA — Cognitive Architecture for Dynamic Adaptive Business Agents — structures how goals, context, agents, policy, tools, oversight and evaluation work together. These public layers explain the operating model without exposing proprietary algorithms."
+            description="CADABA — Cognitive Architecture Design for Autonomous Business Agents — structures how goals, context, agents, policy, tools, oversight and evaluation work together. These public layers explain the operating model without exposing proprietary algorithms."
           />
           <ArchitectureLayerDiagram layers={CADABA_LAYERS} label="Eight public CADABA architecture layers" />
           <div className={styles.actions}>

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { render } from '../../test-utils/render'
 import NexusDemoPage from '../../pages/NexusDemoPage'
 import NexusDocsPage from '../../pages/NexusDocsPage'
+import NexusOverviewPage from '../../pages/NexusOverviewPage'
 import NexusPricingPage from '../../pages/NexusPricingPage'
 import NexusAssessmentPage from '../../pages/NexusAssessmentPage'
 
@@ -15,6 +16,15 @@ vi.mock('../../utils/api', () => ({
     emailAssessment: vi.fn(),
   },
 }))
+
+describe('Nexus overview page', () => {
+  it('uses the approved CADABA expansion', () => {
+    render(<NexusOverviewPage />, { route: '/products/nexus-aos' })
+
+    expect(screen.getByText(/CADABA — Cognitive Architecture Design for Autonomous Business Agents —/)).toBeInTheDocument()
+    expect(screen.queryByText(/Dynamic Adaptive Business Agents/i)).not.toBeInTheDocument()
+  })
+})
 
 describe('Nexus pricing page', () => {
   it('renders the essential public prices without offline commercial detail', () => {
