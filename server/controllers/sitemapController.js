@@ -5,6 +5,36 @@ import Course from '../models/Course.js'
 
 const BASE = (process.env.FRONTEND_URL || 'https://rhemaaisolutions.tech').replace(/\/$/, '')
 
+const NEXUS_DOMAIN_SLUGS = [
+  'energy', 'finance', 'smart-city', 'legal', 'smart-home',
+  'customer-service', 'education', 'retail', 'human-resources', 'real-estate',
+  'manufacturing', 'healthcare', 'entertainment', 'marketing', 'transportation',
+  'supply-chain', 'research', 'telecommunications', 'cybersecurity', 'agriculture',
+]
+
+const NEXUS_DOC_SLUGS = [
+  'getting-started', 'concepts', 'architecture', 'agents', 'workflows',
+  'integrations', 'governance', 'observability', 'security', 'api',
+]
+
+const NEXUS_URLS = [
+  { path: '/products/nexus-aos', changefreq: 'monthly', priority: '0.9' },
+  { path: '/products/nexus-aos/demo', changefreq: 'yearly', priority: '0.8' },
+  { path: '/products/nexus-aos/readiness-assessment', changefreq: 'monthly', priority: '0.8' },
+  { path: '/products/nexus-aos/solutions', changefreq: 'monthly', priority: '0.8' },
+  { path: '/products/nexus-aos/solutions/agentic-data-engineering', changefreq: 'monthly', priority: '0.8' },
+  { path: '/products/nexus-aos/solutions/procurement', changefreq: 'monthly', priority: '0.8' },
+  { path: '/products/nexus-aos/architecture', changefreq: 'monthly', priority: '0.8' },
+  { path: '/products/nexus-aos/pricing', changefreq: 'monthly', priority: '0.7' },
+  { path: '/products/nexus-aos/docs', changefreq: 'monthly', priority: '0.7' },
+  ...NEXUS_DOMAIN_SLUGS.map((slug) => ({
+    path: `/products/nexus-aos/solutions/${slug}`, changefreq: 'monthly', priority: '0.7',
+  })),
+  ...NEXUS_DOC_SLUGS.map((slug) => ({
+    path: `/products/nexus-aos/docs/${slug}`, changefreq: 'monthly', priority: '0.6',
+  })),
+]
+
 const STATIC_URLS = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/services', changefreq: 'monthly', priority: '0.8' },
@@ -16,6 +46,7 @@ const STATIC_URLS = [
   { path: '/about', changefreq: 'monthly', priority: '0.6' },
   { path: '/careers', changefreq: 'monthly', priority: '0.5' },
   { path: '/contact', changefreq: 'yearly', priority: '0.5' },
+  ...NEXUS_URLS,
 ]
 
 function isoDate(value) {

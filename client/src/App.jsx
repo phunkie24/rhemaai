@@ -21,6 +21,15 @@ const CourseDetailPage   = lazy(() => import('@pages/CourseDetailPage'))
 const AdminOperationsPage = lazy(() => import('@pages/AdminOperationsPage'))
 const LegalPage          = lazy(() => import('@pages/LegalPage'))
 const NotFoundPage       = lazy(() => import('@pages/NotFoundPage'))
+const NexusOverviewPage  = lazy(() => import('@pages/NexusOverviewPage'))
+const NexusDemoPage      = lazy(() => import('@pages/NexusDemoPage'))
+const NexusAssessmentPage = lazy(() => import('@pages/NexusAssessmentPage'))
+const NexusSolutionsPage = lazy(() => import('@pages/NexusSolutionsPage'))
+const NexusDomainPage    = lazy(() => import('@pages/NexusDomainPage'))
+const NexusFlagshipSolutionPage = lazy(() => import('@pages/NexusFlagshipSolutionPage'))
+const NexusArchitecturePage = lazy(() => import('@pages/NexusArchitecturePage'))
+const NexusPricingPage   = lazy(() => import('@pages/NexusPricingPage'))
+const NexusDocsPage      = lazy(() => import('@pages/NexusDocsPage'))
 
 function PageLoader() {
   return (
@@ -43,6 +52,17 @@ export default function App() {
             <Route path="/"               element={<HomePage />} />
             <Route path="/services"       element={<ServicesPage />} />
             <Route path="/products"       element={<ProductsPage />} />
+            <Route path="/products/nexus-aos" element={<NexusOverviewPage />} />
+            <Route path="/products/nexus-aos/demo" element={<NexusDemoPage />} />
+            <Route path="/products/nexus-aos/readiness-assessment" element={<NexusAssessmentPage />} />
+            <Route path="/products/nexus-aos/solutions" element={<NexusSolutionsPage />} />
+            <Route path="/products/nexus-aos/solutions/agentic-data-engineering" element={<NexusFlagshipSolutionPage solution="agentic-data-engineering" />} />
+            <Route path="/products/nexus-aos/solutions/procurement" element={<NexusFlagshipSolutionPage solution="procurement" />} />
+            <Route path="/products/nexus-aos/solutions/:domain" element={<NexusDomainPage />} />
+            <Route path="/products/nexus-aos/architecture" element={<NexusArchitecturePage />} />
+            <Route path="/products/nexus-aos/pricing" element={<NexusPricingPage />} />
+            <Route path="/products/nexus-aos/docs" element={<NexusDocsPage />} />
+            <Route path="/products/nexus-aos/docs/:section" element={<NexusDocsPage />} />
             <Route path="/products/:slug" element={<ProductDetailPage />} />
             <Route path="/case-studies"   element={<CaseStudiesPage />} />
             <Route path="/about"          element={<AboutPage />} />

@@ -66,11 +66,6 @@ function typeLabel(type) {
   return getPublicationTypeMeta(type).label
 }
 
-function formatPrice(price = {}) {
-  if (!price.amount) return price.label || 'Free'
-  return `${price.currency || 'USD'} ${Number(price.amount).toLocaleString()}`
-}
-
 function PublicationCard({ publication }) {
   const typeMeta    = getPublicationTypeMeta(publication.type)
   const paystackUrl = publication.price?.paystackUrl

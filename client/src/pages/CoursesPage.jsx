@@ -71,10 +71,6 @@ export function getCategoryMeta(key) {
   return CATEGORIES.find((category) => category.key === key) || CATEGORIES[0]
 }
 
-function formatPaidPrice(pricing = {}) {
-  return `${pricing.currency || 'USD'} ${pricing.amount ?? 0}`
-}
-
 function YoutubeModal({ course, onClose }) {
   const embedUrl = getYouTubeEmbedUrl(course, { autoplay: true })
 
@@ -363,7 +359,7 @@ export default function CoursesPage() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35 }}
               >
-                {courses.map((course, index) => (
+                {courses.map((course) => (
                   <CourseCard key={course._id || course.slug} course={course} />
                 ))}
               </motion.div>

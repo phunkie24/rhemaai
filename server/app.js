@@ -16,6 +16,7 @@ import adminRoutes from './routes/admin.js'
 import webhookRoutes from './routes/webhooks.js'
 import sitemapRoutes from './routes/sitemap.js'
 import prerenderRoutes from './routes/prerender.js'
+import nexusRoutes from './routes/nexus.js'
 
 const app = express()
 
@@ -69,6 +70,7 @@ app.use('/api/publications', publicationsRoutes)
 app.use('/api/products', productsRoutes)
 app.use('/api/case-studies', caseStudiesRoutes)
 app.use('/api/courses', coursesRoutes)
+app.use('/api/nexus', nexusRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/sitemap.xml', sitemapRoutes)
 

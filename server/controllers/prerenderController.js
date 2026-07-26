@@ -6,6 +6,7 @@ import Course from '../models/Course.js'
 const SITE_NAME = 'RhemaAI Solutions Ltd'
 const BASE = (process.env.FRONTEND_URL || 'https://rhemaaisolutions.tech').replace(/\/$/, '')
 const DEFAULT_IMAGE = `${BASE}/og-image.svg`
+const NEXUS_IMAGE = '/nexus-aos-social-preview.png'
 
 // This controller exists only for crawlers that don't execute JavaScript
 // (social link-preview bots, some search bots). Real browsers never reach
@@ -129,6 +130,118 @@ export const renderPublications = staticHandler('/publications')
 export const renderCourses = staticHandler('/courses')
 export const renderContact = staticHandler('/contact')
 export const renderCareers = staticHandler('/careers')
+
+const NEXUS_STATIC_META = {
+  '/products/nexus-aos': {
+    title: 'Nexus AOS | Governed Enterprise Agentic AI',
+    description: 'Build, govern and operate enterprise AI agents with Nexus AOS, RhemaAI Solutions Ltd’s multi-agent orchestration platform powered by CADABA.',
+  },
+  '/products/nexus-aos/demo': {
+    title: 'Nexus AOS Demo | RhemaAI Solutions Ltd',
+    description: 'Request a tailored enterprise Nexus AOS demonstration covering orchestration, human approvals, policy, data integration, observability and deployment.',
+  },
+  '/products/nexus-aos/readiness-assessment': {
+    title: 'Agentic AI Readiness Assessment | Nexus AOS',
+    description: 'Assess strategy, data, integration, security, governance, oversight and operational readiness for a governed Nexus AOS workflow.',
+  },
+  '/products/nexus-aos/solutions': {
+    title: 'Nexus AOS Solutions | 20 Agentic AI Domains',
+    description: 'Explore Nexus AOS governed agentic workflow designs across twenty real-world application domains.',
+  },
+  '/products/nexus-aos/solutions/agentic-data-engineering': {
+    title: 'Agentic Data Engineering | Nexus AOS',
+    description: 'Operate data platforms with governed AI agent roles for pipelines, quality, metadata, incidents and accountable remediation.',
+  },
+  '/products/nexus-aos/solutions/procurement': {
+    title: 'Procurement Automation | Nexus AOS',
+    description: 'Coordinate procurement decisions across agents, enterprise systems, policy checks and human approvals.',
+  },
+  '/products/nexus-aos/architecture': {
+    title: 'Nexus AOS Architecture | CADABA Agent Orchestration',
+    description: 'Explore the logical architecture, CADABA cognitive loop, reliability, security and observability model behind Nexus AOS.',
+  },
+  '/products/nexus-aos/pricing': {
+    title: 'Nexus AOS Pricing and Pilot Packages | RhemaAI Solutions Ltd',
+    description: 'Public US-dollar pricing for Nexus AOS readiness assessment, workflow discovery, pilots, annual platform licences, implementation, support and training.',
+  },
+  '/products/nexus-aos/docs': {
+    title: 'Nexus AOS Documentation | Developer Portal',
+    description: 'Public concepts, architecture, governance, security and evaluation documentation for Nexus AOS.',
+  },
+}
+
+export function renderNexusStatic(req, res) {
+  const meta = NEXUS_STATIC_META[req.path]
+  if (!meta) return sendNotFound(res)
+  return sendMeta(res, { path: req.path, image: NEXUS_IMAGE, ...meta })
+}
+
+function titleCaseSlug(value = '') {
+  return value.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+}
+
+const NEXUS_DOMAIN_SLUGS = new Set([
+  'energy',
+  'finance',
+  'smart-city',
+  'legal',
+  'smart-home',
+  'customer-service',
+  'education',
+  'retail',
+  'human-resources',
+  'real-estate',
+  'manufacturing',
+  'healthcare',
+  'entertainment',
+  'marketing',
+  'transportation',
+  'supply-chain',
+  'research',
+  'telecommunications',
+  'cybersecurity',
+  'agriculture',
+])
+
+const NEXUS_DOC_SLUGS = new Set([
+  'getting-started',
+  'concepts',
+  'architecture',
+  'agents',
+  'workflows',
+  'integrations',
+  'governance',
+  'observability',
+  'security',
+  'api',
+])
+
+export function renderNexusDomain(req, res) {
+  if (!NEXUS_DOMAIN_SLUGS.has(req.params.domain)) return sendNotFound(res)
+  const name = titleCaseSlug(req.params.domain)
+  const path = `/products/nexus-aos/solutions/${req.params.domain}`
+  return sendMeta(res, {
+    path,
+    image: NEXUS_IMAGE,
+    title: `Nexus AOS for ${name} | Agentic AI Solutions`,
+    description: `Explore governed agent roles, workflows, oversight and enterprise integration patterns for Nexus AOS in ${name}.`,
+  })
+}
+
+export function renderNexusDocs(req, res) {
+  if (req.params.section && !NEXUS_DOC_SLUGS.has(req.params.section)) return sendNotFound(res)
+  const name = titleCaseSlug(req.params.section || 'getting-started')
+  const path = req.params.section
+    ? `/products/nexus-aos/docs/${req.params.section}`
+    : '/products/nexus-aos/docs'
+  return sendMeta(res, {
+    path,
+    image: NEXUS_IMAGE,
+    title: `${name} | Nexus AOS Documentation`,
+    description: `Read the public ${name.toLowerCase()} documentation for Nexus AOS governed multi-agent orchestration.`,
+    type: 'article',
+  })
+}
 
 export async function renderProductDetail(req, res, next) {
   try {

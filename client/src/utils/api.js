@@ -29,6 +29,11 @@ export const contactAPI = {
   submit: (data) => api.post('/contact', data),
 }
 
+export const nexusAPI = {
+  requestDemo: (data) => api.post('/nexus/demo', data),
+  emailAssessment: (data) => api.post('/nexus/assessment', data),
+}
+
 export const newsletterAPI = {
   subscribe: (email) => api.post('/newsletter', { email }),
 }

@@ -20,7 +20,7 @@
 
 .top {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr repeat(4, 1fr);
   gap: 52px;
   margin-bottom: 52px;
   padding-bottom: 52px;

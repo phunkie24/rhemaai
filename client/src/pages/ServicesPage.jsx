@@ -196,6 +196,16 @@ export default function ServicesPage() {
                 >
                   Start a conversation
                 </Link>
+                {service.id === 'agentic-ai' && (
+                  <Link to="/products/nexus-aos" className={styles.nexusLink}>
+                    Explore Nexus AOS
+                  </Link>
+                )}
+                {service.id === 'data-engineering' && (
+                  <Link to="/products/nexus-aos/solutions/agentic-data-engineering" className={styles.nexusLink}>
+                    Explore Agentic Data Engineering
+                  </Link>
+                )}
               </div>
             ))}
           </div>

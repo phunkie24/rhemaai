@@ -610,6 +610,16 @@
   z-index: 1;
 }
 
+.nexusLink {
+  display: inline-flex;
+  margin-top: 10px;
+  color: var(--service-color);
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .cardLink::after {
   content: '>';
   transition: transform var(--transition-fast);

@@ -4,7 +4,7 @@ import { SERVICES } from '../../utils/servicesData'
 describe('SERVICES data', () => {
   it('exports the enterprise service catalog', () => {
     expect(Array.isArray(SERVICES)).toBe(true)
-    expect(SERVICES).toHaveLength(19)
+    expect(SERVICES).toHaveLength(27)
   })
 
   it('each service has required shape', () => {

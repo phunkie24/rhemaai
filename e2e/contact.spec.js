@@ -16,7 +16,7 @@ test.describe('Contact Page', () => {
   })
 
   test('form has all required fields', async ({ page }) => {
-    await expect(page.getByPlaceholder(/Funke Yusuf/i)).toBeVisible()
+    await expect(page.getByPlaceholder(/Funke R\. Yusuf/i)).toBeVisible()
     await expect(page.getByPlaceholder(/you@company/i)).toBeVisible()
     await expect(page.getByPlaceholder(/Tell us about your project/i)).toBeVisible()
     await expect(page.locator('select').first()).toBeVisible()
@@ -30,7 +30,7 @@ test.describe('Contact Page', () => {
   })
 
   test('validates email format', async ({ page }) => {
-    await page.getByPlaceholder(/Funke Yusuf/i).fill('Test User')
+    await page.getByPlaceholder(/Funke R\. Yusuf/i).fill('Test User')
     await page.getByPlaceholder(/you@company/i).fill('not-an-email')
     await page.getByPlaceholder(/Tell us about your project/i).fill('This is a detailed enough message.')
     await page.getByRole('button', { name: /Send Consultation Request/i }).click()
@@ -67,7 +67,7 @@ test.describe('Contact Page', () => {
       })
     })
 
-    await page.getByPlaceholder(/Funke Yusuf/i).fill('Amaka Okafor')
+    await page.getByPlaceholder(/Funke R\. Yusuf/i).fill('Amaka Okafor')
     await page.getByPlaceholder(/you@company/i).fill('amaka@energycorp.ng')
     await page.getByPlaceholder(/Tell us about your project/i).fill(
       'We want predictive maintenance models for our pipeline assets — looking forward to a call.'
@@ -86,7 +86,7 @@ test.describe('Contact Page', () => {
       headers: { 'Content-Type': 'application/json' },
     }))
 
-    await page.getByPlaceholder(/Funke Yusuf/i).fill('Amaka Okafor')
+    await page.getByPlaceholder(/Funke R\. Yusuf/i).fill('Amaka Okafor')
     await page.getByPlaceholder(/you@company/i).fill('amaka@energycorp.ng')
     await page.getByPlaceholder(/Tell us about your project/i).fill(
       'We want predictive maintenance models for our pipeline assets.'
@@ -104,7 +104,7 @@ test.describe('Contact Page', () => {
       headers: { 'Content-Type': 'application/json' },
     }))
 
-    await page.getByPlaceholder(/Funke Yusuf/i).fill('Test User')
+    await page.getByPlaceholder(/Funke R\. Yusuf/i).fill('Test User')
     await page.getByPlaceholder(/you@company/i).fill('test@example.com')
     await page.getByPlaceholder(/Tell us about your project/i).fill('Detailed project message here.')
 

@@ -34,6 +34,16 @@ const CONTACT_LINKS = [
   { label: 'Book a Discovery Call',path: '/contact' },
 ]
 
+const NEXUS_LINKS = [
+  { label: 'Overview', path: '/products/nexus-aos' },
+  { label: 'Solutions', path: '/products/nexus-aos/solutions' },
+  { label: 'Architecture', path: '/products/nexus-aos/architecture' },
+  { label: 'Assessment', path: '/products/nexus-aos/readiness-assessment' },
+  { label: 'Pricing', path: '/products/nexus-aos/pricing' },
+  { label: 'Documentation', path: '/products/nexus-aos/docs' },
+  { label: 'Request Demo', path: '/products/nexus-aos/demo' },
+]
+
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | success | error
@@ -108,6 +118,15 @@ export default function Footer() {
               <li key={`${l.label}-${l.path}`}>
                 <Link to={l.path} className={styles.footerLink}>{l.label}</Link>
               </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.col}>
+          <div className={styles.colTitle}>Nexus AOS</div>
+          <ul>
+            {NEXUS_LINKS.map((link) => (
+              <li key={link.path}><Link to={link.path} className={styles.footerLink}>{link.label}</Link></li>
             ))}
           </ul>
         </div>

@@ -28,3 +28,14 @@ export const newsletterLimiter = rateLimit({
     message: 'Too many subscription attempts. Please try again in an hour.',
   },
 })
+
+export const nexusLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  skip: () => process.env.NODE_ENV !== 'production',
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    message: 'Too many Nexus requests. Please try again in an hour.',
+  },
+})

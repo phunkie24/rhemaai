@@ -4,11 +4,9 @@ import { useCountUp } from '../../hooks/useCountUp'
 
 describe('useCountUp', () => {
   let rafCallbacks = []
-  let currentTime = 0
 
   beforeEach(() => {
     rafCallbacks = []
-    currentTime = 0
 
     vi.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => {
       rafCallbacks.push(cb)

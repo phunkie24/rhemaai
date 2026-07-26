@@ -4,7 +4,15 @@ import BrandMark from '@components/common/BrandMark'
 import styles from './Navbar.module.css'
 
 const NAV_LINKS = [
-  { label: 'Products',     path: '/products' },
+  {
+    label: 'Products',
+    path: '/products',
+    children: [
+      { label: 'Nexus AOS', path: '/products/nexus-aos' },
+      { label: 'Forge SE', path: '/products/forge-se' },
+      { label: 'All Products', path: '/products' },
+    ],
+  },
   { label: 'Services',     path: '/services' },
   { label: 'Case Studies', path: '/case-studies' },
   { label: 'Research',     path: '/insights' },
@@ -20,7 +28,7 @@ export default function Navbar() {
   const { pathname } = useLocation()
   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`)
   const darkHeroPaths = ['/', '/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses']
-  const usesDarkHero = darkHeroPaths.includes(pathname)
+  const usesDarkHero = darkHeroPaths.some((path) => pathname === path || (path !== '/' && pathname.startsWith(`${path}/`)))
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -46,13 +54,20 @@ export default function Navbar() {
 
         <ul className={styles.navLinks}>
           {NAV_LINKS.map((link) => (
-            <li key={link.path}>
+            <li key={link.path} className={styles.navItem}>
               <Link
                 to={link.path}
                 className={`${styles.navLink} ${isActivePath(link.path) ? styles.active : ''}`}
               >
                 {link.label}
               </Link>
+              {link.children && (
+                <div className={styles.dropdown}>
+                  {link.children.map((child) => (
+                    <Link key={child.path} to={child.path}>{child.label}</Link>
+                  ))}
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -76,9 +91,14 @@ export default function Navbar() {
         aria-hidden={!menuOpen}
       >
         {NAV_LINKS.map((link) => (
-          <Link key={link.path} to={link.path} className={styles.mobileLink}>
-            {link.label}
-          </Link>
+          <div key={link.path}>
+            <Link to={link.path} className={styles.mobileLink}>{link.label}</Link>
+            {link.children && (
+              <div className={styles.mobileSubLinks}>
+                {link.children.map((child) => <Link key={child.path} to={child.path}>{child.label}</Link>)}
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </>
