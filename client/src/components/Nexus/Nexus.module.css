@@ -384,6 +384,7 @@
 }
 
 .workflow strong {
+  color: #1a2332;
   font-size: 14px;
 }
 
@@ -410,7 +411,10 @@
   font-weight: 900;
 }
 
-.layerDiagram strong { font-size: 13px; }
+.layerDiagram strong {
+  color: #1a2332;
+  font-size: 13px;
+}
 
 .pillList {
   display: flex;

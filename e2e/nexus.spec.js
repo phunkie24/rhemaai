@@ -4,6 +4,10 @@ test.describe('Nexus AOS public ecosystem', () => {
   test('navigates overview, domain, architecture, pricing, docs and demo', async ({ page }) => {
     await page.goto('/products/nexus-aos')
     await expect(page.getByRole('heading', { level: 1, name: /Build, Govern and Operate Enterprise AI Agents/ })).toBeVisible()
+    const layerLabel = page.locator('[aria-label="Eight public CADABA architecture layers"] strong').first()
+    await expect(layerLabel).toBeVisible()
+    await expect(layerLabel).toHaveCSS('color', 'rgb(26, 35, 50)')
+    await expect(layerLabel.locator('..')).toHaveCSS('background-color', 'rgb(255, 255, 255)')
 
     await page.goto('/products/nexus-aos/solutions/energy')
     await expect(page.getByRole('heading', { level: 1, name: /Energy/ })).toBeVisible()
@@ -11,6 +15,10 @@ test.describe('Nexus AOS public ecosystem', () => {
 
     await page.goto('/products/nexus-aos/architecture')
     await expect(page.getByRole('heading', { level: 1, name: /Governed Multi-Agent Orchestration/ })).toBeVisible()
+    const workflowLabel = page.locator('[aria-label="CADABA cognitive loop"] strong').first()
+    await expect(workflowLabel).toBeVisible()
+    await expect(workflowLabel).toHaveCSS('color', 'rgb(26, 35, 50)')
+    await expect(workflowLabel.locator('..')).toHaveCSS('background-color', 'rgb(255, 255, 255)')
 
     await page.goto('/products/nexus-aos/pricing')
     await expect(page.getByRole('heading', { level: 1, name: /Start with One Workflow/ })).toBeVisible()
