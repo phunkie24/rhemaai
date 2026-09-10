@@ -22,8 +22,8 @@
 }
 
 .onDark:not(.scrolled) {
-  background: rgba(6, 16, 29, 0.9);
-  border-bottom-color: rgba(125, 211, 252, 0.16);
+  background: rgba(36,16,61, 0.9);
+  border-bottom-color: rgba(213,180,238, 0.16);
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.16);
 }
 

@@ -2,29 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 
-function criticalPreloadPlugin() {
-  const preloads = []
-  return {
-    name: 'critical-preload',
-    generateBundle(_, bundle) {
-      for (const key of Object.keys(bundle)) {
-        if (key.includes('enterprise-ai-operations')) {
-          preloads.push(`  <link rel="preload" as="image" href="/${key}" fetchpriority="high">`)
-        }
-      }
-    },
-    transformIndexHtml: {
-      order: 'post',
-      handler(html) {
-        if (!preloads.length) return html
-        return html.replace('</head>', `${preloads.join('\n')}\n  </head>`)
-      },
-    },
-  }
-}
-
 export default defineConfig({
-  plugins: [react(), criticalPreloadPlugin()],
+  plugins: [react()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
@@ -48,10 +27,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          helmet: ['react-helmet-async'],
+        manualChunks(id) {
+          const path = id.replace(/\\/g, '/')
+          // Keep shared React and CommonJS helpers out of optional page libraries.
+          if (path.includes('commonjsHelpers') || /node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//.test(path)) return 'vendor'
+          if (path.includes('/node_modules/framer-motion/')) return 'motion'
+          if (path.includes('/node_modules/react-helmet-async/')) return 'helmet'
         },
       },
     },

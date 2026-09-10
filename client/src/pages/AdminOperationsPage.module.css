@@ -1,7 +1,7 @@
 .page {
   min-height: 100vh;
   background: #eef4f7;
-  color: #0f172a;
+  color: #281638;
 }
 
 .hero {
@@ -14,7 +14,7 @@
   background:
     radial-gradient(circle at 15% 20%, rgba(103,232,249,0.24), transparent 30%),
     radial-gradient(circle at 84% 18%, rgba(190,242,100,0.18), transparent 24%),
-    linear-gradient(135deg, #07111f, #10233a 54%, #0f3d3e);
+    linear-gradient(135deg, #24103d, #10233a 54%, #0f3d3e);
   color: #fff;
 }
 
@@ -22,7 +22,7 @@
 .formHeader span,
 .seoTop span,
 .item span {
-  color: #67e8f9;
+  color: #f0cc78;
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -83,7 +83,7 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
   padding: 14px var(--section-pad-x);
-  border-bottom: 1px solid #dbe7f0;
+  border-bottom: 1px solid #e6dcec;
   background: #fff;
 }
 
@@ -93,15 +93,15 @@
   justify-items: start;
   min-height: auto;
   padding: 10px 14px;
-  border: 1px solid #dbe7f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
-  color: #0f172a;
-  background: #f8fafc;
+  color: #281638;
+  background: #fcfaff;
   text-align: left;
 }
 
 .tabs button span {
-  color: #0f766e;
+  color: #6b319b;
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -110,7 +110,7 @@
 
 .tabs .activeTab {
   border-color: transparent;
-  background: linear-gradient(135deg, #67e8f9, #bef264);
+  background: linear-gradient(135deg, #f0cc78, #f0cc78);
   box-shadow: 0 16px 36px rgba(20, 184, 166, 0.18);
 }
 
@@ -125,7 +125,7 @@
 .editor,
 .listPanel,
 .seoPanel {
-  border: 1px solid #dbe7f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 18px 60px rgba(15, 23, 42, 0.07);
@@ -156,7 +156,7 @@
 .formHeader h2,
 .seoTop h3 {
   margin: 4px 0 0;
-  color: #0f172a;
+  color: #281638;
   font-size: 22px;
   letter-spacing: 0;
 }
@@ -180,9 +180,9 @@
 .editor > .priceGrid,
 .editor > label {
   padding: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
-  background: #f8fafc;
+  background: #fcfaff;
 }
 
 .page label {
@@ -206,7 +206,7 @@
   padding: 10px 12px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  color: #0f172a;
+  color: #281638;
   background: #fff;
   font: inherit;
   font-size: 14px;
@@ -222,7 +222,7 @@
   padding: 8px 10px;
   border: 0;
   border-radius: 7px;
-  color: #0f172a;
+  color: #281638;
   background: #e0f2fe;
   font: inherit;
   font-size: 12px;
@@ -247,8 +247,8 @@
   padding: 9px 14px;
   border: 0;
   border-radius: 8px;
-  color: #06101d;
-  background: linear-gradient(135deg, #67e8f9, #bef264);
+  color: #24103d;
+  background: linear-gradient(135deg, #f0cc78, #f0cc78);
   font: inherit;
   font-size: 13px;
   font-weight: 900;
@@ -275,8 +275,8 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  color: #0f766e;
-  background: #ecfeff;
+  color: #6b319b;
+  background: #f4ecff;
   font-size: 14px;
 }
 
@@ -310,7 +310,7 @@
 }
 
 .message {
-  color: #0f766e;
+  color: #6b319b;
   font-size: 13px;
   font-weight: 800;
 }
@@ -331,14 +331,14 @@
   display: grid;
   gap: 12px;
   padding: 14px;
-  border: 1px solid #dbe7f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
-  background: #f8fafc;
+  background: #fcfaff;
 }
 
 .item h3 {
   margin: 5px 0 6px;
-  color: #0f172a;
+  color: #281638;
   font-size: 15px;
   letter-spacing: 0;
 }
@@ -385,9 +385,9 @@
 .archPreview img {
   width: 100%;
   max-height: 220px;
-  border: 1px solid #dbe7f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
-  background: #f8fafc;
+  background: #fcfaff;
   object-fit: contain;
 }
 
@@ -395,9 +395,9 @@
   display: grid;
   gap: 9px;
   padding: 16px;
-  border: 1px solid #dbe7f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
-  background: #f8fafc;
+  background: #fcfaff;
 }
 
 .coursePreview > span {
@@ -418,9 +418,9 @@
 .coursePreviewGrid iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
-  border: 1px solid #dbe7f0;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
-  background: #0f172a;
+  background: #281638;
   object-fit: cover;
 }
 

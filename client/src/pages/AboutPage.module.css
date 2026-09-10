@@ -3,7 +3,7 @@
   padding: 138px 0 96px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(8, 42, 50, 0.9)),
+    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(8, 42, 50, 0.9)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }
@@ -40,7 +40,7 @@
   padding: 7px 14px;
   border: 1px solid rgba(114, 167, 248, 0.32);
   border-radius: var(--radius-full);
-  background: #0d1726;
+  background: #321b4d;
 }
 
 .heroTitle {
@@ -54,7 +54,7 @@
 }
 
 .heroAccent {
-  color: #9BD8D2;
+  color: #e5d3ff;
 }
 
 .heroSub {
@@ -142,7 +142,7 @@
 .statsInner {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(49, 87, 213, 0.2), rgba(14, 148, 136, 0.12));
+  background: linear-gradient(135deg, rgba(91,26,162, 0.2), rgba(184,134,39, 0.12));
   pointer-events: none;
 }
 
@@ -216,7 +216,7 @@
 .founderPhotoBorder {
   position: absolute;
   inset: -10px -10px 10px 10px;
-  border: 2px solid rgba(49, 87, 213, 0.28);
+  border: 2px solid rgba(91,26,162, 0.28);
   border-radius: 24px;
   z-index: 0;
 }
@@ -299,7 +299,7 @@
   padding: 88px 0;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(8, 42, 50, 0.9)),
+    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(8, 42, 50, 0.9)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark);
 }
@@ -307,7 +307,7 @@
 .ctaBg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(49, 87, 213, 0.14), rgba(14, 148, 136, 0.1));
+  background: linear-gradient(135deg, rgba(91,26,162, 0.14), rgba(184,134,39, 0.1));
   pointer-events: none;
 }
 

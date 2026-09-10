@@ -17,10 +17,12 @@
   --brand-800: #2F0B5C;
   --brand-900: #1B0738;
 
-  --accent-teal:  #0B9488;
-  --accent-cyan:  #22D3EE;
-  --accent-amber: #D29222;
-  --accent-lime:  #A3E635;
+  --gold: #b88627;
+  --gold-light: #f0cc78;
+  --accent-teal:  var(--gold);
+  --accent-cyan:  var(--gold-light);
+  --accent-amber: var(--gold);
+  --accent-lime:  var(--gold-light);
   --accent-rose:  #C2415D;
 
   /* Semantic colors */
@@ -31,44 +33,44 @@
 
   /* Neutrals */
   --white:      #FFFFFF;
-  --off-white:  #F3F7FB;
-  --gray-50:    #EEF3F8;
-  --gray-100:   #DFE8F2;
+  --off-white:  #fcfaff;
+  --gray-50:    #f8f3fc;
+  --gray-100:   #e6dcec;
   --gray-200:   #C6D4E3;
   --gray-400:   #8A96AA;
   --gray-600:   #586276;
   --gray-800:   #202B3D;
-  --dark:       #06101D;
-  --dark-mid:   #0A1727;
-  --dark-card:  #101C2E;
-  --surface-ink: #0D1726;
-  --surface-raised: #142238;
+  --dark:       #24103d;
+  --dark-mid:   #2f1648;
+  --dark-card:  #3a2057;
+  --surface-ink: #321b4d;
+  --surface-raised: #432763;
   --surface-light: #FFFFFF;
 
   /* Text */
-  --text-primary:   #101827;
+  --text-primary:   #281638;
   --text-secondary: #526071;
   --text-muted:     #7A8699;
   --text-white:     rgba(255, 255, 255, 0.92);
   --text-white-muted: rgba(255, 255, 255, 0.52);
 
   /* Borders */
-  --border-light:   rgba(36, 71, 184, 0.13);
-  --border-mid:     rgba(36, 71, 184, 0.26);
-  --border-strong:  rgba(36, 71, 184, 0.44);
-  --border-dark:    rgba(125, 211, 252, 0.18);
+  --border-light:   rgba(91,26,162, 0.13);
+  --border-mid:     rgba(91,26,162, 0.26);
+  --border-strong:  rgba(91,26,162, 0.44);
+  --border-dark:    rgba(213,180,238, 0.18);
 
   /* Shadows */
-  --glow-sm:   0 8px 28px rgba(34, 211, 238, 0.15);
-  --glow-md:   0 14px 44px rgba(49, 87, 213, 0.22);
-  --glow-lg:   0 22px 68px rgba(14, 148, 136, 0.24);
-  --shadow-sm: 0 2px 8px rgba(7, 17, 31, 0.08);
-  --shadow-md: 0 8px 30px rgba(7, 17, 31, 0.12);
-  --shadow-lg: 0 20px 56px rgba(7, 17, 31, 0.16);
+  --glow-sm:   0 8px 28px rgba(213,169,79, 0.15);
+  --glow-md:   0 14px 44px rgba(91,26,162, 0.22);
+  --glow-lg:   0 22px 68px rgba(184,134,39, 0.24);
+  --shadow-sm: 0 2px 8px rgba(36,16,61, 0.08);
+  --shadow-md: 0 8px 30px rgba(36,16,61, 0.12);
+  --shadow-lg: 0 20px 56px rgba(36,16,61, 0.16);
 
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
+  --font-display: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Type scale */
   --text-xs:   11px;

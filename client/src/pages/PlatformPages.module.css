@@ -1,6 +1,6 @@
 .page {
   min-height: 100vh;
-  background: #f7fafc;
+  background: #ffffff;
   color: var(--text-primary);
 }
 
@@ -9,17 +9,17 @@
   overflow: hidden;
   padding: 142px var(--section-pad-x) 86px;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94) 0%, rgba(16, 35, 58, 0.91) 48%, rgba(9, 47, 47, 0.9) 100%),
-    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #06101d;
+    linear-gradient(135deg, rgba(36,16,61, 0.94) 0%, rgba(62,16,118, 0.91) 48%, rgba(62,16,118, 0.9) 100%),
+
+    #24103d;
 }
 
 .productHero {
-  background: linear-gradient(180deg, #070b13 0%, #080c14 100%);
+  background: linear-gradient(180deg, #2f0b5c 0%, #3e1076 100%);
 }
 
 .colorHero {
-  background: linear-gradient(180deg, #070b13 0%, #080c14 100%);
+  background: linear-gradient(180deg, #2f0b5c 0%, #3e1076 100%);
 }
 
 .radiance {
@@ -71,20 +71,16 @@
 }
 
 .productHero .heroCopy h1 {
-  color: #f8fafc;
+  color: #fcfaff;
 }
 
 .colorHero .heroCopy h1 {
-  color: #f8fafc;
+  color: #fcfaff;
 }
 
 .heroTitleAccent {
   display: inline;
-  color: transparent;
-  background: linear-gradient(100deg, #8b5cf6 0%, #7357ff 32%, #3b82f6 66%, #06b6d4 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--gold-light);
 }
 
 .heroCopy p {
@@ -111,8 +107,8 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to right, rgba(7,17,31,0.88) 0%, rgba(7,17,31,0.72) 55%, rgba(7,17,31,0.28) 100%),
-    linear-gradient(to bottom, rgba(7,17,31,0.18) 0%, rgba(7,17,31,0.52) 100%);
+    linear-gradient(to right, rgba(36,16,61,0.88) 0%, rgba(36,16,61,0.72) 55%, rgba(36,16,61,0.28) 100%),
+    linear-gradient(to bottom, rgba(36,16,61,0.18) 0%, rgba(36,16,61,0.52) 100%);
 }
 
 .colorHero .heroBgOverlay {
@@ -122,7 +118,7 @@
 .eyebrow {
   display: inline-flex;
   margin-bottom: 16px;
-  color: #67e8f9;
+  color: #f0cc78;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -166,14 +162,14 @@
   padding: 12px 18px;
   color: #fff;
   border: 1px solid rgba(255,255,255,0.24);
-  background: #101c2e;
+  background: #3a2057;
 }
 
 .signalPanel {
   padding: 22px;
-  border: 1px solid rgba(125,211,252,0.18);
+  border: 1px solid rgba(213,180,238,0.18);
   border-radius: 8px;
-  background: #0d1726;
+  background: #321b4d;
   box-shadow: 0 26px 80px rgba(0,0,0,0.26);
   backdrop-filter: none;
 }
@@ -189,7 +185,7 @@
 
 .panelHeader span,
 .publicationTop span {
-  color: #67e8f9;
+  color: #f0cc78;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -212,10 +208,10 @@
   min-height: 76px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(125,211,252,0.14);
+  border: 1px solid rgba(213,180,238,0.14);
   border-radius: 8px;
   color: #e0f2fe;
-  background: #142238;
+  background: #432763;
   font-weight: 800;
 }
 
@@ -233,7 +229,7 @@
   width: 32%;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #60a5fa, #2dd4bf, #bef264);
+  background: linear-gradient(90deg, #c8a6ff, #f0cc78);
   animation: pulseRail 2.8s ease-in-out infinite;
 }
 
@@ -255,7 +251,7 @@
 }
 
 .panelRows strong {
-  color: #bef264;
+  color: #f0cc78;
 }
 
 .metricBand {
@@ -279,7 +275,7 @@
 }
 
 .metricBand strong {
-  color: #0f766e;
+  color: #6b319b;
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 800;
@@ -436,7 +432,7 @@
 .categoryLine {
   flex: 1;
   height: 1px;
-  background: color-mix(in srgb, var(--accent) 35%, #dbe7f0);
+  background: color-mix(in srgb, var(--accent) 35%, #e6dcec);
 }
 
 /* Card header pills */
@@ -466,7 +462,7 @@
 
 .productName {
   margin: 0;
-  color: #0f172a;
+  color: #281638;
   font-size: clamp(19px, 1.6vw, 23px);
   line-height: 1.18;
 }
@@ -477,7 +473,7 @@
 }
 
 .productName a:hover {
-  color: #0f766e;
+  color: #6b319b;
 }
 
 .productKicker {
@@ -512,7 +508,7 @@
   min-height: 96px;
   margin: 18px 24px 0 28px;
   padding: 14px;
-  border: 1px solid color-mix(in srgb, var(--accent) 24%, #e2e8f0);
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, #e6dcec);
   border-radius: 8px;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--accent) 7%, #fff) 0%, rgba(248, 250, 252, 0.9) 100%);
@@ -566,12 +562,12 @@
   font-weight: 800;
   color: #fff;
   text-decoration: none;
-  background: color-mix(in srgb, var(--accent) 84%, #0f172a);
+  background: color-mix(in srgb, var(--accent) 84%, #281638);
   transition: background 0.18s, transform 0.18s;
 }
 
 .productCta:hover {
-  background: color-mix(in srgb, var(--accent) 72%, #020617);
+  background: color-mix(in srgb, var(--accent) 72%, #1b0738);
   color: #fff;
   transform: translateY(-1px);
 }
@@ -584,7 +580,7 @@
   padding: 10px 16px;
   border: 1px solid color-mix(in srgb, var(--accent) 28%, #cbd5e1);
   border-radius: 8px;
-  color: color-mix(in srgb, var(--accent) 72%, #0f172a);
+  color: color-mix(in srgb, var(--accent) 72%, #281638);
   background: #fff;
   font-size: 13.5px;
   font-weight: 800;
@@ -594,7 +590,7 @@
 
 .salesCta:hover {
   border-color: color-mix(in srgb, var(--accent) 42%, #94a3b8);
-  color: color-mix(in srgb, var(--accent) 86%, #020617);
+  color: color-mix(in srgb, var(--accent) 86%, #1b0738);
   background: color-mix(in srgb, var(--accent) 8%, #fff);
 }
 
@@ -603,12 +599,12 @@
   width: 100%;
   height: clamp(240px, 18vw, 360px);
   margin-top: 12px;
-  border: 1px solid color-mix(in srgb, var(--publication-color), #dbe7f0 72%);
+  border: 1px solid color-mix(in srgb, var(--publication-color), #e6dcec 72%);
   border-radius: 8px;
   object-fit: contain;
   object-position: center;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--publication-color), #fff 92%), #f8fafc);
+    linear-gradient(135deg, color-mix(in srgb, var(--publication-color), #fff 92%), #fcfaff);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.78),
     0 8px 22px color-mix(in srgb, var(--publication-color), transparent 84%);
@@ -616,7 +612,7 @@
 
 .publicationCard h2 {
   margin: 14px 0 10px;
-  color: #0f172a;
+  color: #281638;
   font-size: 19px;
   line-height: 1.25;
   letter-spacing: 0;
@@ -647,19 +643,19 @@
 
 .tagRow em {
   padding: 5px 9px;
-  border: 1px solid color-mix(in srgb, var(--accent) 18%, #dbe7f0);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, #e6dcec);
   border-radius: 99px;
   color: color-mix(in srgb, var(--accent) 52%, #475569);
-  background: color-mix(in srgb, var(--accent) 6%, #f8fafc);
+  background: color-mix(in srgb, var(--accent) 6%, #fcfaff);
   font-size: 11px;
   font-style: normal;
   font-weight: 700;
 }
 
 .publicationCard .tagRow em {
-  border-color: color-mix(in srgb, var(--publication-color) 24%, #dbe7f0);
+  border-color: color-mix(in srgb, var(--publication-color) 24%, #e6dcec);
   color: color-mix(in srgb, var(--publication-color) 70%, #475569);
-  background: color-mix(in srgb, var(--publication-color) 8%, #f8fafc);
+  background: color-mix(in srgb, var(--publication-color) 8%, #fcfaff);
 }
 
 .cardActions {
@@ -676,7 +672,7 @@
   gap: 10px 14px;
   margin: 14px 24px 0 28px;
   padding-top: 14px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e6dcec;
 }
 
 .ctaBand {
@@ -686,9 +682,9 @@
   gap: 24px;
   padding: 56px var(--section-pad-x);
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(22, 78, 99, 0.9) 58%, rgba(54, 83, 20, 0.84)),
-    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #0f172a;
+    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(22, 78, 99, 0.9) 58%, rgba(54, 83, 20, 0.84)),
+
+    #281638;
 }
 
 .ctaBand h2 {
@@ -704,7 +700,7 @@
   flex-wrap: wrap;
   gap: 8px;
   padding: 16px var(--section-pad-x);
-  border-bottom: 1px solid #dbe7f0;
+  border-bottom: 1px solid #e6dcec;
   background: #ffffff;
   backdrop-filter: none;
 }
@@ -712,25 +708,25 @@
 .filterBand button {
   min-height: 38px;
   padding: 8px 14px;
-  border: 1px solid color-mix(in srgb, var(--accent, #67e8f9) 16%, #dbe7f0);
+  border: 1px solid color-mix(in srgb, var(--accent, #f0cc78) 16%, #e6dcec);
   border-radius: 99px;
   color: #475569;
-  background: #f8fafc;
+  background: #fcfaff;
   font-weight: 800;
   cursor: pointer;
 }
 
 .filterBand button:hover {
-  color: color-mix(in srgb, var(--accent, #67e8f9) 72%, #0f172a);
-  border-color: color-mix(in srgb, var(--accent, #67e8f9) 36%, #dbe7f0);
-  background: color-mix(in srgb, var(--accent, #67e8f9) 7%, #fff);
+  color: color-mix(in srgb, var(--accent, #f0cc78) 72%, #281638);
+  border-color: color-mix(in srgb, var(--accent, #f0cc78) 36%, #e6dcec);
+  background: color-mix(in srgb, var(--accent, #f0cc78) 7%, #fff);
 }
 
 .filterBand .activeFilter {
-  color: #06101d;
-  border-color: color-mix(in srgb, var(--accent, #67e8f9) 36%, transparent);
-  background: linear-gradient(135deg, var(--accent, #67e8f9), color-mix(in srgb, var(--accent, #67e8f9) 55%, #bef264));
-  box-shadow: 0 12px 26px color-mix(in srgb, var(--accent, #67e8f9) 18%, transparent);
+  color: #fff;
+  border-color: color-mix(in srgb, var(--accent, #f0cc78) 36%, transparent);
+  background: var(--primary);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--accent, #f0cc78) 18%, transparent);
 }
 
 .publicationFilterBand {
@@ -741,14 +737,14 @@
   min-height: 42px;
   padding: 9px 22px;
   color: color-mix(in srgb, var(--publication-color), #334155 56%);
-  border-color: color-mix(in srgb, var(--publication-color), #dbe7f0 76%);
+  border-color: color-mix(in srgb, var(--publication-color), #e6dcec 76%);
   background: color-mix(in srgb, var(--publication-color), #fff 94%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
 }
 
 .publicationFilterBand button:hover {
   color: color-mix(in srgb, var(--publication-color), black 10%);
-  border-color: color-mix(in srgb, var(--publication-color), #dbe7f0 45%);
+  border-color: color-mix(in srgb, var(--publication-color), #e6dcec 45%);
   background: color-mix(in srgb, var(--publication-color), #fff 88%);
 }
 
@@ -840,7 +836,7 @@
 }
 
 .priceNGN {
-  color: #0f172a;
+  color: #281638;
   font-size: 18px;
   font-weight: 900;
 }
@@ -852,7 +848,7 @@
 }
 
 .priceFree {
-  color: color-mix(in srgb, var(--publication-color, #0f766e), black 10%);
+  color: color-mix(in srgb, var(--publication-color, #6b319b), black 10%);
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -870,9 +866,9 @@
   align-items: center;
   min-height: 30px;
   padding: 5px 10px;
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, #dbe7f0);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, #e6dcec);
   border-radius: 999px;
-  color: color-mix(in srgb, var(--accent) 76%, #0f172a);
+  color: color-mix(in srgb, var(--accent) 76%, #281638);
   background: color-mix(in srgb, var(--accent) 8%, #fff);
   font-size: 12px;
   font-weight: 800;
@@ -881,7 +877,7 @@
 
 .priceContact:hover {
   color: #fff;
-  background: color-mix(in srgb, var(--accent) 82%, #0f172a);
+  background: color-mix(in srgb, var(--accent) 82%, #281638);
 }
 
 .publicationBottom {
@@ -891,7 +887,7 @@
   align-items: center;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid #e6dcec;
 }
 
 .btnPaystack {
@@ -917,7 +913,7 @@
 
 .textAction {
   min-height: 34px;
-  color: #0f766e;
+  color: #6b319b;
   font-weight: 700;
   font-size: 13px;
   text-decoration: underline;

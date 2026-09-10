@@ -1,9 +1,6 @@
 .section {
   padding: var(--section-pad-y) var(--section-pad-x);
-  background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94) 0%, rgba(19, 11, 42, 0.92) 45%, rgba(5, 56, 62, 0.9) 100%),
-    url('../../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    var(--dark-mid);
+  background: linear-gradient(135deg, #2f0b5c, #4b148c);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -35,7 +32,7 @@
 .label {
   font-size: 11px;
   font-weight: 700;
-  color: #67e8f9;
+  color: #f0cc78;
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
@@ -83,7 +80,7 @@
 }
 
 .btnGhost {
-  background: #101c2e;
+  background: #3a2057;
   color: rgba(255, 255, 255, 0.85);
   padding: 15px 28px;
   border-radius: var(--radius-md);

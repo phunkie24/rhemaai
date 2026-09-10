@@ -3,9 +3,9 @@
   overflow: hidden;
   padding: 28px var(--section-pad-x);
   background:
-    linear-gradient(90deg, rgba(7, 17, 31, 0.82) 0%, rgba(18, 23, 58, 0.8) 48%, rgba(6, 78, 59, 0.76) 100%),
+    linear-gradient(90deg, rgba(36,16,61, 0.82) 0%, rgba(18, 23, 58, 0.8) 48%, rgba(6, 78, 59, 0.76) 100%),
     url('../../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #07111f;
+    #24103d;
 }
 
 .streamSection::before {
@@ -39,7 +39,7 @@
 .eyebrow {
   display: inline-flex;
   margin-bottom: 10px;
-  color: #67e8f9;
+  color: #f0cc78;
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -72,10 +72,10 @@
 
 .topicRow span {
   padding: 6px 10px;
-  border: 1px solid rgba(125, 211, 252, 0.18);
+  border: 1px solid rgba(213,180,238, 0.18);
   border-radius: 999px;
   color: #dbeafe;
-  background: #101c2e;
+  background: #3a2057;
   font-size: 12px;
   font-weight: 800;
 }
@@ -101,19 +101,19 @@
 }
 
 .primaryAction {
-  color: #06101d;
-  background: linear-gradient(135deg, #67e8f9, #bef264);
+  color: #24103d;
+  background: linear-gradient(135deg, #f0cc78, #f0cc78);
 }
 
 .primaryAction:hover {
-  color: #06101d;
+  color: #24103d;
   transform: translateY(-1px);
 }
 
 .secondaryAction {
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #101c2e;
+  background: #3a2057;
 }
 
 .secondaryAction:hover {
@@ -146,7 +146,7 @@
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  background: #0d1726;
+  background: #321b4d;
   box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
 }
 

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { productsAPI } from '@utils/api'
+import { PRODUCT_PRICING } from '@utils/pricing'
+import Price from '@components/common/Price'
+import { NEXUS_LICENSES } from '../data/nexusPricing'
 import styles from './PlatformPages.module.css'
 
 function productDescription(summary, features) {
@@ -51,13 +53,13 @@ function catalogueProduct({
 // Colors mirror the service practice-area colors in utils/servicesData.js so
 // the products page reads as one taxonomy with the services page.
 export const PRODUCT_CATEGORIES = [
-  { id: 'agentic-ai', name: 'Agentic AI Engineering', color: '#3157D5' },
-  { id: 'data-engineering', name: 'Data Engineering & Platforms', color: '#0E9488' },
-  { id: 'data-science', name: 'Data Science & Analytics', color: '#7C3AED' },
-  { id: 'cloud-architecture', name: 'Cloud Architecture', color: '#2447B8' },
-  { id: 'mlops-dataops', name: 'MLOps & DataOps', color: '#C2415D' },
-  { id: 'enterprise-software', name: 'Enterprise Software Eng.', color: '#10275F' },
-  { id: 'fintech-blockchain', name: 'FinTech & Blockchain', color: '#6F5B22' },
+  { id: 'agentic-ai', name: 'Agentic AI Engineering', color: '#5B1AA2' },
+  { id: 'data-engineering', name: 'Data Engineering & Platforms', color: '#7B3FE8' },
+  { id: 'data-science', name: 'Data Science & Analytics', color: '#8A631C' },
+  { id: 'cloud-architecture', name: 'Cloud Architecture', color: '#6B319B' },
+  { id: 'mlops-dataops', name: 'MLOps & DataOps', color: '#4B148C' },
+  { id: 'enterprise-software', name: 'Enterprise Software Eng.', color: '#946C23' },
+  { id: 'fintech-blockchain', name: 'FinTech & Blockchain', color: '#3E1076' },
 ]
 
 const PRODUCT_GROUP_BY_SLUG = {
@@ -82,7 +84,7 @@ const PRODUCT_GROUP_BY_SLUG = {
   'ledger-fm': 'fintech-blockchain',
 }
 
-const ALL_PRODUCTS_ACCENT = '#75E8A1'
+const ALL_PRODUCTS_ACCENT = '#5B1AA2'
 
 const GROUP_KEYWORDS = [
   {
@@ -567,17 +569,12 @@ function ProductCard({ product, accent }) {
           {extraTagCount > 0 && <em>+{extraTagCount}</em>}
         </div>
 
-        <div className={styles.priceRow}>
-          {product.pricing?.amountNGN > 0 && (
-            <span className={styles.priceNGN}>NGN {Number(product.pricing.amountNGN).toLocaleString()}</span>
-          )}
-          {product.pricing?.amount > 0 && (
-            <span className={styles.priceUSD}>${Number(product.pricing.amount).toFixed(2)}</span>
-          )}
-          {(!product.pricing?.amount && !product.pricing?.amountNGN) && (
-            <Link to="/contact" className={styles.priceContact}>Pricing on request</Link>
-          )}
-        </div>
+        <Price pricing={PRODUCT_PRICING[product.slug] || (product.slug === 'nexus-aos'
+          ? { label: `From ${NEXUS_LICENSES[0].displayPrice}` }
+          : product.pricing)} />
+        {product.slug === 'nexus-aos' && (
+          <p>Annual platform licence. Implementation priced separately. <Link to="/products/nexus-aos/pricing">Compare plans</Link></p>
+        )}
       </div>
 
       {secondaryLinks.length > 0 && (
@@ -635,11 +632,11 @@ export default function ProductsPage() {
       <section className={`${styles.hero} ${styles.productHero}`}>
         <div className={styles.radiance} />
         <div className={styles.heroInner}>
-          <motion.div
+          <div
             className={styles.heroCopy}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65 }}
+
+
+
           >
             <span className={styles.eyebrow}>RhemaAI Platform</span>
             <h1>Enterprise products for <span className={styles.heroTitleAccent}>governed AI, data and cloud operations</span>.</h1>
@@ -652,13 +649,13 @@ export default function ProductsPage() {
               <Link to="/contact" className={styles.primaryAction}>Book a platform session</Link>
               <Link to="/services" className={styles.secondaryAction}>View services</Link>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className={styles.signalPanel}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.12, duration: 0.65 }}
+
+
+
             aria-label="RhemaAI Platform operating signals"
           >
             <div className={styles.panelHeader}>
@@ -681,7 +678,7 @@ export default function ProductsPage() {
               <div><span>Release readiness</span><strong>92%</strong></div>
               <div><span>Pipeline health</span><strong>Stable</strong></div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -701,6 +698,7 @@ export default function ProductsPage() {
             key={cat.id}
             type="button"
             className={activeCategory === cat.id ? styles.activeFilter : ''}
+            aria-pressed={activeCategory === cat.id}
             style={{ '--accent': filterAccent(cat) }}
             onClick={() => setActiveCategory(cat.id)}
           >

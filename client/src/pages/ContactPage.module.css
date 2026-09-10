@@ -38,7 +38,7 @@
 }
 
 .accent {
-  color: #9BD8D2;
+  color: #e5d3ff;
 }
 
 .desc {
@@ -78,7 +78,7 @@
   height: 34px;
   border-radius: var(--radius-md);
   background: rgba(155, 216, 210, 0.16);
-  color: #9BD8D2;
+  color: #e5d3ff;
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 900;

@@ -3,14 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import MarkdownContent from '@components/common/MarkdownContent'
 import PageSEO from '@components/common/PageSEO'
 import { productsAPI } from '@utils/api'
+import { formatPrice as priceLabel, PRODUCT_PRICING } from '@utils/pricing'
 import { SEED_PRODUCTS } from './ProductsPage'
 import styles from './ContentPage.module.css'
-
-function priceLabel(pricing = {}) {
-  if (pricing.amountNGN > 0) return `NGN ${Number(pricing.amountNGN).toLocaleString()}`
-  if (pricing.amount > 0) return `${pricing.currency || 'USD'} ${Number(pricing.amount).toLocaleString()}`
-  return pricing.label || 'Contact sales'
-}
 
 function productCategory(product) {
   return product.kicker || product.category || 'Platform product'
@@ -60,7 +55,7 @@ export default function ProductDetailPage() {
   }
 
   const description = product.description?.trim()
-  const pricing = product.pricing || {}
+  const pricing = { ...product.pricing, ...PRODUCT_PRICING[product.slug] }
 
   return (
     <div className={styles.page}>

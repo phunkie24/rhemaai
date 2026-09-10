@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { SERVICES } from '@utils/servicesData'
+import { SERVICE_PRICING } from '@utils/pricing'
+import Price from '@components/common/Price'
 
 const HOME_SERVICE_IDS = ['agentic-ai', 'data-engineering', 'data-science']
 const HOME_SERVICES = SERVICES.filter(s => HOME_SERVICE_IDS.includes(s.id))
@@ -39,6 +41,7 @@ function ServiceCard({ service }) {
         ))}
       </div>
 
+      <Price pricing={SERVICE_PRICING[service.id] || service.pricing} />
       <Link to={`/services#${service.id}`} className={styles.cardLink}>
         Learn more<span className="sr-only"> about {service.title}</span>
       </Link>
@@ -54,7 +57,6 @@ export default function Services() {
         title="End-to-End Enterprise AI & Cloud Services"
         subtitle="From strategy to production deployment, we deliver across the full intelligence stack, combining Applied Mathematics, multi-cloud expertise, and proven agentic AI patterns."
         centered
-        light
       />
 
       <div className={styles.grid}>
@@ -70,6 +72,7 @@ export default function Services() {
             <h3>{MANAGED_SERVICES.title}</h3>
             <p>{MANAGED_SERVICES.description}</p>
             {MANAGED_SERVICES.note && <p className={styles.managedNote}>{MANAGED_SERVICES.note}</p>}
+            <Price pricing={SERVICE_PRICING[MANAGED_SERVICES.id] || MANAGED_SERVICES.pricing} />
           </div>
           <Link to="/services" className={styles.managedLink}>
             Learn more<span className="sr-only"> about {MANAGED_SERVICES.title}</span>

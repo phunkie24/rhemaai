@@ -20,7 +20,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: #07111f;
+  background: var(--white);
   color: var(--text-primary);
   font-size: var(--text-base);
   line-height: 1.6;
@@ -109,8 +109,8 @@ ul { list-style: none; }
 }
 
 ::selection {
-  color: #06101d;
-  background: #a7f3d0;
+  color: #24103d;
+  background: #f0cc78;
 }
 
 .text-muted { color: var(--text-muted); }
@@ -144,6 +144,7 @@ ul { list-style: none; }
 
 /* Respect user reduced-motion preference (replaces MotionConfig) */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

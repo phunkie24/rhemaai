@@ -1,7 +1,7 @@
 .hero {
   padding: 140px var(--section-pad-x) 72px;
   background:
-    linear-gradient(135deg, rgba(7, 17, 31, 0.78), rgba(8, 42, 50, 0.72)),
+    linear-gradient(135deg, rgba(36,16,61, 0.78), rgba(8, 42, 50, 0.72)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark);
   position: relative;
@@ -32,7 +32,7 @@
 }
 
 .heroAccent {
-  color: #9BD8D2;
+  color: #e5d3ff;
 }
 
 .heroDesc {
@@ -231,7 +231,7 @@
   overflow: hidden;
   padding: 80px var(--section-pad-x);
   background:
-    linear-gradient(135deg, rgba(7, 17, 31, 0.84), rgba(8, 42, 50, 0.78)),
+    linear-gradient(135deg, rgba(36,16,61, 0.84), rgba(8, 42, 50, 0.78)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
   text-align: center;

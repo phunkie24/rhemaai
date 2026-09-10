@@ -2,8 +2,7 @@
   position: relative;
   overflow: hidden;
   padding: var(--section-pad-y) var(--section-pad-x) clamp(44px, 5vw, 68px);
-  background:
-    linear-gradient(180deg, #06101d 0%, #0a1727 52%, #101827 100%);
+  background: var(--white);
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }
@@ -35,7 +34,7 @@
   --edge-mid: color-mix(in srgb, var(--service-color), white 18%);
   --edge-dark: color-mix(in srgb, var(--service-color), black 38%);
   background:
-    linear-gradient(150deg, color-mix(in srgb, var(--service-color), #0d1726 88%) 0%, #0d1726 44%, #081322 100%);
+    linear-gradient(150deg, color-mix(in srgb, var(--service-color), #321b4d 88%) 0%, #321b4d 44%, #291340 100%);
   border: 1px solid color-mix(in srgb, var(--service-color), #dbeafe 66%);
   border-top: 7px solid var(--edge-mid);
   border-left: 5px solid color-mix(in srgb, var(--service-color), white 8%);
@@ -126,7 +125,7 @@
 .cardHighlight {
   border-color: color-mix(in srgb, var(--service-color), white 28%);
   background:
-    linear-gradient(150deg, color-mix(in srgb, var(--service-color), #0d1726 78%) 0%, #0d1726 50%, #081322 100%);
+    linear-gradient(150deg, color-mix(in srgb, var(--service-color), #321b4d 78%) 0%, #321b4d 50%, #291340 100%);
 }
 
 .cardHighlight:hover {
@@ -255,6 +254,11 @@
 }
 
 /* Card link */
+.card > div:last-of-type {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
 .cardLink {
   display: inline-flex;
   align-items: center;
@@ -298,7 +302,7 @@
   border-top: 7px solid var(--edge-mid);
   border-left: 5px solid color-mix(in srgb, var(--service-color), white 10%);
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--service-color), #0d1726 78%) 0%, #0d1726 56%, #081322 100%);
+    linear-gradient(135deg, color-mix(in srgb, var(--service-color), #321b4d 78%) 0%, #321b4d 56%, #291340 100%);
   box-shadow:
     inset 1px 1px 0 rgba(255, 255, 255, 0.13),
     inset -9px -9px 0 rgba(0, 0, 0, 0.17),
@@ -420,20 +424,20 @@
   align-items: center;
   gap: 6px;
   background: transparent;
-  color: #67e8f9;
+  color: var(--primary);
   padding: 12px 28px;
   border-radius: var(--radius-md);
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  border: 1.5px solid rgba(125, 211, 252, 0.22);
+  border: 1.5px solid rgba(213,180,238, 0.22);
   transition: var(--transition-base);
 }
 
 .allServicesBtn:hover {
-  background: #67e8f9;
-  color: #06101d;
-  border-color: #67e8f9;
+  background: #f0cc78;
+  color: #24103d;
+  border-color: #f0cc78;
   box-shadow: var(--glow-sm);
 }
 

@@ -2,7 +2,7 @@
   --nexus-purple: #5b1aa2;
   --nexus-purple-dark: #2f0b5c;
   --nexus-gold: #b7791f;
-  --nexus-ink: #101827;
+  --nexus-ink: #281638;
   min-height: 100vh;
   color: var(--nexus-ink);
   background: #f5f7fb;
@@ -85,7 +85,7 @@
 
 .breadcrumbWrap {
   padding: 124px var(--section-pad-x) 0;
-  background: #080c14;
+  background: #3e1076;
 }
 
 .breadcrumbs ol {
@@ -117,7 +117,7 @@
   padding: 34px var(--section-pad-x) 86px;
   background:
     radial-gradient(circle at 84% 16%, rgba(183, 121, 31, 0.14), transparent 24%),
-    linear-gradient(135deg, #080c14 0%, #151022 54%, #26113c 100%);
+    linear-gradient(135deg, #3e1076 0%, #151022 54%, #26113c 100%);
 }
 
 .heroGrid {
@@ -303,7 +303,7 @@
 .agentCard,
 .packageCard {
   padding: 24px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 12px 34px rgba(15,23,42,.06);
@@ -361,7 +361,7 @@
   align-items: center;
   min-height: 72px;
   padding: 12px 18px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   background: #fff;
 }
 
@@ -460,7 +460,7 @@
   gap: 14px;
   margin-bottom: 14px;
   padding: 18px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -504,7 +504,7 @@
   flex-direction: column;
   min-height: 350px;
   padding: 22px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-top: 5px solid var(--nexus-purple);
   border-radius: 8px;
   background: #fff;
@@ -685,7 +685,7 @@
   place-items: center;
   min-height: 72px;
   padding: 12px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-left: 4px solid var(--nexus-gold);
   color: #384457;
   background: #fff;
@@ -755,7 +755,7 @@
   padding: 13px 15px;
   border: 1px solid #e4e8ef;
   border-radius: 6px;
-  background: #f8fafc;
+  background: #fcfaff;
 }
 
 .packageDetails summary {
@@ -812,7 +812,7 @@
 
 .tableWrap {
   overflow-x: auto;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -859,7 +859,7 @@
 
 .faqList details {
   padding: 18px 20px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -887,7 +887,7 @@
   position: sticky;
   top: 142px;
   padding: 22px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -900,7 +900,7 @@
 
 .formCard {
   padding: clamp(22px, 4vw, 42px);
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 18px 50px rgba(15,23,42,.08);
@@ -988,7 +988,7 @@
   align-items: flex-start;
   gap: 10px;
   padding: 13px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 7px;
   color: #455267;
   font-size: 12px;
@@ -1084,7 +1084,7 @@
   display: grid;
   gap: 4px;
   padding: 12px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -1127,7 +1127,7 @@
 .question {
   min-width: 0;
   padding: 24px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 10px 28px rgba(15,23,42,.05);
@@ -1168,7 +1168,7 @@
   gap: 7px;
   min-height: 120px;
   padding: 12px 8px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 7px;
   color: #596579;
   text-align: center;
@@ -1198,7 +1198,7 @@
   gap: 10px;
   min-height: 48px;
   padding: 10px 12px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 7px;
   color: #4f5b6f;
   font-size: 12px;
@@ -1266,7 +1266,7 @@
 
 .dimensionGrid article {
   padding: 16px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 7px;
   background: #fff;
 }
@@ -1364,7 +1364,7 @@
   display: flex;
   gap: 10px;
   padding: 12px var(--section-pad-x);
-  border-bottom: 1px solid #dfe5ee;
+  border-bottom: 1px solid #e6dcec;
   background: rgba(255,255,255,.98);
 }
 
@@ -1396,7 +1396,7 @@
   width: min(620px, calc(100% - 40px));
   max-height: 420px;
   overflow-y: auto;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
   box-shadow: 0 18px 44px rgba(15,23,42,.14);
@@ -1494,7 +1494,7 @@
 .docsArticle li::before { content: '—'; position: absolute; left: 0; color: var(--nexus-purple); }
 
 .docsArticle dl { display: grid; gap: 12px; margin-top: 18px; }
-.docsArticle dl div { padding: 15px; border: 1px solid #dfe5ee; border-radius: 7px; background: #fff; }
+.docsArticle dl div { padding: 15px; border: 1px solid #e6dcec; border-radius: 7px; background: #fff; }
 .docsArticle dt { color: #1b2433; font-family: var(--font-display); font-weight: 800; }
 .docsArticle dd { margin-top: 6px; color: #596579; font-size: 13px; }
 
@@ -1505,7 +1505,7 @@
   gap: 16px;
   margin-top: 30px;
   padding: 18px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -1526,7 +1526,7 @@
   display: grid;
   gap: 4px;
   padding: 16px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #e6dcec;
   border-radius: 8px;
   background: #fff;
 }
@@ -1570,7 +1570,7 @@
   margin-top: 14px;
   padding: 18px;
   border-radius: 8px;
-  color: #e2e8f0;
+  color: #e6dcec;
   background: #0b1020;
   overflow-x: auto;
 }

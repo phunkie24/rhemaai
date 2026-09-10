@@ -1,7 +1,8 @@
 import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { SERVICES } from '@utils/servicesData'
+import { SERVICE_PRICING } from '@utils/pricing'
+import Price from '@components/common/Price'
 import CTA from '@components/CTA/CTA'
 import styles from './ServicesPage.module.css'
 
@@ -49,11 +50,11 @@ export default function ServicesPage() {
       <section className={styles.hero}>
         <div className={styles.heroGrid} />
         <div className="container">
-          <motion.div
+          <div
             className={styles.heroInner}
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+
+
+
           >
             <div className={styles.heroCopy}>
               <span className={styles.badge}>Enterprise Service Portfolio</span>
@@ -73,11 +74,11 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            <motion.div
+            <div
               className={styles.streamPanel}
-              initial={{ opacity: 0, x: 28 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.16, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+
+
+
               aria-label="Live enterprise service stream"
             >
               <div className={styles.panelTop}>
@@ -99,21 +100,21 @@ export default function ServicesPage() {
               </div>
 
               <div className={styles.eventList}>
-                {STREAM_EVENTS.map((event, index) => (
-                  <motion.div
+                {STREAM_EVENTS.map((event) => (
+                  <div
                     key={event.label}
                     className={styles.eventRow}
-                    initial={{ opacity: 0, x: 18 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.32 + index * 0.08, duration: 0.4 }}
+
+
+
                   >
                     <span>{event.label}</span>
                     <strong>{event.value}</strong>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -190,11 +191,12 @@ export default function ServicesPage() {
                   ))}
                 </div>
 
+                <Price pricing={SERVICE_PRICING[service.id] || service.pricing} />
                 <Link
                   to="/contact"
                   className={styles.cardLink}
                 >
-                  Start a conversation
+                  Request a quote
                 </Link>
                 {service.id === 'agentic-ai' && (
                   <Link to="/products/nexus-aos" className={styles.nexusLink}>

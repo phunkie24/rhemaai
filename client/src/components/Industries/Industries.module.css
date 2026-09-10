@@ -33,16 +33,16 @@
 }
 
 .pill:hover {
-  background: #0d1726;
+  background: #321b4d;
   color: white;
-  border-color: #0d1726;
-  box-shadow: 0 14px 34px rgba(13, 23, 38, 0.16);
+  border-color: #321b4d;
+  box-shadow: 0 14px 34px rgba(50,27,77, 0.16);
 }
 
 .pillHighlight {
-  border-color: rgba(14, 148, 136, 0.24);
-  background: #ecfeff;
-  color: #0f766e;
+  border-color: rgba(184,134,39, 0.24);
+  background: #f4ecff;
+  color: #6b319b;
 }
 
 .pillHighlight:hover {
@@ -51,10 +51,10 @@
 }
 
 .pillActive {
-  background: #0d1726;
+  background: #321b4d;
   color: white;
-  border-color: #0d1726;
-  box-shadow: 0 14px 34px rgba(13, 23, 38, 0.16);
+  border-color: #321b4d;
+  box-shadow: 0 14px 34px rgba(50,27,77, 0.16);
 }
 
 .pillIcon {

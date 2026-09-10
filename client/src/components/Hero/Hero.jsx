@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom'
-import useCountUp from '@hooks/useCountUp'
-import heroMedia from '../../assets/enterprise-ai-operations.webp'
 import styles from './Hero.module.css'
 
 const STATS = [
@@ -28,15 +26,12 @@ const VISUAL_METRICS = [
   { value: '24/7', label: 'Ops' },
 ]
 
-function StatItem({ stat, index }) {
-  const count = useCountUp(stat.value ?? 0, 1800, true)
-
+function StatItem({ stat }) {
   return (
     <div
       className={`${styles.stat} ${stat.text ? styles.textStat : ''}`}
-      style={{ animationDelay: `${0.35 + index * 0.08}s` }}
     >
-      <strong>{stat.text ?? `${count.toLocaleString()}${stat.suffix}`}</strong>
+      <strong>{stat.text ?? `${stat.value.toLocaleString('en-US')}${stat.suffix}`}</strong>
       <span>{stat.label}</span>
     </div>
   )
@@ -45,8 +40,6 @@ function StatItem({ stat, index }) {
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <img src={heroMedia} alt="" aria-hidden="true" className={styles.heroBg} fetchpriority="high" decoding="async" />
-      <div className={styles.heroBgOverlay} aria-hidden="true" />
 
       <div className={styles.heroShell}>
         <div className={styles.copy}>
@@ -56,7 +49,7 @@ export default function Hero() {
           </div>
 
           <h1 className={styles.headline}>
-            Enterprise AI Systems for Production
+            Enterprise AI Systems <span className={styles.goldText}>for Production</span>
           </h1>
 
           <p className={styles.subtext}>
@@ -84,15 +77,13 @@ export default function Hero() {
         <div className={styles.signalsCol}>
           <div className={styles.visualStack} aria-label="RhemaAI enterprise AI operating model">
             <div className={styles.primaryImageCard}>
-              <img
-                src={heroMedia}
-                alt="Enterprise AI operations command center dashboard"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className={styles.imageCaption}>
-                <span>AI operations room</span>
-                <strong>Governed automation in view</strong>
+              <div className={styles.architecture}>
+                <span className={styles.architectureLabel}>From strategy to production</span>
+                <strong className={styles.architectureCore}>Rhema<span>AI</span></strong>
+                <div className={styles.architectureNodes}>
+                  <span>AI systems</span><span>Trusted data</span><span>Cloud platforms</span>
+                </div>
+                <span className={styles.architectureFooter}>Governance at every layer</span>
               </div>
             </div>
 

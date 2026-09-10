@@ -8,7 +8,7 @@
   padding: 130px 0 52px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(8, 42, 50, 0.9)),
+    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(8, 42, 50, 0.9)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }
@@ -49,7 +49,7 @@
   padding: 7px 16px;
   border: 1px solid rgba(114, 167, 248, 0.32);
   border-radius: var(--radius-full);
-  background: #0d1726;
+  background: #321b4d;
   color: var(--brand-300);
   font-size: 11px;
   font-weight: 800;
@@ -69,7 +69,7 @@
 
 /* Gradient on "Measurable Outcomes." */
 .accent {
-  background: linear-gradient(90deg, #67e8f9 0%, #34d399 55%, #a78bfa 100%);
+  background: linear-gradient(90deg, #f0cc78 0%, #34d399 55%, #a78bfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -93,7 +93,7 @@
   padding: 24px 28px;
   border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 12px;
-  background: #0d1726;
+  background: #321b4d;
 }
 
 .hStat {
@@ -162,7 +162,7 @@
   flex: 0 0 auto;
   min-height: 42px;
   padding: 9px 20px;
-  border: 1px solid color-mix(in srgb, var(--accent), #dbe7f0 76%);
+  border: 1px solid color-mix(in srgb, var(--accent), #e6dcec 76%);
   border-radius: var(--radius-full);
   background: color-mix(in srgb, var(--accent), #fff 94%);
   color: color-mix(in srgb, var(--accent), #334155 58%);
@@ -177,7 +177,7 @@
 }
 
 .filterBtn:hover {
-  border-color: color-mix(in srgb, var(--accent), #dbe7f0 45%);
+  border-color: color-mix(in srgb, var(--accent), #e6dcec 45%);
   color: color-mix(in srgb, var(--accent), black 10%);
   background: color-mix(in srgb, var(--accent), #fff 88%);
   transform: translateY(-1px);
@@ -214,7 +214,7 @@
   padding: 24px;
   overflow: hidden;
   isolation: isolate;
-  border: 1px solid color-mix(in srgb, var(--accent), #d8e3ed 72%);
+  border: 1px solid color-mix(in srgb, var(--accent), #e6dcec 72%);
   border-top: 6px solid var(--accent);
   border-left: 5px solid color-mix(in srgb, var(--accent), #fff 20%);
   border-radius: 8px;
@@ -267,7 +267,7 @@
 
 .card:hover {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent), #d8e3ed 40%);
+  border-color: color-mix(in srgb, var(--accent), #e6dcec 40%);
   border-top-color: color-mix(in srgb, var(--accent), #fff 18%);
   box-shadow:
     inset 1px 1px 0 rgba(255, 255, 255, 0.96),
@@ -362,7 +362,7 @@
 .tag {
   padding: 5px 9px;
   border-radius: var(--radius-md);
-  border: 1px solid color-mix(in srgb, var(--accent), #dbe7f0 76%);
+  border: 1px solid color-mix(in srgb, var(--accent), #e6dcec 76%);
   background: color-mix(in srgb, var(--accent), #fff 94%);
   color: color-mix(in srgb, var(--accent), #475569 54%);
   font-size: 11px;
@@ -375,7 +375,7 @@
   padding: 56px 0;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94), rgba(8, 42, 50, 0.9)),
+    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(8, 42, 50, 0.9)),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
     var(--dark-mid);
 }

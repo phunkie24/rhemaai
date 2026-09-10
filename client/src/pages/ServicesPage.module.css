@@ -1,8 +1,8 @@
 .hero {
   position: relative;
   background:
-    linear-gradient(135deg, rgba(27, 7, 56, 0.94), rgba(6, 16, 29, 0.92)),
-    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
+    linear-gradient(135deg, rgba(27, 7, 56, 0.94), rgba(36,16,61, 0.92)),
+
     var(--dark-mid);
   padding: 138px 0 96px;
   overflow: hidden;
@@ -44,7 +44,7 @@
 
 .badge {
   color: #e9ddff;
-  background: #0d1726;
+  background: #321b4d;
   border: 1px solid rgba(216, 195, 255, 0.28);
   padding: 7px 15px;
   border-radius: var(--radius-full);
@@ -58,7 +58,7 @@
   height: 8px;
   border-radius: 999px;
   background: var(--accent-teal);
-  box-shadow: 0 0 0 4px rgba(14, 148, 136, 0.16);
+  box-shadow: 0 0 0 4px rgba(184,134,39, 0.16);
 }
 
 .heroTitle {
@@ -93,8 +93,8 @@
 
 .proofRow span {
   color: rgba(255, 255, 255, 0.82);
-  background: #101c2e;
-  border: 1px solid rgba(125, 211, 252, 0.16);
+  background: #3a2057;
+  border: 1px solid rgba(213,180,238, 0.16);
   border-radius: var(--radius-full);
   padding: 8px 12px;
   font-size: 12px;
@@ -104,9 +104,9 @@
 .streamPanel {
   position: relative;
   min-height: 430px;
-  border: 1px solid rgba(125, 211, 252, 0.18);
+  border: 1px solid rgba(213,180,238, 0.18);
   border-radius: var(--radius-lg);
-  background: #0d1726;
+  background: #321b4d;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.26);
   overflow: hidden;
   padding: 24px;
@@ -160,8 +160,8 @@
   align-items: center;
   gap: 7px;
   color: #fff;
-  background: rgba(14, 148, 136, 0.18);
-  border: 1px solid rgba(14, 148, 136, 0.42);
+  background: rgba(184,134,39, 0.18);
+  border: 1px solid rgba(184,134,39, 0.42);
   border-radius: var(--radius-full);
   padding: 6px 10px;
   font-size: 11px;
@@ -194,10 +194,10 @@
 .streamRail {
   position: relative;
   height: 94px;
-  border: 1px solid rgba(125, 211, 252, 0.14);
+  border: 1px solid rgba(213,180,238, 0.14);
   border-radius: var(--radius-md);
   background:
-    linear-gradient(90deg, rgba(14, 148, 136, 0.18), rgba(91, 26, 162, 0.16), rgba(183, 121, 31, 0.14));
+    linear-gradient(90deg, rgba(184,134,39, 0.18), rgba(91, 26, 162, 0.16), rgba(183, 121, 31, 0.14));
   overflow: hidden;
 }
 
@@ -226,7 +226,7 @@
   height: 8px;
   border-radius: 999px;
   background: linear-gradient(90deg, transparent, #fff, var(--accent-teal));
-  box-shadow: 0 0 18px rgba(14, 148, 136, 0.45);
+  box-shadow: 0 0 18px rgba(184,134,39, 0.45);
   animation: streamPacket 4.6s linear infinite;
 }
 
@@ -257,9 +257,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border: 1px solid rgba(125, 211, 252, 0.14);
+  border: 1px solid rgba(213,180,238, 0.14);
   border-radius: var(--radius-md);
-  background: #142238;
+  background: #432763;
   padding: 13px 14px;
 }
 
@@ -636,11 +636,11 @@
 
 @keyframes livePulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(14, 148, 136, 0.45);
+    box-shadow: 0 0 0 0 rgba(184,134,39, 0.45);
   }
 
   50% {
-    box-shadow: 0 0 0 7px rgba(14, 148, 136, 0);
+    box-shadow: 0 0 0 7px rgba(184,134,39, 0);
   }
 }
 

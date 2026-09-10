@@ -13,8 +13,8 @@
   content: '';
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(36, 71, 184, 0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 148, 136, 0.024) 1px, transparent 1px);
+    linear-gradient(rgba(91,26,162, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,134,39, 0.024) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, transparent 0%, black 24%, black 76%, transparent 100%);
 }
@@ -24,10 +24,10 @@
   overflow: hidden;
   padding: 132px var(--section-pad-x) 76px;
   background:
-    linear-gradient(135deg, rgba(6, 16, 29, 0.94) 0%, rgba(16, 35, 58, 0.9) 46%, rgba(9, 47, 47, 0.88) 100%),
+    linear-gradient(135deg, rgba(36,16,61, 0.94) 0%, rgba(62,16,118, 0.9) 46%, rgba(62,16,118, 0.88) 100%),
     url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #06101d;
-  border-bottom: 1px solid rgba(125, 211, 252, 0.18);
+    #24103d;
+  border-bottom: 1px solid rgba(213,180,238, 0.18);
 }
 
 .hero::before {
@@ -50,9 +50,9 @@
   background:
     linear-gradient(
       90deg,
-      var(--content-accent, #67e8f9),
-      color-mix(in srgb, var(--content-accent, #67e8f9), white 34%),
-      color-mix(in srgb, var(--content-accent, #67e8f9), #a5009d 42%)
+      var(--content-accent, #f0cc78),
+      color-mix(in srgb, var(--content-accent, #f0cc78), white 34%),
+      color-mix(in srgb, var(--content-accent, #f0cc78), #a5009d 42%)
     );
 }
 
@@ -76,7 +76,7 @@
   align-items: center;
   gap: 9px;
   margin-bottom: 16px;
-  color: color-mix(in srgb, var(--content-accent, #67e8f9), white 24%);
+  color: color-mix(in srgb, var(--content-accent, #f0cc78), white 24%);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -309,7 +309,7 @@
 .inlineCode {
   padding: 2px 6px;
   border-radius: 6px;
-  background: rgba(49, 87, 213, 0.1);
+  background: rgba(91,26,162, 0.1);
   color: var(--primary);
   font-size: 0.92em;
   font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
@@ -322,7 +322,7 @@
   padding: 18px;
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 10px;
-  background: #020617;
+  background: #1b0738;
   color: #e5e7eb;
   font-size: 14px;
   line-height: 1.65;
@@ -420,7 +420,7 @@
 }
 
 .table tr:nth-child(even) {
-  background: rgba(49, 87, 213, 0.025);
+  background: rgba(91,26,162, 0.025);
 }
 
 /* ── Horizontal rule ── */
@@ -560,7 +560,7 @@
   margin-bottom: 30px;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: #020617;
+  background: #1b0738;
   aspect-ratio: 16 / 9;
   box-shadow: var(--shadow-md);
 }
