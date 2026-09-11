@@ -39,7 +39,8 @@ export default function HomePage() {
             '@type': 'ProfessionalService',
             name: 'RhemaAI Solutions Ltd',
             url: 'https://rhemaaisolutions.tech',
-            image: 'https://rhemaaisolutions.tech/og-image.svg',
+            image: 'https://rhemaaisolutions.tech/brand/rhemaai-company-logo.png',
+            logo: 'https://rhemaaisolutions.tech/brand/rhemaai-company-logo.png',
             areaServed: ['Nigeria', 'United Kingdom', 'United States', 'United Arab Emirates', 'South Africa', 'Kenya', 'Canada', 'Australia'],
             serviceType: ['Enterprise AI consulting', 'Agentic AI engineering', 'Data engineering', 'Cloud architecture', 'MLOps', 'Business intelligence'],
             hasOfferCatalog: {

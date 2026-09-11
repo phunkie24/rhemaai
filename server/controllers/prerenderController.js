@@ -5,7 +5,7 @@ import Course from '../models/Course.js'
 
 const SITE_NAME = 'RhemaAI Solutions Ltd'
 const BASE = (process.env.FRONTEND_URL || 'https://rhemaaisolutions.tech').replace(/\/$/, '')
-const DEFAULT_IMAGE = `${BASE}/og-image.svg`
+const DEFAULT_IMAGE = `${BASE}/brand/rhemaai-company-social.jpg`
 const NEXUS_IMAGE = '/nexus-aos-social-preview.png'
 
 // This controller exists only for crawlers that don't execute JavaScript
@@ -47,11 +47,14 @@ function sendMeta(res, { path, title, description, image, type = 'website' }) {
 <meta property="og:title" content="${esc(fullTitle)}" />
 <meta property="og:description" content="${safeDescription}" />
 <meta property="og:image" content="${esc(ogImage)}" />
+<meta property="og:image:alt" content="${esc(fullTitle)}" />
+${ogImage === DEFAULT_IMAGE ? '<meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />' : ''}
 <meta property="og:site_name" content="${SITE_NAME}" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(fullTitle)}" />
 <meta name="twitter:description" content="${safeDescription}" />
 <meta name="twitter:image" content="${esc(ogImage)}" />
+<meta name="twitter:image:alt" content="${esc(fullTitle)}" />
 </head>
 <body>
 <h1>${esc(title)}</h1>

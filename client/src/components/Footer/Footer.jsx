@@ -73,7 +73,7 @@ export default function Footer() {
         <div className={styles.brand}>
           <div className={styles.logoRow}>
             <div className={styles.logoMark}>
-              <BrandMark className={styles.logoSvg} title="RhemaAI Solutions Ltd logo" />
+              <BrandMark className={styles.logoImage} title="RhemaAI Solutions Ltd logo" loading="lazy" />
             </div>
             <span className={styles.brandName}>
               Rhema<span>AI</span> Solutions Ltd

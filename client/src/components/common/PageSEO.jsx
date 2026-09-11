@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 
 const BASE      = 'https://rhemaaisolutions.tech'
-const OG_IMAGE  = `${BASE}/og-image.svg`
+const OG_IMAGE  = `${BASE}/brand/rhemaai-company-social.jpg`
 
 export default function PageSEO({
   title,
@@ -25,7 +25,7 @@ export default function PageSEO({
       {keywords && <meta name="keywords" content={keywords} />}
       <meta name="author"       content="RhemaAI Solutions Ltd" />
       <meta name="application-name" content="RhemaAI Solutions Ltd" />
-      <meta name="theme-color"  content="#06101D" />
+      <meta name="theme-color"  content="#2F0B5C" />
       <meta name="robots"       content={noindex ? 'noindex, nofollow' : 'index, follow'} />
       <link rel="canonical"     href={canonical} />
 
@@ -45,6 +45,9 @@ export default function PageSEO({
       <meta property="og:title"       content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image"       content={ogImage} />
+      <meta property="og:image:alt"   content={image ? fullTitle : 'RhemaAI Solutions Ltd — white dove and gold flames on purple'} />
+      {!image && <meta property="og:image:width" content="1200" />}
+      {!image && <meta property="og:image:height" content="630" />}
       <meta property="og:site_name"   content="RhemaAI Solutions Ltd" />
 
       {/* Twitter Card */}
@@ -54,6 +57,7 @@ export default function PageSEO({
       <meta name="twitter:title"       content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image"       content={ogImage} />
+      <meta name="twitter:image:alt"   content={image ? fullTitle : 'RhemaAI Solutions Ltd — white dove and gold flames on purple'} />
 
       {/* Per-page structured data */}
       {structuredData && (

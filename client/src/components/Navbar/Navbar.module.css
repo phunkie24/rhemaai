@@ -47,10 +47,12 @@
   box-shadow: 0 10px 24px rgba(76, 24, 145, 0.18);
 }
 
-.logoSvg {
+.logoImage {
   width: 40px;
   height: 40px;
   display: block;
+  object-fit: contain;
+  border-radius: var(--radius-full);
 }
 
 .brandName {

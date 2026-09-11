@@ -66,7 +66,7 @@ export default function Navbar() {
       >
         <Link to="/" className={styles.logo}>
           <div className={styles.logoMark}>
-            <BrandMark className={styles.logoSvg} title="RhemaAI Solutions Ltd logo" />
+            <BrandMark className={styles.logoImage} title="RhemaAI Solutions Ltd logo" />
           </div>
           <span className={styles.brandName}>
             Rhema<span className={styles.brandAccent}>AI</span> Solutions Ltd
