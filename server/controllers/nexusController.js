@@ -22,6 +22,7 @@ const demoSchema = Joi.object({
   interest: Joi.string().valid(
     'demo',
     'readiness-assessment',
+    'architecture-blueprint',
     'workflow-discovery',
     'starter-pilot',
     'standard-pilot',
@@ -32,6 +33,8 @@ const demoSchema = Joi.object({
     'implementation-services',
     'training',
     'managed-services',
+    'enterprise-agentops',
+    'mission-critical-agentops',
     'other'
   ).default('demo'),
   indicativeBudget: Joi.string().valid(

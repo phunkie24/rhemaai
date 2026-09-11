@@ -2,28 +2,26 @@ import { NEXUS_BASE } from './nexusContent'
 import { PRODUCT_PRICING, formatPrice } from '../utils/pricing'
 
 // Keep the existing enquiry identifiers so bookmarked links and submissions remain valid.
-const packageIds = ['readiness-assessment', 'standard-pilot', 'implementation-services', 'enterprise', 'managed-services']
-export const NEXUS_PRIMARY_PRICING = PRODUCT_PRICING['nexus-aos'].tiers.map((tier, index) => ({
+export const NEXUS_PRIMARY_PRICING = PRODUCT_PRICING['nexus-aos'].tiers.map((tier) => ({
   ...tier,
-  id: packageIds[index],
   displayPrice: formatPrice(tier),
   startingAt: Boolean(tier.amount),
   billingPeriod: tier.interval === 'month' ? 'monthly' : tier.amount ? 'one-time' : 'custom',
-  ctaLabel: index === 3 ? 'Contact Enterprise Sales' : 'Discuss this package',
-  ctaUrl: `${NEXUS_BASE}/demo?interest=${packageIds[index]}`,
+  ctaLabel: tier.id === 'enterprise' ? 'Contact Enterprise Sales' : 'Discuss this package',
+  ctaUrl: `${NEXUS_BASE}/demo?interest=${tier.id}`,
 }))
 
 export const NEXUS_PRICING_NOTES = [
   'All numeric prices are starting prices. Final scope and pricing are confirmed in your proposal.',
   'Naira and US-dollar prices are listed separately as supplied; they are not exchange-rate conversions.',
-  'Managed AgentOps is priced monthly. Enterprise Deployment starts from the displayed amount.',
+  'Professional, Enterprise and 24/7 Mission-Critical AgentOps are priced monthly. Enterprise Deployment starts from the displayed amount.',
 ]
 
 export const NEXUS_PRICING_FAQS = [
   ['What does a Nexus AOS deployment cost?', `Deployments start from ${formatPrice(PRODUCT_PRICING['nexus-aos']).replace(/^From /, '')}. Choose a Proof of Concept, Production Deployment or Enterprise Deployment.`],
-  ['Is Managed AgentOps billed monthly?', `Yes. ${formatPrice(PRODUCT_PRICING['nexus-aos'].tiers[4])}.`],
+  ['Is AgentOps billed monthly?', `Yes. ${NEXUS_PRIMARY_PRICING.filter(offer => offer.interval === 'month').map(offer => `${offer.name}: ${offer.displayPrice}`).join('; ')}.`],
   ['Do we need a Readiness Assessment before a pilot?', 'An assessment helps establish readiness. Teams with a defined workflow can discuss a Proof of Concept directly.'],
-  ['Can pricing be customised?', `Enterprise Deployment ${formatPrice(PRODUCT_PRICING['nexus-aos'].tiers[3]).replace(/^From /, 'starts from ')}. Final pricing is confirmed after scope and technical discovery.`],
+  ['Can pricing be customised?', `Enterprise Deployment ${NEXUS_PRIMARY_PRICING.find(offer => offer.id === 'enterprise').displayPrice.replace(/^From /, 'starts from ')}. Final pricing is confirmed after scope and technical discovery.`],
 ]
 
 export const NEXUS_INTEREST_OPTIONS = [

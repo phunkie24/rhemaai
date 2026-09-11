@@ -218,8 +218,8 @@ export default function ServicesPage() {
         <div className="container">
           <div className={styles.serviceHeader}>
             <span className={styles.sectionLabel}>Enterprise operations</span>
-            <h2>Managed-service enterprise rates</h2>
-            <p>Monthly starting prices for Nigerian and international engagements.</p>
+            <h2>Managed-service packages</h2>
+            <p>Choose Essential, Professional, Enterprise or Mission Critical support. Monthly starting prices are shown below.</p>
           </div>
           <Price pricing={SERVICE_PRICING['managed-services']} expanded />
         </div>

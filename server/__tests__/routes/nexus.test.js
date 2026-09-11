@@ -59,6 +59,13 @@ describe('POST /api/nexus/demo', () => {
     expect(response.body.errors.length).toBeGreaterThanOrEqual(2)
   })
 
+  it.each(['architecture-blueprint', 'enterprise-agentops', 'mission-critical-agentops'])('accepts the v2 pricing enquiry option %s', async (interest) => {
+    const response = await request(app).post('/api/nexus/demo').send({ ...validDemo, interest })
+    expect(response.status).toBe(201)
+    const saved = await NexusEnquiry.findById(response.body.id)
+    expect(saved.interest).toBe(interest)
+  })
+
   it('acknowledges honeypot submissions without persistence', async () => {
     const response = await request(app)
       .post('/api/nexus/demo')

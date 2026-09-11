@@ -162,7 +162,7 @@ const NEXUS_STATIC_META = {
   },
   '/products/nexus-aos/pricing': {
     title: 'Nexus AOS Pricing and Pilot Packages | RhemaAI Solutions Ltd',
-    description: 'Nigerian and international starting prices for Nexus AOS readiness assessment, proof of concept, production deployment, enterprise deployment and monthly managed AgentOps.',
+    description: 'Nexus AOS deployments start from ₦7,500,000 / $20,000. Compare assessments, architecture blueprints, deployment packages and Professional, Enterprise or 24/7 Mission-Critical AgentOps.',
   },
   '/products/nexus-aos/docs': {
     title: 'Nexus AOS Documentation | Developer Portal',
