@@ -43,8 +43,8 @@
 }
 
 .badge {
-  color: #e9ddff;
-  background: #321b4d;
+  color: var(--brand-100);
+  background: var(--surface-ink);
   border: 1px solid rgba(216, 195, 255, 0.28);
   padding: 7px 15px;
   border-radius: var(--radius-full);
@@ -73,12 +73,12 @@
 }
 
 .heroAccent {
-  color: #d8c3ff;
+  color: var(--brand-100);
 }
 
 .heroSub {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-white-muted);
   line-height: 1.75;
   max-width: 760px;
   margin: 0;
@@ -93,12 +93,12 @@
 
 .proofRow span {
   color: rgba(255, 255, 255, 0.82);
-  background: #3a2057;
+  background: var(--dark-card);
   border: 1px solid rgba(213,180,238, 0.16);
   border-radius: var(--radius-full);
   padding: 8px 12px;
   font-size: 12px;
-  font-weight: 750;
+  font-weight: 700;
 }
 
 .streamPanel {
@@ -106,7 +106,7 @@
   min-height: 430px;
   border: 1px solid rgba(213,180,238, 0.18);
   border-radius: var(--radius-lg);
-  background: #321b4d;
+  background: var(--surface-ink);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.26);
   overflow: hidden;
   padding: 24px;
@@ -142,13 +142,13 @@
 .panelTop strong {
   display: block;
   margin-top: 6px;
-  color: #fff;
+  color: var(--white);
   font-size: 18px;
   line-height: 1.25;
 }
 
 .panelKicker {
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-white-muted);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -159,7 +159,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: #fff;
+  color: var(--white);
   background: rgba(184,134,39, 0.18);
   border: 1px solid rgba(184,134,39, 0.42);
   border-radius: var(--radius-full);
@@ -184,7 +184,7 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.68);
+  color: var(--text-white-muted);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -225,7 +225,7 @@
   width: 44px;
   height: 8px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, #fff, var(--accent-teal));
+  background: linear-gradient(90deg, transparent, var(--white), var(--accent-teal));
   box-shadow: 0 0 18px rgba(184,134,39, 0.45);
   animation: streamPacket 4.6s linear infinite;
 }
@@ -237,13 +237,13 @@
 .streamRail i:nth-child(2) {
   top: 43px;
   animation-delay: 1.25s;
-  background: linear-gradient(90deg, transparent, #fff, #d8c3ff);
+  background: linear-gradient(90deg, transparent, var(--white), var(--brand-100));
 }
 
 .streamRail i:nth-child(3) {
   top: 59px;
   animation-delay: 2.4s;
-  background: linear-gradient(90deg, transparent, #fff, #f6c55f);
+  background: linear-gradient(90deg, transparent, var(--white), var(--gold));
 }
 
 .eventList {
@@ -259,25 +259,25 @@
   gap: 18px;
   border: 1px solid rgba(213,180,238, 0.14);
   border-radius: var(--radius-md);
-  background: #432763;
+  background: var(--surface-raised);
   padding: 13px 14px;
 }
 
 .eventRow span {
-  color: rgba(255, 255, 255, 0.66);
+  color: var(--text-white-muted);
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .eventRow strong {
-  color: #fff;
+  color: var(--white);
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 800;
   white-space: nowrap;
 }
 
 .flowSection {
-  background: #fff;
+  background: var(--white);
   padding: 52px 0;
 }
 
@@ -351,11 +351,11 @@
   position: relative;
   z-index: 1;
   min-height: 188px;
-  background: #fff;
+  background: var(--white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 46px rgba(36,16,61, 0.08);
 }
 
 .stageNum {
@@ -369,7 +369,7 @@
   color: var(--primary);
   border: 1px solid var(--border-mid);
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 800;
 }
 
 .flowStage h3 {
@@ -410,11 +410,7 @@
   --edge-soft: color-mix(in srgb, var(--service-color), transparent 84%);
   --edge-mid: color-mix(in srgb, var(--service-color), white 18%);
   --edge-dark: color-mix(in srgb, var(--service-color), black 32%);
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 93%) 0%, #fff 42%, #fff 100%);
-  border: 1px solid color-mix(in srgb, var(--service-color), white 68%);
-  border-top: 7px solid var(--edge-mid);
-  border-left: 5px solid color-mix(in srgb, var(--service-color), white 24%);
+
   border-radius: 8px;
   padding: 24px;
   display: flex;
@@ -423,58 +419,28 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
-    inset -8px -8px 0 rgba(15, 23, 42, 0.035),
-    8px 9px 0 var(--edge-soft),
-    0 18px 46px rgba(15, 23, 42, 0.075);
-  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+
+  transition: box-shadow 0.25s ease, transform var(--transition-base), border-color var(--transition-base);
+  background: var(--white);
+  border: 1px solid var(--gold);
+  border-top: 4px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(36, 16, 61, .06);
 }
 
 .card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--service-color), transparent 18%) 0 7px, transparent 7px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, transparent 42%),
-    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--service-color), transparent 78%) 0%, transparent 44%);
-  pointer-events: none;
+  content: none;
 }
 
 .card::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  width: 92px;
-  height: 92px;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    transparent 48%,
-    color-mix(in srgb, var(--edge-dark), transparent 8%) 49%,
-    color-mix(in srgb, var(--service-color), white 18%) 100%
-  );
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  opacity: 0.42;
-  transform-origin: bottom right;
-  transition: opacity var(--transition-base), transform var(--transition-base);
-  pointer-events: none;
+  content: none;
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--service-color), white 44%);
-  border-top-color: color-mix(in srgb, var(--service-color), white 26%);
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 1),
-    inset -8px -8px 0 rgba(15, 23, 42, 0.045),
-    12px 13px 0 color-mix(in srgb, var(--service-color), transparent 80%),
-    0 28px 64px color-mix(in srgb, var(--service-color), transparent 78%),
-    0 18px 46px rgba(15, 23, 42, 0.1);
-  transform: translate(-2px, -7px);
+  background: var(--white);
+  border-color: var(--gold);
+  border-top-color: var(--gold);
+  box-shadow: 0 12px 28px rgba(36, 16, 61, .1);
+  transform: translateY(-2px);
 }
 
 .card:hover::after {
@@ -483,9 +449,9 @@
 }
 
 .cardFeatured {
-  border-color: color-mix(in srgb, var(--service-color), white 50%);
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 88%) 0%, #fff 50%, #fff 100%);
+  background: var(--white);
+  border-color: var(--gold);
+  box-shadow: none;
 }
 
 .featuredBadge {
@@ -497,35 +463,35 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(135deg, var(--service-color), color-mix(in srgb, var(--service-color), white 26%));
-  border: 1px solid rgba(255, 255, 255, 0.66);
+
   padding: 3px 10px;
   border-radius: var(--radius-full);
-  box-shadow: 0 10px 22px color-mix(in srgb, var(--service-color), transparent 70%);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--gold-ink);
+  box-shadow: none;
 }
 
 .cardIcon {
   width: 52px;
   height: 52px;
   border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--service-color), white 48%);
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 82%), color-mix(in srgb, var(--service-color), white 95%));
-  color: var(--service-color);
+
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 900;
+  font-weight: 800;
   flex-shrink: 0;
   position: relative;
   z-index: 1;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
-    0 7px 0 color-mix(in srgb, var(--service-color), transparent 78%),
-    0 14px 28px rgba(15, 23, 42, 0.08);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--primary);
+  box-shadow: none;
 }
 
 .cardTitle {
@@ -591,10 +557,12 @@
   font-size: 10px;
   font-weight: 600;
   padding: 4px 10px;
-  background: color-mix(in srgb, var(--service-color), transparent 91%);
-  color: color-mix(in srgb, var(--service-color), black 16%);
-  border: 1px solid color-mix(in srgb, var(--service-color), transparent 78%);
+
   border-radius: var(--radius-full);
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--gold-ink);
+  box-shadow: none;
 }
 
 .cardLink {
@@ -603,31 +571,33 @@
   gap: 4px;
   font-size: var(--text-sm);
   font-weight: 700;
-  color: var(--service-color);
+
   text-decoration: none;
-  transition: gap var(--transition-fast);
+  transition: gap 0.15s ease;
   position: relative;
   z-index: 1;
+  color: var(--primary);
 }
 
 .nexusLink {
   display: inline-flex;
   margin-top: 10px;
-  color: var(--service-color);
+
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 800;
   text-decoration: underline;
   text-underline-offset: 3px;
+  color: var(--primary);
 }
 
 .cardLink::after {
   content: '>';
-  transition: transform var(--transition-fast);
+  transition: transform 0.15s ease;
 }
 
 .cardLink:hover {
   gap: 10px;
-  color: color-mix(in srgb, var(--service-color), black 18%);
+  color: var(--primary-hover);
 }
 
 .cardLink:hover::after {

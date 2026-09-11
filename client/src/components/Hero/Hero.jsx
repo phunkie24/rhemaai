@@ -68,8 +68,8 @@ export default function Hero() {
           </div>
 
           <div className={styles.statsRow} aria-label="RhemaAI Solutions Ltd delivery proof points">
-            {STATS.map((stat, index) => (
-              <StatItem key={stat.label} stat={stat} index={index} />
+            {STATS.map((stat) => (
+              <StatItem key={stat.label} stat={stat} />
             ))}
           </div>
         </div>

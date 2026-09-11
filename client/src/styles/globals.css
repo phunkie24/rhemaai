@@ -1,5 +1,4 @@
 @import './variables.css';
-@import './animations.css';
 
 /* =====================================================
    Reset & Base
@@ -15,7 +14,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -24,7 +23,7 @@ body {
   color: var(--text-primary);
   font-size: var(--text-base);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .sr-only {
@@ -52,6 +51,25 @@ h1 { font-size: var(--text-5xl); font-weight: 800; }
 h2 { font-size: var(--text-3xl); }
 h3 { font-size: var(--text-xl); }
 h4 { font-size: var(--text-lg); }
+
+#main-content h1 {
+  font-family: var(--font-display);
+  font-size: var(--heading-page);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  overflow-wrap: break-word;
+}
+
+input, select, textarea, button, summary {
+  font-family: var(--font-body);
+}
+
+input, select, textarea { font-size: 16px; }
+button, summary { touch-action: manipulation; }
+button:disabled { cursor: not-allowed; }
+code, pre, kbd, samp { font-family: var(--font-mono); }
+[id] { scroll-margin-top: calc(var(--nav-height) + 24px); }
 
 p { line-height: 1.75; color: var(--text-secondary); }
 
@@ -109,8 +127,8 @@ ul { list-style: none; }
 }
 
 ::selection {
-  color: #24103d;
-  background: #f0cc78;
+  color: var(--dark);
+  background: var(--gold-light);
 }
 
 .text-muted { color: var(--text-muted); }
@@ -124,7 +142,7 @@ ul { list-style: none; }
   z-index: 9999;
   padding: 10px 18px;
   background: var(--primary);
-  color: #fff;
+  color: var(--white);
   font-size: 14px;
   font-weight: 700;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
@@ -137,7 +155,7 @@ ul { list-style: none; }
 
 /* Focus */
 :focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -150,6 +168,10 @@ ul { list-style: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+@media (max-width: 1060px) {
+  :root { --nav-height: 64px; }
 }
 
 /* Scrollbar */

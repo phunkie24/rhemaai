@@ -33,11 +33,7 @@
   --edge-soft: color-mix(in srgb, var(--service-color), transparent 82%);
   --edge-mid: color-mix(in srgb, var(--service-color), white 18%);
   --edge-dark: color-mix(in srgb, var(--service-color), black 38%);
-  background:
-    linear-gradient(150deg, color-mix(in srgb, var(--service-color), #321b4d 88%) 0%, #321b4d 44%, #291340 100%);
-  border: 1px solid color-mix(in srgb, var(--service-color), #dbeafe 66%);
-  border-top: 7px solid var(--edge-mid);
-  border-left: 5px solid color-mix(in srgb, var(--service-color), white 8%);
+
   border-radius: 8px;
   padding: 0;
   position: relative;
@@ -48,69 +44,36 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.13),
-    inset -9px -9px 0 rgba(0, 0, 0, 0.17),
-    9px 11px 0 rgba(2, 6, 23, 0.28),
-    0 22px 52px rgba(0, 0, 0, 0.22);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  border-top: 4px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(36, 16, 61, .06);
 }
 
 .card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--service-color), transparent 14%) 0 7px, transparent 7px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, transparent 40%),
-    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--service-color), transparent 50%) 0%, transparent 42%);
-  opacity: 0.78;
-  transition: opacity 0.3s ease;
-  border-radius: inherit;
-  z-index: 0;
-  pointer-events: none;
+  content: none;
 }
 
 .card::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 96px;
-  height: 96px;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    transparent 48%,
-    color-mix(in srgb, var(--edge-dark), transparent 18%) 49%,
-    color-mix(in srgb, var(--service-color), white 10%) 100%
-  );
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  opacity: 0.38;
-  transform-origin: bottom right;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-  z-index: 0;
+  content: none;
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--service-color), white 34%);
-  border-top-color: color-mix(in srgb, var(--service-color), white 26%);
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.18),
-    inset -9px -9px 0 rgba(0, 0, 0, 0.2),
-    13px 15px 0 rgba(2, 6, 23, 0.26),
-    0 28px 70px color-mix(in srgb, var(--service-color), transparent 68%);
-  transform: translate(-2px, -8px);
+  background: var(--white);
+  border-color: var(--gold);
+  border-top-color: var(--gold);
+  box-shadow: 0 12px 28px rgba(36, 16, 61, .1);
+  transform: translateY(-2px);
 }
 
 .card:hover .icon {
-  background: var(--service-color);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.28),
-    0 9px 0 color-mix(in srgb, var(--service-color), black 28%),
-    0 18px 34px color-mix(in srgb, var(--service-color), transparent 60%);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--primary);
+  box-shadow: none;
+  transform: none;
 }
 
 .card:hover::before {
@@ -123,14 +86,14 @@
 }
 
 .cardHighlight {
-  border-color: color-mix(in srgb, var(--service-color), white 28%);
-  background:
-    linear-gradient(150deg, color-mix(in srgb, var(--service-color), #321b4d 78%) 0%, #321b4d 50%, #291340 100%);
+  background: var(--white);
+  border-color: var(--gold);
+  box-shadow: none;
 }
 
 .cardHighlight:hover {
-  border-color: color-mix(in srgb, var(--service-color), white 42%);
   box-shadow: var(--glow-md);
+  border-color: var(--gold);
 }
 
 /* Popular badge */
@@ -143,12 +106,14 @@
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  background: linear-gradient(135deg, var(--service-color), color-mix(in srgb, var(--service-color), white 28%));
-  color: #fff;
+
   padding: 4px 10px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--service-color), transparent 64%);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--gold-ink);
+  box-shadow: none;
 }
 
 /* Icon */
@@ -156,52 +121,46 @@
   width: 52px;
   height: 52px;
   margin: 20px 24px 16px;
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 84%), color-mix(in srgb, var(--service-color), white 94%));
-  border: 1px solid color-mix(in srgb, var(--service-color), white 48%);
+
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: 900;
-  color: var(--service-color);
+  font-weight: 800;
+
   transition: var(--transition-base);
   flex-shrink: 0;
   position: relative;
   z-index: 1;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-    0 7px 0 color-mix(in srgb, var(--service-color), transparent 74%),
-    0 14px 28px rgba(0, 0, 0, 0.18);
-}
 
-.iconActive {
-  background: var(--primary);
-  color: #fff;
-  transform: scale(1.05);
-  box-shadow: var(--glow-sm);
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--primary);
+  box-shadow: none;
 }
 
 /* Title & Description */
 .cardTitle {
   font-size: 17px;
   font-weight: 700;
-  color: #fff;
+
   margin: 0 24px 10px;
   line-height: 1.25;
   position: relative;
   z-index: 1;
+  color: var(--text-primary);
 }
 
 .cardDesc {
   font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.68);
+
   line-height: 1.7;
   margin: 0 24px 18px;
   position: relative;
   z-index: 1;
+  color: var(--text-secondary);
 }
 
 /* Capabilities list */
@@ -221,7 +180,7 @@
   align-items: center;
   gap: 8px;
   font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.68);
+  color: var(--text-secondary);
 }
 
 .capDot {
@@ -245,12 +204,15 @@
 .tag {
   font-size: 11px;
   font-weight: 600;
-  color: color-mix(in srgb, var(--service-color), white 58%);
-  background: color-mix(in srgb, var(--service-color), transparent 88%);
+
   padding: 3px 10px;
   border-radius: var(--radius-full);
   letter-spacing: 0.2px;
-  border: 1px solid color-mix(in srgb, var(--service-color), transparent 62%);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--gold-ink);
+  box-shadow: none;
 }
 
 /* Card link */
@@ -265,25 +227,17 @@
   gap: 5px;
   font-size: 13px;
   font-weight: 600;
-  color: color-mix(in srgb, var(--service-color), white 46%);
+
   text-decoration: none;
   margin: 0 24px 24px;
   position: relative;
   z-index: 1;
   transition: var(--transition-fast);
+  color: var(--primary);
 }
 
 .cardLink:hover {
-  color: #fff;
-}
-
-.linkArrow {
-  transition: transform 0.2s ease;
-  display: inline-block;
-}
-
-.cardLink:hover .linkArrow {
-  transform: translateX(4px);
+  color: var(--primary-hover);
 }
 
 /* Managed Services banner */
@@ -298,46 +252,20 @@
   margin: 8px 0 32px;
   padding: 22px 26px;
   border-radius: 8px;
-  border: 1px solid color-mix(in srgb, var(--service-color), white 42%);
-  border-top: 7px solid var(--edge-mid);
-  border-left: 5px solid color-mix(in srgb, var(--service-color), white 10%);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--service-color), #321b4d 78%) 0%, #321b4d 56%, #291340 100%);
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.13),
-    inset -9px -9px 0 rgba(0, 0, 0, 0.17),
-    9px 11px 0 rgba(2, 6, 23, 0.24),
-    0 22px 54px rgba(0, 0, 0, 0.22);
+
   overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--gold);
+  border-top: 4px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(36, 16, 61, .06);
 }
 
 .managedBand::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--service-color), transparent 14%) 0 7px, transparent 7px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, transparent 44%);
-  pointer-events: none;
+  content: none;
 }
 
 .managedBand::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 120px;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    transparent 46%,
-    color-mix(in srgb, var(--edge-dark), transparent 14%) 47%,
-    color-mix(in srgb, var(--service-color), white 8%) 100%
-  );
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  opacity: 0.42;
-  pointer-events: none;
+  content: none;
 }
 
 .managedIcon {
@@ -348,18 +276,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--service-color), white 82%), color-mix(in srgb, var(--service-color), white 94%));
-  color: var(--service-color);
+
   font-family: var(--font-display);
-  font-weight: 900;
+  font-weight: 800;
   font-size: 14px;
   position: relative;
   z-index: 1;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-    0 7px 0 color-mix(in srgb, var(--service-color), transparent 74%),
-    0 14px 28px rgba(0, 0, 0, 0.18);
+
+  background: var(--white);
+  border: 1px solid var(--gold);
+  color: var(--primary);
+  box-shadow: none;
 }
 
 .managedCopy {
@@ -373,36 +300,38 @@
   margin: 0 0 6px;
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .managedCopy p {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.68);
+  color: var(--text-secondary);
 }
 
 .managedNote {
   margin-top: 8px !important;
   font-size: 12.5px !important;
-  color: rgba(255, 255, 255, 0.48) !important;
+
   font-style: italic;
+  color: var(--text-secondary) !important;
 }
 
 .managedLink {
   flex-shrink: 0;
   font-size: 13px;
   font-weight: 700;
-  color: color-mix(in srgb, var(--service-color), white 46%);
+
   text-decoration: none;
   white-space: nowrap;
   position: relative;
   z-index: 1;
+  color: var(--primary);
 }
 
 .managedLink:hover {
-  color: #fff;
+  color: var(--primary-hover);
 }
 
 @media (max-width: 640px) {
@@ -435,9 +364,9 @@
 }
 
 .allServicesBtn:hover {
-  background: #f0cc78;
-  color: #24103d;
-  border-color: #f0cc78;
+  background: var(--gold-light);
+  color: var(--dark);
+  border-color: var(--gold-light);
   box-shadow: var(--glow-sm);
 }
 

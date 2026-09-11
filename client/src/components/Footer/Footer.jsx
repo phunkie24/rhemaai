@@ -162,6 +162,10 @@ export default function Footer() {
         </div>
       </div>
 
+      <div className={styles.pricingNotice} aria-label="Pricing terms">
+        <p><strong>Enterprise engagements start from the displayed amount. Final pricing depends on data volume, integrations, deployment environment, security requirements, number of workflows, service levels and delivery timeline. Cloud usage, model/API consumption, licences, hardware, travel and taxes are charged separately.</strong></p>
+        <p><strong>Prices exclude cloud infrastructure, AI model/API consumption, software licences, hardware, advertising spend, travel, taxes and third-party services. Final pricing is confirmed after scope and technical discovery.</strong></p>
+      </div>
       <div className={styles.bottom}>
         <div className={styles.copy}>
           &copy; {new Date().getFullYear()} <span>RhemaAI Solutions Ltd</span>. All rights reserved.

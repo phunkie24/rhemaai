@@ -3,9 +3,9 @@
   overflow: hidden;
   padding: 28px var(--section-pad-x);
   background:
-    linear-gradient(90deg, rgba(36,16,61, 0.82) 0%, rgba(18, 23, 58, 0.8) 48%, rgba(6, 78, 59, 0.76) 100%),
-    url('../../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #24103d;
+    linear-gradient(90deg, rgba(36,16,61, 0.82) 0%, rgba(47,11,92, 0.8) 48%, rgba(62,16,118, 0.76) 100%),
+
+    var(--dark);
 }
 
 .streamSection::before {
@@ -39,9 +39,9 @@
 .eyebrow {
   display: inline-flex;
   margin-bottom: 10px;
-  color: #f0cc78;
+  color: var(--gold-light);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -49,7 +49,7 @@
 .copy h2 {
   max-width: 720px;
   margin: 0;
-  color: #fff;
+  color: var(--white);
   font-size: clamp(26px, 3.6vw, 42px);
   line-height: 1.05;
   letter-spacing: 0;
@@ -74,8 +74,8 @@
   padding: 6px 10px;
   border: 1px solid rgba(213,180,238, 0.18);
   border-radius: 999px;
-  color: #dbeafe;
-  background: #3a2057;
+  color: var(--brand-100);
+  background: var(--dark-card);
   font-size: 12px;
   font-weight: 800;
 }
@@ -96,28 +96,28 @@
   padding: 10px 16px;
   border-radius: 8px;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 800;
   text-decoration: none;
 }
 
 .primaryAction {
-  color: #24103d;
-  background: linear-gradient(135deg, #f0cc78, #f0cc78);
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-light));
 }
 
 .primaryAction:hover {
-  color: #24103d;
+  color: var(--dark);
   transform: translateY(-1px);
 }
 
 .secondaryAction {
-  color: #fff;
+  color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: #3a2057;
+  background: var(--dark-card);
 }
 
 .secondaryAction:hover {
-  color: #fff;
+  color: var(--white);
   border-color: rgba(255, 255, 255, 0.36);
   transform: translateY(-1px);
 }
@@ -146,7 +146,7 @@
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 8px;
-  background: #321b4d;
+  background: var(--surface-ink);
   box-shadow: 0 24px 56px rgba(0, 0, 0, 0.28);
 }
 

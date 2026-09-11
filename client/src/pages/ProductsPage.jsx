@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { productsAPI } from '@utils/api'
 import { PRODUCT_PRICING } from '@utils/pricing'
 import Price from '@components/common/Price'
-import { NEXUS_LICENSES } from '../data/nexusPricing'
 import styles from './PlatformPages.module.css'
 
 function productDescription(summary, features) {
@@ -84,7 +83,6 @@ const PRODUCT_GROUP_BY_SLUG = {
   'ledger-fm': 'fintech-blockchain',
 }
 
-const ALL_PRODUCTS_ACCENT = '#5B1AA2'
 
 const GROUP_KEYWORDS = [
   {
@@ -166,11 +164,6 @@ function resolveProductGroup(product = {}) {
   ))?.id
 
   return inferredGroup || validGroup || 'enterprise-software'
-}
-
-function productCategoryMeta(product) {
-  const group = resolveProductGroup(product)
-  return PRODUCT_CATEGORIES.find((cat) => cat.id === group) || PRODUCT_CATEGORIES[0]
 }
 
 export const SEED_PRODUCTS = [
@@ -524,7 +517,7 @@ function CardLink({ link }) {
   )
 }
 
-function ProductCard({ product, accent }) {
+function ProductCard({ product }) {
   const detailHref = `/products/${product.slug || product._id}`
   const featurePreview = (product.features || []).slice(0, 3)
   const extraFeatureCount = Math.max((product.features?.length || 0) - featurePreview.length, 0)
@@ -538,7 +531,7 @@ function ProductCard({ product, accent }) {
   ].filter(Boolean)
 
   return (
-    <article className={styles.productCard} style={{ '--accent': accent }}>
+    <article className={styles.productCard} style={{ '--accent': 'var(--gold)' }}>
       <div className={styles.productCardHeader}>
         {product.featured && (
           <div className={styles.pillRow}>
@@ -569,11 +562,9 @@ function ProductCard({ product, accent }) {
           {extraTagCount > 0 && <em>+{extraTagCount}</em>}
         </div>
 
-        <Price pricing={PRODUCT_PRICING[product.slug] || (product.slug === 'nexus-aos'
-          ? { label: `From ${NEXUS_LICENSES[0].displayPrice}` }
-          : product.pricing)} />
+        <Price pricing={PRODUCT_PRICING[product.slug] || product.pricing} />
         {product.slug === 'nexus-aos' && (
-          <p>Annual platform licence. Implementation priced separately. <Link to="/products/nexus-aos/pricing">Compare plans</Link></p>
+          <Link to="/products/nexus-aos/pricing">Compare Nexus deployment packages</Link>
         )}
       </div>
 
@@ -599,9 +590,6 @@ function ProductCard({ product, accent }) {
 
 const CATEGORY_FILTERS = [{ id: 'all', name: 'All' }, ...PRODUCT_CATEGORIES]
 
-function filterAccent(category) {
-  return category.id === 'all' ? ALL_PRODUCTS_ACCENT : category.color
-}
 
 export default function ProductsPage() {
   const [products, setProducts] = useState(SEED_PRODUCTS)
@@ -699,7 +687,7 @@ export default function ProductsPage() {
             type="button"
             className={activeCategory === cat.id ? styles.activeFilter : ''}
             aria-pressed={activeCategory === cat.id}
-            style={{ '--accent': filterAccent(cat) }}
+            style={{ '--accent': 'var(--gold)' }}
             onClick={() => setActiveCategory(cat.id)}
           >
             {cat.name}
@@ -714,23 +702,19 @@ export default function ProductsPage() {
         </div>
 
         {activeMeta && (
-          <div className={styles.categoryLabel} style={{ '--accent': activeMeta.color }}>
+          <div className={styles.categoryLabel} style={{ '--accent': 'var(--gold)' }}>
             <span>{activeMeta.name}</span>
             <div className={styles.categoryLine} />
           </div>
         )}
 
         <div className={styles.productGrid}>
-          {filteredProducts.map((product) => {
-            const cat = productCategoryMeta(product)
-            return (
+          {filteredProducts.map((product) => (
               <ProductCard
                 key={product._id || product.slug || product.name}
                 product={product}
-                accent={cat.color}
               />
-            )
-          })}
+          ))}
         </div>
 
         {filteredProducts.length === 0 && (

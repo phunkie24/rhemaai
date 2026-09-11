@@ -1,8 +1,7 @@
 // Use amountNGN for naira, or amount + currency for other currencies.
 // Optional: prefix: 'From', interval: 'month' or 'project'.
 // Populate with approved prices; an unset or zero amount is never advertised as free.
-export const SERVICE_PRICING = {}
-export const PRODUCT_PRICING = {}
+export { SERVICE_PRICING, PRODUCT_PRICING } from '../data/cataloguePricing'
 
 export function formatPrice(pricing = {}) {
   pricing = pricing || {}
@@ -10,7 +9,7 @@ export function formatPrice(pricing = {}) {
     const amount = Number(value)
     if (!Number.isFinite(amount) || amount <= 0) return null
     try {
-      return new Intl.NumberFormat('en-NG', {
+      return new Intl.NumberFormat(currency === 'USD' ? 'en-US' : 'en-NG', {
         style: 'currency', currency,
         minimumFractionDigits: 0, maximumFractionDigits: 2,
       }).format(amount)

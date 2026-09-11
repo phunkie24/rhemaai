@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Price from '@components/common/Price'
+import { PRODUCT_PRICING } from '../utils/pricing'
 import DomainCatalogue from '@components/Nexus/DomainCatalogue'
 import {
   ArchitectureLayerDiagram,
@@ -77,6 +79,7 @@ export default function NexusOverviewPage() {
           ['Explore the Architecture', `${NEXUS_BASE}/architecture`, 'secondary'],
           ['Assess Your AI Readiness', `${NEXUS_BASE}/readiness-assessment`, 'text'],
         ]} />
+        <Price pricing={PRODUCT_PRICING['nexus-aos']} />
       </NexusHero>
 
       <section className={styles.section}>

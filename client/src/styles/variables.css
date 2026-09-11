@@ -19,6 +19,8 @@
 
   --gold: #b88627;
   --gold-light: #f0cc78;
+  --gold-ink: #77551c;
+  --gold-wash: #fffaf0;
   --accent-teal:  var(--gold);
   --accent-cyan:  var(--gold-light);
   --accent-amber: var(--gold);
@@ -36,10 +38,10 @@
   --off-white:  #fcfaff;
   --gray-50:    #f8f3fc;
   --gray-100:   #e6dcec;
-  --gray-200:   #C6D4E3;
-  --gray-400:   #8A96AA;
-  --gray-600:   #586276;
-  --gray-800:   #202B3D;
+  --gray-200:   #d7cde0;
+  --gray-400:   #94849f;
+  --gray-600:   #62556e;
+  --gray-800:   #382645;
   --dark:       #24103d;
   --dark-mid:   #2f1648;
   --dark-card:  #3a2057;
@@ -49,10 +51,10 @@
 
   /* Text */
   --text-primary:   #281638;
-  --text-secondary: #526071;
-  --text-muted:     #7A8699;
+  --text-secondary: #62556e;
+  --text-muted:     #6b5c79;
   --text-white:     rgba(255, 255, 255, 0.92);
-  --text-white-muted: rgba(255, 255, 255, 0.52);
+  --text-white-muted: rgba(255, 255, 255, 0.72);
 
   /* Borders */
   --border-light:   rgba(91,26,162, 0.13);
@@ -69,8 +71,10 @@
   --shadow-lg: 0 20px 56px rgba(36,16,61, 0.16);
 
   /* Typography */
-  --font-display: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body:    system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-body);
+  --font-mono: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --heading-page: clamp(36px, 4.6vw, 64px);
 
   /* Type scale */
   --text-xs:   11px;
@@ -112,7 +116,8 @@
   --transition-spring: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Layout */
-  --container-max: 100%;
+  --container-max: 1440px;
+  --nav-height: 68px;
   --section-pad-x: clamp(20px, 4vw, 96px);
   --section-pad-y: clamp(64px, 6vw, 96px);
 

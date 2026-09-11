@@ -1,7 +1,7 @@
 .section {
   padding: clamp(52px, 6vw, 76px) var(--section-pad-x) var(--section-pad-y);
   background:
-    linear-gradient(180deg, #f8fbff 0%, #eef6f6 100%);
+    linear-gradient(180deg, var(--off-white) 0%, var(--off-white) 100%);
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }
@@ -20,12 +20,12 @@
   gap: 8px;
   padding: 11px 20px;
   border-radius: var(--radius-full);
-  border: 1px solid #d9e6ef;
+  border: 1px solid var(--gray-100);
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-  background: #ffffff;
+  background: var(--white);
   cursor: pointer;
   transition: var(--transition-base);
   user-select: none;
@@ -33,16 +33,16 @@
 }
 
 .pill:hover {
-  background: #321b4d;
+  background: var(--surface-ink);
   color: white;
-  border-color: #321b4d;
+  border-color: var(--surface-ink);
   box-shadow: 0 14px 34px rgba(50,27,77, 0.16);
 }
 
 .pillHighlight {
   border-color: rgba(184,134,39, 0.24);
-  background: #f4ecff;
-  color: #6b319b;
+  background: var(--brand-50);
+  color: var(--primary);
 }
 
 .pillHighlight:hover {
@@ -51,22 +51,22 @@
 }
 
 .pillActive {
-  background: #321b4d;
+  background: var(--surface-ink);
   color: white;
-  border-color: #321b4d;
+  border-color: var(--surface-ink);
   box-shadow: 0 14px 34px rgba(50,27,77, 0.16);
 }
 
 .pillIcon {
   font-family: var(--font-display);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--primary);
 }
 
 .pill:hover .pillIcon,
 .pillActive .pillIcon {
-  color: #fff;
+  color: var(--white);
 }
 
 /* Case Studies */
@@ -93,7 +93,7 @@
 
 .caseCard {
   background: white;
-  border: 1px solid #d9e6ef;
+  border: 1px solid var(--gray-100);
   border-radius: var(--radius-lg);
   padding: 24px;
   overflow: hidden;
@@ -106,7 +106,7 @@
 
 .caseCard:hover {
   border-color: var(--border-mid);
-  box-shadow: 0 22px 58px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 22px 58px rgba(36,16,61, 0.12);
 }
 
 .caseTag {
@@ -119,7 +119,7 @@
   background: var(--brand-50);
   padding: 4px 12px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(107, 70, 255, 0.15);
+  border: 1px solid rgba(91,26,162, 0.15);
   align-self: flex-start;
 }
 

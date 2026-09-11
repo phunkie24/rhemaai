@@ -77,7 +77,7 @@
   padding: 0 34px;
   font-size: 12px;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--text-white-muted);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -94,7 +94,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, #b68cff 38%, #8f5cff 100%);
+  background: radial-gradient(circle, var(--white) 0%, var(--brand-200) 38%, var(--brand-300) 100%);
   flex-shrink: 0;
   box-shadow:
     0 0 8px rgba(155, 109, 255, 0.95),

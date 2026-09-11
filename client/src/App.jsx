@@ -44,10 +44,10 @@ export default function App() {
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <ScrollToTop />
       <Navbar />
       <main id="main-content">
         <Suspense fallback={<PageLoader />}>
+          <ScrollToTop />
           <Routes>
             <Route path="/"               element={<HomePage />} />
             <Route path="/services"       element={<ServicesPage />} />

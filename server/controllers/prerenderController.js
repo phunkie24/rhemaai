@@ -162,7 +162,7 @@ const NEXUS_STATIC_META = {
   },
   '/products/nexus-aos/pricing': {
     title: 'Nexus AOS Pricing and Pilot Packages | RhemaAI Solutions Ltd',
-    description: 'Public US-dollar pricing for Nexus AOS readiness assessment, workflow discovery, pilots, annual platform licences, implementation, support and training.',
+    description: 'Nigerian and international starting prices for Nexus AOS readiness assessment, proof of concept, production deployment, enterprise deployment and monthly managed AgentOps.',
   },
   '/products/nexus-aos/docs': {
     title: 'Nexus AOS Documentation | Developer Portal',

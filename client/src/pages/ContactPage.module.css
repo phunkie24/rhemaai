@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-top: 68px;
+  padding-top: var(--nav-height);
 }
 
 .left {
@@ -38,13 +38,13 @@
 }
 
 .accent {
-  color: #e5d3ff;
+  color: var(--brand-100);
 }
 
 .desc {
   max-width: 560px;
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-white-muted);
   line-height: 1.75;
   font-weight: 300;
   margin-bottom: 24px;
@@ -56,17 +56,17 @@
   gap: 12px;
   margin-bottom: 34px;
   padding: 13px 16px;
-  border: 1px solid rgba(155, 216, 210, 0.28);
+  border: 1px solid rgba(213,180,238, 0.28);
   border-radius: var(--radius-lg);
-  background: rgba(155, 216, 210, 0.08);
-  color: #fff;
+  background: rgba(213,180,238, 0.08);
+  color: var(--white);
   text-decoration: none;
   transition: var(--transition-base);
 }
 
 .phoneLink:hover {
-  border-color: rgba(155, 216, 210, 0.5);
-  background: rgba(155, 216, 210, 0.12);
+  border-color: rgba(213,180,238, 0.5);
+  background: rgba(213,180,238, 0.12);
   transform: translateY(-1px);
 }
 
@@ -77,11 +77,11 @@
   width: 34px;
   height: 34px;
   border-radius: var(--radius-md);
-  background: rgba(155, 216, 210, 0.16);
-  color: #e5d3ff;
+  background: rgba(213,180,238, 0.16);
+  color: var(--brand-100);
   font-family: var(--font-display);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .phoneLink strong,
@@ -98,7 +98,7 @@
 
 .phoneLink em {
   margin-top: 2px;
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--text-white-muted);
   font-size: 13px;
 }
 
@@ -112,8 +112,8 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  background: rgba(107, 70, 255, 0.1);
-  border: 1px solid rgba(107, 70, 255, 0.2);
+  background: rgba(91,26,162, 0.1);
+  border: 1px solid rgba(91,26,162, 0.2);
   border-radius: var(--radius-lg);
   padding: 16px 18px;
 }
@@ -122,7 +122,7 @@
   color: var(--brand-300);
   font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 800;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -136,7 +136,7 @@
 
 .infoDesc {
   font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-white-muted);
   line-height: 1.5;
 }
 
@@ -200,7 +200,7 @@
 .field select:focus {
   border-color: var(--primary);
   background: white;
-  box-shadow: 0 0 0 3px rgba(107, 70, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(91,26,162, 0.1);
 }
 
 .field textarea {
@@ -275,7 +275,7 @@
   justify-content: center;
   font-family: var(--font-display);
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 800;
   color: white;
   margin: 0 auto 20px;
 }

@@ -163,7 +163,7 @@ export default function ServicesPage() {
                 key={service.id}
                 id={service.id}
                 className={`${styles.card} ${service.highlight ? styles.cardFeatured : ''}`}
-                style={{ '--service-color': service.color }}
+                style={{ '--service-color': 'var(--gold)' }}
               >
                 {service.highlight && (
                   <span className={styles.featuredBadge}>Featured</span>
@@ -214,6 +214,16 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className={styles.flowSection} id="managed-services">
+        <div className="container">
+          <div className={styles.serviceHeader}>
+            <span className={styles.sectionLabel}>Enterprise operations</span>
+            <h2>Managed-service enterprise rates</h2>
+            <p>Monthly starting prices for Nigerian and international engagements.</p>
+          </div>
+          <Price pricing={SERVICE_PRICING['managed-services']} expanded />
+        </div>
+      </section>
       <CTA />
     </>
   )

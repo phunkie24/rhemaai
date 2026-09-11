@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import BrandMark from '@components/common/BrandMark'
 import styles from './Navbar.module.css'
@@ -25,6 +25,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuButton = useRef(null)
   const { pathname } = useLocation()
   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`)
   const darkHeroPaths = ['/', '/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses']
@@ -32,15 +33,35 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
+    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => setMenuOpen(false), [pathname])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+    const desktop = window.matchMedia('(min-width: 1061px)')
+    const closeOnDesktop = () => { if (desktop.matches) setMenuOpen(false) }
+    document.addEventListener('keydown', closeOnEscape)
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape)
+      desktop.removeEventListener('change', closeOnDesktop)
+    }
+  }, [menuOpen])
+
   return (
     <>
       <nav
+        aria-label="Main navigation"
         className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${usesDarkHero && !scrolled ? styles.onDark : ''}`}
       >
         <Link to="/" className={styles.logo}>
@@ -57,6 +78,7 @@ export default function Navbar() {
             <li key={link.path} className={styles.navItem}>
               <Link
                 to={link.path}
+                aria-current={isActivePath(link.path) ? 'page' : undefined}
                 className={`${styles.navLink} ${isActivePath(link.path) ? styles.active : ''}`}
               >
                 {link.label}
@@ -74,10 +96,13 @@ export default function Navbar() {
 
         <div className={styles.navRight}>
           <button
+            ref={menuButton}
+            type="button"
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
             <span className={menuOpen ? styles.barTop + ' ' + styles.open : styles.barTop} />
             <span className={menuOpen ? styles.barMid + ' ' + styles.open : styles.barMid} />
@@ -87,15 +112,16 @@ export default function Navbar() {
       </nav>
 
       <div
+        id="mobile-navigation"
         className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuVisible : ''}`}
         aria-hidden={!menuOpen}
       >
         {NAV_LINKS.map((link) => (
           <div key={link.path}>
-            <Link to={link.path} className={styles.mobileLink}>{link.label}</Link>
+            <Link to={link.path} className={styles.mobileLink} aria-current={isActivePath(link.path) ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{link.label}</Link>
             {link.children && (
               <div className={styles.mobileSubLinks}>
-                {link.children.map((child) => <Link key={child.path} to={child.path}>{child.label}</Link>)}
+                {link.children.map((child) => <Link key={child.path} to={child.path} onClick={() => setMenuOpen(false)}>{child.label}</Link>)}
               </div>
             )}
           </div>

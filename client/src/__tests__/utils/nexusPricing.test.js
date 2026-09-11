@@ -7,16 +7,13 @@ import {
 } from '../../data/nexusPricing'
 
 describe('Nexus pricing source of truth', () => {
-  it('exposes the eight required primary public offers and exact prices', () => {
+  it('exposes the five approved public packages in both price lists', () => {
     expect(Object.fromEntries(NEXUS_PRIMARY_PRICING.map((offer) => [offer.id, offer.displayPrice]))).toEqual({
-      'readiness-assessment': '$2,500 fixed fee',
-      'workflow-discovery': '$5,000 fixed fee',
-      'starter-pilot': 'From $15,000',
-      'standard-pilot': 'From $30,000',
-      'advanced-pilot': 'From $60,000',
-      department: '$30,000/year',
-      business: '$90,000/year',
-      enterprise: 'From $200,000/year',
+      'readiness-assessment': 'From ₦750,000 / $2,500',
+      'standard-pilot': 'From ₦5,000,000 / $20,000',
+      'implementation-services': 'From ₦15,000,000 / $50,000',
+      enterprise: 'From ₦50,000,000 / $120,000',
+      'managed-services': 'From ₦1,500,000 / $5,000 per month',
     })
   })
 

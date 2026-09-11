@@ -5,17 +5,25 @@
   gap: 4px;
   margin: 18px 0;
   padding: 14px 16px;
-  border: 1px solid #e8d8b7;
-  border-left: 3px solid #b88627;
+  border: 1px solid var(--gold);
+  border-left: 3px solid var(--gold);
   border-radius: 6px;
-  background: #fffcf5;
-  color: #4b148c;
+
+  color: var(--primary-hover);
+  background: var(--white);
+  border-color: var(--gold);
 }
 .label {
-  color: #77551c;
+  color: var(--gold-ink);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .08em;
 }
 .price strong { font-size: 17px; line-height: 1.4; }
+.details { margin-top: 8px; min-width: 0; }
+.details summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--primary-hover); }
+.tiers { margin: 12px 0 0; }
+.tiers > div { padding: 10px 0; border-top: 1px solid var(--gold); }
+.tiers dt { color: var(--text-secondary); font-size: 12px; line-height: 1.5; }
+.tiers dd { margin: 4px 0 0; color: var(--primary-hover); font-size: 14px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }

@@ -3,26 +3,7 @@
   min-height: 94vh;
   padding: 124px var(--section-pad-x) 40px;
   overflow: hidden;
-  background: linear-gradient(120deg, #2f0b5c, #4b148c);
-}
-
-.heroBg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  z-index: 0;
-}
-
-.heroBgOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(to right, rgba(36,16,61,0.94) 0%, rgba(36,16,61,0.78) 52%, rgba(36,16,61,0.5) 100%),
-    linear-gradient(to bottom, rgba(36,16,61,0.36) 0%, rgba(36,16,61,0.88) 100%);
+  background: linear-gradient(120deg, var(--brand-800), var(--primary-hover));
 }
 
 .heroShell {
@@ -46,10 +27,10 @@
   justify-content: center;
   gap: 24px;
   padding: 28px 20px;
-  background: linear-gradient(145deg, #432763, #2f0b5c);
+  background: linear-gradient(145deg, var(--surface-raised), var(--brand-800));
 }
 .architectureLabel, .architectureFooter {
-  color: #e5d3ff;
+  color: var(--brand-100);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .1em;
@@ -99,7 +80,7 @@
 
 .headline {
   margin: 0 0 24px;
-  color: #fff;
+  color: var(--white);
   font-size: var(--text-4xl);
   font-weight: 800;
   line-height: 1.04;
@@ -110,7 +91,7 @@
 .subtext {
   max-width: 700px;
   margin: 0 0 34px;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-white-muted);
   font-size: 18px;
   line-height: 1.72;
 }
@@ -138,24 +119,24 @@
 
 .btnPrimary {
   background: var(--gold-light);
-  color: #2f0b5c;
+  color: var(--brand-800);
   box-shadow: 0 10px 24px rgba(91,26,162, 0.22);
 }
 
 .btnPrimary:hover {
   background: #ffdfa0;
-  color: #2f0b5c;
+  color: var(--brand-800);
   transform: translateY(-1px);
 }
 
 .btnSecondary {
-  color: #fff;
+  color: var(--white);
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .btnSecondary:hover {
-  color: #fff;
+  color: var(--white);
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-1px);
@@ -176,7 +157,7 @@
   max-width: 760px;
   border: 1px solid rgba(213,180,238, 0.22);
   border-radius: var(--radius-lg);
-  background: #321b4d;
+  background: var(--surface-ink);
   box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 
@@ -192,7 +173,7 @@
 
 .stat strong {
   display: block;
-  color: #f0cc78;
+  color: var(--gold-light);
   font-family: var(--font-display);
   font-size: clamp(22px, 3vw, 28px);
   font-weight: 800;
@@ -208,41 +189,13 @@
 .stat span {
   display: block;
   margin-top: 6px;
-  color: rgba(255, 255, 255, 0.56);
+  color: var(--text-white-muted);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   line-height: 1.25;
   overflow-wrap: break-word;
-}
-
-.media {
-  position: relative;
-  width: 100%;
-  min-width: 0;
-  min-height: 540px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--dark);
-  box-shadow: 0 28px 70px rgba(36,16,61, 0.22);
-}
-
-.mediaImage {
-  width: 100%;
-  height: 100%;
-  min-height: 540px;
-  object-fit: cover;
-}
-
-.mediaShade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(36,16,61, 0.04) 0%, rgba(36,16,61, 0.42) 100%),
-    linear-gradient(90deg, rgba(36,16,61, 0.3), transparent 42%);
-  pointer-events: none;
 }
 
 .visualStack {
@@ -254,12 +207,11 @@
 }
 
 .primaryImageCard,
-.portraitCard,
 .signalPanel,
 .metricDeck {
   border: 1px solid rgba(213,180,238, 0.2);
   border-radius: var(--radius-md);
-  background: #321b4d;
+  background: var(--surface-ink);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
 }
 
@@ -285,75 +237,13 @@
   pointer-events: none;
 }
 
-.imageCaption {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 1;
-}
-
-.imageCaption span,
-.portraitCard span,
 .metricDeck span {
   display: block;
-  color: rgba(255, 255, 255, 0.58);
+  color: var(--text-white-muted);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.imageCaption strong,
-.portraitCard strong {
-  display: block;
-  margin-top: 4px;
-  color: #fff;
-  font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 1.2;
-}
-
-.portraitCard {
-  position: relative;
-  display: block;
-  min-height: 118px;
-  overflow: hidden;
-  padding: 22px 18px 20px 118px;
-}
-
-.portraitCard::after {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  content: '';
-  background:
-    linear-gradient(90deg, rgba(50,27,77, 0.02) 0%, rgba(50,27,77, 0.8) 36%, #321b4d 84%),
-    linear-gradient(180deg, rgba(36,16,61, 0.08) 0%, rgba(36,16,61, 0.72) 100%);
-  pointer-events: none;
-}
-
-.portraitCard img {
-  position: absolute;
-  inset: 0 auto 0 0;
-  z-index: 0;
-  width: 148px;
-  height: 100%;
-  border-radius: 0;
-  object-fit: cover;
-  object-position: 58% 38%;
-  opacity: 0.9;
-  filter: saturate(1.02) contrast(1.04);
-  mask-image: linear-gradient(90deg, black 0%, black 46%, transparent 100%);
-}
-
-.portraitCard div {
-  position: relative;
-  z-index: 2;
-}
-
-.portraitCard strong {
-  font-size: 14px;
 }
 
 .signalPanel {
@@ -396,50 +286,20 @@
 
 .metricDeck strong {
   display: block;
-  color: #f0cc78;
+  color: var(--gold-light);
   font-family: var(--font-display);
   font-size: 20px;
   line-height: 1;
 }
 
-.statusPanel {
-  position: absolute;
-  z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius-md);
-  background: rgba(8, 18, 33, 0.74);
-  color: #fff;
-  backdrop-filter: none;
-}
-
-.statusPanel {
-  top: 20px;
-  left: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.statusDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--accent-teal);
-}
-
 .signal span {
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--text-white-muted);
   font-size: 12px;
   font-weight: 600;
 }
 
 .signal strong {
-  color: #fff;
+  color: var(--white);
   font-size: 13px;
   font-weight: 800;
 }
@@ -453,13 +313,13 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border: 1px solid rgba(213,180,238, 0.18);
   border-radius: var(--radius-lg);
-  background: #321b4d;
+  background: var(--surface-ink);
   box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 
 .capabilityStrip span {
   padding: 16px 18px;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-white-muted);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -536,19 +396,9 @@
   }
 
   .primaryImageCard,
-  .portraitCard,
   .signalPanel,
   .metricDeck {
     grid-column: 1;
-  }
-
-  .portraitCard {
-    min-height: 112px;
-    padding: 20px 16px 18px 106px;
-  }
-
-  .portraitCard img {
-    width: 132px;
   }
 
   .stat,
@@ -560,16 +410,5 @@
   .stat:last-child,
   .capabilityStrip span:last-child {
     border-bottom: 0;
-  }
-
-  .media,
-  .mediaImage {
-    min-height: 360px;
-  }
-
-  .statusPanel {
-    left: 14px;
-    right: 14px;
-    top: 14px;
   }
 }

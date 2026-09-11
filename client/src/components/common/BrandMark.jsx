@@ -1,4 +1,7 @@
+import { useId } from 'react'
+
 export default function BrandMark({ className = '', title = 'RhemaAI Solutions Ltd' }) {
+  const gradientId = useId()
   return (
     <svg
       className={className}
@@ -8,12 +11,12 @@ export default function BrandMark({ className = '', title = 'RhemaAI Solutions L
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <linearGradient id="rhemaaiMarkGradient" x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#6B2ACF" />
-          <stop offset="1" stopColor="#351071" />
+        <linearGradient id={gradientId} x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="var(--primary)" />
+          <stop offset="1" stopColor="var(--brand-800)" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="url(#rhemaaiMarkGradient)" />
+      <circle cx="32" cy="32" r="30" fill={`url(#${gradientId})`} />
       <circle cx="32" cy="32" r="25.4" fill="none" stroke="#FFFFFF" strokeWidth="3.2" />
       <path
         d="M44.6 22.6c-4.6-1.2-7.2.8-10.4 4.8l-4 5.2c-1.2 1.6-2.8 2.8-4.7 3.4l-14.1 4.5c4.4 3.8 10.4 4.7 16.1 2.4l-7.1 6.5c3.5 1.6 7.5.8 10.3-2.1l4.9-5.1c4.8-5 7.6-10.3 8.7-16.3.3-1.2.4-2.3.3-3.3Z"

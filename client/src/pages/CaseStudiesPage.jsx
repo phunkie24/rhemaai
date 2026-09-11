@@ -5,26 +5,7 @@ import { Link } from 'react-router-dom'
 import { caseStudiesAPI } from '@utils/api'
 import styles from './CaseStudiesPage.module.css'
 
-const INDUSTRY_ACCENTS = {
-  Enterprise: '#5A1098',
-  'Data Engineering': '#05D9E8',
-  Manufacturing: '#8A0CF2',
-  Energy: '#1515D8',
-  Retail: '#3B9AF2',
-  Healthcare: '#A5009D',
-  FinTech: '#D005D0',
-}
-
-const ALL_ACCENT = '#3A3AF2'
-const INDUSTRY_ORDER = Object.keys(INDUSTRY_ACCENTS)
-
-function getIndustryAccent(industry) {
-  return industry === 'All' ? ALL_ACCENT : (INDUSTRY_ACCENTS[industry] || '#9632F2')
-}
-
-function getCaseAccent(caseStudy) {
-  return getIndustryAccent(caseStudy?.industry)
-}
+const INDUSTRY_ORDER = ['Enterprise', 'Data Engineering', 'Manufacturing', 'Energy', 'Retail', 'Healthcare', 'FinTech']
 
 function sortIndustries(industries) {
   return [...industries].sort((a, b) => {
@@ -434,7 +415,7 @@ export default function CaseStudiesPage() {
                 <button
                   key={f}
                   className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
-                  style={{ '--accent': getIndustryAccent(f) }}
+                  style={{ '--accent': 'var(--gold)' }}
                   onClick={() => setActive(f)}
                 >
                   {f}
@@ -459,7 +440,7 @@ export default function CaseStudiesPage() {
                     variants={cardAnim}
                     initial="hidden"
                     animate="show"
-                    style={{ '--accent': getCaseAccent(cs) }}
+                    style={{ '--accent': 'var(--gold)' }}
                   >
                     <div className={styles.cardHead}>
                       <span className={styles.industryTag}>{cs.industry}</span>

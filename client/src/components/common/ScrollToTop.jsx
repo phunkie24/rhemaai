@@ -6,18 +6,19 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     if (hash) {
-      const id = decodeURIComponent(hash.slice(1))
+      let id = hash.slice(1)
+      try { id = decodeURIComponent(id) } catch { /* retain malformed fragments as literal IDs */ }
       const target = document.getElementById(id)
 
       if (target) {
         window.requestAnimationFrame(() => {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          target.scrollIntoView({ behavior: 'instant', block: 'start' })
         })
         return
       }
     }
 
-    window.scrollTo({ top: 0, behavior: 'auto' })
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname, hash])
 
   return null

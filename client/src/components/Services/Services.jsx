@@ -13,7 +13,7 @@ function ServiceCard({ service }) {
   return (
     <div
       className={`${styles.card} ${service.highlight ? styles.cardHighlight : ''}`}
-      style={{ '--service-color': service.color }}
+      style={{ '--service-color': 'var(--gold)' }}
     >
       {service.highlight && (
         <div className={styles.popularBadge}>Featured</div>
@@ -66,7 +66,7 @@ export default function Services() {
       </div>
 
       {MANAGED_SERVICES && (
-        <div className={styles.managedBand} style={{ '--service-color': MANAGED_SERVICES.color }}>
+        <div className={styles.managedBand} style={{ '--service-color': 'var(--gold)' }}>
           <div className={styles.managedIcon} aria-hidden="true">{MANAGED_SERVICES.icon}</div>
           <div className={styles.managedCopy}>
             <h3>{MANAGED_SERVICES.title}</h3>

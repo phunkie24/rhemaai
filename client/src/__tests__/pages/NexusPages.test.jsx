@@ -31,9 +31,10 @@ describe('Nexus pricing page', () => {
     render(<NexusPricingPage />, { route: '/products/nexus-aos/pricing' })
 
     expect(screen.getByRole('heading', { level: 1, name: /Start with One Workflow/ })).toBeInTheDocument()
-    expect(screen.getAllByText('$2,500 fixed fee').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('From $30,000').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('$90,000/year').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('From ₦750,000 / $2,500').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('From ₦5,000,000 / $20,000').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('From ₦50,000,000 / $120,000').length).toBeGreaterThan(0)
+    expect(screen.queryByText('$90,000/year')).not.toBeInTheDocument()
     expect(screen.queryByText(/contact for pricing/i)).not.toBeInTheDocument()
     expect(screen.getByText('Can pricing be customised?')).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Cloud, Model and Infrastructure Costs' })).not.toBeInTheDocument()

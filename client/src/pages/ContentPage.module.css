@@ -1,8 +1,8 @@
 .page {
   background:
-    linear-gradient(180deg, rgba(248, 251, 255, 0.96) 0%, rgba(236, 246, 248, 0.94) 52%, rgba(255, 255, 255, 0.98) 100%),
-    url('../assets/enterprise-ai-operations.webp') center top / cover fixed no-repeat,
-    #f8fbff;
+    linear-gradient(180deg, rgba(252,250,255, 0.96) 0%, rgba(248,243,252, 0.94) 52%, rgba(255, 255, 255, 0.98) 100%),
+
+    var(--off-white);
   min-height: 70vh;
 }
 
@@ -25,8 +25,8 @@
   padding: 132px var(--section-pad-x) 76px;
   background:
     linear-gradient(135deg, rgba(36,16,61, 0.94) 0%, rgba(62,16,118, 0.9) 46%, rgba(62,16,118, 0.88) 100%),
-    url('../assets/enterprise-ai-operations.webp') center / cover no-repeat,
-    #24103d;
+
+    var(--dark);
   border-bottom: 1px solid rgba(213,180,238, 0.18);
 }
 
@@ -50,9 +50,9 @@
   background:
     linear-gradient(
       90deg,
-      var(--content-accent, #f0cc78),
-      color-mix(in srgb, var(--content-accent, #f0cc78), white 34%),
-      color-mix(in srgb, var(--content-accent, #f0cc78), #a5009d 42%)
+      var(--content-accent, var(--gold-light)),
+      color-mix(in srgb, var(--content-accent, var(--gold-light)), white 34%),
+      color-mix(in srgb, var(--content-accent, var(--gold-light)), var(--brand-500) 42%)
     );
 }
 
@@ -76,7 +76,7 @@
   align-items: center;
   gap: 9px;
   margin-bottom: 16px;
-  color: color-mix(in srgb, var(--content-accent, #f0cc78), white 24%);
+  color: color-mix(in srgb, var(--content-accent, var(--gold-light)), white 24%);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -94,7 +94,7 @@
 
 .title {
   margin: 0;
-  color: #fff;
+  color: var(--white);
   font-size: var(--text-4xl);
   font-weight: 800;
   letter-spacing: 0;
@@ -124,7 +124,7 @@
   padding: 6px 10px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--white);
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 700;
@@ -159,7 +159,7 @@
   padding: 22px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: var(--white);
   box-shadow: var(--shadow-sm);
   justify-self: end;
   width: 100%;
@@ -312,7 +312,7 @@
   background: rgba(91,26,162, 0.1);
   color: var(--primary);
   font-size: 0.92em;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-weight: 700;
 }
 
@@ -320,10 +320,10 @@
   overflow-x: auto;
   margin: 28px 0;
   padding: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.28);
+  border: 1px solid rgba(148,132,159, 0.28);
   border-radius: 10px;
-  background: #1b0738;
-  color: #e5e7eb;
+  background: var(--brand-900);
+  color: var(--gray-100);
   font-size: 14px;
   line-height: 1.65;
   white-space: pre;
@@ -332,7 +332,7 @@
 
 .codeBlock code {
   color: inherit;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+  font-family: var(--font-mono);
 }
 
 /* ── Article headings (used by MD_COMPONENTS) ── */
@@ -371,7 +371,7 @@
   height: auto;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 8px 32px rgba(36,16,61, 0.1);
 }
 
 .figcaption {
@@ -452,7 +452,7 @@
   padding: 24px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: var(--white);
   box-shadow: var(--shadow-sm);
 }
 
@@ -500,7 +500,7 @@
   padding: 12px 18px;
   border-radius: var(--radius-md);
   background: var(--primary);
-  color: #fff;
+  color: var(--white);
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
@@ -508,7 +508,7 @@
 }
 
 .button:hover {
-  color: #fff;
+  color: var(--white);
   background: var(--primary-hover);
 }
 
@@ -520,7 +520,7 @@
   padding: 12px 18px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--white);
   color: var(--text-primary);
   font-size: 14px;
   font-weight: 800;
@@ -560,7 +560,7 @@
   margin-bottom: 30px;
   overflow: hidden;
   border-radius: var(--radius-lg);
-  background: #1b0738;
+  background: var(--brand-900);
   aspect-ratio: 16 / 9;
   box-shadow: var(--shadow-md);
 }
@@ -626,4 +626,11 @@
   .button {
     width: 100%;
   }
+}
+.productPage .card,
+.productPage .detailAside {
+  background: var(--white);
+  border: 1px solid var(--gold);
+  border-top: 4px solid var(--gold);
+  box-shadow: 0 8px 24px rgba(36, 16, 61, .06);
 }

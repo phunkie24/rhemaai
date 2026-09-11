@@ -12,7 +12,7 @@
   left: -200px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(107,70,255,0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(91,26,162,0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -62,7 +62,7 @@
 }
 
 .accent {
-  background: linear-gradient(135deg, var(--brand-300), #C084FC);
+  background: linear-gradient(135deg, var(--brand-300), var(--brand-200));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -70,7 +70,7 @@
 
 .desc {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-white-muted);
   line-height: 1.75;
   font-weight: 300;
 }
@@ -81,7 +81,7 @@
 .techTitle {
   font-size: 11px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--text-white-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 12px;
@@ -97,8 +97,8 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--brand-200);
-  background: rgba(107, 70, 255, 0.18);
-  border: 1px solid rgba(107, 70, 255, 0.25);
+  background: rgba(91,26,162, 0.18);
+  border: 1px solid rgba(91,26,162, 0.25);
   padding: 4px 12px;
   border-radius: var(--radius-full);
   letter-spacing: 0.2px;
@@ -109,8 +109,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(107, 70, 255, 0.12);
-  border: 1px solid rgba(107, 70, 255, 0.25);
+  background: rgba(91,26,162, 0.12);
+  border: 1px solid rgba(91,26,162, 0.25);
   border-radius: var(--radius-lg);
   padding: 16px 20px;
 }
@@ -135,7 +135,7 @@
 
 .mathSub {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-white-muted);
 }
 
 /* Right — Capability Grid */
@@ -147,7 +147,7 @@
 
 .capCard {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(107, 70, 255, 0.18);
+  border: 1px solid rgba(91,26,162, 0.18);
   border-radius: var(--radius-lg);
   padding: 22px 20px;
   cursor: default;
@@ -155,8 +155,8 @@
 }
 
 .capCard:hover {
-  background: rgba(107, 70, 255, 0.12);
-  border-color: rgba(107, 70, 255, 0.35);
+  background: rgba(91,26,162, 0.12);
+  border-color: rgba(91,26,162, 0.35);
 }
 
 .capIcon {
@@ -174,7 +174,7 @@
 
 .capDesc {
   font-size: 12.5px;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-white-muted);
   line-height: 1.65;
 }
 

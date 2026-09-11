@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import MarkdownContent from '@components/common/MarkdownContent'
+import Price from '@components/common/Price'
 import PageSEO from '@components/common/PageSEO'
 import { productsAPI } from '@utils/api'
 import { formatPrice as priceLabel, PRODUCT_PRICING } from '@utils/pricing'
@@ -58,7 +59,7 @@ export default function ProductDetailPage() {
   const pricing = { ...product.pricing, ...PRODUCT_PRICING[product.slug] }
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} ${styles.productPage}`}>
       <PageSEO
         title={product.seo?.metaTitle || product.name}
         description={product.seo?.metaDescription || product.summary || product.description || product.name}
@@ -81,6 +82,8 @@ export default function ProductDetailPage() {
       <section className={styles.content}>
         <div className={styles.detailLayout}>
           <article className={styles.detailMain}>
+            <h2>Pricing options</h2>
+            <Price pricing={pricing} expanded />
             <h2>Overview</h2>
             {description ? (
               <MarkdownContent>

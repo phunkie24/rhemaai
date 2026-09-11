@@ -1,3 +1,4 @@
+import { NEXUS_PRIMARY_PRICING } from '../data/nexusPricing'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -161,7 +162,7 @@ export default function NexusAssessmentPage() {
           <NexusHero
             eyebrow="12-dimension self-assessment"
             title="Assess Whether Your Organisation Is Ready for a Governed Agentic Workflow"
-            description="Begin the online component of the $2,500 fixed-fee Nexus AI Readiness Assessment. Answer 48 structured questions across business strategy, process, data, integration, AI maturity, security, governance, oversight, observability, infrastructure and organisational capability."
+            description={`Begin the online component of the Nexus AI Readiness Assessment (${NEXUS_PRIMARY_PRICING[0].displayPrice}). Answer 48 structured questions across business strategy, process, data, integration, AI maturity, security, governance, oversight, observability, infrastructure and organisational capability.`}
             aside={(
               <>
                 <h2>Transparent scoring</h2>

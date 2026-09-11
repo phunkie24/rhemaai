@@ -8,23 +8,23 @@ import { getYouTubeEmbedUrl, getYouTubeMedia } from '@utils/youtube'
 import styles from './CoursesPage.module.css'
 
 export const CATEGORIES = [
-  { key: 'all', label: 'All Courses', color: '#3A3AF2' },
-  { key: 'data-engineering', label: 'Data Engineering', color: '#05D9E8' },
-  { key: 'machine-learning', label: 'Machine Learning', color: '#118CF2' },
-  { key: 'generative-ai', label: 'Generative AI', color: '#8A0CF2' },
-  { key: 'agentic-ai', label: 'Agentic AI', color: '#1515D8' },
-  { key: 'software-engineering', label: 'Software Engineering', color: '#D005D0' },
-  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#3B9AF2' },
-  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#5A1098' },
+  { key: 'all', label: 'All Courses', color: '#5B1AA2' },
+  { key: 'data-engineering', label: 'Data Engineering', color: '#5B1AA2' },
+  { key: 'machine-learning', label: 'Machine Learning', color: '#5B1AA2' },
+  { key: 'generative-ai', label: 'Generative AI', color: '#5B1AA2' },
+  { key: 'agentic-ai', label: 'Agentic AI', color: '#5B1AA2' },
+  { key: 'software-engineering', label: 'Software Engineering', color: '#5B1AA2' },
+  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#5B1AA2' },
+  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#5B1AA2' },
 ]
 
 export const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
-export const LEVEL_COLOR = { beginner: '#10B981', intermediate: '#F59E0B', advanced: '#F43F5E' }
+export const LEVEL_COLOR = { beginner: '#5B1AA2', intermediate: '#5B1AA2', advanced: '#5B1AA2' }
 
 const HERO_TRACKS = [
-  { label: 'Agentic AI labs', value: 'Architecture patterns', color: '#67E8F9' },
-  { label: 'Cloud delivery', value: 'Azure, AWS and GCP', color: '#FBBF24' },
-  { label: 'Data engineering', value: 'Lakehouse to analytics', color: '#34D399' },
+  { label: 'Agentic AI labs', value: 'Architecture patterns', color: '#F0CC78' },
+  { label: 'Cloud delivery', value: 'Azure, AWS and GCP', color: '#F0CC78' },
+  { label: 'Data engineering', value: 'Lakehouse to analytics', color: '#F0CC78' },
 ]
 
 export const SEED_COURSES = [

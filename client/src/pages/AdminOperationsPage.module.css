@@ -1,7 +1,7 @@
 .page {
   min-height: 100vh;
-  background: #eef4f7;
-  color: #281638;
+  background: var(--off-white);
+  color: var(--text-primary);
 }
 
 .hero {
@@ -12,19 +12,19 @@
   gap: 40px;
   padding: 120px var(--section-pad-x) 36px;
   background:
-    radial-gradient(circle at 15% 20%, rgba(103,232,249,0.24), transparent 30%),
-    radial-gradient(circle at 84% 18%, rgba(190,242,100,0.18), transparent 24%),
-    linear-gradient(135deg, #24103d, #10233a 54%, #0f3d3e);
-  color: #fff;
+    radial-gradient(circle at 15% 20%, rgba(240,204,120,0.24), transparent 30%),
+    radial-gradient(circle at 84% 18%, rgba(240,204,120,0.18), transparent 24%),
+    linear-gradient(135deg, var(--dark), var(--brand-800) 54%, var(--dark-mid));
+  color: var(--white);
 }
 
 .hero span,
 .formHeader span,
 .seoTop span,
 .item span {
-  color: #f0cc78;
+  color: var(--gold-light);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -32,7 +32,7 @@
 .hero h1 {
   max-width: 600px;
   margin: 10px 0 14px;
-  color: #fff;
+  color: var(--white);
   font-size: clamp(22px, 2.6vw, 34px);
   line-height: 1.15;
   letter-spacing: 0;
@@ -41,7 +41,7 @@
 .hero p {
   max-width: 560px;
   margin: 0;
-  color: rgba(255,255,255,0.72);
+  color: var(--text-white-muted);
   font-size: 16px;
   line-height: 1.7;
 }
@@ -59,7 +59,7 @@
   display: block;
   margin-top: 8px;
   font-size: 13px;
-  color: rgba(255,255,255,0.6);
+  color: var(--text-white-muted);
 }
 
 .keyOk {
@@ -83,8 +83,8 @@
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
   padding: 14px var(--section-pad-x);
-  border-bottom: 1px solid #e6dcec;
-  background: #fff;
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--white);
 }
 
 .tabs button {
@@ -93,25 +93,25 @@
   justify-items: start;
   min-height: auto;
   padding: 10px 14px;
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  color: #281638;
-  background: #fcfaff;
+  color: var(--text-primary);
+  background: var(--off-white);
   text-align: left;
 }
 
 .tabs button span {
-  color: #6b319b;
+  color: var(--primary);
   font-size: 10px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .tabs .activeTab {
   border-color: transparent;
-  background: linear-gradient(135deg, #f0cc78, #f0cc78);
-  box-shadow: 0 16px 36px rgba(20, 184, 166, 0.18);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-light));
+  box-shadow: 0 16px 36px rgba(91,26,162, 0.18);
 }
 
 .workspace {
@@ -125,10 +125,10 @@
 .editor,
 .listPanel,
 .seoPanel {
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.07);
+  background: var(--white);
+  box-shadow: 0 18px 60px rgba(36,16,61, 0.07);
 }
 
 .editor {
@@ -156,7 +156,7 @@
 .formHeader h2,
 .seoTop h3 {
   margin: 4px 0 0;
-  color: #281638;
+  color: var(--text-primary);
   font-size: 22px;
   letter-spacing: 0;
 }
@@ -180,16 +180,16 @@
 .editor > .priceGrid,
 .editor > label {
   padding: 16px;
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  background: #fcfaff;
+  background: var(--off-white);
 }
 
 .page label {
   display: grid;
   min-width: 0;
   gap: 7px;
-  color: #334155;
+  color: var(--gray-800);
   font-size: 13px;
   font-weight: 800;
 }
@@ -204,10 +204,10 @@
   width: 100%;
   min-height: 42px;
   padding: 10px 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--gray-200);
   border-radius: 8px;
-  color: #281638;
-  background: #fff;
+  color: var(--text-primary);
+  background: var(--white);
   font: inherit;
   font-size: 14px;
 }
@@ -222,11 +222,11 @@
   padding: 8px 10px;
   border: 0;
   border-radius: 7px;
-  color: #281638;
-  background: #e0f2fe;
+  color: var(--text-primary);
+  background: var(--brand-100);
   font: inherit;
   font-size: 12px;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .page textarea {
@@ -237,9 +237,9 @@
 .page input:focus,
 .page select:focus,
 .page textarea:focus {
-  outline: 2px solid rgba(20, 184, 166, 0.25);
-  border-color: #14b8a6;
-  background: #fff;
+  outline: 2px solid rgba(91,26,162, 0.25);
+  border-color: var(--primary);
+  background: var(--white);
 }
 
 .page button {
@@ -247,11 +247,11 @@
   padding: 9px 14px;
   border: 0;
   border-radius: 8px;
-  color: #24103d;
-  background: linear-gradient(135deg, #f0cc78, #f0cc78);
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-light));
   font: inherit;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 800;
   cursor: pointer;
 }
 
@@ -265,8 +265,8 @@
   gap: 14px;
   padding: 18px;
   background:
-    radial-gradient(circle at 92% 8%, rgba(103,232,249,0.16), transparent 24%),
-    #ffffff;
+    radial-gradient(circle at 92% 8%, rgba(240,204,120,0.16), transparent 24%),
+    var(--white);
 }
 
 .seoTop strong {
@@ -275,13 +275,13 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  color: #6b319b;
-  background: #f4ecff;
+  color: var(--primary);
+  background: var(--brand-50);
   font-size: 14px;
 }
 
 .page small {
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 800;
 }
 
@@ -310,7 +310,7 @@
 }
 
 .message {
-  color: #6b319b;
+  color: var(--primary);
   font-size: 13px;
   font-weight: 800;
 }
@@ -331,14 +331,14 @@
   display: grid;
   gap: 12px;
   padding: 14px;
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  background: #fcfaff;
+  background: var(--off-white);
 }
 
 .item h3 {
   margin: 5px 0 6px;
-  color: #281638;
+  color: var(--text-primary);
   font-size: 15px;
   letter-spacing: 0;
 }
@@ -346,12 +346,12 @@
 .item p,
 .empty {
   margin: 0;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 13px;
 }
 
 .itemActions .deleteButton {
-  color: #fff;
+  color: var(--white);
   background: #991b1b;
 }
 
@@ -375,7 +375,7 @@
 }
 
 .archPreview > span {
-  color: #64748b !important;
+  color: var(--text-muted) !important;
   font-size: 11px !important;
   font-weight: 900 !important;
   letter-spacing: 0.08em !important;
@@ -385,9 +385,9 @@
 .archPreview img {
   width: 100%;
   max-height: 220px;
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  background: #fcfaff;
+  background: var(--off-white);
   object-fit: contain;
 }
 
@@ -395,15 +395,15 @@
   display: grid;
   gap: 9px;
   padding: 16px;
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  background: #fcfaff;
+  background: var(--off-white);
 }
 
 .coursePreview > span {
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -418,9 +418,9 @@
 .coursePreviewGrid iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
-  border: 1px solid #e6dcec;
+  border: 1px solid var(--gray-100);
   border-radius: 8px;
-  background: #281638;
+  background: var(--text-primary);
   object-fit: cover;
 }
 
