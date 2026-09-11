@@ -25,9 +25,14 @@ services:
     environment:
       NODE_ENV: production
       PORT: 5000
+      TRUST_PROXY: loopback,uniquelocal
       MONGODB_URI: mongodb://mongo:27017/rhemaai
       EMAIL_USER: ${EMAIL_USER:-}
       EMAIL_PASS: ${EMAIL_PASS:-}
+      EMAIL_HOST: ${EMAIL_HOST:-smtp.hostinger.com}
+      EMAIL_PORT: ${EMAIL_PORT:-465}
+      NOTIFY_EMAIL: ${NOTIFY_EMAIL:-}
+      FORM_BLOCKED_SENDERS: ${FORM_BLOCKED_SENDERS:-}
       FRONTEND_URL: ${FRONTEND_URL:?Set FRONTEND_URL in .env}
       CONTACT_ADMIN_KEY: ${CONTACT_ADMIN_KEY:?Set CONTACT_ADMIN_KEY in .env}
     depends_on:

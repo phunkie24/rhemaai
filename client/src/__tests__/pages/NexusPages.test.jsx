@@ -9,11 +9,12 @@ import NexusPricingPage from '../../pages/NexusPricingPage'
 import NexusAssessmentPage from '../../pages/NexusAssessmentPage'
 
 const requestDemo = vi.hoisted(() => vi.fn())
+const emailAssessment = vi.hoisted(() => vi.fn())
 
 vi.mock('../../utils/api', () => ({
   nexusAPI: {
     requestDemo,
-    emailAssessment: vi.fn(),
+    emailAssessment,
   },
 }))
 
@@ -126,5 +127,12 @@ describe('Nexus readiness assessment', () => {
     expect(screen.getByLabelText('Overall score 81 out of 100')).toBeInTheDocument()
     expect(screen.getAllByText('Business strategy').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Organisational capability').length).toBeGreaterThan(0)
+
+    emailAssessment.mockRejectedValueOnce(new Error('An email was requested recently. Please try again in an hour.'))
+    fireEvent.change(screen.getByLabelText(/Work email/), { target: { value: 'customer@example.com' } })
+    fireEvent.click(screen.getByLabelText(/I consent to receiving/))
+    fireEvent.click(screen.getByRole('button', { name: 'Email My Summary' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Please try again in an hour.')
+    expect(screen.getByLabelText(/Work email/)).toHaveValue('customer@example.com')
   })
 })

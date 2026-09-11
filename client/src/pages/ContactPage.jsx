@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import PageSEO from '@components/common/PageSEO'
+import FormHoneypot from '@components/common/FormHoneypot'
 import { motion } from 'framer-motion'
 import { contactAPI } from '@utils/api'
 import styles from './ContactPage.module.css'
@@ -28,21 +29,24 @@ const BUDGETS = [
 
 export default function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState('idle')
+  const [submitError, setSubmitError] = useState('')
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm({ defaultValues: { service: 'general', budget: 'not-specified' } })
+  } = useForm({ defaultValues: { service: 'general', budget: 'not-specified', website: '' } })
 
   const onSubmit = async (data) => {
     try {
       setSubmitStatus('loading')
+      setSubmitError('')
       await contactAPI.submit(data)
       setSubmitStatus('success')
       reset()
     } catch (err) {
+      setSubmitError(err.message || 'Please try again later.')
       setSubmitStatus('error')
     }
   }
@@ -125,12 +129,15 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                <FormHoneypot field={register('website')} />
                 <h2 className={styles.formTitle}>Book a Consultation</h2>
 
                 <div className={styles.fieldRow}>
                   <div className={styles.field}>
-                    <label>Full Name *</label>
+                    <label htmlFor="contact-name">Full Name *</label>
                     <input
+                      id="contact-name"
+                      maxLength={100}
                       {...register('name', { required: 'Name is required', minLength: { value: 2, message: 'Minimum 2 characters' } })}
                       placeholder="Funke R. Yusuf"
                       className={errors.name ? styles.inputError : ''}
@@ -138,8 +145,10 @@ export default function ContactPage() {
                     {errors.name && <span className={styles.errorMsg}>{errors.name.message}</span>}
                   </div>
                   <div className={styles.field}>
-                    <label>Email Address *</label>
+                    <label htmlFor="contact-email">Email Address *</label>
                     <input
+                      id="contact-email"
+                      maxLength={254}
                       type="email"
                       {...register('email', { required: 'Email is required', pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' } })}
                       placeholder="you@company.com"
@@ -150,8 +159,10 @@ export default function ContactPage() {
                 </div>
 
                 <div className={styles.field}>
-                  <label>Company / Organisation</label>
+                  <label htmlFor="contact-company">Company / Organisation</label>
                   <input
+                    id="contact-company"
+                    maxLength={150}
                     {...register('company')}
                     placeholder="Acme Enterprises Ltd"
                   />
@@ -159,16 +170,16 @@ export default function ContactPage() {
 
                 <div className={styles.fieldRow}>
                   <div className={styles.field}>
-                    <label>Service Area *</label>
-                    <select {...register('service')}>
+                    <label htmlFor="contact-service">Service Area *</label>
+                    <select id="contact-service" {...register('service')}>
                       {SERVICES.map((s) => (
                         <option key={s.value} value={s.value}>{s.label}</option>
                       ))}
                     </select>
                   </div>
                   <div className={styles.field}>
-                    <label>Project Budget</label>
-                    <select {...register('budget')}>
+                    <label htmlFor="contact-budget">Project Budget</label>
+                    <select id="contact-budget" {...register('budget')}>
                       {BUDGETS.map((b) => (
                         <option key={b.value} value={b.value}>{b.label}</option>
                       ))}
@@ -177,8 +188,10 @@ export default function ContactPage() {
                 </div>
 
                 <div className={styles.field}>
-                  <label>Project Brief *</label>
+                  <label htmlFor="contact-message">Project Brief *</label>
                   <textarea
+                    id="contact-message"
+                    maxLength={2000}
                     {...register('message', {
                       required: 'Please describe your project',
                       minLength: { value: 10, message: 'Please provide more detail' },
@@ -191,8 +204,8 @@ export default function ContactPage() {
                 </div>
 
                 {submitStatus === 'error' && (
-                  <div className={styles.formError}>
-                    Something went wrong. Please try again or email us directly at info@rhemaaisolutions.tech
+                  <div className={styles.formError} role="alert">
+                    {submitError}
                   </div>
                 )}
 

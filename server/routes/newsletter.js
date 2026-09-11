@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { subscribe } from '../controllers/newsletterController.js'
 import { newsletterLimiter } from '../middleware/rateLimiter.js'
+import { formHoneypot } from '../utils/formGuard.js'
 
 const router = Router()
 
@@ -30,5 +31,5 @@ const router = Router()
  *       429:
  *         description: Too many attempts (10/hr limit)
  */
-router.post('/', newsletterLimiter, subscribe)
+router.post('/', newsletterLimiter, formHoneypot, subscribe)
 export default router

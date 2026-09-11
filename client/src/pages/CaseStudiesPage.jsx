@@ -40,10 +40,16 @@ function caseKeys(item) {
 }
 
 function mergeCases(apiCases = []) {
-  const merged = [...apiCases]
+  // Older stored seed records must not undo the approved website corrections.
+  const currentApiCases = apiCases
+    .filter((item) => !caseKeys(item).includes('elitem-prep-blockchain-supply-chain') && item.client !== 'Elitem Prep - Blockchain Supply Chain')
+    .map((item) => caseKeys(item).includes('adso-azure-synapse-migration-seplat')
+      ? { ...item, ...CASES.find((entry) => entry.id === 'adso-azure-synapse-migration-seplat') }
+      : item)
+  const merged = [...currentApiCases]
   const seen = new Set()
 
-  apiCases.forEach((item) => {
+  currentApiCases.forEach((item) => {
     caseKeys(item).forEach((key) => seen.add(key))
   })
 
@@ -302,15 +308,6 @@ const CASES = [
     tags: ['PyTorch', 'ONNX', 'FastAPI', 'Azure ML', 'Agentic AI'],
   }),
   caseItem({
-    id: 'elitem-prep-blockchain-supply-chain',
-    industry: 'Manufacturing',
-    client: 'Elitem Prep - Blockchain Supply Chain',
-    kpi1: { value: '4', label: 'Agent Coordination' },
-    kpi2: { value: 'On-Chain', label: 'Provenance Tracking' },
-    summary: 'Blockchain-backed supply chain provenance system with 4 coordinated agents managing material certification, supplier verification, chain-of-custody tracking, and on-chain compliance attestation for regulated manufacturing.',
-    tags: ['Blockchain', 'Solidity', 'LangGraph', 'Web3', 'IPFS'],
-  }),
-  caseItem({
     id: 'rhemaai-platform-website-seo',
     industry: 'Data Engineering',
     client: 'RhemaAI Platform - Website & SEO',
@@ -322,11 +319,11 @@ const CASES = [
   caseItem({
     id: 'adso-azure-synapse-migration-seplat',
     industry: 'Data Engineering',
-    client: 'ADSO to Azure Synapse Migration - Seplat',
+    client: 'MySQL to Azure Synapse Migration - Seplat',
     kpi1: { value: 'Full', label: 'Data Migration' },
     kpi2: { value: 'Zero', label: 'Business Disruption' },
-    summary: 'Migration of SAP ADSO structures to Azure Synapse with full data fidelity, schema translation, delta load engineering, and post-migration validation, enabling cloud-native analytics on previously locked SAP data.',
-    tags: ['SAP ADSO', 'Azure Synapse', 'ADF', 'Spark', 'Data Migration'],
+    summary: 'Migration of MySQL data to Azure Synapse with full data fidelity, schema translation, delta load engineering, and post-migration validation, enabling cloud-native analytics on operational data.',
+    tags: ['MySQL', 'Azure Synapse', 'ADF', 'Spark', 'Data Migration'],
   }),
   caseItem({
     id: 'predictive-analytics-data-engine',

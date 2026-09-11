@@ -1,12 +1,14 @@
 import Joi from 'joi'
 import nodemailer from 'nodemailer'
 import NexusEnquiry from '../models/NexusEnquiry.js'
+import { allowFormSubmission, allowVisitorEmail, releaseFailedSubmission } from '../utils/formGuard.js'
+import { assessmentDimensions } from '../config/assessmentDimensions.js'
 
 const optionalText = (max) => Joi.string().trim().max(max).allow('', null)
 
 const demoSchema = Joi.object({
   fullName: Joi.string().trim().min(2).max(100).required(),
-  workEmail: Joi.string().trim().email().max(180).required(),
+  workEmail: Joi.string().trim().lowercase().email().max(180).required(),
   company: Joi.string().trim().min(2).max(160).required(),
   jobTitle: optionalText(120),
   country: optionalText(100),
@@ -54,15 +56,15 @@ const demoSchema = Joi.object({
 
 const assessmentSchema = Joi.object({
   fullName: optionalText(100),
-  workEmail: Joi.string().trim().email().max(180).required(),
+  workEmail: Joi.string().trim().lowercase().email().max(180).required(),
   company: optionalText(160),
   assessmentScore: Joi.number().integer().min(0).max(100).required(),
   assessmentBand: Joi.string().valid('Foundation Required', 'Emerging', 'Pilot Ready', 'Scale Ready', 'Advanced').required(),
   dimensionScores: Joi.array().items(Joi.object({
-    slug: Joi.string().trim().max(80).required(),
+    slug: Joi.string().valid(...Object.keys(assessmentDimensions)).required(),
     name: Joi.string().trim().max(120).required(),
     score: Joi.number().integer().min(0).max(100).required(),
-  })).length(12).required(),
+  })).length(12).unique('slug').required(),
   consent: Joi.boolean().valid(true).required(),
   website: optionalText(200),
 })
@@ -99,14 +101,23 @@ function createTransporter() {
     host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
     port,
     secure: port === 465,
+    requireTLS: true,
+    connectionTimeout: 5000,
+    greetingTimeout: 5000,
+    socketTimeout: 10000,
     auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
   })
 }
 
-async function sendEmails(messages) {
+async function sendEmails(messages, visitorAllowed = true) {
   if (!emailEnabled()) return
   const transporter = createTransporter()
-  await Promise.allSettled(messages.map((message) => transporter.sendMail(message)))
+  await Promise.allSettled(messages
+    .filter((message) => !message.visitor || visitorAllowed)
+    .map(({ visitor, ...message }) => transporter.sendMail({
+      ...message,
+      ...(visitor ? { headers: { 'Auto-Submitted': 'auto-replied', 'X-Auto-Response-Suppress': 'All' } } : {}),
+    })))
 }
 
 function validate(schema, body, res) {
@@ -126,16 +137,20 @@ export async function submitNexusDemo(req, res, next) {
     const value = validate(demoSchema, req.body, res)
     if (!value) return
 
-    // Honeypot: acknowledge without persisting or emailing.
-    if (value.website) {
-      return res.status(201).json({ success: true, message: 'Your request has been received.' })
-    }
+    if (!await allowFormSubmission(req, res, {
+      scope: 'nexus-demo', email: value.workEmail,
+      text: [value.primaryUseCase, value.additionalContext, value.requiredIntegrations].filter(Boolean).join('\n'),
+      singleLineFields: [value.fullName, value.company, value.jobTitle, value.country, value.industry],
+      fingerprint: value.primaryUseCase,
+    })) return
 
+    const replyAllowed = emailEnabled() && await allowVisitorEmail(value.workEmail)
     const saved = await NexusEnquiry.create({
       ...cleanObject(value),
       kind: 'demo',
       ipAddress: req.ip,
     })
+    delete req.releaseFormDuplicate
     const owner = process.env.NOTIFY_EMAIL || process.env.EMAIL_USER
     const safeName = escapeHtml(value.fullName)
     const safeEmail = escapeHtml(value.workEmail)
@@ -148,15 +163,16 @@ export async function submitNexusDemo(req, res, next) {
         to: owner,
         replyTo: value.workEmail,
         subject: `Nexus AOS ${value.interest} request — ${value.company}`,
-        html: `<h2>New Nexus AOS request</h2><p><strong>${safeName}</strong> (${safeEmail}) from ${safeCompany}</p><p><strong>Interest:</strong> ${escapeHtml(value.interest)}</p><p><strong>Indicative budget:</strong> ${escapeHtml(value.indicativeBudget)}</p><p><strong>Primary use case:</strong></p><p>${safeUseCase}</p>`,
+        html: `<h2>New Nexus AOS request</h2><p>External website enquiry. The sender's identity and email address have not been verified. Treat links and payment requests with caution.</p><p><strong>Access review:</strong> Verify the organisation and authorised contact before sharing any demo invitation. This enquiry has not granted app access. Do not share passwords, API keys or production data.</p><p><strong>${safeName}</strong> (${safeEmail}) from ${safeCompany}</p><p><strong>Interest:</strong> ${escapeHtml(value.interest)}</p><p><strong>Indicative budget:</strong> ${escapeHtml(value.indicativeBudget)}</p><p><strong>Primary use case:</strong></p><p>${safeUseCase}</p>`,
       },
       {
+        visitor: true,
         from: `"RhemaAI Solutions Ltd" <${process.env.EMAIL_USER}>`,
         to: value.workEmail,
         subject: 'We received your Nexus AOS request',
-        html: `<h2>Thank you, ${escapeHtml(value.fullName.split(' ')[0])}</h2><p>We have received your Nexus AOS request. Our team will review the use case, systems, governance needs and deployment context before arranging the next step.</p><p>Do not send credentials or confidential production data by email.</p>`,
+        html: '<h2>Thank you for your enquiry</h2><p>We have received your Nexus AOS request. Our team will review the use case, systems, governance needs and deployment context before arranging the next step.</p><p>Do not send credentials or confidential production data by email.</p>',
       },
-    ])
+    ], replyAllowed)
 
     return res.status(201).json({
       success: true,
@@ -164,6 +180,7 @@ export async function submitNexusDemo(req, res, next) {
       id: saved._id,
     })
   } catch (error) {
+    await releaseFailedSubmission(req)
     next(error)
   }
 }
@@ -173,8 +190,21 @@ export async function submitAssessmentCopy(req, res, next) {
     const value = validate(assessmentSchema, req.body, res)
     if (!value) return
 
-    if (value.website) {
-      return res.status(201).json({ success: true, message: 'Your assessment summary has been requested.' })
+    value.dimensionScores = Object.entries(assessmentDimensions).map(([slug, name]) => ({
+      slug, name, score: value.dimensionScores.find((dimension) => dimension.slug === slug).score,
+    }))
+
+    if (!await allowFormSubmission(req, res, {
+      scope: 'nexus-assessment', email: value.workEmail,
+      text: value.dimensionScores.map((dimension) => dimension.name).join('\n'),
+      singleLineFields: [value.fullName, value.company, ...value.dimensionScores.map((dimension) => dimension.name)],
+      fingerprint: JSON.stringify(value.dimensionScores),
+    })) return
+
+    if (emailEnabled() && !await allowVisitorEmail(value.workEmail)) {
+      await releaseFailedSubmission(req)
+      res.set('Retry-After', '3600')
+      return res.status(429).json({ message: 'An email was requested recently for this address. Please try again in an hour.' })
     }
 
     const saved = await NexusEnquiry.create({
@@ -182,11 +212,13 @@ export async function submitAssessmentCopy(req, res, next) {
       kind: 'assessment',
       ipAddress: req.ip,
     })
+    delete req.releaseFormDuplicate
     const rows = value.dimensionScores
       .map((dimension) => `<li>${escapeHtml(dimension.name)}: ${dimension.score}/100</li>`)
       .join('')
 
     await sendEmails([{
+      visitor: true,
       from: `"RhemaAI Solutions Ltd" <${process.env.EMAIL_USER}>`,
       to: value.workEmail,
       subject: `Your Nexus AOS readiness summary — ${value.assessmentBand}`,
@@ -199,6 +231,7 @@ export async function submitAssessmentCopy(req, res, next) {
       id: saved._id,
     })
   } catch (error) {
+    await releaseFailedSubmission(req)
     next(error)
   }
 }

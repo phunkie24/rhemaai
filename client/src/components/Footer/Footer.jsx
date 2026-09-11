@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import FormHoneypot from '../common/FormHoneypot'
 import { Link } from 'react-router-dom'
 import { newsletterAPI } from '@utils/api'
 import BrandMark from '@components/common/BrandMark'
@@ -46,6 +47,8 @@ const NEXUS_LINKS = [
 
 export default function Footer() {
   const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('')
+  const [feedback, setFeedback] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | success | error
 
   const handleSubscribe = async (e) => {
@@ -53,10 +56,12 @@ export default function Footer() {
     if (!email) return
     setStatus('loading')
     try {
-      await newsletterAPI.subscribe(email)
+      await newsletterAPI.subscribe(email, website)
       setStatus('success')
       setEmail('')
-    } catch {
+      setWebsite('')
+    } catch (error) {
+      setFeedback(error.message || 'Please try again later.')
       setStatus('error')
     }
   }
@@ -84,12 +89,14 @@ export default function Footer() {
             <div className={styles.newsletterTitle}>Research</div>
             <div className={styles.newsletterSub}>AI, cloud & data engineering updates. No spam.</div>
             <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
+              <FormHoneypot field={{ value: website, onChange: (event) => setWebsite(event.target.value) }} />
               <label htmlFor="footer-newsletter-email" className={styles.srOnly}>
                 Email address
               </label>
               <input
                 id="footer-newsletter-email"
                 type="email"
+                maxLength={254}
                 placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -106,7 +113,7 @@ export default function Footer() {
               </button>
             </form>
             {status === 'success' && <p className={styles.successMsg}>Subscribed. You are on the list.</p>}
-            {status === 'error'   && <p className={styles.errorMsg}>Something went wrong. Try again.</p>}
+            {status === 'error'   && <p className={styles.errorMsg} role="alert">{feedback}</p>}
           </div>
         </div>
 

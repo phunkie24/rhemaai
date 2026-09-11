@@ -1,8 +1,9 @@
 import Joi from 'joi'
 import { Subscriber } from '../models/Subscriber.js'
+import { allowFormSubmission } from '../utils/formGuard.js'
 
 const emailSchema = Joi.object({
-  email: Joi.string().trim().lowercase().email().required(),
+  email: Joi.string().trim().lowercase().email().max(254).required(),
 })
 
 export async function subscribe(req, res, next) {
@@ -11,6 +12,8 @@ export async function subscribe(req, res, next) {
     if (error) {
       return res.status(400).json({ message: 'Please provide a valid email address' })
     }
+
+    if (!await allowFormSubmission(req, res, { scope: 'newsletter', email: value.email })) return
 
     const existing = await Subscriber.findOne({ email: value.email })
     if (existing) {

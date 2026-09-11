@@ -33,6 +33,7 @@ const ERROR_ORDER = ['fullName', 'workEmail', 'company', 'primaryUseCase', 'cons
 export default function NexusDemoPage() {
   const [searchParams] = useSearchParams()
   const [status, setStatus] = useState('idle')
+  const [submitError, setSubmitError] = useState('')
   const started = useRef(false)
   const interest = getNexusInterest(searchParams.get('interest') || searchParams.get('engagement'))
   const domain = searchParams.get('domain') || ''
@@ -66,11 +67,13 @@ export default function NexusDemoPage() {
   const onSubmit = async (data) => {
     try {
       setStatus('submitting')
+      setSubmitError('')
       await nexusAPI.requestDemo(data)
       setStatus('success')
       trackNexusEvent('nexus_demo_submitted', { route: `${NEXUS_BASE}/demo`, domain: domain || 'unspecified' })
       reset()
-    } catch {
+    } catch (error) {
+      setSubmitError(error.message || 'Please try again later.')
       setStatus('error')
       trackNexusEvent('nexus_demo_failed', { route: `${NEXUS_BASE}/demo`, domain: domain || 'unspecified' })
     }
@@ -228,7 +231,7 @@ export default function NexusDemoPage() {
 
                   {status === 'error' && (
                     <div className={styles.errorSummary} role="alert">
-                      We could not submit the request. Try again or email info@rhemaaisolutions.tech.
+                      {submitError}
                     </div>
                   )}
 
@@ -236,6 +239,7 @@ export default function NexusDemoPage() {
                     {isSubmitting || status === 'submitting' ? 'Submitting securely…' : 'Request a Tailored Demo'}
                   </button>
                   <p className={styles.formLegal}>By submitting, you also agree to the site <Link to="/terms">Terms of Service</Link>. Do not include sensitive personal or operational information.</p>
+                  <p className={styles.formLegal}>Demo requests are reviewed before an appointment is arranged. Submitting this form does not grant access to Nexus AOS.</p>
                 </form>
               )}
             </div>

@@ -82,7 +82,7 @@ describe('ContactPage', () => {
 
   it('shows error message when API call fails', async () => {
     const user = userEvent.setup()
-    mockSubmit.mockRejectedValueOnce(new Error('Server error'))
+    mockSubmit.mockRejectedValueOnce(new Error('Too many form submissions. Please try again in an hour.'))
     render(<ContactPage />)
 
     await user.type(screen.getByPlaceholderText(/Funke R\. Yusuf/i), 'Amaka')
@@ -95,8 +95,9 @@ describe('ContactPage', () => {
     await user.click(screen.getByRole('button', { name: /Send Consultation Request/i }))
 
     await waitFor(() => {
-      expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument()
+      expect(screen.getByRole('alert')).toHaveTextContent('Please try again in an hour.')
     })
+    expect(screen.getByLabelText(/Email Address/)).toHaveValue('amaka@corp.ng')
   })
 
   it('allows sending another request after success', async () => {

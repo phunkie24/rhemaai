@@ -3,6 +3,7 @@ import request from 'supertest'
 import app from '../../app.js'
 import NexusEnquiry from '../../models/NexusEnquiry.js'
 import { setupTestDB } from '../helpers/db.js'
+import { assessmentDimensions } from '../../config/assessmentDimensions.js'
 
 setupTestDB()
 
@@ -23,20 +24,7 @@ const validDemo = {
   consent: true,
 }
 
-const dimensionScores = [
-  'strategy',
-  'process',
-  'data',
-  'integration',
-  'ai-maturity',
-  'security',
-  'governance',
-  'human-oversight',
-  'observability',
-  'infrastructure',
-  'operating-model',
-  'change-capability',
-].map((slug, index) => ({ slug, name: `Dimension ${index + 1}`, score: 75 }))
+const dimensionScores = Object.entries(assessmentDimensions).map(([slug, name]) => ({ slug, name, score: 75 }))
 
 describe('POST /api/nexus/demo', () => {
   it('stores a valid pricing-qualified request without budget gating', async () => {

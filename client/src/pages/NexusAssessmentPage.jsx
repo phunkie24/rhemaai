@@ -29,6 +29,7 @@ export default function NexusAssessmentPage() {
   const [results, setResults] = useState(null)
   const [emailForm, setEmailForm] = useState({ fullName: '', workEmail: '', company: '', consent: false, website: '' })
   const [emailStatus, setEmailStatus] = useState('idle')
+  const [emailError, setEmailError] = useState('')
 
   useEffect(() => {
     try {
@@ -131,6 +132,7 @@ export default function NexusAssessmentPage() {
     }
     try {
       setEmailStatus('submitting')
+      setEmailError('')
       await nexusAPI.emailAssessment({
         ...emailForm,
         assessmentScore: results.overallScore,
@@ -138,7 +140,8 @@ export default function NexusAssessmentPage() {
         dimensionScores: results.dimensions,
       })
       setEmailStatus('success')
-    } catch {
+    } catch (error) {
+      setEmailError(error.message || 'The summary could not be sent. Please try again later.')
       setEmailStatus('error')
     }
   }
@@ -289,6 +292,7 @@ export default function NexusAssessmentPage() {
           emailForm={emailForm}
           setEmailForm={setEmailForm}
           emailStatus={emailStatus}
+          emailError={emailError}
           emailResults={emailResults}
           restart={restart}
         />
@@ -297,7 +301,7 @@ export default function NexusAssessmentPage() {
   )
 }
 
-function AssessmentResults({ results, emailForm, setEmailForm, emailStatus, emailResults, restart }) {
+function AssessmentResults({ results, emailForm, setEmailForm, emailStatus, emailError, emailResults, restart }) {
   return (
     <>
       <header className={styles.resultsHero}>
@@ -378,7 +382,7 @@ function AssessmentResults({ results, emailForm, setEmailForm, emailStatus, emai
             <label className={styles.consent}><input type="checkbox" checked={emailForm.consent} onChange={(event) => setEmailForm({ ...emailForm, consent: event.target.checked })} /><span>I consent to receiving this requested assessment summary. *</span></label>
             <input className={styles.honeypot} tabIndex="-1" autoComplete="off" value={emailForm.website} onChange={(event) => setEmailForm({ ...emailForm, website: event.target.value })} aria-hidden="true" />
             {emailStatus === 'validation' && <p className={styles.inlineError} role="alert">Enter a valid email and provide consent.</p>}
-            {emailStatus === 'error' && <p className={styles.inlineError} role="alert">The summary could not be sent. Please try again.</p>}
+            {emailStatus === 'error' && <p className={styles.inlineError} role="alert">{emailError}</p>}
             {emailStatus === 'success' ? <p className={styles.inlineSuccess} role="status">Your summary has been requested.</p> : (
               <button type="submit" className={styles.primaryAction} disabled={emailStatus === 'submitting'}>{emailStatus === 'submitting' ? 'Sending…' : 'Email My Summary'}</button>
             )}

@@ -21,7 +21,9 @@ import nexusRoutes from './routes/nexus.js'
 const app = express()
 
 app.disable('x-powered-by')
-app.set('trust proxy', 1)
+// Only the local reverse proxy may supply a client IP. Trusting one arbitrary
+// hop lets direct requests to Node spoof X-Forwarded-For and bypass limits.
+app.set('trust proxy', 'loopback')
 
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },

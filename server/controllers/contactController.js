@@ -2,12 +2,13 @@ import nodemailer from 'nodemailer'
 import Joi from 'joi'
 import Contact from '../models/Contact.js'
 import { parsePagination } from '../utils/pagination.js'
+import { allowFormSubmission, allowVisitorEmail, releaseFailedSubmission } from '../utils/formGuard.js'
 
 const CONTACT_STATUSES = new Set(['new', 'read', 'replied', 'closed'])
 
 const contactSchema = Joi.object({
   name: Joi.string().trim().min(2).max(100).required(),
-  email: Joi.string().trim().email().required(),
+  email: Joi.string().trim().lowercase().email().max(254).required(),
   company: Joi.string().trim().max(150).allow('', null),
   service: Joi.string().valid(
     'agentic-ai', 'generative-ai', 'ai-advisory',
@@ -23,19 +24,6 @@ const contactSchema = Joi.object({
 // Checked at request time — module-level constants are evaluated before dotenv loads in ESM
 const isEmailEnabled = () => !!(process.env.EMAIL_USER && process.env.EMAIL_PASS)
 
-function makeTransporter() {
-  const port = parseInt(process.env.EMAIL_PORT || '465', 10)
-  return nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
-    port,
-    secure: port === 465,   // true for 465 (SSL), false for 587 (STARTTLS)
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  })
-}
-
 async function sendWithFallback(mailOptions) {
   // Try configured port first, then fall back to 587 STARTTLS
   const ports = [
@@ -49,6 +37,10 @@ async function sendWithFallback(mailOptions) {
         host: process.env.EMAIL_HOST || 'smtp.hostinger.com',
         port,
         secure: port === 465,
+        requireTLS: true,
+        connectionTimeout: 5000,
+        greetingTimeout: 5000,
+        socketTimeout: 10000,
         auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
       })
       await t.sendMail(mailOptions)
@@ -81,19 +73,26 @@ export async function submitContact(req, res, next) {
       })
     }
 
+    if (!await allowFormSubmission(req, res, {
+      scope: 'contact', email: value.email, text: value.message,
+      singleLineFields: [value.name, value.company], fingerprint: value.message,
+    })) return
+
+    const replyAllowed = isEmailEnabled() && await allowVisitorEmail(value.email)
     const contact = await Contact.create({ ...value, ipAddress: req.ip })
-    const firstName = escapeHtml(value.name.split(' ')[0])
+    delete req.releaseFormDuplicate
     const company = value.company ? escapeHtml(value.company) : 'Not provided'
 
     // NOTIFY_EMAIL can be a different inbox (e.g. personal Gmail); falls back to EMAIL_USER
-    const notifyRecipients = [
+    const notifyRecipients = [...new Set([
       process.env.EMAIL_USER,
       process.env.NOTIFY_EMAIL,
-    ].filter(Boolean).join(', ')
+    ].filter(Boolean).flatMap((item) => item.split(',').map((address) => address.trim()).filter(Boolean)))].join(', ')
 
     const notificationEmail = {
       from: `"RhemaAI Solutions Ltd Website" <${process.env.EMAIL_USER}>`,
       to: notifyRecipients,
+      replyTo: value.email,
       subject: `New Consultation Request - ${value.name} (${value.company || 'No company'})`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
@@ -102,6 +101,7 @@ export async function submitContact(req, res, next) {
             <p style="color: rgba(255,255,255,0.7); margin: 8px 0 0; font-size: 14px;">RhemaAI Solutions Ltd Website</p>
           </div>
           <div style="background: #f8f7ff; padding: 28px; border-radius: 0 0 12px 12px; border: 1px solid #e8e6f5;">
+            <p style="font-size: 13px; color: #805719;">External website enquiry. The sender's identity and email address have not been verified. Treat links and payment requests with caution.</p>
             <table style="width: 100%; border-collapse: collapse;">
               <tr><td style="padding: 8px 0; font-size: 13px; color: #6B6080; font-weight: 600; width: 120px;">Name</td>
                   <td style="padding: 8px 0; font-size: 14px; color: #0F0A1E;">${escapeHtml(value.name)}</td></tr>
@@ -126,7 +126,8 @@ export async function submitContact(req, res, next) {
     const autoReply = {
       from: `"RhemaAI Solutions Ltd" <${process.env.EMAIL_USER}>`,
       to: value.email,
-      subject: `Thank you for reaching out, ${value.name.split(' ')[0]} - RhemaAI Solutions Ltd`,
+      subject: 'We received your consultation request - RhemaAI Solutions Ltd',
+      headers: { 'Auto-Submitted': 'auto-replied', 'X-Auto-Response-Suppress': 'All' },
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #6B46FF, #3D1FAB); padding: 32px; border-radius: 12px 12px 0 0; text-align: center;">
@@ -134,7 +135,7 @@ export async function submitContact(req, res, next) {
             <p style="color: rgba(255,255,255,0.7); margin: 8px 0 0;">Enterprise AI & Cloud Transformation</p>
           </div>
           <div style="background: #f8f7ff; padding: 32px; border-radius: 0 0 12px 12px; border: 1px solid #e8e6f5;">
-            <h2 style="font-size: 20px; color: #0F0A1E; margin: 0 0 16px;">Thank you, ${firstName}!</h2>
+            <h2 style="font-size: 20px; color: #0F0A1E; margin: 0 0 16px;">Thank you for your enquiry!</h2>
             <p style="font-size: 15px; color: #5A5370; line-height: 1.75; margin-bottom: 20px;">
               We've received your consultation request and our team will review it within <strong>24 hours</strong>.
               We look forward to discussing how we can help transform your enterprise with AI and cloud technology.
@@ -160,7 +161,7 @@ export async function submitContact(req, res, next) {
     if (isEmailEnabled()) {
       const results = await Promise.allSettled([
         sendWithFallback(notificationEmail),
-        sendWithFallback(autoReply),
+        ...(replyAllowed ? [sendWithFallback(autoReply)] : []),
       ])
       results.forEach((r, i) => {
         if (r.status === 'rejected') {
@@ -177,6 +178,7 @@ export async function submitContact(req, res, next) {
       id: contact._id,
     })
   } catch (err) {
+    await releaseFailedSubmission(req)
     next(err)
   }
 }

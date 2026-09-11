@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { submitContact, getContacts } from '../controllers/contactController.js'
 import { requireAdmin } from '../middleware/adminAuth.js'
 import { contactLimiter } from '../middleware/rateLimiter.js'
+import { formHoneypot } from '../utils/formGuard.js'
 
 const router = Router()
 
@@ -59,7 +60,7 @@ const router = Router()
  *       401:
  *         description: Missing or invalid admin key
  */
-router.post('/', contactLimiter, submitContact)
+router.post('/', contactLimiter, formHoneypot, submitContact)
 router.get('/', requireAdmin, getContacts)
 
 export default router

@@ -35,7 +35,7 @@ export const nexusAPI = {
 }
 
 export const newsletterAPI = {
-  subscribe: (email) => api.post('/newsletter', { email }),
+  subscribe: (email, website = '') => api.post('/newsletter', { email, website }),
 }
 
 export const insightsAPI = {

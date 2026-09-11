@@ -13,6 +13,10 @@ const PORT = process.env.PORT || 5000
 
 validateEnv()
 
+// Evaluated after dotenv has loaded. Docker explicitly trusts its private proxy
+// network; direct VPS installations default to the loopback Nginx connection.
+app.set('trust proxy', process.env.TRUST_PROXY || 'loopback')
+
 await connectDB()
 
 const server = app.listen(PORT, () => {
