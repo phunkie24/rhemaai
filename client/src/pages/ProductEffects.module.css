@@ -90,7 +90,7 @@
   justify-content: center;
   gap: 12px;
   overflow: hidden;
-  background: linear-gradient(140deg, var(--brand-200), var(--gold-wash) 75%);
+  background: var(--surface-accent);
   box-shadow: 0 24px 60px rgba(104, 81, 38, .12), 0 0 44px rgba(195, 167, 216, .2);
   animation: coreFloat 6s ease-in-out infinite;
 }

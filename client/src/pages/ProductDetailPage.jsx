@@ -51,12 +51,12 @@ export default function ProductDetailPage() {
   }, [fallback, slug])
 
   if (loading) {
-    return <section className={styles.hero}><div className={styles.heroInner}><p className={styles.subtitle} role="status">Loading product details…</p></div></section>
+    return <section className={`brand-header ${styles.hero}`}><div className={styles.heroInner}><p className={styles.subtitle} role="status">Loading product details…</p></div></section>
   }
 
   if (!product) {
     return (
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>Product not found</span>
           <h1 className={styles.title}>This product is not available.</h1>
@@ -83,7 +83,7 @@ export default function ProductDetailPage() {
         keywords={product.seo?.keywords?.join(', ') || product.tags?.join(', ')}
       />
 
-      <section className={`${styles.hero} ${effects.detailHero}`}>
+      <section className={`brand-header ${styles.hero} ${effects.detailHero}`}>
         <div className={styles.heroInner}>
           <nav className={effects.breadcrumbs} aria-label="Breadcrumb"><Link to="/products">Products</Link><span aria-hidden="true">/</span><span aria-current="page">{product.name}</span></nav>
           <div className={effects.heroLayout}>

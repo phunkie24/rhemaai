@@ -26,6 +26,19 @@ body {
   overflow-x: clip;
 }
 
+/* Lilac leads the page headers, with light panels and readable plum text. */
+.brand-header.brand-header {
+  --text-secondary: #493653;
+  --primary: #493653;
+  --gold-ink: #493653;
+  --lilac-ink: #493653;
+  --surface-ink: rgba(255, 255, 255, .84);
+  --surface-raised: rgba(255, 255, 255, .48);
+  --gold-wash: rgba(255, 255, 255, .45);
+  color: var(--text-primary);
+  background: var(--surface-hero);
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

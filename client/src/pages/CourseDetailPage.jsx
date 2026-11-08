@@ -48,7 +48,7 @@ export default function CourseDetailPage() {
 
   if (!course) {
     return (
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>Course not found</span>
           <h1 className={styles.title}>This course is not available.</h1>
@@ -77,7 +77,7 @@ export default function CourseDetailPage() {
         image={thumbnail}
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>{categoryLabel(course.category)}</span>
           <h1 className={styles.title}>{course.title}</h1>

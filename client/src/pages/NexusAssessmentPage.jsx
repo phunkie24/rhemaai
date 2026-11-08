@@ -202,7 +202,7 @@ export default function NexusAssessmentPage() {
 
       {started && !results && (
         <>
-          <header className={styles.assessmentHeader}>
+          <header className={`brand-header ${styles.assessmentHeader}`}>
             <div>
               <span className={styles.sectionEyebrow}>Readiness assessment</span>
               <h1>{section.name}</h1>
@@ -304,7 +304,7 @@ export default function NexusAssessmentPage() {
 function AssessmentResults({ results, emailForm, setEmailForm, emailStatus, emailError, emailResults, restart }) {
   return (
     <>
-      <header className={styles.resultsHero}>
+      <header className={`brand-header ${styles.resultsHero}`}>
         <span className={styles.sectionEyebrow}>Your deterministic self-assessment</span>
         <div className={styles.scoreRing} aria-label={`Overall score ${results.overallScore} out of 100`}>
           <strong>{results.overallScore}</strong><span>/100</span>

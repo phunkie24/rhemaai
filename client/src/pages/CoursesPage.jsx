@@ -267,7 +267,7 @@ export default function CoursesPage() {
         keywords="AI courses online Nigeria, data engineering training Africa, agentic AI course, machine learning certification, Azure cloud training, data science course, enterprise AI education, BI analytics course UK UAE"
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroGrid} />
         <div className={styles.heroInner}>
           <motion.div

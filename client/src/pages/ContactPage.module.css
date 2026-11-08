@@ -237,7 +237,7 @@
 .submitBtn {
   width: 100%;
   background: var(--action-bg);
-  color: var(--text-primary);
+  color: var(--action-text);
   padding: 15px 24px;
   border-radius: var(--radius-md);
   font-size: 15px;

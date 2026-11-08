@@ -921,7 +921,7 @@ export default function AdminOperationsPage() {
     <div className={styles.page}>
       <PageSEO title="Admin Operations | RhemaAI Solutions Ltd" description="RhemaAI Solutions Ltd internal operations panel." noindex />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div>
           <span>Administration Operations</span>
           <h1>Manage products, case studies, research articles, books and white papers.</h1>

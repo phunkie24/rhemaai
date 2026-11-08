@@ -42,7 +42,7 @@ export default function PublicationDetailPage() {
 
   if (!publication) {
     return (
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>Publication not found</span>
           <h1 className={styles.title}>This publication is not available.</h1>
@@ -69,7 +69,7 @@ export default function PublicationDetailPage() {
         type="article"
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>{typeLabel(publication.type)}</span>
           <h1 className={styles.title}>{publication.title}</h1>

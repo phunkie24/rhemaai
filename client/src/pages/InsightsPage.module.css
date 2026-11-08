@@ -78,7 +78,7 @@
 
 .filterActive {
   background: var(--action-bg) !important;
-  color: var(--text-primary) !important;
+  color: var(--action-text) !important;
   border-color: color-mix(in srgb, var(--cat-color), black 4%) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
@@ -258,7 +258,7 @@
   align-items: center;
   gap: 6px;
   background: var(--action-bg);
-  color: var(--text-primary);
+  color: var(--action-text);
   padding: 14px 28px;
   border-radius: var(--radius-md);
   font-size: 15px;
@@ -269,7 +269,7 @@
 
 .nlBtn:hover {
   background: var(--action-hover);
-  color: var(--text-primary);
+  color: var(--action-text);
   transform: translateY(-2px);
 }
 

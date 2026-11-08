@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { publicationsAPI } from '@utils/api'
 import multiAgentBookCover from '../assets/multi-agent-book-cover.webp'
-import authorPortrait from '../assets/author_portrait.webp'
 import styles from './PlatformPages.module.css'
 
 const TYPES = [
@@ -171,9 +170,7 @@ export default function PublicationsPage() {
         keywords="AI books Nigeria, multi-agent orchestration patterns book, enterprise AI whitepaper, agentic AI book, data engineering publications, machine learning books Africa, Azure cloud whitepaper"
       />
 
-      <section className={`${styles.hero} ${styles.colorHero}`}>
-        <img src={authorPortrait} alt="" aria-hidden="true" className={styles.heroBgPortrait} loading="lazy" decoding="async" />
-        <div className={styles.heroBgOverlay} />
+      <section className={`brand-header ${styles.hero} ${styles.colorHero}`}>
         <div className={`${styles.heroInner} ${styles.heroSingle}`}>
           <motion.div
             className={styles.heroCopy}

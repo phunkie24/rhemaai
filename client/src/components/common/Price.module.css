@@ -10,7 +10,7 @@
   border-radius: 6px;
 
   color: var(--primary-hover);
-  background: var(--white);
+  background: var(--surface-ink);
   border-color: var(--gold);
 }
 .label {

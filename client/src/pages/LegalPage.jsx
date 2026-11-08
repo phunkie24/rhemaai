@@ -44,7 +44,7 @@ export default function LegalPage({ type = 'privacy' }) {
     <div className={styles.page}>
       <PageSEO title={copy.title} description={copy.description} />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>{copy.label}</span>
           <h1 className={styles.title}>{copy.title}</h1>

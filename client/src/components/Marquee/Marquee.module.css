@@ -3,7 +3,7 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(255, 250, 240, 0.98) 0%, rgba(255, 250, 240, 0.98) 38%, rgba(255, 250, 240, 0.98) 68%, rgba(255, 250, 240, 0.98) 100%),
+    linear-gradient(90deg, rgba(240, 231, 245, 0.98) 0%, rgba(240, 231, 245, 0.98) 38%, rgba(240, 231, 245, 0.98) 68%, rgba(240, 231, 245, 0.98) 100%),
     var(--off-white);
   border-top: 1px solid rgba(195, 167, 216, 0.24);
   border-bottom: 1px solid rgba(184,134,39, 0.22);
@@ -49,12 +49,12 @@
 
 .fadeLeft {
   left: 0;
-  background: linear-gradient(to right, rgba(255, 250, 240, 1) 0%, rgba(255, 250, 240, 0.65) 34%, transparent 100%);
+  background: linear-gradient(to right, rgba(240, 231, 245, 1) 0%, rgba(240, 231, 245, 0.65) 34%, transparent 100%);
 }
 
 .fadeRight {
   right: 0;
-  background: linear-gradient(to left, rgba(255, 250, 240, 1) 0%, rgba(255, 250, 240, 0.62) 34%, transparent 100%);
+  background: linear-gradient(to left, rgba(240, 231, 245, 1) 0%, rgba(240, 231, 245, 0.62) 34%, transparent 100%);
 }
 
 .track {

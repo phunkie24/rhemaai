@@ -147,13 +147,13 @@
 
 .primaryAction {
   padding: 12px 18px;
-  color: var(--text-primary);
+  color: var(--action-text);
   background: var(--action-bg);
   box-shadow: 0 14px 34px rgba(195, 167, 216, 0.28);
 }
 
 .primaryAction:hover {
-  color: var(--text-primary);
+  color: var(--action-text);
   background: var(--action-hover);
   transform: translateY(-1px);
 }
@@ -162,7 +162,7 @@
   padding: 12px 18px;
   color: var(--text-primary);
   border: 1px solid rgba(255,255,255,0.24);
-  background: var(--brand-100);
+  background: var(--surface-ink);
 }
 
 .signalPanel {
@@ -555,7 +555,7 @@
   border-radius: 8px;
   font-size: 13.5px;
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--action-text);
   text-decoration: none;
 
   transition: background 0.18s, transform 0.18s;
@@ -563,7 +563,7 @@
 }
 
 .productCta:hover {
-  color: var(--text-primary);
+  color: var(--action-text);
   transform: translateY(-1px);
   background: var(--action-hover);
 }
@@ -722,7 +722,7 @@
 }
 
 .filterBand .activeFilter {
-  color: var(--text-primary);
+  color: var(--action-text);
   border-color: color-mix(in srgb, var(--accent, var(--gold-light)) 36%, transparent);
   background: var(--action-bg);
   box-shadow: 0 12px 26px color-mix(in srgb, var(--accent, var(--gold-light)) 18%, transparent);
@@ -877,7 +877,7 @@
   padding: 8px 18px;
   border-radius: 8px;
   background: var(--action-bg);
-  color: var(--text-primary);
+  color: var(--action-text);
   font-size: 13px;
   font-weight: 800;
   text-decoration: none;
@@ -887,7 +887,7 @@
 
 .btnPaystack:hover {
   background: var(--action-hover);
-  color: var(--text-primary);
+  color: var(--action-text);
 }
 
 .textAction {

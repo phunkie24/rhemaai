@@ -62,7 +62,7 @@
   padding: 7px 14px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--radius-full);
-  background: rgba(255, 250, 240, 0.86);
+  background: var(--surface-ink);
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 700;
@@ -119,13 +119,13 @@
 
 .btnPrimary {
   background: var(--gold-light);
-  color: var(--text-primary);
+  color: var(--action-text);
   box-shadow: 0 10px 24px rgba(195, 167, 216, 0.22);
 }
 
 .btnPrimary:hover {
   background: #ffdfa0;
-  color: var(--text-primary);
+  color: var(--action-text);
   transform: translateY(-1px);
 }
 

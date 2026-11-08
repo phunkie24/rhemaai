@@ -47,7 +47,7 @@ export default function ServicesPage() {
         keywords="AI consulting services Nigeria, data engineering services, Azure cloud consulting UK, agentic AI engineering, MLOps DataOps, machine learning services UAE, BI analytics consulting, data science South Africa"
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroGrid} aria-hidden="true" />
         <div className="container">
           <div

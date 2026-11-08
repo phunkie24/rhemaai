@@ -357,7 +357,7 @@ export default function CaseStudiesPage() {
       />
 
       <div className={styles.page}>
-        <section className={styles.hero}>
+        <section className={`brand-header ${styles.hero}`}>
           <div className={styles.grid} />
           <div className="container">
             <motion.div

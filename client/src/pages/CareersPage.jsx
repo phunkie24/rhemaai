@@ -26,7 +26,7 @@ export default function CareersPage() {
         keywords="AI engineer jobs Nigeria, data engineering careers Africa, machine learning jobs remote, Azure cloud architect positions, data scientist Nigeria, agentic AI engineer careers, enterprise AI jobs UK UAE"
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>Careers</span>
           <h1 className={styles.title}>Build enterprise AI with a high-trust technical team.</h1>

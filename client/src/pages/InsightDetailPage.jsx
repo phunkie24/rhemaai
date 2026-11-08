@@ -46,7 +46,7 @@ export default function InsightDetailPage() {
 
   if (!article) {
     return (
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>Research article not found</span>
           <h1 className={styles.title}>This article is not available.</h1>
@@ -79,7 +79,7 @@ export default function InsightDetailPage() {
         type="article"
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>{category}</span>
           <h1 className={styles.title}>{article.title}</h1>

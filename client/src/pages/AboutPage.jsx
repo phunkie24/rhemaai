@@ -75,7 +75,7 @@ export default function AboutPage() {
         }}
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroGrid} />
         <div className="container">
           <motion.div

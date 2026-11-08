@@ -546,7 +546,7 @@ export default function ProductsPage() {
         keywords="enterprise AI platform Nigeria, RAG platform, MLOps SaaS, cloud landing zone Azure, AI operations software, data engineering platform Africa, quantitative research platform, enterprise AI publications"
       />
 
-      <section className={`${styles.hero} ${styles.productHero}`}>
+      <section className={`brand-header ${styles.hero} ${styles.productHero}`}>
         <div className={styles.radiance} />
         <div className={styles.heroInner}>
           <div

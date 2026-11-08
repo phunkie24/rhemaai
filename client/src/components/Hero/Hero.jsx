@@ -39,7 +39,7 @@ function StatItem({ stat }) {
 
 export default function Hero() {
   return (
-    <section className={styles.hero}>
+    <section className={`brand-header ${styles.hero}`}>
 
       <div className={styles.heroShell}>
         <div className={styles.copy}>

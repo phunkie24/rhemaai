@@ -103,7 +103,7 @@
 
 .proofRow span {
   color: var(--text-secondary);
-  background: var(--brand-100);
+  background: var(--surface-raised);
   border: 1px solid rgba(213,180,238, 0.16);
   border-radius: var(--radius-full);
   padding: 8px 12px;
@@ -677,7 +677,7 @@
 .technologyBand .tag { font-size: 12px; padding: 8px 14px; }
 .engagementGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 48px; }
 .engagementGrid .serviceHeader { margin: 0; }
-.detailContact { margin-top: 24px; background: var(--action-bg); color: var(--text-primary); }
+.detailContact { margin-top: 24px; background: var(--action-bg); color: var(--action-text); }
 .engagementGrid .nexusLink { display: block; margin-top: 24px; }
 .pricingPanel { min-width: 0; padding: 28px; background: var(--off-white); border: 1px solid var(--border-light); border-radius: 14px; }
 .backLink { padding-top: 24px; padding-bottom: 52px; font-weight: 700; }

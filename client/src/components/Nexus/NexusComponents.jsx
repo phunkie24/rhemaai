@@ -95,7 +95,7 @@ export function NexusSubNavigation() {
 
 export function NexusHero({ eyebrow, title, description, children, aside }) {
   return (
-    <header className={styles.hero}>
+    <header className={`brand-header ${styles.hero}`}>
       <div className={styles.heroGrid} aria-hidden="true" />
       <div className={styles.heroInner}>
         <div className={styles.heroCopy}>

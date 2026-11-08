@@ -84,7 +84,7 @@ export default function NexusDocsPage() {
         author: { '@type': 'Organization', name: 'RhemaAI Solutions Ltd' },
       }}
     >
-      <header className={styles.docsHeader}>
+      <header className={`brand-header ${styles.docsHeader}`}>
         <div>
           <span className={styles.sectionEyebrow}>Nexus AOS documentation</span>
           <h1>{doc.title}</h1>

@@ -23,9 +23,9 @@
 }
 
 .onDark:not(.scrolled) {
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(237, 225, 245, .96);
   border-bottom-color: var(--border-light);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 /* Logo */
@@ -164,7 +164,7 @@
 }
 
 .onDark .navLink:hover {
-  color: var(--text-primary);
+  color: var(--primary);
   background: rgba(255, 255, 255, 0.1);
 }
 

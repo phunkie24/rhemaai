@@ -122,7 +122,7 @@
 
 .subscribeBtn {
   background: var(--action-bg);
-  color: var(--text-primary);
+  color: var(--action-text);
   border: none;
   border-radius: var(--radius-md);
   width: 36px;

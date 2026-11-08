@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         noindex
       />
 
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroInner}>
           <span className={styles.label}>404</span>
           <h1 className={styles.title}>This page is not part of the current architecture.</h1>

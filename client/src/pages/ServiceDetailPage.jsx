@@ -29,7 +29,7 @@ export default function ServiceDetailPage() {
           provider: { '@type': 'Organization', name: 'RhemaAI Solutions Ltd', url: 'https://rhemaaisolutions.tech' },
         }}
       />
-      <section className={styles.hero}>
+      <section className={`brand-header ${styles.hero}`}>
         <div className={styles.heroGrid} aria-hidden="true" />
         <div className="container">
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
