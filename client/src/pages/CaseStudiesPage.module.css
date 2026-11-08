@@ -164,7 +164,7 @@
   background: var(--white);
   border: 1px solid var(--gold);
   border-top: 4px solid var(--gold);
-  box-shadow: 0 8px 24px rgba(128, 0, 255, .06);
+  box-shadow: 0 8px 24px rgba(120, 81, 169, .06);
 }
 
 .card::before {
@@ -185,7 +185,7 @@
   background: var(--white);
   border-color: var(--gold);
   border-top-color: var(--gold);
-  box-shadow: 0 12px 28px rgba(128, 0, 255, .1);
+  box-shadow: 0 12px 28px rgba(120, 81, 169, .1);
   transform: translateY(-2px);
 }
 

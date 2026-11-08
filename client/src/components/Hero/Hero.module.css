@@ -120,7 +120,7 @@
 .btnPrimary {
   background: var(--gold-light);
   color: var(--action-text);
-  box-shadow: 0 10px 24px rgba(128, 0, 255, 0.22);
+  box-shadow: 0 10px 24px rgba(120, 81, 169, 0.22);
 }
 
 .btnPrimary:hover {

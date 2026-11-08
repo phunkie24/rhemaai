@@ -23,7 +23,7 @@
 }
 
 .onDark:not(.scrolled) {
-  background: linear-gradient(110deg, #5800b0, #8000ef);
+  background: var(--surface-hero);
   border-bottom-color: var(--border-light);
   box-shadow: none;
 }
@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 10px 24px rgba(128, 0, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(120, 81, 169, 0.18);
 }
 
 .logoImage {

@@ -13,8 +13,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(128, 0, 255, .06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(128, 0, 255, .06) 1px, transparent 1px);
+    linear-gradient(rgba(120, 81, 169, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 81, 169, .06) 1px, transparent 1px);
   background-size: 52px 52px;
   pointer-events: none;
 }
@@ -62,8 +62,8 @@
   inset: 0;
   content: '';
   background:
-    linear-gradient(90deg, rgba(56, 0, 120, .08), rgba(56, 0, 120, .4)),
-    linear-gradient(180deg, transparent 22%, rgba(33, 0, 76, .94) 100%);
+    linear-gradient(90deg, rgba(67, 41, 94, .08), rgba(67, 41, 94, .4)),
+    linear-gradient(180deg, transparent 22%, rgba(48, 32, 64, .94) 100%);
   pointer-events: none;
 }
 
@@ -196,7 +196,7 @@
 
 .statDiv {
   width: 1px;
-  background: rgba(128, 0, 255, 0.22);
+  background: rgba(120, 81, 169, 0.22);
   flex-shrink: 0;
   align-self: stretch;
 }
@@ -271,7 +271,7 @@
 
   .stat {
     padding: 22px 16px;
-    border-bottom: 1px solid rgba(128, 0, 255, 0.22);
+    border-bottom: 1px solid rgba(120, 81, 169, 0.22);
   }
 
   .stat:last-child {

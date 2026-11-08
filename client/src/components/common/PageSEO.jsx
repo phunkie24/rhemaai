@@ -25,7 +25,7 @@ export default function PageSEO({
       {keywords && <meta name="keywords" content={keywords} />}
       <meta name="author"       content="RhemaAI Solutions Ltd" />
       <meta name="application-name" content="RhemaAI Solutions Ltd" />
-      <meta name="theme-color"  content="#8000ff" />
+      <meta name="theme-color"  content="#7851a9" />
       <meta name="robots"       content={noindex ? 'noindex, nofollow' : 'index, follow'} />
       <link rel="canonical"     href={canonical} />
 

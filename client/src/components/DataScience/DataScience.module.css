@@ -12,7 +12,7 @@
   left: -200px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(128, 0, 255, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(120, 81, 169, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -24,7 +24,7 @@
   right: -100px;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(128, 0, 255, 0.10) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(120, 81, 169, 0.10) 0%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -97,8 +97,8 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--brand-ink);
-  background: rgba(128, 0, 255, 0.18);
-  border: 1px solid rgba(128, 0, 255, 0.25);
+  background: rgba(120, 81, 169, 0.18);
+  border: 1px solid rgba(120, 81, 169, 0.25);
   padding: 4px 12px;
   border-radius: var(--radius-full);
   letter-spacing: 0.2px;
@@ -109,8 +109,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(128, 0, 255, 0.12);
-  border: 1px solid rgba(128, 0, 255, 0.25);
+  background: rgba(120, 81, 169, 0.12);
+  border: 1px solid rgba(120, 81, 169, 0.25);
   border-radius: var(--radius-lg);
   padding: 16px 20px;
 }
@@ -147,7 +147,7 @@
 
 .capCard {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(128, 0, 255, 0.18);
+  border: 1px solid rgba(120, 81, 169, 0.18);
   border-radius: var(--radius-lg);
   padding: 22px 20px;
   cursor: default;
@@ -155,8 +155,8 @@
 }
 
 .capCard:hover {
-  background: rgba(128, 0, 255, 0.12);
-  border-color: rgba(128, 0, 255, 0.35);
+  background: rgba(120, 81, 169, 0.12);
+  border-color: rgba(120, 81, 169, 0.35);
 }
 
 .capIcon {
