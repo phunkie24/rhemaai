@@ -631,3 +631,7 @@
   border-top: 4px solid var(--gold);
   box-shadow: 0 8px 24px rgba(120, 81, 169, .06);
 }
+
+/* Refined shared surfaces. */
+
+.hero::before { opacity: .2; }

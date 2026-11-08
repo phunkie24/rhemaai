@@ -962,3 +962,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Refined shared surfaces. */
+
+.radiance { opacity: .2; }
+.productCard { border-radius: var(--radius-lg); border-color: var(--border-light); border-top: 2px solid var(--gold); box-shadow: var(--shadow-sm); }
+.productCard:hover { box-shadow: var(--shadow-md); }

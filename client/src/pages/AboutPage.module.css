@@ -399,3 +399,7 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Refined shared surfaces. */
+
+.heroGrid { opacity: .2; }

@@ -737,3 +737,8 @@
     padding: 20px;
   }
 }
+
+/* Refined shared surfaces. */
+
+.heroGrid { opacity: .2; }
+.card { border-radius: var(--radius-lg); border-color: var(--border-light); box-shadow: var(--shadow-sm); }

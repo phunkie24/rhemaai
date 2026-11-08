@@ -801,3 +801,11 @@
     gap: 6px;
   }
 }
+
+/* Refined shared surfaces. */
+
+.heroGrid { opacity: .2; }
+.streamPanel { border-radius: var(--radius-xl); background: rgba(48,32,64,.5); border: 1px solid rgba(255,255,255,.24); box-shadow: 0 24px 64px rgba(48,32,64,.2); }
+.card, .flowStage { border-radius: var(--radius-lg); border-color: var(--border-light); box-shadow: var(--shadow-sm); }
+.card { border-top: 2px solid var(--gold); }
+.card:hover, .card:focus-within { border-color: var(--gold); box-shadow: var(--shadow-md); }

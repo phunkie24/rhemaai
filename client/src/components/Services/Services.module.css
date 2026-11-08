@@ -409,3 +409,7 @@
     animation: none !important;
   }
 }
+
+/* Refined shared surfaces. */
+
+.card { border-radius: var(--radius-lg); border-color: var(--border-light); border-top: 2px solid var(--gold); box-shadow: var(--shadow-sm); }

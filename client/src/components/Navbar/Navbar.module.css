@@ -325,3 +325,9 @@
   .onDark .hamburger span { background: var(--text-primary); }
   .mobileMenu { top: var(--nav-height); }
 }
+
+/* Refined shared surfaces. */
+
+.scrolled { background: rgba(255,255,255,.94); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.dropdown { padding: 10px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.dropdown a { padding: 11px 12px; border-radius: var(--radius-md); }

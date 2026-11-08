@@ -392,3 +392,7 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Refined shared surfaces. */
+
+.card { border-radius: var(--radius-lg); border-color: var(--border-light); box-shadow: var(--shadow-sm); }

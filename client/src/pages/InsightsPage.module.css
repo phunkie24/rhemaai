@@ -284,3 +284,7 @@
   .filterBar { padding: 14px var(--section-pad-x); gap: 6px; }
   .filterBtn { font-size: 12px; padding: 7px 14px; }
 }
+
+/* Refined shared surfaces. */
+
+.card { border-radius: var(--radius-lg); border-color: var(--border-light); box-shadow: var(--shadow-sm); }

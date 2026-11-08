@@ -46,7 +46,6 @@ body {
   --border-mid: rgba(255, 255, 255, .4);
   color: var(--text-primary);
 }
-.brand-header.brand-header { background: var(--surface-hero); }
 
 .sr-only {
   position: absolute;
@@ -212,4 +211,56 @@ ul { list-style: none; }
 
 @media (max-width: 480px) {
   h1 { font-size: 36px; }
+}
+
+/* Shared photographic headers and mathematical manifold surfaces. */
+.brand-header.brand-header {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    linear-gradient(100deg, rgba(100,65,143,.97) 0%, rgba(120,81,169,.88) 42%, rgba(67,41,94,.54) 100%),
+    url('../assets/enterprise-ai-operations.webp') center 46% / cover no-repeat,
+    var(--brand-500);
+  border-bottom: 1px solid rgba(255,211,72,.28);
+}
+.brand-header.brand-header::after {
+  content: '';
+  position: absolute;
+  inset: -6%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  background: url('../assets/branding/manifold-mesh.svg') center / cover no-repeat;
+  opacity: .28;
+  mask-image: linear-gradient(100deg, transparent 5%, #000 50%);
+  transform-origin: 75% 60%;
+  animation: manifoldDrift 22s ease-in-out infinite alternate;
+}
+.brand-panel.brand-panel {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(110deg, rgba(86,53,120,.65), rgba(120,81,169,.4)),
+    url('../assets/branding/manifold-mesh.svg') right center / auto 130% no-repeat,
+    var(--surface-accent);
+}
+.brand-header h1 { text-wrap: balance; }
+.brand-header p { text-wrap: pretty; }
+@keyframes manifoldDrift {
+  from { transform: translate3d(-1%, 1%, 0) rotate(-3deg) scale(1); }
+  to { transform: translate3d(2%, -1%, 0) rotate(3deg) scale(1.06); }
+}
+@media (max-width: 700px) {
+  .brand-header.brand-header {
+    background:
+      linear-gradient(110deg, rgba(100,65,143,.95), rgba(120,81,169,.83)),
+      url('../assets/enterprise-ai-operations.webp') 66% center / cover no-repeat,
+      var(--brand-500);
+  }
+  .brand-header.brand-header::after { opacity: .18; background-size: auto 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-header.brand-header::after { animation: none; transform: none; }
 }

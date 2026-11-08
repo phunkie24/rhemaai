@@ -68,7 +68,7 @@ export default function ContactPage() {
 
       <div className={styles.page}>
         <motion.div
-          className={styles.left}
+          className={`brand-header ${styles.left}`}
           initial={{ opacity: 0, x: -32 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.65 }}
