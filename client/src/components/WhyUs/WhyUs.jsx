@@ -48,7 +48,7 @@ const CERTS = [
 
 export default function WhyUs() {
   return (
-    <section className={styles.section}>
+    <section className={`brand-panel ${styles.section}`}>
       <SectionHeader
         label="Why RhemaAI Solutions Ltd"
         title="The Rare Combination That Changes Outcomes"

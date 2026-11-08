@@ -13,7 +13,7 @@
   content: '';
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(195, 167, 216, 0.028) 1px, transparent 1px),
+    linear-gradient(rgba(128, 0, 255, 0.028) 1px, transparent 1px),
     linear-gradient(90deg, rgba(184,134,39, 0.024) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, transparent 0%, black 24%, black 76%, transparent 100%);
@@ -306,7 +306,7 @@
 .inlineCode {
   padding: 2px 6px;
   border-radius: 6px;
-  background: rgba(195, 167, 216, 0.1);
+  background: rgba(128, 0, 255, 0.1);
   color: var(--primary);
   font-size: 0.92em;
   font-family: var(--font-mono);
@@ -317,7 +317,7 @@
   overflow-x: auto;
   margin: 28px 0;
   padding: 18px;
-  border: 1px solid rgba(195, 167, 216, 0.28);
+  border: 1px solid rgba(128, 0, 255, 0.28);
   border-radius: 10px;
   background: var(--brand-900);
   color: var(--gray-100);
@@ -368,7 +368,7 @@
   height: auto;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(195, 167, 216, 0.1);
+  box-shadow: 0 8px 32px rgba(128, 0, 255, 0.1);
 }
 
 .figcaption {
@@ -417,7 +417,7 @@
 }
 
 .table tr:nth-child(even) {
-  background: rgba(195, 167, 216, 0.025);
+  background: rgba(128, 0, 255, 0.025);
 }
 
 /* ── Horizontal rule ── */
@@ -629,5 +629,5 @@
   background: var(--white);
   border: 1px solid var(--gold);
   border-top: 4px solid var(--gold);
-  box-shadow: 0 8px 24px rgba(195, 167, 216, .06);
+  box-shadow: 0 8px 24px rgba(128, 0, 255, .06);
 }

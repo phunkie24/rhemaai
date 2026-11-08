@@ -23,7 +23,7 @@
 }
 
 .onDark:not(.scrolled) {
-  background: rgba(237, 225, 245, .96);
+  background: linear-gradient(110deg, #5800b0, #8000ef);
   border-bottom-color: var(--border-light);
   box-shadow: none;
 }
@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 10px 24px rgba(195, 167, 216, 0.18);
+  box-shadow: 0 10px 24px rgba(128, 0, 255, 0.18);
 }
 
 .logoImage {
@@ -68,11 +68,11 @@
 }
 
 .onDark .brandName {
-  color: var(--text-primary);
+  color: var(--white);
 }
 
 .onDark .brandAccent {
-  color: var(--lilac-ink);
+  color: var(--gold-light);
 }
 
 /* Nav Links */
@@ -160,11 +160,11 @@
 }
 
 .onDark .navLink {
-  color: var(--text-secondary);
+  color: #f2e8ff;
 }
 
 .onDark .navLink:hover {
-  color: var(--primary);
+  color: var(--white);
   background: rgba(255, 255, 255, 0.1);
 }
 

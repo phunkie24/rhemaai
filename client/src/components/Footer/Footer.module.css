@@ -15,7 +15,7 @@
   background: var(--surface-accent);
   color: var(--text-primary);
   padding: 72px var(--section-pad-x) 28px;
-  border-top: 1px solid rgba(195, 167, 216, 0.1);
+  border-top: 1px solid rgba(128, 0, 255, 0.1);
 }
 
 .top {
@@ -24,7 +24,7 @@
   gap: 52px;
   margin-bottom: 52px;
   padding-bottom: 52px;
-  border-bottom: 1px solid rgba(195, 167, 216, 0.1);
+  border-bottom: 1px solid rgba(128, 0, 255, 0.1);
 }
 
 /* Brand column */
@@ -64,7 +64,7 @@
 }
 
 .brandName span {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
 }
 
 .tagline {
@@ -100,7 +100,7 @@
 .emailInput {
   flex: 1;
   background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(195, 167, 216, 0.2);
+  border: 1px solid rgba(128, 0, 255, 0.2);
   border-radius: var(--radius-md);
   padding: 9px 14px;
   font-size: 13px;
@@ -116,7 +116,7 @@
 }
 
 .emailInput:focus {
-  border-color: rgba(195, 167, 216, 0.5);
+  border-color: rgba(128, 0, 255, 0.5);
   background: rgba(255, 255, 255, 0.08);
 }
 
@@ -181,7 +181,7 @@
 }
 
 .footerLink:hover {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
 }
 
 /* Bottom */
@@ -199,7 +199,7 @@
 }
 
 .copy span {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
 }
 
 .legal {
@@ -215,7 +215,7 @@
 }
 
 .legal a:hover {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
 }
 
 /* Responsive */

@@ -23,7 +23,7 @@
   height: 110%;
   top: -30%;
   right: -15%;
-  background: radial-gradient(ellipse, rgba(195, 167, 216, .26), transparent 65%);
+  background: radial-gradient(ellipse, rgba(128, 0, 255, .26), transparent 65%);
   pointer-events: none;
   animation: auroraDrift 9s ease-in-out infinite alternate;
 }
@@ -53,7 +53,7 @@
 }
 
 .badge {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
   background: var(--surface-ink);
   border: 1px solid rgba(216, 195, 255, 0.28);
   padding: 7px 15px;
@@ -83,7 +83,7 @@
 }
 
 .heroAccent {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
 }
 
 .heroSub {
@@ -207,7 +207,7 @@
   border: 1px solid rgba(213,180,238, 0.14);
   border-radius: var(--radius-md);
   background:
-    linear-gradient(90deg, rgba(184,134,39, 0.18), rgba(195, 167, 216, 0.16), rgba(183, 121, 31, 0.14));
+    linear-gradient(90deg, rgba(184,134,39, 0.18), rgba(128, 0, 255, 0.16), rgba(183, 121, 31, 0.14));
   overflow: hidden;
 }
 
@@ -367,7 +367,7 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: 0 18px 46px rgba(195, 167, 216, 0.08);
+  box-shadow: 0 18px 46px rgba(128, 0, 255, 0.08);
 }
 
 .stageNum {
@@ -436,7 +436,7 @@
   background: var(--white);
   border: 1px solid var(--gold);
   border-top: 4px solid var(--gold);
-  box-shadow: 0 8px 24px rgba(195, 167, 216, .06);
+  box-shadow: 0 8px 24px rgba(128, 0, 255, .06);
 }
 
 .card::before {
@@ -468,7 +468,7 @@
   background: var(--white);
   border-color: var(--gold);
   border-top-color: var(--gold);
-  box-shadow: 0 12px 28px rgba(195, 167, 216, .1);
+  box-shadow: 0 12px 28px rgba(128, 0, 255, .1);
 }
 
 .card:hover::after {
@@ -652,13 +652,13 @@
 }
 .primaryAction:hover, .detailContact:hover { transform: translateY(-3px); box-shadow: 0 0 28px rgba(240, 204, 120, .25); }
 .secondaryAction { color: var(--text-primary); font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
-.breadcrumbs { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; color: var(--lilac-ink); font-size: 13px; margin-bottom: 32px; }
+.breadcrumbs { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; color: var(--brand-ink); font-size: 13px; margin-bottom: 32px; }
 .breadcrumbs a { color: var(--text-primary); text-underline-offset: 4px; }
 .serviceVisual { position: relative; width: min(100%, 430px); aspect-ratio: 1; justify-self: center; display: grid; place-items: center; }
-.serviceVisual::before { content: ''; position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle, rgba(195, 167, 216, .3), transparent 65%); animation: visualGlow 5s ease-in-out infinite; }
+.serviceVisual::before { content: ''; position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle, rgba(128, 0, 255, .3), transparent 65%); animation: visualGlow 5s ease-in-out infinite; }
 .visualCore { position: relative; z-index: 1; width: 126px; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--gold-light); border-radius: 28px; background: var(--gold-wash); color: var(--gold-ink); box-shadow: 0 0 44px rgba(240, 204, 120, .16); animation: coreFloat 5s ease-in-out infinite; }
 .visualCore span { font-family: var(--font-display); font-size: 38px; font-weight: 800; }
-.visualCore small { color: var(--lilac-ink); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+.visualCore small { color: var(--brand-ink); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
 .orbit { position: absolute; inset: 19%; border: 1px solid rgba(213,180,238,.35); border-radius: 50%; animation: orbitSpin 12s linear infinite; }
 .orbit::before { content: ''; position: absolute; top: -5px; left: calc(50% - 5px); width: 10px; height: 10px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 18px var(--gold-light); }
 .orbitOuter { inset: 5%; border-style: dashed; animation-duration: 22s; animation-direction: reverse; }
@@ -669,7 +669,7 @@
 .orbitBottom { bottom: 5%; left: 18%; }
 .capabilityGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; padding: 0; margin: 0; }
 .capabilityTile { padding: 26px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--white); transition: border-color .25s ease, box-shadow .25s ease; }
-.capabilityTile:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(195, 167, 216, .08); }
+.capabilityTile:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(128, 0, 255, .08); }
 .capabilityNumber { display: inline-block; color: var(--service-color); font-size: 13px; font-weight: 800; margin-bottom: 16px; }
 .capabilityTile p { margin: 0; color: var(--text-primary); font-size: 15px; line-height: 1.65; }
 .technologyBand { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border-light); }

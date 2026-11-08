@@ -26,18 +26,27 @@ body {
   overflow-x: clip;
 }
 
-/* Lilac leads the page headers, with light panels and readable plum text. */
-.brand-header.brand-header {
-  --text-secondary: #493653;
-  --primary: #493653;
-  --gold-ink: #493653;
-  --lilac-ink: #493653;
-  --surface-ink: rgba(255, 255, 255, .84);
-  --surface-raised: rgba(255, 255, 255, .48);
-  --gold-wash: rgba(255, 255, 255, .45);
+/* Rich purple surfaces echo the ribbon logo; gold and white retain contrast. */
+.brand-header,
+.brand-panel {
+  --text-primary: #ffffff;
+  --text-secondary: #f2e8ff;
+  --text-muted: #e5d5f6;
+  --primary: #ffd348;
+  --primary-hover: #fff0b7;
+  --gold-ink: #ffd348;
+  --brand-ink: #f4e7ff;
+  --surface-ink: rgba(38, 0, 78, .58);
+  --surface-raised: rgba(255, 255, 255, .09);
+  --gold-wash: rgba(255, 255, 255, .07);
+  --action-bg: #ffd348;
+  --action-hover: #ffe274;
+  --action-text: #301443;
+  --border-light: rgba(255, 255, 255, .24);
+  --border-mid: rgba(255, 255, 255, .4);
   color: var(--text-primary);
-  background: var(--surface-hero);
 }
+.brand-header.brand-header { background: var(--surface-hero); }
 
 .sr-only {
   position: absolute;
@@ -133,7 +142,7 @@ ul { list-style: none; }
 
 /* Text Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, var(--gold-ink), var(--lilac-ink));
+  background: linear-gradient(135deg, var(--gold-ink), var(--brand-ink));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

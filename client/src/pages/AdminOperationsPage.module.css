@@ -111,7 +111,7 @@
 .tabs .activeTab {
   border-color: transparent;
   background: linear-gradient(135deg, var(--gold-light), var(--gold-light));
-  box-shadow: 0 16px 36px rgba(195, 167, 216, 0.18);
+  box-shadow: 0 16px 36px rgba(128, 0, 255, 0.18);
 }
 
 .workspace {
@@ -128,7 +128,7 @@
   border: 1px solid var(--gray-100);
   border-radius: 8px;
   background: var(--white);
-  box-shadow: 0 18px 60px rgba(195, 167, 216, 0.07);
+  box-shadow: 0 18px 60px rgba(128, 0, 255, 0.07);
 }
 
 .editor {
@@ -237,7 +237,7 @@
 .page input:focus,
 .page select:focus,
 .page textarea:focus {
-  outline: 2px solid rgba(195, 167, 216, 0.25);
+  outline: 2px solid rgba(128, 0, 255, 0.25);
   border-color: var(--primary);
   background: var(--white);
 }

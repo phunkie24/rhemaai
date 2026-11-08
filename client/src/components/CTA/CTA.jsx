@@ -3,7 +3,7 @@ import styles from './CTA.module.css'
 
 export default function CTA() {
   return (
-    <section className={styles.section}>
+    <section className={`brand-panel ${styles.section}`}>
       <div className={styles.bg} />
 
       <div className={styles.content}>

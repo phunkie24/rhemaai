@@ -30,7 +30,7 @@
   background: var(--surface-accent);
 }
 .architectureLabel, .architectureFooter {
-  color: var(--lilac-ink);
+  color: var(--brand-ink);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .1em;
@@ -120,7 +120,7 @@
 .btnPrimary {
   background: var(--gold-light);
   color: var(--action-text);
-  box-shadow: 0 10px 24px rgba(195, 167, 216, 0.22);
+  box-shadow: 0 10px 24px rgba(128, 0, 255, 0.22);
 }
 
 .btnPrimary:hover {
