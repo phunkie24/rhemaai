@@ -97,7 +97,6 @@ export default function Navbar() {
                 className={`${styles.navLink} ${isActivePath(link.path) ? styles.active : ''}`}
               >
                 {link.label}
-                {link.children && <span className={styles.dropdownArrow} aria-hidden="true">⌄</span>}
               </Link>
               {link.children && (
                 <div className={styles.dropdown}>

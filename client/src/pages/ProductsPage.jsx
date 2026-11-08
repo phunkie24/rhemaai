@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import PageSEO from '@components/common/PageSEO'
 import { Link, useSearchParams } from 'react-router-dom'
 import { PRODUCT_CATEGORIES } from '../data/productCategories'
 import { productsAPI } from '@utils/api'
-import { PRODUCT_PRICING } from '@utils/pricing'
-import Price from '@components/common/Price'
 import styles from './PlatformPages.module.css'
+import effects from './ProductEffects.module.css'
 
 function productDescription(summary, features) {
   return `${summary}
@@ -466,42 +466,26 @@ const METRICS = [
   { value: '3x', label: 'cloud delivery coverage' },
 ]
 
-function isInternalHref(href = '') {
-  return href.startsWith('/') && !href.startsWith('//')
-}
-
-function CardLink({ link }) {
-  if (isInternalHref(link.href)) {
-    return (
-      <Link to={link.href} className={link.className || styles.textAction}>
-        {link.label}
-      </Link>
-    )
-  }
-
-  return (
-    <a href={link.href} className={link.className || styles.textAction} target="_blank" rel="noopener noreferrer">
-      {link.label}
-    </a>
-  )
-}
-
-function ProductCard({ product }) {
+function ProductCard({ product, index }) {
   const detailHref = `/products/${product.slug || product._id}`
-  const featurePreview = (product.features || []).slice(0, 3)
-  const extraFeatureCount = Math.max((product.features?.length || 0) - featurePreview.length, 0)
-  const tagPreview = (product.tags || []).filter((tag) => tag !== 'Flagship').slice(0, 3)
-  const extraTagCount = Math.max(((product.tags || []).filter((tag) => tag !== 'Flagship').length) - tagPreview.length, 0)
-  const secondaryLinks = [
-    product.pricing?.paystackUrl && { href: product.pricing.paystackUrl, label: 'Buy Now - Paystack', className: styles.btnPaystack },
-    product.demoUrl && { href: product.demoUrl, label: 'Open demo' },
-    product.productUrl && { href: product.productUrl, label: 'View product' },
-    product.assetUrl && { href: product.assetUrl, label: 'Download package' },
-  ].filter(Boolean)
+  const fallback = SEED_PRODUCTS.find((item) => item.slug === product.slug)
+  const featurePreview = (product.features?.length ? product.features : fallback?.features || []).slice(0, 2)
+  const tagPreview = (product.tags?.length ? product.tags : fallback?.tags || []).filter((tag) => tag !== 'Flagship').slice(0, 3)
+  const kicker = product.kicker || fallback?.kicker
+  const initials = product.name.split(/\s+/).map((word) => word[0]).join('').slice(0, 3)
 
   return (
-    <article className={styles.productCard} style={{ '--accent': 'var(--gold)' }}>
+    <motion.article
+      className={`${styles.productCard} ${effects.highlightCard}`}
+      style={{ '--accent': 'var(--gold)', '--flash-delay': `${(index % 6) * 0.75}s` }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -6 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
+    >
       <div className={styles.productCardHeader}>
+        <span className={effects.productIcon} aria-hidden="true">{initials}</span>
         {product.featured && (
           <div className={styles.pillRow}>
             <span className={styles.pillFlagship}>Flagship</span>
@@ -510,47 +494,28 @@ function ProductCard({ product }) {
         <h3 className={styles.productName}>
           <Link to={detailHref}>{product.name}</Link>
         </h3>
-        {product.kicker && <span className={styles.productKicker}>{product.kicker}</span>}
+        {kicker && <span className={styles.productKicker}>{kicker}</span>}
       </div>
 
-      <p className={styles.productSummary}>{product.summary || product.description}</p>
-
-      {product.features?.length > 0 && (
-        <ul className={styles.productFeatures}>
+      {featurePreview.length > 0 && (
+        <ul className={effects.highlights}>
           {featurePreview.map((feature) => <li key={feature}>{feature}</li>)}
         </ul>
-      )}
-
-      {extraFeatureCount > 0 && (
-        <span className={styles.moreFeatures}>+{extraFeatureCount} more capabilities</span>
       )}
 
       <div className={styles.productCardMeta}>
         <div className={styles.tagRow}>
           {tagPreview.map((tag) => <em key={tag}>{tag}</em>)}
-          {extraTagCount > 0 && <em>+{extraTagCount}</em>}
         </div>
 
-        <Price pricing={PRODUCT_PRICING[product.slug] || product.pricing} />
       </div>
-
-      {secondaryLinks.length > 0 && (
-        <div className={styles.auxActions}>
-          {secondaryLinks.map((link) => (
-            <CardLink key={link.label} link={link} />
-          ))}
-        </div>
-      )}
 
       <div className={styles.cardActions}>
-        <Link to={detailHref} className={styles.productCta}>
+        <Link to={detailHref} className={styles.productCta} aria-label={`View details: ${product.name}`}>
           View details <span aria-hidden="true">&rarr;</span>
         </Link>
-        <Link to="/contact" className={styles.salesCta}>
-          Contact sales
-        </Link>
       </div>
-    </article>
+    </motion.article>
   )
 }
 
@@ -646,8 +611,9 @@ export default function ProductsPage() {
 
       <section id="product-suite" className={`${styles.section} ${styles.productSuiteSection}`}>
         <div className={`${styles.sectionHeader} ${styles.productSuiteHeader}`}>
-          <span className={styles.eyebrow}>Product Suite</span>
+          <span className={styles.eyebrow}>Product highlights</span>
           <h2>Composable product modules.</h2>
+          <p>Explore each product for its full capabilities, pricing and deployment options.</p>
         </div>
 
         {activeMeta && (
@@ -658,10 +624,11 @@ export default function ProductsPage() {
         )}
 
         <div className={styles.productGrid}>
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product, index) => (
               <ProductCard
                 key={product._id || product.slug || product.name}
                 product={product}
+                index={index}
               />
           ))}
         </div>

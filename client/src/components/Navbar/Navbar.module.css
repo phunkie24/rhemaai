@@ -148,7 +148,6 @@
   letter-spacing: 0.1px;
 }
 
-.dropdownArrow { margin-left: 5px; }
 
 .navLink:hover {
   color: var(--primary);
