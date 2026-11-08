@@ -6,7 +6,7 @@ import { SERVICE_CATALOGUE } from '../config/serviceCatalogue.js'
 
 const SITE_NAME = 'RhemaAI Solutions Ltd'
 const BASE = (process.env.FRONTEND_URL || 'https://rhemaaisolutions.tech').replace(/\/$/, '')
-const DEFAULT_IMAGE = `${BASE}/brand/rhemaai-company-social.jpg`
+const DEFAULT_IMAGE = `${BASE}/brand/rhemaai-ribbon-social.jpg`
 const NEXUS_IMAGE = '/nexus-aos-social-preview.png'
 
 // This controller exists only for crawlers that don't execute JavaScript

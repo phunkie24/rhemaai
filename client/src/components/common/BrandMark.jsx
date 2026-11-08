@@ -1,5 +1,5 @@
-import logo from '../../assets/branding/rhemaai-logo-gold-96.webp'
-import logoRetina from '../../assets/branding/rhemaai-logo-gold-192.webp'
+import logo from '../../assets/branding/rhemaai-ribbon-96.png'
+import logoRetina from '../../assets/branding/rhemaai-ribbon-192.png'
 
 export default function BrandMark({ className = '', title = 'RhemaAI Solutions Ltd', loading = 'eager' }) {
   return (
