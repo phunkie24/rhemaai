@@ -1,8 +1,7 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import PageSEO from '@components/common/PageSEO'
 import { Link } from 'react-router-dom'
 import { SERVICES } from '@utils/servicesData'
-import { SERVICE_PRICING } from '@utils/pricing'
-import Price from '@components/common/Price'
 import CTA from '@components/CTA/CTA'
 import styles from './ServicesPage.module.css'
 
@@ -13,10 +12,10 @@ const PROOF_POINTS = [
 ]
 
 const STREAM_EVENTS = [
-  { label: 'ERP, SaaS and API events', value: '24.8k/min' },
-  { label: 'Quality rules evaluated', value: '99.7%' },
-  { label: 'Model scoring latency', value: '128ms' },
-  { label: 'Governance controls active', value: '42' },
+  { label: 'Enterprise systems and data', value: 'Connect' },
+  { label: 'Quality and evaluation', value: 'Validate' },
+  { label: 'Models and applications', value: 'Deploy' },
+  { label: 'Monitoring and governance', value: 'Operate' },
 ]
 
 const FLOW_STAGES = [
@@ -39,6 +38,7 @@ const FLOW_STAGES = [
 ]
 
 export default function ServicesPage() {
+  const reduceMotion = useReducedMotion()
   return (
     <>
       <PageSEO
@@ -48,7 +48,7 @@ export default function ServicesPage() {
       />
 
       <section className={styles.hero}>
-        <div className={styles.heroGrid} />
+        <div className={styles.heroGrid} aria-hidden="true" />
         <div className="container">
           <div
             className={styles.heroInner}
@@ -63,10 +63,13 @@ export default function ServicesPage() {
                 <span className={styles.heroAccent}>Built for Production</span>
               </h1>
               <p className={styles.heroSub}>
-                RhemaAI Solutions Ltd turns strategy into governed platforms: agentic workflows,
-                streaming data foundations, cloud architecture, MLOps, and software
-                systems engineered for enterprise reliability.
+                Explore our service highlights. Open any service for its full capabilities,
+                technologies and engagement options.
               </p>
+              <div className={styles.heroActions}>
+                <Link to="#capabilities" className={styles.primaryAction}>Explore services <span aria-hidden="true">↗</span></Link>
+                <Link to="/contact" className={styles.secondaryAction}>Discuss your project</Link>
+              </div>
               <div className={styles.proofRow}>
                 {PROOF_POINTS.map((point) => (
                   <span key={point}>{point}</span>
@@ -79,34 +82,32 @@ export default function ServicesPage() {
 
 
 
-              aria-label="Live enterprise service stream"
+              aria-label="Illustrative service delivery workflow"
             >
               <div className={styles.panelTop}>
                 <div>
-                  <span className={styles.panelKicker}>Streaming Operations</span>
-                  <strong>Enterprise intelligence fabric</strong>
+                  <span className={styles.panelKicker}>Delivery in motion</span>
+                  <strong>From systems to intelligence</strong>
                 </div>
-                <span className={styles.livePill}>Live</span>
+                <span className={styles.livePill}>Connected</span>
               </div>
 
               <div className={styles.streamMap}>
                 <span>Systems</span>
                 <div className={styles.streamRail}>
-                  <i />
-                  <i />
-                  <i />
+                  <i aria-hidden="true" />
+                  <i aria-hidden="true" />
+                  <i aria-hidden="true" />
                 </div>
                 <span>AI Services</span>
               </div>
 
               <div className={styles.eventList}>
-                {STREAM_EVENTS.map((event) => (
+                {STREAM_EVENTS.map((event, index) => (
                   <div
                     key={event.label}
                     className={styles.eventRow}
-
-
-
+                    style={{ '--event-delay': `${index * 0.7}s` }}
                   >
                     <span>{event.label}</span>
                     <strong>{event.value}</strong>
@@ -133,14 +134,18 @@ export default function ServicesPage() {
           <div className={styles.flowTrack} aria-label="Service delivery flow">
             <div className={styles.flowLine} />
             {FLOW_STAGES.map((stage, index) => (
-              <div
+              <motion.div
                 key={stage.title}
                 className={styles.flowStage}
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
               >
                 <span className={styles.stageNum}>0{index + 1}</span>
                 <h3>{stage.title}</h3>
                 <p>{stage.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -149,81 +154,66 @@ export default function ServicesPage() {
       <section className={styles.gridSection} id="capabilities">
         <div className="container">
           <div className={styles.serviceHeader}>
-            <span className={styles.sectionLabel}>Capabilities</span>
+            <span className={styles.sectionLabel}>Service highlights</span>
             <h2>Specialised Services, Integrated Delivery</h2>
             <p>
-              Choose a focused service line or combine them into a complete enterprise
-              transformation roadmap.
+              Find your next capability. Explore each service for the full scope and pricing.
             </p>
           </div>
 
           <div className={styles.grid}>
-            {SERVICES.filter((service) => service.id !== 'managed-services').map((service) => (
-              <div
+            {SERVICES.map((service, index) => (
+              <motion.article
                 key={service.id}
                 id={service.id}
                 className={`${styles.card} ${service.highlight ? styles.cardFeatured : ''}`}
-                style={{ '--service-color': 'var(--gold)' }}
+                style={{ '--service-color': service.color, '--shine-delay': `${(index % 6) * 0.8}s` }}
+                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={reduceMotion ? undefined : { y: -6 }}
+                viewport={{ once: true, amount: 0.12 }}
+                transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
               >
                 {service.highlight && (
                   <span className={styles.featuredBadge}>Featured</span>
                 )}
 
-                <div className={styles.cardIcon}>
+                <div className={styles.cardIcon} aria-hidden="true">
                   {service.icon}
                 </div>
 
-                <h2 className={styles.cardTitle}>{service.title}</h2>
-                <p className={styles.cardDesc}>{service.description}</p>
+                <h3 className={styles.cardTitle}>
+                  <Link to={`/services/${service.id}`}>{service.title}</Link>
+                </h3>
 
                 <ul className={styles.caps}>
-                  {service.capabilities.slice(0, 4).map((cap) => (
+                  {service.capabilities.slice(0, 2).map((cap) => (
                     <li key={cap} className={styles.cap}>
                       <span className={styles.capDot} />
-                      {cap}
+                      {cap.split(': ')[0]}
                     </li>
                   ))}
                 </ul>
 
                 <div className={styles.tags}>
-                  {service.tags.slice(0, 5).map((tag) => (
+                  {service.tags.slice(0, 3).map((tag) => (
                     <span key={tag} className={styles.tag}>{tag}</span>
                   ))}
                 </div>
 
-                <Price pricing={SERVICE_PRICING[service.id] || service.pricing} />
                 <Link
-                  to="/contact"
+                  to={`/services/${service.id}`}
                   className={styles.cardLink}
+                  aria-label={`Explore service: ${service.title}`}
                 >
-                  Request a quote
+                  Explore service
                 </Link>
-                {service.id === 'agentic-ai' && (
-                  <Link to="/products/nexus-aos" className={styles.nexusLink}>
-                    Explore Nexus AOS
-                  </Link>
-                )}
-                {service.id === 'data-engineering' && (
-                  <Link to="/products/nexus-aos/solutions/agentic-data-engineering" className={styles.nexusLink}>
-                    Explore Agentic Data Engineering
-                  </Link>
-                )}
-              </div>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className={styles.flowSection} id="managed-services">
-        <div className="container">
-          <div className={styles.serviceHeader}>
-            <span className={styles.sectionLabel}>Enterprise operations</span>
-            <h2>Managed-service packages</h2>
-            <p>Choose Essential, Professional, Enterprise or Mission Critical support. Monthly starting prices are shown below.</p>
-          </div>
-          <Price pricing={SERVICE_PRICING['managed-services']} expanded />
-        </div>
-      </section>
       <CTA />
     </>
   )

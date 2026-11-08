@@ -95,24 +95,31 @@ describe('POST /api/nexus/assessment', () => {
 })
 
 describe('Nexus route discovery and crawler guards', () => {
+  it('redirects legacy Nexus deep links while preserving query parameters', async () => {
+    const response = await request(app).get('/products/nexus-aos/demo?interest=standard-pilot')
+    expect(response.status).toBe(301)
+    expect(response.headers.location).toBe('/nexus-aos/demo?interest=standard-pilot')
+  })
+
   it('publishes every Nexus domain and documentation route in the sitemap', async () => {
     const response = await request(app).get('/api/sitemap.xml')
 
     expect(response.status).toBe(200)
     expect(response.headers['content-type']).toMatch(/application\/xml/)
     for (const slug of ['energy', 'finance', 'smart-city', 'healthcare', 'cybersecurity', 'agriculture']) {
-      expect(response.text).toContain(`/products/nexus-aos/solutions/${slug}`)
+      expect(response.text).toContain(`/nexus-aos/solutions/${slug}`)
     }
     for (const slug of ['getting-started', 'architecture', 'governance', 'security', 'api']) {
-      expect(response.text).toContain(`/products/nexus-aos/docs/${slug}`)
+      expect(response.text).toContain(`/nexus-aos/docs/${slug}`)
     }
-    expect(response.text).toContain('/products/nexus-aos/pricing')
+    expect(response.text).toContain('/nexus-aos/pricing')
+    expect(response.text).not.toContain('/products/nexus-aos')
   })
 
   it('returns crawler-safe 404 metadata for unknown domain and documentation slugs', async () => {
     const [domain, docs] = await Promise.all([
-      request(app).get('/products/nexus-aos/solutions/not-a-domain'),
-      request(app).get('/products/nexus-aos/docs/not-a-section'),
+      request(app).get('/nexus-aos/solutions/not-a-domain'),
+      request(app).get('/nexus-aos/docs/not-a-section'),
     ])
 
     expect(domain.status).toBe(404)

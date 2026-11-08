@@ -222,7 +222,7 @@ export async function submitAssessmentCopy(req, res, next) {
       from: `"RhemaAI Solutions Ltd" <${process.env.EMAIL_USER}>`,
       to: value.workEmail,
       subject: `Your Nexus AOS readiness summary — ${value.assessmentBand}`,
-      html: `<h2>Nexus AOS readiness summary</h2><p>Your deterministic self-assessment score is <strong>${value.assessmentScore}/100 — ${escapeHtml(value.assessmentBand)}</strong>.</p><ul>${rows}</ul><p>This is a planning aid, not a certification, regulatory opinion or guaranteed technical assessment.</p><p><a href="https://rhemaaisolutions.tech/products/nexus-aos/demo">Discuss the recommended next step</a></p>`,
+      html: `<h2>Nexus AOS readiness summary</h2><p>Your deterministic self-assessment score is <strong>${value.assessmentScore}/100 — ${escapeHtml(value.assessmentBand)}</strong>.</p><ul>${rows}</ul><p>This is a planning aid, not a certification, regulatory opinion or guaranteed technical assessment.</p><p><a href="https://rhemaaisolutions.tech/nexus-aos/demo">Discuss the recommended next step</a></p>`,
     }])
 
     return res.status(201).json({

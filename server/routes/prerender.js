@@ -2,6 +2,7 @@ import { Router } from 'express'
 import {
   renderHome,
   renderServices,
+  renderServiceDetail,
   renderProducts,
   renderProductDetail,
   renderCaseStudies,
@@ -21,22 +22,27 @@ import {
 
 const router = Router()
 
+router.get(['/products/nexus-aos', '/products/nexus-aos/*', '/products/enterprise-ai-control-room'], (req, res) => {
+  res.redirect(301, req.originalUrl.replace(/^\/products\/(?:nexus-aos|enterprise-ai-control-room)/, '/nexus-aos'))
+})
+
 router.get('/', renderHome)
 router.get('/services', renderServices)
+router.get('/services/:slug', renderServiceDetail)
 router.get('/products', renderProducts)
 router.get([
-  '/products/nexus-aos',
-  '/products/nexus-aos/demo',
-  '/products/nexus-aos/readiness-assessment',
-  '/products/nexus-aos/solutions',
-  '/products/nexus-aos/solutions/agentic-data-engineering',
-  '/products/nexus-aos/solutions/procurement',
-  '/products/nexus-aos/architecture',
-  '/products/nexus-aos/pricing',
+  '/nexus-aos',
+  '/nexus-aos/demo',
+  '/nexus-aos/readiness-assessment',
+  '/nexus-aos/solutions',
+  '/nexus-aos/solutions/agentic-data-engineering',
+  '/nexus-aos/solutions/procurement',
+  '/nexus-aos/architecture',
+  '/nexus-aos/pricing',
 ], renderNexusStatic)
-router.get('/products/nexus-aos/docs', renderNexusDocs)
-router.get('/products/nexus-aos/docs/:section', renderNexusDocs)
-router.get('/products/nexus-aos/solutions/:domain', renderNexusDomain)
+router.get('/nexus-aos/docs', renderNexusDocs)
+router.get('/nexus-aos/docs/:section', renderNexusDocs)
+router.get('/nexus-aos/solutions/:domain', renderNexusDomain)
 router.get('/products/:slug', renderProductDetail)
 router.get('/case-studies', renderCaseStudies)
 router.get('/about', renderAbout)

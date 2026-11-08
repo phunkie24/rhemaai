@@ -1,4 +1,4 @@
-export const NEXUS_BASE = '/products/nexus-aos'
+export const NEXUS_BASE = '/nexus-aos'
 
 export const NEXUS_NAV_ITEMS = [
   { label: 'Overview', path: NEXUS_BASE },

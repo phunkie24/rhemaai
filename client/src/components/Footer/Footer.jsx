@@ -6,13 +6,13 @@ import BrandMark from '@components/common/BrandMark'
 import styles from './Footer.module.css'
 
 const SERVICES_LINKS = [
-  { label: 'Agentic AI Engineering',       path: '/services#agentic-ai' },
-  { label: 'Data Engineering & Platforms', path: '/services#data-engineering' },
-  { label: 'Data Science & Analytics',     path: '/services#data-science' },
-  { label: 'Cloud Architecture',           path: '/services#cloud-architecture' },
-  { label: 'MLOps & DataOps',              path: '/services#mlops' },
-  { label: 'Enterprise Software Eng.',     path: '/services#software-engineering' },
-  { label: 'FinTech & Blockchain',         path: '/services#fintech-blockchain' },
+  { label: 'Agentic AI Engineering',       path: '/services/agentic-ai' },
+  { label: 'Data Engineering & Platforms', path: '/services/data-engineering' },
+  { label: 'Data Science & Analytics',     path: '/services/data-science' },
+  { label: 'Cloud Architecture',           path: '/services/cloud-architecture' },
+  { label: 'MLOps & DataOps',              path: '/services/mlops' },
+  { label: 'Enterprise Software Eng.',     path: '/services/software-engineering' },
+  { label: 'FinTech & Blockchain',         path: '/services/fintech-blockchain' },
 ]
 
 const COMPANY_LINKS = [
@@ -36,13 +36,13 @@ const CONTACT_LINKS = [
 ]
 
 const NEXUS_LINKS = [
-  { label: 'Overview', path: '/products/nexus-aos' },
-  { label: 'Solutions', path: '/products/nexus-aos/solutions' },
-  { label: 'Architecture', path: '/products/nexus-aos/architecture' },
-  { label: 'Assessment', path: '/products/nexus-aos/readiness-assessment' },
-  { label: 'Pricing', path: '/products/nexus-aos/pricing' },
-  { label: 'Documentation', path: '/products/nexus-aos/docs' },
-  { label: 'Request Demo', path: '/products/nexus-aos/demo' },
+  { label: 'Overview', path: '/nexus-aos' },
+  { label: 'Solutions', path: '/nexus-aos/solutions' },
+  { label: 'Architecture', path: '/nexus-aos/architecture' },
+  { label: 'Assessment', path: '/nexus-aos/readiness-assessment' },
+  { label: 'Pricing', path: '/nexus-aos/pricing' },
+  { label: 'Documentation', path: '/nexus-aos/docs' },
+  { label: 'Request Demo', path: '/nexus-aos/demo' },
 ]
 
 export default function Footer() {
@@ -169,10 +169,6 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className={styles.pricingNotice} aria-label="Pricing terms">
-        <p><strong>Enterprise engagements start from the displayed amount. Final pricing depends on data volume, integrations, deployment environment, security requirements, number of workflows, service levels and delivery timeline. Cloud usage, model/API consumption, licences, hardware, travel and taxes are charged separately.</strong></p>
-        <p><strong>Prices exclude cloud infrastructure, AI model/API consumption, software licences, hardware, advertising spend, travel, taxes and third-party services. Final pricing is confirmed after scope and technical discovery.</strong></p>
-      </div>
       <div className={styles.bottom}>
         <div className={styles.copy}>
           &copy; {new Date().getFullYear()} <span>RhemaAI Solutions Ltd</span>. All rights reserved.

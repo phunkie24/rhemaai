@@ -1,11 +1,12 @@
 import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Navbar from '@components/Navbar/Navbar'
 import Footer from '@components/Footer/Footer'
 import ScrollToTop from '@components/common/ScrollToTop'
 
 const HomePage           = lazy(() => import('@pages/HomePage'))
 const ServicesPage       = lazy(() => import('@pages/ServicesPage'))
+const ServiceDetailPage  = lazy(() => import('@pages/ServiceDetailPage'))
 const ProductsPage       = lazy(() => import('@pages/ProductsPage'))
 const ProductDetailPage  = lazy(() => import('@pages/ProductDetailPage'))
 const AboutPage          = lazy(() => import('@pages/AboutPage'))
@@ -31,6 +32,12 @@ const NexusArchitecturePage = lazy(() => import('@pages/NexusArchitecturePage'))
 const NexusPricingPage   = lazy(() => import('@pages/NexusPricingPage'))
 const NexusDocsPage      = lazy(() => import('@pages/NexusDocsPage'))
 
+function LegacyNexusRedirect() {
+  const { pathname, search, hash } = useLocation()
+  const destination = pathname.replace(/^\/products\/(?:nexus-aos|enterprise-ai-control-room)/, '/nexus-aos')
+  return <Navigate to={`${destination}${search}${hash}`} replace />
+}
+
 function PageLoader() {
   return (
     <div role="status" aria-label="Loading page" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff' }}>
@@ -51,18 +58,21 @@ export default function App() {
           <Routes>
             <Route path="/"               element={<HomePage />} />
             <Route path="/services"       element={<ServicesPage />} />
+            <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/products"       element={<ProductsPage />} />
-            <Route path="/products/nexus-aos" element={<NexusOverviewPage />} />
-            <Route path="/products/nexus-aos/demo" element={<NexusDemoPage />} />
-            <Route path="/products/nexus-aos/readiness-assessment" element={<NexusAssessmentPage />} />
-            <Route path="/products/nexus-aos/solutions" element={<NexusSolutionsPage />} />
-            <Route path="/products/nexus-aos/solutions/agentic-data-engineering" element={<NexusFlagshipSolutionPage solution="agentic-data-engineering" />} />
-            <Route path="/products/nexus-aos/solutions/procurement" element={<NexusFlagshipSolutionPage solution="procurement" />} />
-            <Route path="/products/nexus-aos/solutions/:domain" element={<NexusDomainPage />} />
-            <Route path="/products/nexus-aos/architecture" element={<NexusArchitecturePage />} />
-            <Route path="/products/nexus-aos/pricing" element={<NexusPricingPage />} />
-            <Route path="/products/nexus-aos/docs" element={<NexusDocsPage />} />
-            <Route path="/products/nexus-aos/docs/:section" element={<NexusDocsPage />} />
+            <Route path="/products/nexus-aos/*" element={<LegacyNexusRedirect />} />
+            <Route path="/products/enterprise-ai-control-room" element={<LegacyNexusRedirect />} />
+            <Route path="/nexus-aos" element={<NexusOverviewPage />} />
+            <Route path="/nexus-aos/demo" element={<NexusDemoPage />} />
+            <Route path="/nexus-aos/readiness-assessment" element={<NexusAssessmentPage />} />
+            <Route path="/nexus-aos/solutions" element={<NexusSolutionsPage />} />
+            <Route path="/nexus-aos/solutions/agentic-data-engineering" element={<NexusFlagshipSolutionPage solution="agentic-data-engineering" />} />
+            <Route path="/nexus-aos/solutions/procurement" element={<NexusFlagshipSolutionPage solution="procurement" />} />
+            <Route path="/nexus-aos/solutions/:domain" element={<NexusDomainPage />} />
+            <Route path="/nexus-aos/architecture" element={<NexusArchitecturePage />} />
+            <Route path="/nexus-aos/pricing" element={<NexusPricingPage />} />
+            <Route path="/nexus-aos/docs" element={<NexusDocsPage />} />
+            <Route path="/nexus-aos/docs/:section" element={<NexusDocsPage />} />
             <Route path="/products/:slug" element={<ProductDetailPage />} />
             <Route path="/case-studies"   element={<CaseStudiesPage />} />
             <Route path="/about"          element={<AboutPage />} />

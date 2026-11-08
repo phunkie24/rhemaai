@@ -1,22 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PageSEO from '@components/common/PageSEO'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { caseStudiesAPI } from '@utils/api'
+import { CASE_STUDY_CATEGORIES } from '../data/caseStudyCategories'
 import styles from './CaseStudiesPage.module.css'
-
-const INDUSTRY_ORDER = ['Enterprise', 'Data Engineering', 'Manufacturing', 'Energy', 'Retail', 'Healthcare', 'FinTech']
-
-function sortIndustries(industries) {
-  return [...industries].sort((a, b) => {
-    const indexA = INDUSTRY_ORDER.indexOf(a)
-    const indexB = INDUSTRY_ORDER.indexOf(b)
-    if (indexA === -1 && indexB === -1) return a.localeCompare(b)
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-    return indexA - indexB
-  })
-}
 
 function caseItem({ id, industry, client, kpi1, kpi2, summary, tags }) {
   return {
@@ -346,12 +334,10 @@ const cardAnim = {
 }
 
 export default function CaseStudiesPage() {
-  const [active, setActive] = useState('All')
+  const [searchParams] = useSearchParams()
+  const active = CASE_STUDY_CATEGORIES.find((category) => category.id === searchParams.get('category'))?.name || 'All'
   const [cases, setCases] = useState(CASES)
-  const filters = useMemo(() => {
-    const industries = Array.from(new Set(cases.map((item) => item.industry))).filter(Boolean)
-    return ['All', ...sortIndustries(industries)]
-  }, [cases])
+  const industryCount = new Set(cases.map((item) => item.industry).filter(Boolean)).size
   const filtered = active === 'All' ? cases : cases.filter((c) => c.industry === active)
 
   useEffect(() => {
@@ -394,9 +380,9 @@ export default function CaseStudiesPage() {
               </div>
 
               <div className={styles.heroStats}>
-                <div className={styles.hStat}><strong>{CASES.length}</strong><span>Case Studies</span></div>
+                <div className={styles.hStat}><strong>{cases.length}</strong><span>Case Studies</span></div>
                 <div className={styles.hDiv} />
-                <div className={styles.hStat}><strong>7</strong><span>Industry Verticals</span></div>
+                <div className={styles.hStat}><strong>{industryCount}</strong><span>Industry Verticals</span></div>
                 <div className={styles.hDiv} />
                 <div className={styles.hStat}><strong>AI</strong><span>Production Systems</span></div>
               </div>
@@ -404,20 +390,12 @@ export default function CaseStudiesPage() {
           </div>
         </section>
 
-        <section className={styles.cardsSection}>
+        <section className={styles.cardsSection} id="case-studies">
           <div className="container">
 
-            <div className={styles.filters}>
-              {filters.map((f) => (
-                <button
-                  key={f}
-                  className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
-                  style={{ '--accent': 'var(--gold)' }}
-                  onClick={() => setActive(f)}
-                >
-                  {f}
-                </button>
-              ))}
+            <div className={styles.resultsHeader}>
+              <h2>{active === 'All' ? 'All case studies' : `${active} case studies`}</h2>
+              <p role="status">{filtered.length} {filtered.length === 1 ? 'case study' : 'case studies'}</p>
             </div>
 
             <AnimatePresence mode="wait">

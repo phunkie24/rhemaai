@@ -36,8 +36,8 @@ test.describe('RhemaAI Solutions Ltd website', () => {
     await expect(page.getByRole('heading', {
       name: /AI, Data and Cloud Services/,
     })).toBeVisible()
-    await expect(page.locator('[aria-label="Live enterprise service stream"]')).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Start a conversation' }).first()).toBeVisible()
+    await expect(page.locator('[aria-label="Illustrative service delivery workflow"]')).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Discuss your project' })).toBeVisible()
 
     await page.goto('/contact')
     await expect(page.getByRole('heading', { name: 'Book a Consultation' })).toBeVisible()
@@ -49,7 +49,7 @@ test.describe('RhemaAI Solutions Ltd website', () => {
 
   test('renders shareable detail pages for content items', async ({ page }) => {
     const detailPages = [
-      ['/products/nexus-aos', /Nexus AOS/],
+      ['/nexus-aos', /Nexus AOS/],
       ['/publications/multi-agent-orchestration-patterns-enterprise-scale-systems', /Multi-Agent Orchestration Patterns/],
       ['/courses/agentic-ai-operations-blueprint', /Agentic AI Operations Blueprint/],
       ['/insights/building-21-pattern-agentic-ai-systems', /Building 21-Pattern Agentic AI Systems/],

@@ -1,20 +1,34 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import BrandMark from '@components/common/BrandMark'
+import { PRODUCT_CATEGORIES } from '../../data/productCategories'
+import { CASE_STUDY_CATEGORIES } from '../../data/caseStudyCategories'
 import styles from './Navbar.module.css'
 
 const NAV_LINKS = [
+  { label: 'Nexus AOS', path: '/nexus-aos' },
   {
     label: 'Products',
     path: '/products',
-    children: [
-      { label: 'Nexus AOS', path: '/products/nexus-aos' },
-      { label: 'Forge SE', path: '/products/forge-se' },
-      { label: 'All Products', path: '/products' },
-    ],
+    children: PRODUCT_CATEGORIES.map((category) => ({
+      label: category.name,
+      path: `/products?category=${category.id}#product-suite`,
+      category: category.id,
+    })),
   },
   { label: 'Services',     path: '/services' },
-  { label: 'Case Studies', path: '/case-studies' },
+  {
+    label: 'Case Studies',
+    path: '/case-studies',
+    children: [
+      { label: 'All', path: '/case-studies#case-studies', category: 'all' },
+      ...CASE_STUDY_CATEGORIES.map((category) => ({
+        label: category.name,
+        path: `/case-studies?category=${category.id}#case-studies`,
+        category: category.id,
+      })),
+    ],
+  },
   { label: 'Research',     path: '/insights' },
   { label: 'Courses',      path: '/courses' },
   { label: 'Publications', path: '/publications' },
@@ -26,9 +40,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButton = useRef(null)
-  const { pathname } = useLocation()
+  const { pathname, search } = useLocation()
+  const activeCategory = new URLSearchParams(search).get('category') || 'all'
   const isActivePath = (path) => pathname === path || pathname.startsWith(`${path}/`)
-  const darkHeroPaths = ['/', '/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses']
+  const darkHeroPaths = ['/', '/nexus-aos', '/products', '/services', '/about', '/case-studies', '/insights', '/labs', '/publications', '/careers', '/courses']
   const usesDarkHero = darkHeroPaths.some((path) => pathname === path || (path !== '/' && pathname.startsWith(`${path}/`)))
 
   useEffect(() => {
@@ -38,7 +53,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => setMenuOpen(false), [pathname])
+  useEffect(() => setMenuOpen(false), [pathname, search])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -82,11 +97,12 @@ export default function Navbar() {
                 className={`${styles.navLink} ${isActivePath(link.path) ? styles.active : ''}`}
               >
                 {link.label}
+                {link.children && <span className={styles.dropdownArrow} aria-hidden="true">⌄</span>}
               </Link>
               {link.children && (
                 <div className={styles.dropdown}>
                   {link.children.map((child) => (
-                    <Link key={child.path} to={child.path}>{child.label}</Link>
+                    <Link key={child.path} to={child.path} aria-current={pathname === link.path && activeCategory === child.category ? 'page' : undefined}>{child.label}</Link>
                   ))}
                 </div>
               )}
@@ -121,7 +137,7 @@ export default function Navbar() {
             <Link to={link.path} className={styles.mobileLink} aria-current={isActivePath(link.path) ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{link.label}</Link>
             {link.children && (
               <div className={styles.mobileSubLinks}>
-                {link.children.map((child) => <Link key={child.path} to={child.path} onClick={() => setMenuOpen(false)}>{child.label}</Link>)}
+                {link.children.map((child) => <Link key={child.path} to={child.path} aria-current={pathname === link.path && activeCategory === child.category ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{child.label}</Link>)}
               </div>
             )}
           </div>

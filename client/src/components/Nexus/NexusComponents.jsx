@@ -20,7 +20,7 @@ export function NexusPage({
 }) {
   const { pathname } = useLocation()
   const breadcrumbItems = [
-    { label: 'Products', path: '/products' },
+    { label: 'Home', path: '/' },
     { label: 'Nexus AOS', path: NEXUS_BASE },
     ...breadcrumbs,
   ]

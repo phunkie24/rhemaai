@@ -16,6 +16,19 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
   background-size: 52px 52px;
   pointer-events: none;
+  animation: gridDrift 24s linear infinite;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 65%;
+  height: 110%;
+  top: -30%;
+  right: -15%;
+  background: radial-gradient(ellipse, rgba(154, 76, 235, .26), transparent 65%);
+  pointer-events: none;
+  animation: auroraDrift 9s ease-in-out infinite alternate;
 }
 
 .heroInner {
@@ -261,6 +274,8 @@
   border-radius: var(--radius-md);
   background: var(--surface-raised);
   padding: 13px 14px;
+  animation: eventFlash 5.6s ease-in-out infinite;
+  animation-delay: var(--event-delay, 0s);
 }
 
 .eventRow span {
@@ -428,19 +443,35 @@
 }
 
 .card::before {
-  content: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(240, 204, 120, .25) 48%, transparent 70%);
+  transform: translateX(-130%);
+  animation: cardShine 6s ease-in-out infinite;
+  animation-delay: var(--shine-delay, 0s);
+  pointer-events: none;
 }
 
 .card::after {
-  content: none;
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  right: -80px;
+  bottom: -85px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--edge-soft), transparent 70%);
+  pointer-events: none;
+  transition: transform .4s ease;
 }
 
-.card:hover {
+.card:hover,
+.card:focus-within {
   background: var(--white);
   border-color: var(--gold);
   border-top-color: var(--gold);
   box-shadow: 0 12px 28px rgba(36, 16, 61, .1);
-  transform: translateY(-2px);
 }
 
 .card:hover::after {
@@ -491,7 +522,8 @@
   background: var(--white);
   border: 1px solid var(--gold);
   color: var(--primary);
-  box-shadow: none;
+  animation: iconGlow 4s ease-in-out infinite;
+  animation-delay: var(--shine-delay, 0s);
 }
 
 .cardTitle {
@@ -504,6 +536,9 @@
   position: relative;
   z-index: 1;
 }
+
+.cardTitle a { color: inherit; text-decoration: none; }
+.cardTitle a:hover { color: var(--primary); }
 
 .cardDesc {
   font-size: var(--text-sm);
@@ -604,6 +639,69 @@
   transform: translateX(3px);
 }
 
+.heroActions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 28px; }
+.primaryAction, .detailContact {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: var(--gold-light);
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.primaryAction:hover, .detailContact:hover { transform: translateY(-3px); box-shadow: 0 0 28px rgba(240, 204, 120, .25); }
+.secondaryAction { color: var(--white); font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
+.breadcrumbs { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; color: var(--brand-100); font-size: 13px; margin-bottom: 32px; }
+.breadcrumbs a { color: var(--white); text-underline-offset: 4px; }
+.serviceVisual { position: relative; width: min(100%, 430px); aspect-ratio: 1; justify-self: center; display: grid; place-items: center; }
+.serviceVisual::before { content: ''; position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle, rgba(154, 76, 235, .3), transparent 65%); animation: visualGlow 5s ease-in-out infinite; }
+.visualCore { position: relative; z-index: 1; width: 126px; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--gold-light); border-radius: 28px; background: var(--dark-mid); color: var(--gold-light); box-shadow: 0 0 44px rgba(240, 204, 120, .16); animation: coreFloat 5s ease-in-out infinite; }
+.visualCore span { font-family: var(--font-display); font-size: 38px; font-weight: 800; }
+.visualCore small { color: var(--brand-100); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+.orbit { position: absolute; inset: 19%; border: 1px solid rgba(213,180,238,.35); border-radius: 50%; animation: orbitSpin 12s linear infinite; }
+.orbit::before { content: ''; position: absolute; top: -5px; left: calc(50% - 5px); width: 10px; height: 10px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 18px var(--gold-light); }
+.orbitOuter { inset: 5%; border-style: dashed; animation-duration: 22s; animation-direction: reverse; }
+.orbitOuter::before { background: var(--brand-100); box-shadow: 0 0 18px var(--brand-100); }
+.orbitLabel { position: absolute; z-index: 2; padding: 9px 16px; border: 1px solid rgba(213,180,238,.3); border-radius: 999px; color: var(--white); background: var(--dark-mid); font-size: 12px; font-weight: 700; }
+.orbitTop { top: 2%; left: 24%; }
+.orbitRight { right: 0; top: 47%; }
+.orbitBottom { bottom: 5%; left: 18%; }
+.capabilityGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; padding: 0; margin: 0; }
+.capabilityTile { padding: 26px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--white); transition: border-color .25s ease, box-shadow .25s ease; }
+.capabilityTile:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(36,16,61,.08); }
+.capabilityNumber { display: inline-block; color: var(--service-color); font-size: 13px; font-weight: 800; margin-bottom: 16px; }
+.capabilityTile p { margin: 0; color: var(--text-primary); font-size: 15px; line-height: 1.65; }
+.technologyBand { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border-light); }
+.technologyBand h2 { font-size: 18px; margin-bottom: 18px; }
+.technologyBand .tag { font-size: 12px; padding: 8px 14px; }
+.engagementGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 48px; }
+.engagementGrid .serviceHeader { margin: 0; }
+.detailContact { margin-top: 24px; background: var(--primary); color: var(--white); }
+.engagementGrid .nexusLink { display: block; margin-top: 24px; }
+.pricingPanel { min-width: 0; padding: 28px; background: var(--off-white); border: 1px solid var(--border-light); border-radius: 14px; }
+.backLink { padding-top: 24px; padding-bottom: 52px; font-weight: 700; }
+
+@keyframes gridDrift { to { background-position: 52px 52px; } }
+@keyframes auroraDrift { to { transform: translate(-15%, 12%) scale(1.15); opacity: .7; } }
+@keyframes eventFlash { 0%, 55%, 100% { border-color: rgba(213,180,238,.14); } 70% { border-color: rgba(240,204,120,.65); box-shadow: 0 0 16px rgba(240,204,120,.08); } }
+@keyframes cardShine { 0%, 55% { transform: translateX(-130%); } 85%, 100% { transform: translateX(130%); } }
+@keyframes iconGlow { 0%, 100% { box-shadow: 0 0 0 0 var(--edge-soft); } 50% { box-shadow: 0 0 0 7px var(--edge-soft), 0 0 22px var(--edge-soft); } }
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+@keyframes coreFloat { 50% { transform: translateY(-9px); } }
+@keyframes visualGlow { 50% { transform: scale(1.12); opacity: .6; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .heroGrid, .hero::before, .eventRow, .card::before, .cardIcon,
+  .orbit, .visualCore, .serviceVisual::before, .livePill::before,
+  .streamRail i, .flowLine::after { animation: none; }
+  .card::before { display: none; }
+  .primaryAction:hover, .detailContact:hover { transform: none; }
+}
+
 @keyframes livePulse {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(184,134,39, 0.45);
@@ -635,6 +733,7 @@
 }
 
 @media (max-width: 1024px) {
+  .capabilityGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .heroInner {
     grid-template-columns: 1fr;
   }
@@ -657,6 +756,12 @@
 }
 
 @media (max-width: 640px) {
+  .capabilityGrid, .engagementGrid { grid-template-columns: 1fr; }
+  .engagementGrid { gap: 26px; }
+  .serviceVisual { max-width: 320px; }
+  .visualCore { width: 100px; border-radius: 22px; }
+  .visualCore span { font-size: 30px; }
+  .pricingPanel { padding: 18px; }
   .hero {
     padding: 116px 0 70px;
   }

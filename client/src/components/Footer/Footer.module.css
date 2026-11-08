@@ -229,13 +229,3 @@
   .bottom { flex-direction: column; text-align: center; }
   .legal { flex-wrap: wrap; justify-content: center; gap: 14px; }
 }
-.pricingNotice {
-  margin: 24px 0;
-  padding: 24px;
-  border: 1px solid rgba(240, 204, 120, .35);
-  border-radius: 8px;
-  background: var(--dark-mid);
-}
-.pricingNotice p { color: var(--brand-50); font-size: 12px; line-height: 1.8; }
-.pricingNotice p + p { margin-top: 12px; }
-.pricingNotice strong { font-weight: 600; }

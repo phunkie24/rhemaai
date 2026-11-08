@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import PageSEO from '@components/common/PageSEO'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { PRODUCT_CATEGORIES } from '../data/productCategories'
 import { productsAPI } from '@utils/api'
 import { PRODUCT_PRICING } from '@utils/pricing'
 import Price from '@components/common/Price'
@@ -49,20 +50,7 @@ function catalogueProduct({
   }
 }
 
-// Colors mirror the service practice-area colors in utils/servicesData.js so
-// the products page reads as one taxonomy with the services page.
-export const PRODUCT_CATEGORIES = [
-  { id: 'agentic-ai', name: 'Agentic AI Engineering', color: '#5B1AA2' },
-  { id: 'data-engineering', name: 'Data Engineering & Platforms', color: '#7B3FE8' },
-  { id: 'data-science', name: 'Data Science & Analytics', color: '#8A631C' },
-  { id: 'cloud-architecture', name: 'Cloud Architecture', color: '#6B319B' },
-  { id: 'mlops-dataops', name: 'MLOps & DataOps', color: '#4B148C' },
-  { id: 'enterprise-software', name: 'Enterprise Software Eng.', color: '#946C23' },
-  { id: 'fintech-blockchain', name: 'FinTech & Blockchain', color: '#3E1076' },
-]
-
 const PRODUCT_GROUP_BY_SLUG = {
-  'nexus-aos': 'agentic-ai',
   'apex-rag': 'agentic-ai',
   'lyra-nlp': 'agentic-ai',
   'aura-xai': 'agentic-ai',
@@ -115,10 +103,8 @@ const GROUP_KEYWORDS = [
   },
 ]
 
-// Rhema Academy (training) and Rhema Press (publications) don't fit any
-// engineering/platform category, so they're kept in the catalogue for
-// direct product-detail links but left out of this categorised grid.
-const EXCLUDED_FROM_GRID = ['rhema-academy', 'rhema-press']
+// These offerings have their own sections. Exclude legacy API entries too.
+const EXCLUDED_FROM_GRID = ['nexus-aos', 'enterprise-ai-control-room', 'rhema-academy', 'rhema-press']
 
 function productIdentity(product) {
   return product.slug || product._id || product.name
@@ -167,23 +153,6 @@ function resolveProductGroup(product = {}) {
 }
 
 export const SEED_PRODUCTS = [
-  catalogueProduct({
-    id: 'nexus-aos',
-    slug: 'nexus-aos',
-    group: 'agentic-ai',
-    name: 'Nexus AOS',
-    kicker: 'Agentic Orchestration System',
-    summary: 'Enterprise control plane for deploying, monitoring and governing multi-agent AI systems across complex business workflows with human-in-the-loop approvals and measurable outcomes.',
-    tags: ['Flagship', 'Agentic AI', 'AgentOps', 'MCP'],
-    features: [
-      'Multi-agent graph orchestration with ADAS and LangGraph patterns',
-      'Approval gates, rollback controls and audit trails',
-      'Real-time agent telemetry and business KPI mapping',
-      'MCP server integration and governed tool registry',
-    ],
-    featured: true,
-    aliases: ['enterprise-ai-control-room'],
-  }),
   catalogueProduct({
     id: 'apex-rag',
     slug: 'apex-rag',
@@ -563,9 +532,6 @@ function ProductCard({ product }) {
         </div>
 
         <Price pricing={PRODUCT_PRICING[product.slug] || product.pricing} />
-        {product.slug === 'nexus-aos' && (
-          <Link to="/products/nexus-aos/pricing">Compare Nexus deployment packages</Link>
-        )}
       </div>
 
       {secondaryLinks.length > 0 && (
@@ -588,12 +554,11 @@ function ProductCard({ product }) {
   )
 }
 
-const CATEGORY_FILTERS = [{ id: 'all', name: 'All' }, ...PRODUCT_CATEGORIES]
-
-
 export default function ProductsPage() {
   const [products, setProducts] = useState(SEED_PRODUCTS)
-  const [activeCategory, setActiveCategory] = useState('all')
+  const [searchParams] = useSearchParams()
+  const activeMeta = PRODUCT_CATEGORIES.find((cat) => cat.id === searchParams.get('category'))
+  const activeCategory = activeMeta?.id || 'all'
 
   useEffect(() => {
     productsAPI.getAll({ limit: 48 })
@@ -607,7 +572,6 @@ export default function ProductsPage() {
   const filteredProducts = activeCategory === 'all'
     ? visibleProducts
     : visibleProducts.filter((product) => resolveProductGroup(product) === activeCategory)
-  const activeMeta = PRODUCT_CATEGORIES.find((cat) => cat.id === activeCategory)
 
   return (
     <div className={styles.page}>
@@ -680,22 +644,7 @@ export default function ProductsPage() {
         ))}
       </section>
 
-      <section className={styles.filterBand}>
-        {CATEGORY_FILTERS.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            className={activeCategory === cat.id ? styles.activeFilter : ''}
-            aria-pressed={activeCategory === cat.id}
-            style={{ '--accent': 'var(--gold)' }}
-            onClick={() => setActiveCategory(cat.id)}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </section>
-
-      <section className={`${styles.section} ${styles.productSuiteSection}`}>
+      <section id="product-suite" className={`${styles.section} ${styles.productSuiteSection}`}>
         <div className={`${styles.sectionHeader} ${styles.productSuiteHeader}`}>
           <span className={styles.eyebrow}>Product Suite</span>
           <h2>Composable product modules.</h2>

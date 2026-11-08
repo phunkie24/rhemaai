@@ -2,32 +2,32 @@ import { expect, test } from '@playwright/test'
 
 test.describe('Nexus AOS public ecosystem', () => {
   test('navigates overview, domain, architecture, pricing, docs and demo', async ({ page }) => {
-    await page.goto('/products/nexus-aos')
+    await page.goto('/nexus-aos')
     await expect(page.getByRole('heading', { level: 1, name: /Build, Govern and Operate Enterprise AI Agents/ })).toBeVisible()
     const layerLabel = page.locator('[aria-label="Eight public CADABA architecture layers"] strong').first()
     await expect(layerLabel).toBeVisible()
     await expect(layerLabel).toHaveCSS('color', 'rgb(26, 35, 50)')
     await expect(layerLabel.locator('..')).toHaveCSS('background-color', 'rgb(255, 255, 255)')
 
-    await page.goto('/products/nexus-aos/solutions/energy')
+    await page.goto('/nexus-aos/solutions/energy')
     await expect(page.getByRole('heading', { level: 1, name: /Energy/ })).toBeVisible()
     await expect(page.getByText('3,839 design artefacts')).toBeVisible()
 
-    await page.goto('/products/nexus-aos/architecture')
+    await page.goto('/nexus-aos/architecture')
     await expect(page.getByRole('heading', { level: 1, name: /Governed Multi-Agent Orchestration/ })).toBeVisible()
     const workflowLabel = page.locator('[aria-label="CADABA cognitive loop"] strong').first()
     await expect(workflowLabel).toBeVisible()
     await expect(workflowLabel).toHaveCSS('color', 'rgb(26, 35, 50)')
     await expect(workflowLabel.locator('..')).toHaveCSS('background-color', 'rgb(255, 255, 255)')
 
-    await page.goto('/products/nexus-aos/pricing')
+    await page.goto('/nexus-aos/pricing')
     await expect(page.getByRole('heading', { level: 1, name: /Start with One Workflow/ })).toBeVisible()
     await expect(page.getByText('$2,500 fixed fee').first()).toBeVisible()
 
-    await page.goto('/products/nexus-aos/docs/security')
+    await page.goto('/nexus-aos/docs/security')
     await expect(page.getByRole('heading', { level: 1, name: 'Security' })).toBeVisible()
 
-    await page.goto('/products/nexus-aos/demo?interest=standard-pilot')
+    await page.goto('/nexus-aos/demo?interest=standard-pilot')
     await expect(page.getByRole('combobox', { name: /What are you interested in/ })).toHaveValue('standard-pilot')
   })
 
@@ -39,11 +39,11 @@ test.describe('Nexus AOS public ecosystem', () => {
     })
 
     const routes = [
-      '/products/nexus-aos',
-      '/products/nexus-aos/readiness-assessment',
-      '/products/nexus-aos/pricing',
-      '/products/nexus-aos/docs/security',
-      '/products/nexus-aos/demo',
+      '/nexus-aos',
+      '/nexus-aos/readiness-assessment',
+      '/nexus-aos/pricing',
+      '/nexus-aos/docs/security',
+      '/nexus-aos/demo',
     ]
 
     for (const route of routes) {

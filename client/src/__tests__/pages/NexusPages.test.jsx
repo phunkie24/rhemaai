@@ -20,7 +20,7 @@ vi.mock('../../utils/api', () => ({
 
 describe('Nexus overview page', () => {
   it('uses the approved CADABA expansion', () => {
-    render(<NexusOverviewPage />, { route: '/products/nexus-aos' })
+    render(<NexusOverviewPage />, { route: '/nexus-aos' })
 
     expect(screen.getByText(/CADABA — Cognitive Architecture Design for Autonomous Business Agents —/)).toBeInTheDocument()
     expect(screen.queryByText(/Dynamic Adaptive Business Agents/i)).not.toBeInTheDocument()
@@ -29,7 +29,7 @@ describe('Nexus overview page', () => {
 
 describe('Nexus pricing page', () => {
   it('renders the essential public prices without offline commercial detail', () => {
-    render(<NexusPricingPage />, { route: '/products/nexus-aos/pricing' })
+    render(<NexusPricingPage />, { route: '/nexus-aos/pricing' })
 
     expect(screen.getByRole('heading', { level: 1, name: /Start with One Workflow/ })).toBeInTheDocument()
     expect(screen.getAllByText('From ₦2,500,000 / $3,500').length).toBeGreaterThan(0)
@@ -51,7 +51,7 @@ describe('Nexus demo form', () => {
   beforeEach(() => requestDemo.mockReset())
 
   it('preselects a safe package query and renders every indicative budget', () => {
-    render(<NexusDemoPage />, { route: '/products/nexus-aos/demo?interest=standard-pilot' })
+    render(<NexusDemoPage />, { route: '/nexus-aos/demo?interest=standard-pilot' })
 
     expect(screen.getByRole('combobox', { name: /What are you interested in/i })).toHaveValue('standard-pilot')
     expect(screen.getByRole('combobox', { name: /Indicative project budget/i })).toHaveValue('not-defined')
@@ -60,7 +60,7 @@ describe('Nexus demo form', () => {
 
   it('shows an accessible required-field summary and does not call the API', async () => {
     const user = userEvent.setup()
-    render(<NexusDemoPage />, { route: '/products/nexus-aos/demo' })
+    render(<NexusDemoPage />, { route: '/nexus-aos/demo' })
 
     await user.click(screen.getByRole('button', { name: 'Request a Tailored Demo' }))
 
@@ -72,7 +72,7 @@ describe('Nexus demo form', () => {
   it('submits pricing interest and budget without using them as eligibility gates', async () => {
     const user = userEvent.setup()
     requestDemo.mockResolvedValueOnce({ success: true })
-    render(<NexusDemoPage />, { route: '/products/nexus-aos/demo?interest=workflow-discovery' })
+    render(<NexusDemoPage />, { route: '/nexus-aos/demo?interest=workflow-discovery' })
 
     await user.type(screen.getByLabelText(/Full name/), 'Amina Bello')
     await user.type(screen.getByLabelText(/Work email/), 'amina@example.com')
@@ -93,12 +93,12 @@ describe('Nexus demo form', () => {
 describe('Nexus documentation', () => {
   it('renders section navigation, TOC, search and next-page navigation', async () => {
     const user = userEvent.setup()
-    render(<NexusDocsPage />, { route: '/products/nexus-aos/docs/getting-started' })
+    render(<NexusDocsPage />, { route: '/nexus-aos/docs/getting-started' })
 
     expect(screen.getByRole('heading', { level: 1, name: 'Getting Started' })).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: 'Documentation sections' })).toBeInTheDocument()
     expect(screen.getByRole('navigation', { name: 'On this page' })).toBeInTheDocument()
-    expect(screen.getAllByRole('link', { name: /Core Concepts/ })[0]).toHaveAttribute('href', '/products/nexus-aos/docs/concepts')
+    expect(screen.getAllByRole('link', { name: /Core Concepts/ })[0]).toHaveAttribute('href', '/nexus-aos/docs/concepts')
 
     await user.type(screen.getByRole('searchbox', { name: 'Search Nexus documentation' }), 'prompt injection')
     expect(await screen.findByRole('option', { name: /Security/ })).toBeInTheDocument()
@@ -108,7 +108,7 @@ describe('Nexus documentation', () => {
 describe('Nexus readiness assessment', () => {
   it('navigates all twelve sections and produces deterministic dimension results', async () => {
     sessionStorage.clear()
-    render(<NexusAssessmentPage />, { route: '/products/nexus-aos/readiness-assessment' })
+    render(<NexusAssessmentPage />, { route: '/nexus-aos/readiness-assessment' })
 
     fireEvent.click(screen.getByRole('button', { name: 'Start the Assessment' }))
 

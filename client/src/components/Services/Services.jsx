@@ -42,7 +42,7 @@ function ServiceCard({ service }) {
       </div>
 
       <Price pricing={SERVICE_PRICING[service.id] || service.pricing} />
-      <Link to={`/services#${service.id}`} className={styles.cardLink}>
+      <Link to={`/services/${service.id}`} className={styles.cardLink}>
         Learn more<span className="sr-only"> about {service.title}</span>
       </Link>
     </div>
@@ -74,7 +74,7 @@ export default function Services() {
             {MANAGED_SERVICES.note && <p className={styles.managedNote}>{MANAGED_SERVICES.note}</p>}
             <Price pricing={SERVICE_PRICING[MANAGED_SERVICES.id] || MANAGED_SERVICES.pricing} />
           </div>
-          <Link to="/services" className={styles.managedLink}>
+          <Link to="/services/managed-services" className={styles.managedLink}>
             Learn more<span className="sr-only"> about {MANAGED_SERVICES.title}</span>
           </Link>
         </div>

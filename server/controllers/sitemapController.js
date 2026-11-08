@@ -2,6 +2,7 @@ import Product from '../models/Product.js'
 import Insight from '../models/Insight.js'
 import Publication from '../models/Publication.js'
 import Course from '../models/Course.js'
+import { SERVICE_CATALOGUE } from '../config/serviceCatalogue.js'
 
 const BASE = (process.env.FRONTEND_URL || 'https://rhemaaisolutions.tech').replace(/\/$/, '')
 
@@ -18,26 +19,27 @@ const NEXUS_DOC_SLUGS = [
 ]
 
 const NEXUS_URLS = [
-  { path: '/products/nexus-aos', changefreq: 'monthly', priority: '0.9' },
-  { path: '/products/nexus-aos/demo', changefreq: 'yearly', priority: '0.8' },
-  { path: '/products/nexus-aos/readiness-assessment', changefreq: 'monthly', priority: '0.8' },
-  { path: '/products/nexus-aos/solutions', changefreq: 'monthly', priority: '0.8' },
-  { path: '/products/nexus-aos/solutions/agentic-data-engineering', changefreq: 'monthly', priority: '0.8' },
-  { path: '/products/nexus-aos/solutions/procurement', changefreq: 'monthly', priority: '0.8' },
-  { path: '/products/nexus-aos/architecture', changefreq: 'monthly', priority: '0.8' },
-  { path: '/products/nexus-aos/pricing', changefreq: 'monthly', priority: '0.7' },
-  { path: '/products/nexus-aos/docs', changefreq: 'monthly', priority: '0.7' },
+  { path: '/nexus-aos', changefreq: 'monthly', priority: '0.9' },
+  { path: '/nexus-aos/demo', changefreq: 'yearly', priority: '0.8' },
+  { path: '/nexus-aos/readiness-assessment', changefreq: 'monthly', priority: '0.8' },
+  { path: '/nexus-aos/solutions', changefreq: 'monthly', priority: '0.8' },
+  { path: '/nexus-aos/solutions/agentic-data-engineering', changefreq: 'monthly', priority: '0.8' },
+  { path: '/nexus-aos/solutions/procurement', changefreq: 'monthly', priority: '0.8' },
+  { path: '/nexus-aos/architecture', changefreq: 'monthly', priority: '0.8' },
+  { path: '/nexus-aos/pricing', changefreq: 'monthly', priority: '0.7' },
+  { path: '/nexus-aos/docs', changefreq: 'monthly', priority: '0.7' },
   ...NEXUS_DOMAIN_SLUGS.map((slug) => ({
-    path: `/products/nexus-aos/solutions/${slug}`, changefreq: 'monthly', priority: '0.7',
+    path: `/nexus-aos/solutions/${slug}`, changefreq: 'monthly', priority: '0.7',
   })),
   ...NEXUS_DOC_SLUGS.map((slug) => ({
-    path: `/products/nexus-aos/docs/${slug}`, changefreq: 'monthly', priority: '0.6',
+    path: `/nexus-aos/docs/${slug}`, changefreq: 'monthly', priority: '0.6',
   })),
 ]
 
 const STATIC_URLS = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/services', changefreq: 'monthly', priority: '0.8' },
+  ...SERVICE_CATALOGUE.map((service) => ({ path: `/services/${service.id}`, changefreq: 'monthly', priority: '0.7' })),
   { path: '/products', changefreq: 'weekly', priority: '0.8' },
   { path: '/publications', changefreq: 'weekly', priority: '0.8' },
   { path: '/insights', changefreq: 'weekly', priority: '0.7' },
@@ -76,7 +78,7 @@ export async function getSitemap(req, res, next) {
 
     const urls = [
       ...STATIC_URLS.map((entry) => urlEntry(entry)),
-      ...products.map((p) => urlEntry({
+      ...products.filter((p) => !['nexus-aos', 'enterprise-ai-control-room'].includes(p.slug)).map((p) => urlEntry({
         path: `/products/${p.slug}`, changefreq: 'monthly', priority: '0.6', lastmod: isoDate(p.updatedAt),
       })),
       ...insights.map((i) => urlEntry({

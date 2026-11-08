@@ -19,12 +19,12 @@ describe('Nexus catalogue and navigation', () => {
   })
 
   it('exposes all Nexus sub-navigation paths in a keyboard-accessible nav', () => {
-    render(<NexusSubNavigation />, { route: '/products/nexus-aos' })
+    render(<NexusSubNavigation />, { route: '/nexus-aos' })
 
     const nav = screen.getByRole('navigation', { name: 'Nexus AOS' })
     expect(nav).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Overview' })).toHaveAttribute('href', '/products/nexus-aos')
-    expect(screen.getByRole('link', { name: 'Pricing' })).toHaveAttribute('href', '/products/nexus-aos/pricing')
-    expect(screen.getByRole('link', { name: 'Request Demo' })).toHaveAttribute('href', '/products/nexus-aos/demo')
+    expect(screen.getByRole('link', { name: 'Overview' })).toHaveAttribute('href', '/nexus-aos')
+    expect(screen.getByRole('link', { name: 'Pricing' })).toHaveAttribute('href', '/nexus-aos/pricing')
+    expect(screen.getByRole('link', { name: 'Request Demo' })).toHaveAttribute('href', '/nexus-aos/demo')
   })
 })
