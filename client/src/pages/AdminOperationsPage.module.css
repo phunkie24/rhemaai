@@ -14,15 +14,15 @@
   background:
     radial-gradient(circle at 15% 20%, rgba(240,204,120,0.24), transparent 30%),
     radial-gradient(circle at 84% 18%, rgba(240,204,120,0.18), transparent 24%),
-    linear-gradient(135deg, var(--dark), var(--brand-800) 54%, var(--dark-mid));
-  color: var(--white);
+    linear-gradient(135deg, var(--off-white), var(--gold-wash) 54%, var(--gold-wash));
+  color: var(--text-primary);
 }
 
 .hero span,
 .formHeader span,
 .seoTop span,
 .item span {
-  color: var(--gold-light);
+  color: var(--gold-ink);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -32,7 +32,7 @@
 .hero h1 {
   max-width: 600px;
   margin: 10px 0 14px;
-  color: var(--white);
+  color: var(--text-primary);
   font-size: clamp(22px, 2.6vw, 34px);
   line-height: 1.15;
   letter-spacing: 0;
@@ -41,7 +41,7 @@
 .hero p {
   max-width: 560px;
   margin: 0;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 16px;
   line-height: 1.7;
 }
@@ -59,7 +59,7 @@
   display: block;
   margin-top: 8px;
   font-size: 13px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
 }
 
 .keyOk {
@@ -75,7 +75,7 @@
   margin-top: 8px;
   font-size: 13px;
   font-weight: 600;
-  color: #fca5a5;
+  color: #a33333;
 }
 
 .tabs {
@@ -111,7 +111,7 @@
 .tabs .activeTab {
   border-color: transparent;
   background: linear-gradient(135deg, var(--gold-light), var(--gold-light));
-  box-shadow: 0 16px 36px rgba(91,26,162, 0.18);
+  box-shadow: 0 16px 36px rgba(195, 167, 216, 0.18);
 }
 
 .workspace {
@@ -128,7 +128,7 @@
   border: 1px solid var(--gray-100);
   border-radius: 8px;
   background: var(--white);
-  box-shadow: 0 18px 60px rgba(36,16,61, 0.07);
+  box-shadow: 0 18px 60px rgba(195, 167, 216, 0.07);
 }
 
 .editor {
@@ -195,7 +195,7 @@
 }
 
 .page .keyPanel label {
-  color: rgba(255,255,255,0.84);
+  color: var(--text-secondary);
 }
 
 .page input,
@@ -237,7 +237,7 @@
 .page input:focus,
 .page select:focus,
 .page textarea:focus {
-  outline: 2px solid rgba(91,26,162, 0.25);
+  outline: 2px solid rgba(195, 167, 216, 0.25);
   border-color: var(--primary);
   background: var(--white);
 }

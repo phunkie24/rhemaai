@@ -1,9 +1,6 @@
 .hero {
   position: relative;
-  background:
-    linear-gradient(135deg, rgba(27, 7, 56, 0.94), rgba(36,16,61, 0.92)),
-
-    var(--dark-mid);
+  background: var(--surface-hero);
   padding: 138px 0 96px;
   overflow: hidden;
 }
@@ -26,7 +23,7 @@
   height: 110%;
   top: -30%;
   right: -15%;
-  background: radial-gradient(ellipse, rgba(154, 76, 235, .26), transparent 65%);
+  background: radial-gradient(ellipse, rgba(195, 167, 216, .26), transparent 65%);
   pointer-events: none;
   animation: auroraDrift 9s ease-in-out infinite alternate;
 }
@@ -56,7 +53,7 @@
 }
 
 .badge {
-  color: var(--brand-100);
+  color: var(--lilac-ink);
   background: var(--surface-ink);
   border: 1px solid rgba(216, 195, 255, 0.28);
   padding: 7px 15px;
@@ -80,18 +77,18 @@
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: 0;
-  color: var(--text-white);
+  color: var(--text-primary);
   margin: 0 0 22px;
   overflow-wrap: break-word;
 }
 
 .heroAccent {
-  color: var(--brand-100);
+  color: var(--lilac-ink);
 }
 
 .heroSub {
   font-size: 18px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   line-height: 1.75;
   max-width: 760px;
   margin: 0;
@@ -105,8 +102,8 @@
 }
 
 .proofRow span {
-  color: rgba(255, 255, 255, 0.82);
-  background: var(--dark-card);
+  color: var(--text-secondary);
+  background: var(--brand-100);
   border: 1px solid rgba(213,180,238, 0.16);
   border-radius: var(--radius-full);
   padding: 8px 12px;
@@ -155,13 +152,13 @@
 .panelTop strong {
   display: block;
   margin-top: 6px;
-  color: var(--white);
+  color: var(--text-primary);
   font-size: 18px;
   line-height: 1.25;
 }
 
 .panelKicker {
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -172,7 +169,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: var(--white);
+  color: var(--text-primary);
   background: rgba(184,134,39, 0.18);
   border: 1px solid rgba(184,134,39, 0.42);
   border-radius: var(--radius-full);
@@ -197,7 +194,7 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 30px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -210,7 +207,7 @@
   border: 1px solid rgba(213,180,238, 0.14);
   border-radius: var(--radius-md);
   background:
-    linear-gradient(90deg, rgba(184,134,39, 0.18), rgba(91, 26, 162, 0.16), rgba(183, 121, 31, 0.14));
+    linear-gradient(90deg, rgba(184,134,39, 0.18), rgba(195, 167, 216, 0.16), rgba(183, 121, 31, 0.14));
   overflow: hidden;
 }
 
@@ -279,13 +276,13 @@
 }
 
 .eventRow span {
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 700;
 }
 
 .eventRow strong {
-  color: var(--white);
+  color: var(--text-primary);
   font-size: 13px;
   font-weight: 800;
   white-space: nowrap;
@@ -370,7 +367,7 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: 0 18px 46px rgba(36,16,61, 0.08);
+  box-shadow: 0 18px 46px rgba(195, 167, 216, 0.08);
 }
 
 .stageNum {
@@ -439,7 +436,7 @@
   background: var(--white);
   border: 1px solid var(--gold);
   border-top: 4px solid var(--gold);
-  box-shadow: 0 8px 24px rgba(36, 16, 61, .06);
+  box-shadow: 0 8px 24px rgba(195, 167, 216, .06);
 }
 
 .card::before {
@@ -471,7 +468,7 @@
   background: var(--white);
   border-color: var(--gold);
   border-top-color: var(--gold);
-  box-shadow: 0 12px 28px rgba(36, 16, 61, .1);
+  box-shadow: 0 12px 28px rgba(195, 167, 216, .1);
 }
 
 .card:hover::after {
@@ -654,25 +651,25 @@
   transition: box-shadow .25s ease, transform .25s ease;
 }
 .primaryAction:hover, .detailContact:hover { transform: translateY(-3px); box-shadow: 0 0 28px rgba(240, 204, 120, .25); }
-.secondaryAction { color: var(--white); font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
-.breadcrumbs { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; color: var(--brand-100); font-size: 13px; margin-bottom: 32px; }
-.breadcrumbs a { color: var(--white); text-underline-offset: 4px; }
+.secondaryAction { color: var(--text-primary); font-size: 14px; font-weight: 700; text-underline-offset: 5px; }
+.breadcrumbs { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; color: var(--lilac-ink); font-size: 13px; margin-bottom: 32px; }
+.breadcrumbs a { color: var(--text-primary); text-underline-offset: 4px; }
 .serviceVisual { position: relative; width: min(100%, 430px); aspect-ratio: 1; justify-self: center; display: grid; place-items: center; }
-.serviceVisual::before { content: ''; position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle, rgba(154, 76, 235, .3), transparent 65%); animation: visualGlow 5s ease-in-out infinite; }
-.visualCore { position: relative; z-index: 1; width: 126px; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--gold-light); border-radius: 28px; background: var(--dark-mid); color: var(--gold-light); box-shadow: 0 0 44px rgba(240, 204, 120, .16); animation: coreFloat 5s ease-in-out infinite; }
+.serviceVisual::before { content: ''; position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle, rgba(195, 167, 216, .3), transparent 65%); animation: visualGlow 5s ease-in-out infinite; }
+.visualCore { position: relative; z-index: 1; width: 126px; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--gold-light); border-radius: 28px; background: var(--gold-wash); color: var(--gold-ink); box-shadow: 0 0 44px rgba(240, 204, 120, .16); animation: coreFloat 5s ease-in-out infinite; }
 .visualCore span { font-family: var(--font-display); font-size: 38px; font-weight: 800; }
-.visualCore small { color: var(--brand-100); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
+.visualCore small { color: var(--lilac-ink); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; }
 .orbit { position: absolute; inset: 19%; border: 1px solid rgba(213,180,238,.35); border-radius: 50%; animation: orbitSpin 12s linear infinite; }
 .orbit::before { content: ''; position: absolute; top: -5px; left: calc(50% - 5px); width: 10px; height: 10px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 18px var(--gold-light); }
 .orbitOuter { inset: 5%; border-style: dashed; animation-duration: 22s; animation-direction: reverse; }
 .orbitOuter::before { background: var(--brand-100); box-shadow: 0 0 18px var(--brand-100); }
-.orbitLabel { position: absolute; z-index: 2; padding: 9px 16px; border: 1px solid rgba(213,180,238,.3); border-radius: 999px; color: var(--white); background: var(--dark-mid); font-size: 12px; font-weight: 700; }
+.orbitLabel { position: absolute; z-index: 2; padding: 9px 16px; border: 1px solid rgba(213,180,238,.3); border-radius: 999px; color: var(--text-primary); background: var(--gold-wash); font-size: 12px; font-weight: 700; }
 .orbitTop { top: 2%; left: 24%; }
 .orbitRight { right: 0; top: 47%; }
 .orbitBottom { bottom: 5%; left: 18%; }
 .capabilityGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; padding: 0; margin: 0; }
 .capabilityTile { padding: 26px; border: 1px solid var(--border-light); border-radius: 12px; background: var(--white); transition: border-color .25s ease, box-shadow .25s ease; }
-.capabilityTile:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(36,16,61,.08); }
+.capabilityTile:hover { border-color: var(--gold); box-shadow: 0 10px 30px rgba(195, 167, 216, .08); }
 .capabilityNumber { display: inline-block; color: var(--service-color); font-size: 13px; font-weight: 800; margin-bottom: 16px; }
 .capabilityTile p { margin: 0; color: var(--text-primary); font-size: 15px; line-height: 1.65; }
 .technologyBand { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border-light); }
@@ -680,7 +677,7 @@
 .technologyBand .tag { font-size: 12px; padding: 8px 14px; }
 .engagementGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 48px; }
 .engagementGrid .serviceHeader { margin: 0; }
-.detailContact { margin-top: 24px; background: var(--primary); color: var(--white); }
+.detailContact { margin-top: 24px; background: var(--action-bg); color: var(--text-primary); }
 .engagementGrid .nexusLink { display: block; margin-top: 24px; }
 .pricingPanel { min-width: 0; padding: 28px; background: var(--off-white); border: 1px solid var(--border-light); border-radius: 14px; }
 .backLink { padding-top: 24px; padding-bottom: 52px; font-weight: 700; }

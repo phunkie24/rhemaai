@@ -6,7 +6,7 @@ export const SERVICES = [
     description:
       'Design and deploy governed multi-agent systems, LLM orchestration pipelines, RAG architectures, AI copilots, and enterprise automation workflows.',
     tags: ['ADAS', 'LangGraph', 'MCP', 'RAG', 'LLM', 'AutoGen'],
-    color: '#5B1AA2',
+    color: '#78571c',
     highlight: true,
     capabilities: [
       'Multi-agent orchestration (ADAS)',
@@ -134,7 +134,7 @@ export const SERVICES = [
     description:
       '24/7 infrastructure health monitoring, uptime/SLA tracking via Azure Monitor and Log Analytics, proactive alerting, and incident response playbooks.',
     tags: ['Azure Monitor', 'Log Analytics', 'SLA', 'Alerting'],
-    color: '#5B1AA2',
+    color: '#78571c',
     highlight: false,
     capabilities: [
       '24/7 infrastructure health monitoring',
@@ -246,7 +246,7 @@ export const SERVICES = [
     description:
       'AI readiness assessment, transformation roadmaps, responsible AI policy, model risk management, regulatory compliance, and board-level AI governance for enterprise programmes.',
     tags: ['AI Strategy', 'Responsible AI', 'EU AI Act', 'NIST RMF', 'Model Risk', 'Governance'],
-    color: '#5B1AA2',
+    color: '#78571c',
     highlight: false,
     capabilities: [
       'AI readiness & opportunity mapping',
@@ -364,7 +364,7 @@ export const SERVICES = [
     description:
       'Quantitative finance solutions for pricing, risk, and portfolio problems, bridging stochastic calculus and functional analysis with production-grade financial systems.',
     tags: ['Stochastic Calculus', 'Monte Carlo', 'VaR / CVaR', 'Quant Finance', 'QuantLib'],
-    color: '#5B1AA2',
+    color: '#78571c',
     highlight: false,
     capabilities: [
       'Derivatives pricing & stochastic modelling',

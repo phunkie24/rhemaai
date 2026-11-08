@@ -1,6 +1,6 @@
 .section {
   padding: var(--section-pad-y) var(--section-pad-x);
-  background: var(--dark-mid);
+  background: var(--gold-wash);
   position: relative;
   overflow: hidden;
 }
@@ -10,8 +10,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(91,26,162,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(91,26,162,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(195, 167, 216, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(195, 167, 216, 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
 }
@@ -22,15 +22,15 @@
   gap: 2px;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  border: 1px solid rgba(91,26,162, 0.2);
+  border: 1px solid rgba(195, 167, 216, 0.2);
   position: relative;
   z-index: var(--z-above);
 }
 
 .step {
   padding: 36px 28px;
-  background: rgba(10, 4, 20, 0.7);
-  border-right: 1px solid rgba(91,26,162, 0.12);
+  background: rgba(255, 250, 240, 0.7);
+  border-right: 1px solid rgba(195, 167, 216, 0.12);
   position: relative;
   transition: var(--transition-base);
   cursor: default;
@@ -44,14 +44,14 @@
   font-family: var(--font-display);
   font-size: 56px;
   font-weight: 800;
-  color: rgba(91,26,162, 0.18);
+  color: rgba(195, 167, 216, 0.18);
   line-height: 1;
   margin-bottom: 20px;
   transition: color 0.3s ease;
 }
 
 .step:hover .stepNum {
-  color: rgba(91,26,162, 0.4);
+  color: rgba(195, 167, 216, 0.4);
 }
 
 .stepContent {}
@@ -59,14 +59,14 @@
 .stepTitle {
   font-size: 16px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--text-secondary);
   margin-bottom: 10px;
   line-height: 1.25;
 }
 
 .stepDesc {
   font-size: 13px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   line-height: 1.7;
   margin-bottom: 20px;
 }
@@ -83,11 +83,11 @@
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
 }
 
 .detailCheck {
-  color: var(--brand-400);
+  color: var(--lilac-ink);
   font-size: 11px;
   flex-shrink: 0;
 }
@@ -95,7 +95,7 @@
 /* Responsive */
 @media (max-width: 900px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
-  .step { border-right: 1px solid rgba(91,26,162, 0.12); border-bottom: 1px solid rgba(91,26,162, 0.12); }
+  .step { border-right: 1px solid rgba(195, 167, 216, 0.12); border-bottom: 1px solid rgba(195, 167, 216, 0.12); }
   .step:nth-child(even) { border-right: none; }
 }
 

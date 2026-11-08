@@ -111,7 +111,7 @@ ul { list-style: none; }
 }
 
 .section--dark {
-  background: var(--dark);
+  background: var(--off-white);
 }
 
 .section--off {
@@ -120,7 +120,7 @@ ul { list-style: none; }
 
 /* Text Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, var(--brand-500), var(--accent-teal), var(--accent-amber));
+  background: linear-gradient(135deg, var(--gold-ink), var(--lilac-ink));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -141,8 +141,8 @@ ul { list-style: none; }
   left: 1rem;
   z-index: 9999;
   padding: 10px 18px;
-  background: var(--primary);
-  color: var(--white);
+  background: var(--action-bg);
+  color: var(--text-primary);
   font-size: 14px;
   font-weight: 700;
   border-radius: 0 0 var(--radius-md) var(--radius-md);

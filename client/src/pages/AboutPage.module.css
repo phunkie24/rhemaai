@@ -2,10 +2,7 @@
   position: relative;
   padding: 138px 0 96px;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(62,16,118, 0.9)),
-
-    var(--dark-mid);
+  background: var(--surface-hero);
 }
 
 .heroGrid {
@@ -28,7 +25,7 @@
 .badge,
 .sectionLabel {
   display: inline-flex;
-  color: var(--brand-300);
+  color: var(--lilac-ink);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -45,7 +42,7 @@
 
 .heroTitle {
   margin: 0 0 22px;
-  color: var(--white);
+  color: var(--text-primary);
   font-size: var(--text-4xl);
   font-weight: 800;
   line-height: 1.06;
@@ -54,12 +51,12 @@
 }
 
 .heroAccent {
-  color: var(--brand-100);
+  color: var(--lilac-ink);
 }
 
 .heroSub {
   max-width: 760px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 18px;
   line-height: 1.72;
 }
@@ -136,13 +133,13 @@
   position: relative;
   padding: 72px 0;
   overflow: hidden;
-  background: var(--dark-mid);
+  background: var(--gold-wash);
 }
 
 .statsInner {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(91,26,162, 0.2), rgba(184,134,39, 0.12));
+  background: linear-gradient(135deg, rgba(195, 167, 216, 0.2), rgba(184,134,39, 0.12));
   pointer-events: none;
 }
 
@@ -166,7 +163,7 @@
 }
 
 .statValue {
-  color: var(--white);
+  color: var(--text-primary);
   font-family: var(--font-display);
   font-size: var(--text-3xl);
   font-weight: 800;
@@ -174,7 +171,7 @@
 }
 
 .statLabel {
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -210,13 +207,13 @@
   display: block;
   position: relative;
   z-index: 1;
-  box-shadow: 0 24px 64px rgba(36,16,61, 0.18);
+  box-shadow: 0 24px 64px rgba(195, 167, 216, 0.18);
 }
 
 .founderPhotoBorder {
   position: absolute;
   inset: -10px -10px 10px 10px;
-  border: 2px solid rgba(91,26,162, 0.28);
+  border: 2px solid rgba(195, 167, 216, 0.28);
   border-radius: 24px;
   z-index: 0;
 }
@@ -249,7 +246,7 @@
   height: 3px;
   margin: 22px 0;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--primary), var(--accent-teal));
+  background: linear-gradient(90deg, var(--action-bg), var(--accent-teal));
 }
 
 .founderBio {
@@ -299,15 +296,15 @@
   padding: 88px 0;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(36,16,61, 0.94), rgba(62,16,118, 0.9)),
+    linear-gradient(135deg, rgba(255, 250, 240, 0.94), rgba(255, 250, 240, 0.9)),
 
-    var(--dark);
+    var(--off-white);
 }
 
 .ctaBg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(91,26,162, 0.14), rgba(184,134,39, 0.1));
+  background: linear-gradient(135deg, rgba(195, 167, 216, 0.14), rgba(184,134,39, 0.1));
   pointer-events: none;
 }
 
@@ -321,7 +318,7 @@
 
 .ctaTitle {
   margin: 0 0 14px;
-  color: var(--white);
+  color: var(--text-primary);
   font-size: var(--text-3xl);
   font-weight: 800;
   letter-spacing: 0;
@@ -329,7 +326,7 @@
 
 .ctaDesc {
   margin: 0 0 28px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 17px;
   line-height: 1.7;
 }
@@ -341,16 +338,16 @@
   min-height: 46px;
   padding: 12px 20px;
   border-radius: var(--radius-md);
-  background: var(--primary);
-  color: var(--white);
+  background: var(--action-bg);
+  color: var(--text-primary);
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
 }
 
 .ctaBtn:hover {
-  color: var(--white);
-  background: var(--primary-hover);
+  color: var(--text-primary);
+  background: var(--action-hover);
 }
 
 @media (max-width: 1024px) {

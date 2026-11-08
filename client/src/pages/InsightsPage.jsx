@@ -6,14 +6,14 @@ import { insightsAPI } from '@utils/api'
 import styles from './InsightsPage.module.css'
 
 export const CATEGORIES = [
-  { value: 'all',               label: 'All Topics',               color: '#5B1AA2' },
-  { value: 'agentic-ai',        label: 'Agentic AI',               color: '#5B1AA2' },
-  { value: 'data-engineering',  label: 'Data Engineering',         color: '#5B1AA2' },
-  { value: 'data-science',      label: 'Data Science & Analytics', color: '#5B1AA2' },
-  { value: 'cloud-architecture',label: 'Cloud Architecture',       color: '#5B1AA2' },
-  { value: 'mlops',             label: 'MLOps & DataOps',          color: '#5B1AA2' },
-  { value: 'enterprise-ai',     label: 'Enterprise AI',            color: '#5B1AA2' },
-  { value: 'fintech',           label: 'FinTech',                  color: '#5B1AA2' },
+  { value: 'all',               label: 'All Topics',               color: '#78571c' },
+  { value: 'agentic-ai',        label: 'Agentic AI',               color: '#78571c' },
+  { value: 'data-engineering',  label: 'Data Engineering',         color: '#78571c' },
+  { value: 'data-science',      label: 'Data Science & Analytics', color: '#78571c' },
+  { value: 'cloud-architecture',label: 'Cloud Architecture',       color: '#78571c' },
+  { value: 'mlops',             label: 'MLOps & DataOps',          color: '#78571c' },
+  { value: 'enterprise-ai',     label: 'Enterprise AI',            color: '#78571c' },
+  { value: 'fintech',           label: 'FinTech',                  color: '#78571c' },
 ]
 
 export function getCategoryMeta(value) {

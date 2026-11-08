@@ -2,10 +2,7 @@
   position: relative;
   overflow: hidden;
   padding: 132px var(--section-pad-x) 78px;
-  background:
-    linear-gradient(135deg, rgba(36,16,61, 0.94) 0%, rgba(47,11,92, 0.9) 48%, rgba(62,16,118, 0.86) 100%),
-
-    var(--brand-800);
+  background: var(--surface-hero);
 }
 
 .hero::after {
@@ -46,7 +43,7 @@
 .panelLabel,
 .modalCat {
   display: inline-flex;
-  color: var(--gold-light);
+  color: var(--gold-ink);
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -60,7 +57,7 @@
 .hero h1 {
   max-width: 920px;
   margin: 0;
-  color: var(--off-white);
+  color: var(--text-primary);
   font-size: clamp(38px, 5.2vw, 76px);
   line-height: 0.98;
   letter-spacing: 0;
@@ -69,13 +66,13 @@
 
 .heroTitleAccent {
   display: inline;
-  color: var(--gold-light);
+  color: var(--gold-ink);
 }
 
 .hero p {
   max-width: 780px;
   margin: 22px 0 0;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 18px;
   line-height: 1.72;
 }
@@ -99,7 +96,7 @@
 
 .heroStat strong {
   display: block;
-  color: var(--white);
+  color: var(--text-primary);
   font-size: 26px;
   font-weight: 800;
   line-height: 1;
@@ -108,7 +105,7 @@
 .heroStat span {
   display: block;
   margin-top: 8px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -158,14 +155,14 @@
 
 .trackItem strong {
   display: block;
-  color: var(--white);
+  color: var(--text-primary);
   font-size: 14px;
   line-height: 1.25;
 }
 
 .trackItem p {
   margin: 4px 0 0;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.45;
 }
@@ -177,14 +174,14 @@
 
 .panelMetric strong {
   display: block;
-  color: var(--gold-light);
+  color: var(--gold-ink);
   font-size: 18px;
 }
 
 .panelMetric span {
   display: block;
   margin-top: 4px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.5;
 }
@@ -240,8 +237,8 @@
 
 .filterActive {
   border-color: color-mix(in srgb, var(--cat-color), black 4%);
-  color: var(--white);
-  background: var(--cat-color);
+  color: var(--text-primary);
+  background: var(--action-bg);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
     inset 0 -4px 0 color-mix(in srgb, var(--cat-color), black 20%),
@@ -336,8 +333,8 @@
   padding: 6px 10px;
   border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 999px;
-  color: var(--white);
-  background: rgba(36,16,61, 0.84);
+  color: var(--text-primary);
+  background: rgba(255, 250, 240, 0.84);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
   font-size: 11px;
   font-weight: 800;
@@ -441,7 +438,7 @@
 .priceFree {
   color: color-mix(in srgb, var(--cat-color, var(--primary)), black 10%);
   border-color: color-mix(in srgb, var(--cat-color, var(--primary)), transparent 68%);
-  background: color-mix(in srgb, var(--cat-color, var(--primary)), transparent 90%);
+  background: color-mix(in srgb, var(--cat-color, var(--action-bg)), transparent 90%);
 }
 
 .pricePaid {
@@ -470,8 +467,8 @@
   min-height: 42px;
   padding: 10px 22px;
   border-radius: 8px;
-  background: var(--primary);
-  color: var(--white);
+  background: var(--action-bg);
+  color: var(--text-primary);
   font-size: 14px;
   font-weight: 800;
   text-decoration: none;
@@ -480,8 +477,8 @@
 }
 
 .btnPaystack:hover {
-  background: var(--primary-hover);
-  color: var(--white);
+  background: var(--action-hover);
+  color: var(--text-primary);
 }
 
 .watchBtn {
@@ -515,7 +512,7 @@
   background: var(--white);
   padding: 58px 22px;
   text-align: center;
-  box-shadow: 0 18px 46px rgba(36,16,61, 0.07);
+  box-shadow: 0 18px 46px rgba(195, 167, 216, 0.07);
 }
 
 .emptyIcon {
@@ -569,9 +566,9 @@
 }
 
 .pageActive {
-  color: var(--white);
+  color: var(--text-primary);
   border-color: var(--primary);
-  background: var(--primary);
+  background: var(--action-bg);
 }
 
 .overlay {
@@ -582,7 +579,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(36,16,61, 0.84);
+  background: rgba(255, 250, 240, 0.84);
   backdrop-filter: blur(10px);
 }
 
@@ -607,15 +604,15 @@
   height: 36px;
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 8px;
-  color: var(--white);
-  background: rgba(36,16,61, 0.76);
+  color: var(--text-primary);
+  background: rgba(255, 250, 240, 0.76);
   font-size: 15px;
   font-weight: 800;
   cursor: pointer;
 }
 
 .modalClose:hover {
-  background: var(--primary);
+  background: var(--action-bg);
 }
 
 .playerWrap {

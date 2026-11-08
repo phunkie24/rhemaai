@@ -8,9 +8,9 @@ import authorPortrait from '../assets/author_portrait.webp'
 import styles from './PlatformPages.module.css'
 
 const TYPES = [
-  { value: 'all', label: 'All', color: '#5B1AA2' },
-  { value: 'book', label: 'Books', color: '#5B1AA2', singular: 'Book' },
-  { value: 'whitepaper', label: 'White Papers', color: '#5B1AA2', singular: 'White Paper' },
+  { value: 'all', label: 'All', color: '#78571c' },
+  { value: 'book', label: 'Books', color: '#78571c', singular: 'Book' },
+  { value: 'whitepaper', label: 'White Papers', color: '#78571c', singular: 'White Paper' },
 ]
 
 export function getPublicationTypeMeta(type) {
@@ -18,7 +18,7 @@ export function getPublicationTypeMeta(type) {
     value: type || 'publication',
     label: type || 'Publication',
     singular: type || 'Publication',
-    color: '#5B1AA2',
+    color: '#78571c',
   }
 }
 

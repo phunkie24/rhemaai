@@ -25,7 +25,7 @@
 }
 
 .light .label {
-  color: var(--brand-300);
+  color: var(--lilac-ink);
 }
 
 .title {
@@ -38,7 +38,7 @@
 }
 
 .light .title {
-  color: white;
+  color: var(--text-primary);
 }
 
 .subtitle {
@@ -50,7 +50,7 @@
 }
 
 .light .subtitle {
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
 }
 
 @media (max-width: 700px) {

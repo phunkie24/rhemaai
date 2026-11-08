@@ -8,18 +8,18 @@ import { getYouTubeEmbedUrl, getYouTubeMedia } from '@utils/youtube'
 import styles from './CoursesPage.module.css'
 
 export const CATEGORIES = [
-  { key: 'all', label: 'All Courses', color: '#5B1AA2' },
-  { key: 'data-engineering', label: 'Data Engineering', color: '#5B1AA2' },
-  { key: 'machine-learning', label: 'Machine Learning', color: '#5B1AA2' },
-  { key: 'generative-ai', label: 'Generative AI', color: '#5B1AA2' },
-  { key: 'agentic-ai', label: 'Agentic AI', color: '#5B1AA2' },
-  { key: 'software-engineering', label: 'Software Engineering', color: '#5B1AA2' },
-  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#5B1AA2' },
-  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#5B1AA2' },
+  { key: 'all', label: 'All Courses', color: '#78571c' },
+  { key: 'data-engineering', label: 'Data Engineering', color: '#78571c' },
+  { key: 'machine-learning', label: 'Machine Learning', color: '#78571c' },
+  { key: 'generative-ai', label: 'Generative AI', color: '#78571c' },
+  { key: 'agentic-ai', label: 'Agentic AI', color: '#78571c' },
+  { key: 'software-engineering', label: 'Software Engineering', color: '#78571c' },
+  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#78571c' },
+  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#78571c' },
 ]
 
 export const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
-export const LEVEL_COLOR = { beginner: '#5B1AA2', intermediate: '#5B1AA2', advanced: '#5B1AA2' }
+export const LEVEL_COLOR = { beginner: '#78571c', intermediate: '#78571c', advanced: '#78571c' }
 
 const HERO_TRACKS = [
   { label: 'Agentic AI labs', value: 'Architecture patterns', color: '#F0CC78' },

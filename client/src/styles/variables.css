@@ -6,20 +6,25 @@
   color-scheme: light;
 
   /* Brand palette */
-  --brand-50:  #F4ECFF;
-  --brand-100: #E5D3FF;
-  --brand-200: #C8A6FF;
-  --brand-300: #9B6DFF;
-  --brand-400: #7B3FE8;
-  --brand-500: #5B1AA2;
-  --brand-600: #4B148C;
-  --brand-700: #3E1076;
-  --brand-800: #2F0B5C;
-  --brand-900: #1B0738;
+  --brand-50:  #faf7fc;
+  --brand-100: #f0e7f5;
+  --brand-200: #e1cfea;
+  --brand-300: #cfb4df;
+  --brand-400: #bd9ace;
+  --brand-500: #ad88c1;
+  --brand-600: #9570a8;
+  --brand-700: #7b5b8d;
+  --brand-800: #644b71;
+  --brand-900: #493953;
+  --lilac-ink: #70517f;
+  --surface-hero: linear-gradient(120deg, #fffdf8 0%, #ffffff 48%, #fff3d6 82%, #f0e7f5 100%);
+  --surface-accent: linear-gradient(135deg, #fff9e9 0%, #ffffff 65%, #f0e7f5 100%);
+  --action-bg: #edc76e;
+  --action-hover: #e3b950;
 
-  --gold: #b88627;
-  --gold-light: #f0cc78;
-  --gold-ink: #77551c;
+  --gold: #c99b35;
+  --gold-light: #f2d58c;
+  --gold-ink: #78571c;
   --gold-wash: #fffaf0;
   --accent-teal:  var(--gold);
   --accent-cyan:  var(--gold-light);
@@ -28,47 +33,47 @@
   --accent-rose:  #C2415D;
 
   /* Semantic colors */
-  --primary:        var(--brand-500);
-  --primary-hover:  var(--brand-600);
-  --primary-light:  var(--brand-50);
+  --primary:        var(--gold-ink);
+  --primary-hover:  #624412;
+  --primary-light:  var(--gold-wash);
   --primary-mid:    var(--brand-300);
 
   /* Neutrals */
   --white:      #FFFFFF;
-  --off-white:  #fcfaff;
-  --gray-50:    #f8f3fc;
-  --gray-100:   #e6dcec;
-  --gray-200:   #d7cde0;
-  --gray-400:   #94849f;
-  --gray-600:   #62556e;
-  --gray-800:   #382645;
-  --dark:       #24103d;
-  --dark-mid:   #2f1648;
-  --dark-card:  #3a2057;
-  --surface-ink: #321b4d;
-  --surface-raised: #432763;
+  --off-white:  #fffdf8;
+  --gray-50:    #faf7f1;
+  --gray-100:   #ece4d8;
+  --gray-200:   #d8cebf;
+  --gray-400:   #95897c;
+  --gray-600:   #665e56;
+  --gray-800:   #40382f;
+  --dark:       #352e27;
+  --dark-mid:   #4a4035;
+  --dark-card:  #5e5144;
+  --surface-ink: #ffffff;
+  --surface-raised: #fff7e5;
   --surface-light: #FFFFFF;
 
   /* Text */
-  --text-primary:   #281638;
-  --text-secondary: #62556e;
-  --text-muted:     #6b5c79;
-  --text-white:     rgba(255, 255, 255, 0.92);
+  --text-primary:   #352e27;
+  --text-secondary: #665e56;
+  --text-muted:     #746b61;
+  --text-white:     #ffffff;
   --text-white-muted: rgba(255, 255, 255, 0.72);
 
   /* Borders */
-  --border-light:   rgba(91,26,162, 0.13);
-  --border-mid:     rgba(91,26,162, 0.26);
-  --border-strong:  rgba(91,26,162, 0.44);
-  --border-dark:    rgba(213,180,238, 0.18);
+  --border-light:   rgba(177,133,42, 0.22);
+  --border-mid:     rgba(177,133,42, 0.36);
+  --border-strong:  rgba(177,133,42, 0.56);
+  --border-dark:    rgba(177,133,42, 0.25);
 
   /* Shadows */
   --glow-sm:   0 8px 28px rgba(213,169,79, 0.15);
-  --glow-md:   0 14px 44px rgba(91,26,162, 0.22);
+  --glow-md:   0 14px 44px rgba(201,155,53, 0.18);
   --glow-lg:   0 22px 68px rgba(184,134,39, 0.24);
-  --shadow-sm: 0 2px 8px rgba(36,16,61, 0.08);
-  --shadow-md: 0 8px 30px rgba(36,16,61, 0.12);
-  --shadow-lg: 0 20px 56px rgba(36,16,61, 0.16);
+  --shadow-sm: 0 2px 8px rgba(104,81,38, 0.06);
+  --shadow-md: 0 8px 30px rgba(104,81,38, 0.09);
+  --shadow-lg: 0 20px 56px rgba(104,81,38, 0.12);
 
   /* Typography */
   --font-body:    system-ui, -apple-system, 'Segoe UI', sans-serif;

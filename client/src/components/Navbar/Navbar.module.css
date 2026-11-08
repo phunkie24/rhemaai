@@ -23,9 +23,9 @@
 }
 
 .onDark:not(.scrolled) {
-  background: rgba(36,16,61, 0.9);
-  border-bottom-color: rgba(213,180,238, 0.16);
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom-color: var(--border-light);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Logo */
@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 10px 24px rgba(76, 24, 145, 0.18);
+  box-shadow: 0 10px 24px rgba(195, 167, 216, 0.18);
 }
 
 .logoImage {
@@ -68,11 +68,11 @@
 }
 
 .onDark .brandName {
-  color: var(--white);
+  color: var(--text-primary);
 }
 
 .onDark .brandAccent {
-  color: var(--brand-100);
+  color: var(--lilac-ink);
 }
 
 /* Nav Links */
@@ -160,11 +160,11 @@
 }
 
 .onDark .navLink {
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
 }
 
 .onDark .navLink:hover {
-  color: var(--white);
+  color: var(--text-primary);
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -174,7 +174,7 @@
 }
 
 .onDark .hamburger span {
-  background: var(--white);
+  background: var(--text-primary);
 }
 
 /* CTA */

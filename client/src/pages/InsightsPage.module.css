@@ -1,9 +1,6 @@
 .hero {
   padding: 140px var(--section-pad-x) 72px;
-  background:
-    linear-gradient(135deg, rgba(36,16,61, 0.78), rgba(62,16,118, 0.72)),
-
-    var(--dark);
+  background: var(--surface-hero);
   position: relative;
   overflow: hidden;
 }
@@ -12,7 +9,7 @@
   display: block;
   font-size: 11px;
   font-weight: 700;
-  color: var(--brand-300);
+  color: var(--lilac-ink);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 16px;
@@ -23,7 +20,7 @@
 .heroTitle {
   font-size: var(--text-4xl);
   font-weight: 800;
-  color: white;
+  color: var(--text-primary);
   line-height: 1.05;
   letter-spacing: 0;
   margin-bottom: 20px;
@@ -32,12 +29,12 @@
 }
 
 .heroAccent {
-  color: var(--brand-100);
+  color: var(--lilac-ink);
 }
 
 .heroDesc {
   font-size: 17px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   line-height: 1.75;
   font-weight: 300;
   max-width: 580px;
@@ -80,8 +77,8 @@
 }
 
 .filterActive {
-  background: var(--cat-color) !important;
-  color: white !important;
+  background: var(--action-bg) !important;
+  color: var(--text-primary) !important;
   border-color: color-mix(in srgb, var(--cat-color), black 4%) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
@@ -229,9 +226,9 @@
   overflow: hidden;
   padding: 80px var(--section-pad-x);
   background:
-    linear-gradient(135deg, rgba(36,16,61, 0.84), rgba(62,16,118, 0.78)),
+    linear-gradient(135deg, rgba(255, 250, 240, 0.84), rgba(255, 250, 240, 0.78)),
 
-    var(--dark-mid);
+    var(--gold-wash);
   text-align: center;
 }
 
@@ -239,7 +236,7 @@
   position: relative;
   z-index: 1;
   font-size: 32px;
-  color: white;
+  color: var(--text-primary);
   margin-bottom: 14px;
   font-weight: 800;
 }
@@ -248,7 +245,7 @@
   position: relative;
   z-index: 1;
   font-size: 15px;
-  color: var(--text-white-muted);
+  color: var(--text-secondary);
   line-height: 1.7;
   max-width: 480px;
   margin: 0 auto 28px;
@@ -260,8 +257,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--primary);
-  color: white;
+  background: var(--action-bg);
+  color: var(--text-primary);
   padding: 14px 28px;
   border-radius: var(--radius-md);
   font-size: 15px;
@@ -271,8 +268,8 @@
 }
 
 .nlBtn:hover {
-  background: var(--primary-hover);
-  color: white;
+  background: var(--action-hover);
+  color: var(--text-primary);
   transform: translateY(-2px);
 }
 
