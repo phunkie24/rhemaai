@@ -47,11 +47,11 @@ describe('Case Studies dropdown', () => {
     const toggle = screen.getByRole('button', { name: 'Toggle menu' })
     await user.click(toggle)
     const mobile = within(document.getElementById('mobile-navigation'))
-    await user.click(mobile.getByRole('link', { name: 'Data Engineering', exact: true }))
+    await user.click(within(mobile.getByRole('link', { name: 'Case Studies', exact: true }).parentElement).getByRole('link', { name: 'Data Engineering', exact: true }))
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
     expect(screen.getByRole('heading', { name: 'Data Engineering case studies' })).toBeInTheDocument()
     const nav = within(screen.getByRole('navigation', { name: 'Main navigation' }))
-    expect(nav.getByRole('link', { name: 'Data Engineering', exact: true })).toHaveAttribute('aria-current', 'page')
+    expect(within(nav.getByRole('link', { name: 'Case Studies', exact: true }).closest('li')).getByRole('link', { name: 'Data Engineering', exact: true })).toHaveAttribute('aria-current', 'page')
     expect(nav.getByRole('link', { name: 'Data Engineering & Platforms' })).not.toHaveAttribute('aria-current')
   })
 

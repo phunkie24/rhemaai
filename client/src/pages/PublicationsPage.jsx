@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react'
 import PageSEO from '@components/common/PageSEO'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { PUBLICATION_TYPES as TYPES } from '../data/publicationTypes'
 import { motion } from 'framer-motion'
 import { publicationsAPI } from '@utils/api'
 import multiAgentBookCover from '../assets/multi-agent-book-cover.webp'
 import styles from './PlatformPages.module.css'
 
-const TYPES = [
-  { value: 'all', label: 'All', color: '#78571c' },
-  { value: 'book', label: 'Books', color: '#78571c', singular: 'Book' },
-  { value: 'whitepaper', label: 'White Papers', color: '#78571c', singular: 'White Paper' },
-]
+
 
 export function getPublicationTypeMeta(type) {
   return TYPES.find((item) => item.value === type) || {
@@ -144,18 +141,22 @@ function PublicationCard({ publication }) {
 }
 
 export default function PublicationsPage() {
-  const [activeType, setActiveType] = useState('all')
+  const [searchParams] = useSearchParams()
+  const activeType = TYPES.find((type) => type.value === searchParams.get('category'))?.value || 'all'
   const [publications, setPublications] = useState(SEED_PUBLICATIONS)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    let cancelled = false
+    setPublications(SEED_PUBLICATIONS)
     setLoading(true)
     publicationsAPI.getAll({ type: activeType, limit: 24 })
       .then((data) => {
-        if (Array.isArray(data.publications)) setPublications(data.publications)
+        if (!cancelled && Array.isArray(data.publications)) setPublications(data.publications)
       })
       .catch(() => { /* seed publications stay visible */ })
-      .finally(() => setLoading(false))
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [activeType])
 
   const filtered = activeType === 'all'
@@ -188,21 +189,10 @@ export default function PublicationsPage() {
         </div>
       </section>
 
-      <section className={`${styles.filterBand} ${styles.publicationFilterBand}`}>
-        {TYPES.map((type) => (
-          <button
-            key={type.value}
-            type="button"
-            className={activeType === type.value ? styles.activeFilter : ''}
-            style={{ '--publication-color': type.color }}
-            onClick={() => setActiveType(type.value)}
-          >
-            {type.label}
-          </button>
-        ))}
-      </section>
-
-      <section className={styles.section}>
+      <section className={styles.section} id="publication-catalogue" aria-labelledby="publication-type">
+        <h2 id="publication-type" className={styles.catalogueTitle}>
+          {activeType === 'all' ? 'All publications' : getPublicationTypeMeta(activeType).label}
+        </h2>
         {loading ? (
           <div className={styles.stateText}>Loading publications...</div>
         ) : (

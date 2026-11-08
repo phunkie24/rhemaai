@@ -7,7 +7,7 @@ vi.mock('framer-motion', async (importOriginal) => {
 
   const htmlTags = [
     'div', 'span', 'p', 'h1', 'h2', 'h3', 'h4', 'section',
-    'article', 'nav', 'ul', 'li', 'a', 'button', 'form', 'input', 'header', 'footer',
+    'article', 'aside', 'nav', 'ul', 'li', 'a', 'button', 'form', 'input', 'header', 'footer',
   ]
 
   const motionPropsToStrip = new Set([

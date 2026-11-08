@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import BrandMark from '@components/common/BrandMark'
+import { PUBLICATION_TYPES } from '../../data/publicationTypes'
+import { COURSE_CATEGORIES } from '../../data/courseCategories'
 import { PRODUCT_CATEGORIES } from '../../data/productCategories'
+import { RESEARCH_CATEGORIES } from '../../data/researchCategories'
 import { CASE_STUDY_CATEGORIES } from '../../data/caseStudyCategories'
 import styles from './Navbar.module.css'
 
@@ -29,9 +32,39 @@ const NAV_LINKS = [
       })),
     ],
   },
-  { label: 'Research',     path: '/insights' },
-  { label: 'Courses',      path: '/courses' },
-  { label: 'Publications', path: '/publications' },
+  {
+    label: 'Research',
+    path: '/insights',
+    children: RESEARCH_CATEGORIES.map((category) => ({
+      label: category.label,
+      path: category.value === 'all'
+        ? '/insights#research-notes'
+        : `/insights?category=${category.value}#research-notes`,
+      category: category.value,
+    })),
+  },
+  {
+    label: 'Courses',
+    path: '/courses',
+    children: COURSE_CATEGORIES.map((category) => ({
+      label: category.label,
+      path: category.key === 'all'
+        ? '/courses#course-catalogue'
+        : `/courses?category=${category.key}#course-catalogue`,
+      category: category.key,
+    })),
+  },
+  {
+    label: 'Publications',
+    path: '/publications',
+    children: PUBLICATION_TYPES.map((type) => ({
+      label: type.label,
+      path: type.value === 'all'
+        ? '/publications#publication-catalogue'
+        : `/publications?category=${type.value}#publication-catalogue`,
+      category: type.value,
+    })),
+  },
   { label: 'About',        path: '/about' },
   { label: 'Contact',      path: '/contact' },
 ]

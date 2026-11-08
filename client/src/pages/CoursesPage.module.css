@@ -186,65 +186,6 @@
   line-height: 1.5;
 }
 
-.filterBar {
-  position: sticky;
-  top: var(--nav-height);
-  z-index: 30;
-  border-bottom: 1px solid var(--gray-100);
-  background: var(--white);
-  backdrop-filter: none;
-}
-
-.filterInner {
-  width: min(100%, var(--container-max));
-  max-width: none;
-  margin: 0 auto;
-  padding: 14px var(--section-pad-x);
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.filterInner::-webkit-scrollbar {
-  display: none;
-}
-
-.filterBtn {
-  flex-shrink: 0;
-  min-height: 42px;
-  padding: 9px 18px;
-  border: 1px solid color-mix(in srgb, var(--cat-color), var(--gray-100) 76%);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--cat-color), var(--white) 94%);
-  color: color-mix(in srgb, var(--cat-color), var(--gray-800) 58%);
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-  white-space: nowrap;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.84),
-    inset 0 -3px 0 color-mix(in srgb, var(--cat-color), transparent 90%);
-  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.filterBtn:hover {
-  border-color: color-mix(in srgb, var(--cat-color), var(--gray-100) 45%);
-  color: color-mix(in srgb, var(--cat-color), black 10%);
-  background: color-mix(in srgb, var(--cat-color), var(--white) 88%);
-  transform: translateY(-1px);
-}
-
-.filterActive {
-  border-color: color-mix(in srgb, var(--cat-color), black 4%);
-  color: var(--action-text);
-  background: var(--action-bg);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    inset 0 -4px 0 color-mix(in srgb, var(--cat-color), black 20%),
-    0 12px 26px color-mix(in srgb, var(--cat-color), transparent 72%);
-}
-
 .gridSection {
   min-height: 60vh;
   padding: 58px var(--section-pad-x) 82px;
@@ -724,9 +665,6 @@
     height: 1px;
   }
 
-  .filterBar {
-    top: var(--nav-height);
-  }
 
   .grid,
   .loadingGrid {
@@ -742,3 +680,5 @@
 
 .heroGrid { opacity: .2; }
 .card { border-radius: var(--radius-lg); border-color: var(--border-light); box-shadow: var(--shadow-sm); }
+
+.topicTitle { margin-bottom: 28px; font-size: var(--text-2xl); }

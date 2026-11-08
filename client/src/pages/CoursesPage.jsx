@@ -1,22 +1,14 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageSEO from '@components/common/PageSEO'
 import CourseThumbnail from '@components/common/CourseThumbnail'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { COURSE_CATEGORIES as CATEGORIES } from '../data/courseCategories'
 import { coursesAPI } from '@utils/api'
 import { getYouTubeEmbedUrl, getYouTubeMedia } from '@utils/youtube'
 import styles from './CoursesPage.module.css'
 
-export const CATEGORIES = [
-  { key: 'all', label: 'All Courses', color: '#78571c' },
-  { key: 'data-engineering', label: 'Data Engineering', color: '#78571c' },
-  { key: 'machine-learning', label: 'Machine Learning', color: '#78571c' },
-  { key: 'generative-ai', label: 'Generative AI', color: '#78571c' },
-  { key: 'agentic-ai', label: 'Agentic AI', color: '#78571c' },
-  { key: 'software-engineering', label: 'Software Engineering', color: '#78571c' },
-  { key: 'cloud-architecture', label: 'Cloud & Architecture', color: '#78571c' },
-  { key: 'advanced-analytics', label: 'Advanced Analytics', color: '#78571c' },
-]
+export { COURSE_CATEGORIES as CATEGORIES } from '../data/courseCategories'
 
 export const LEVEL_LABEL = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' }
 export const LEVEL_COLOR = { beginner: '#78571c', intermediate: '#78571c', advanced: '#78571c' }
@@ -218,7 +210,9 @@ function CourseCard({ course }) {
 }
 
 export default function CoursesPage() {
-  const [activeCategory, setActiveCategory] = useState('all')
+  const [searchParams] = useSearchParams()
+  const activeCategory = getCategoryMeta(searchParams.get('category')).key
+  const requestId = useRef(0)
   const [courses, setCourses] = useState([])
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
@@ -227,16 +221,19 @@ export default function CoursesPage() {
   const [selected, setSelected] = useState(null)
 
   const fetchCourses = useCallback(async (category, nextPage) => {
+    const currentRequest = ++requestId.current
     setLoading(true)
     try {
       const params = { page: nextPage, limit: 12 }
       if (category !== 'all') params.category = category
       const data = await coursesAPI.getAll(params)
+      if (currentRequest !== requestId.current) return
       setCourses(data.courses || [])
       setTotal(data.total || 0)
       setPage(data.page || 1)
       setPages(data.pages || 1)
     } catch {
+      if (currentRequest !== requestId.current) return
       const fallback = category === 'all'
         ? SEED_COURSES
         : SEED_COURSES.filter((course) => course.category === category)
@@ -245,19 +242,15 @@ export default function CoursesPage() {
       setPage(1)
       setPages(1)
     } finally {
-      setLoading(false)
+      if (currentRequest === requestId.current) setLoading(false)
     }
   }, [])
 
   useEffect(() => {
     fetchCourses(activeCategory, 1)
+    return () => { requestId.current += 1 }
   }, [activeCategory, fetchCourses])
 
-  const handleCategory = (key) => {
-    setActiveCategory(key)
-    setPage(1)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
 
   return (
     <>
@@ -321,24 +314,11 @@ export default function CoursesPage() {
         </div>
       </section>
 
-      <div className={styles.filterBar}>
-        <div className={styles.filterInner}>
-          {CATEGORIES.map((category) => (
-            <button
-              key={category.key}
-              type="button"
-              className={`${styles.filterBtn} ${activeCategory === category.key ? styles.filterActive : ''}`}
-              style={{ '--cat-color': category.color }}
-              onClick={() => handleCategory(category.key)}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <section className={styles.gridSection}>
+      <section className={styles.gridSection} id="course-catalogue" aria-labelledby="course-topic">
         <div className={styles.gridInner}>
+          <h2 id="course-topic" className={styles.topicTitle}>
+            {activeCategory === 'all' ? 'All courses' : `${getCategoryMeta(activeCategory).label} courses`}
+          </h2>
           {loading ? (
             <div className={styles.loadingGrid}>
               {[...Array(6)].map((_, index) => <div key={index} className={styles.skeleton} />)}

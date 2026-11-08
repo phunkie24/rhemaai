@@ -1,20 +1,12 @@
 import { useState, useEffect } from 'react'
 import PageSEO from '@components/common/PageSEO'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { RESEARCH_CATEGORIES as CATEGORIES } from '../data/researchCategories'
 import { motion } from 'framer-motion'
 import { insightsAPI } from '@utils/api'
 import styles from './InsightsPage.module.css'
 
-export const CATEGORIES = [
-  { value: 'all',               label: 'All Topics',               color: '#78571c' },
-  { value: 'agentic-ai',        label: 'Agentic AI',               color: '#78571c' },
-  { value: 'data-engineering',  label: 'Data Engineering',         color: '#78571c' },
-  { value: 'data-science',      label: 'Data Science & Analytics', color: '#78571c' },
-  { value: 'cloud-architecture',label: 'Cloud Architecture',       color: '#78571c' },
-  { value: 'mlops',             label: 'MLOps & DataOps',          color: '#78571c' },
-  { value: 'enterprise-ai',     label: 'Enterprise AI',            color: '#78571c' },
-  { value: 'fintech',           label: 'FinTech',                  color: '#78571c' },
-]
+export { RESEARCH_CATEGORIES as CATEGORIES } from '../data/researchCategories'
 
 export function getCategoryMeta(value) {
   return CATEGORIES.find((category) => category.value === value) || CATEGORIES[0]
@@ -69,18 +61,22 @@ function ArticleCard({ article, index }) {
 }
 
 export default function InsightsPage() {
-  const [activeCategory, setActiveCategory] = useState('all')
+  const [searchParams] = useSearchParams()
+  const activeCategory = getCategoryMeta(searchParams.get('category')).value
   const [articles, setArticles] = useState(SEED_ARTICLES)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    let cancelled = false
     setLoading(true)
+    setArticles(SEED_ARTICLES)
     insightsAPI.getAll({ category: activeCategory, limit: 12 })
       .then(data => {
-        if (data.insights?.length) setArticles(data.insights)
+        if (!cancelled && data.insights?.length) setArticles(data.insights)
       })
-      .catch(() => { /* use seed data */ })
-      .finally(() => setLoading(false))
+      .catch(() => { /* use seed data if the request fails */ })
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [activeCategory])
 
   const filtered = activeCategory === 'all'
@@ -108,22 +104,11 @@ export default function InsightsPage() {
         </motion.div>
       </div>
 
-      {/* Category Filter */}
-      <div className={styles.filterBar}>
-        {CATEGORIES.map(cat => (
-          <button
-            key={cat.value}
-            className={`${styles.filterBtn} ${activeCategory === cat.value ? styles.filterActive : ''}`}
-            style={{ '--cat-color': cat.color }}
-            onClick={() => setActiveCategory(cat.value)}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
-
       {/* Articles */}
-      <div className={styles.articlesSection}>
+      <section className={styles.articlesSection} id="research-notes" aria-labelledby="research-topic">
+        <h2 id="research-topic" className={styles.topicTitle}>
+          {activeCategory === 'all' ? 'All research' : `${getCategoryMeta(activeCategory).label} research`}
+        </h2>
         {loading ? (
           <div className={styles.loading}>Loading research...</div>
         ) : (
@@ -134,7 +119,7 @@ export default function InsightsPage() {
         {!loading && filtered.length === 0 && (
           <div className={styles.empty}>No research notes in this category yet. Check back soon.</div>
         )}
-      </div>
+      </section>
 
       {/* Newsletter signup */}
       <div className={styles.newsletterBanner}>
