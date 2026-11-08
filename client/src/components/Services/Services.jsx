@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { SERVICES } from '@utils/servicesData'
-import { SERVICE_PRICING } from '@utils/pricing'
-import Price from '@components/common/Price'
 
 const HOME_SERVICE_IDS = ['agentic-ai', 'data-engineering', 'data-science']
 const HOME_SERVICES = SERVICES.filter(s => HOME_SERVICE_IDS.includes(s.id))
@@ -9,11 +8,16 @@ const MANAGED_SERVICES = SERVICES.find(s => s.id === 'managed-services')
 import SectionHeader from '@components/common/SectionHeader'
 import styles from './Services.module.css'
 
-function ServiceCard({ service }) {
+function ServiceCard({ service, index }) {
   return (
-    <div
+    <motion.article
       className={`${styles.card} ${service.highlight ? styles.cardHighlight : ''}`}
-      style={{ '--service-color': 'var(--gold)' }}
+      style={{ '--service-color': 'var(--gold)', '--flash-delay': `${index * 0.8}s` }}
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -7 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
     >
       {service.highlight && (
         <div className={styles.popularBadge}>Featured</div>
@@ -41,11 +45,10 @@ function ServiceCard({ service }) {
         ))}
       </div>
 
-      <Price pricing={SERVICE_PRICING[service.id] || service.pricing} />
       <Link to={`/services/${service.id}`} className={styles.cardLink}>
         Learn more<span className="sr-only"> about {service.title}</span>
       </Link>
-    </div>
+    </motion.article>
   )
 }
 
@@ -60,24 +63,31 @@ export default function Services() {
       />
 
       <div className={styles.grid}>
-        {HOME_SERVICES.map((service) => (
-          <ServiceCard key={service.id} service={service} />
+        {HOME_SERVICES.map((service, index) => (
+          <ServiceCard key={service.id} service={service} index={index} />
         ))}
       </div>
 
       {MANAGED_SERVICES && (
-        <div className={styles.managedBand} style={{ '--service-color': 'var(--gold)' }}>
+        <motion.article
+          className={styles.managedBand}
+          style={{ '--service-color': 'var(--gold)', '--flash-delay': '2.4s' }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ y: -4 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.45 }}
+        >
           <div className={styles.managedIcon} aria-hidden="true">{MANAGED_SERVICES.icon}</div>
           <div className={styles.managedCopy}>
             <h3>{MANAGED_SERVICES.title}</h3>
             <p>{MANAGED_SERVICES.description}</p>
             {MANAGED_SERVICES.note && <p className={styles.managedNote}>{MANAGED_SERVICES.note}</p>}
-            <Price pricing={SERVICE_PRICING[MANAGED_SERVICES.id] || MANAGED_SERVICES.pricing} />
           </div>
           <Link to="/services/managed-services" className={styles.managedLink}>
             Learn more<span className="sr-only"> about {MANAGED_SERVICES.title}</span>
           </Link>
-        </div>
+        </motion.article>
       )}
 
       <div className={styles.cta}>
