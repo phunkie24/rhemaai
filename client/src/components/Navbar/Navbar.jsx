@@ -117,7 +117,7 @@ export default function Navbar() {
             <BrandMark className={styles.logoImage} title="RhemaAI Solutions Ltd logo" />
           </div>
           <span className={styles.brandName}>
-            Rhema<span className={styles.brandAccent}>AI</span> Solutions Ltd
+            Rhema<span className={styles.brandAccent}>AI</span><br />Solutions Ltd
           </span>
         </Link>
 

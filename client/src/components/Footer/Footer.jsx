@@ -76,7 +76,7 @@ export default function Footer() {
               <BrandMark className={styles.logoImage} title="RhemaAI Solutions Ltd logo" loading="lazy" />
             </div>
             <span className={styles.brandName}>
-              Rhema<span>AI</span> Solutions Ltd
+              Rhema<span>AI</span><br />Solutions Ltd
             </span>
           </div>
           <p className={styles.tagline}>
